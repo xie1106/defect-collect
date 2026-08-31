@@ -211,7 +211,7 @@ const APP_CONFIG = {
     // 记录被标记为 [退货:待处理]（处理中）等状态时，后台【不会】自动创建退货单。
     // 填入退货 worker 地址后，前端"一键退货"会直接调用它创建订单；
     // 留空则"一键退货"仅更新状态，不创建订单。
-    returnWorkerUrl: '',
+    returnWorkerUrl: 'https://defect-return-worker.458914253.workers.dev',
 };
 
 // 兼容旧代码引用（下方业务代码无需改动）
