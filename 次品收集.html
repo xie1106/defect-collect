@@ -923,10 +923,12 @@ async function loadStyleMap() {
     } catch(e) { _styleSupplierMap = {}; }
 }
 function getSupplierForGroup(items) {
+    // 打码/脱敏的供应商名（含*号）视为未匹配
+    const validName = (v) => (v && !String(v).includes('*')) ? v : null;
     // Try extracting supplier from [1688:...供应商:xxx...] tag first
     for (const r of items) {
         const m = (r.note||'').match(/供应商:([^\s\]]+)/);
-        if (m && m[1]) return m[1];
+        if (m && m[1]) { const n = validName(m[1]); if (n) return n; }
     }
     if (!_styleSupplierMap) return null;
     for (const r of items) {
@@ -936,18 +938,18 @@ function getSupplierForGroup(items) {
         const raw = m[1];
         // Try exact match first (case-insensitive)
         for (const [k, v] of Object.entries(_styleSupplierMap)) {
-            if (k.toUpperCase() === raw.toUpperCase()) return v;
+            if (k.toUpperCase() === raw.toUpperCase()) return validName(v);
         }
         // Progressive trim: try shorter prefixes
         for (let len = raw.length - 1; len >= 3; len--) {
             const prefix = raw.substring(0, len);
             for (const [k, v] of Object.entries(_styleSupplierMap)) {
-                if (k.toUpperCase() === prefix.toUpperCase()) return v;
+                if (k.toUpperCase() === prefix.toUpperCase()) return validName(v);
             }
         }
         // Try startsWith match
         for (const [k, v] of Object.entries(_styleSupplierMap)) {
-            if (raw.toUpperCase().startsWith(k.toUpperCase()) || k.toUpperCase().startsWith(raw.toUpperCase())) return v;
+            if (raw.toUpperCase().startsWith(k.toUpperCase()) || k.toUpperCase().startsWith(raw.toUpperCase())) return validName(v);
         }
     }
     return null;
