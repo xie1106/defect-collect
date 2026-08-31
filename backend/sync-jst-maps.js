@@ -14,6 +14,7 @@
 //     full        全量：以现有 sku_info_map.json 的 SKU 名单为基础，批量刷新（默认）
 //     incremental 增量：只同步最近 N 天（默认7天）新改动的商品，合并进现有文件
 //     supplier    只更新供应商：用聚水潭『商品多供应商』接口重建 款号→供应商
+//     record      按登记补齐：读系统数据库登记过的商品，缺失的从聚水潭补齐（含新SKU）
 // 可选环境变量：
 //   JST_DAYS           incremental 的天数，默认 7
 //   JST_DELAY_MS       请求间隔毫秒，默认 700（限流保护）
@@ -174,6 +175,7 @@ function parseColorSize(val) {
 // ---------- 主流程 ----------
 async function main() {
   const skuFile = path.join(OUT_DIR, 'sku_info_map.json');
+  if (MODE === 'record') { await runRecordUpdate(); return; }
   if (MODE === 'supplier') {
     const skuMap = readJson(skuFile, {});
     const styleMap = readJson(path.join(OUT_DIR, 'return_style_map.json'), {});
@@ -372,6 +374,68 @@ async function runSupplierUpdate(skuMap, oldStyleMap) {
   fs.writeFileSync(addrFile, JSON.stringify(addrMap));
   console.log(`✅ 已生成 ${styleFile}（${Object.keys(styleSupplier)} 条；新增 ${added}，沿用旧值 ${keptOld}）`);
   console.log(`✅ 已生成 ${addrFile}（${Object.keys(addrMap)} 条）`);
+  console.log('\n完成！请提交到网页同层目录。');
+}
+
+// ---------- record 模式：按系统登记记录补齐缺失 SKU ----------
+async function runRecordUpdate() {
+  const SUPABASE_URL = process.env.SUPABASE_URL || 'https://elyfxyrdbuykyklfjfdr.supabase.co';
+  const SUPABASE_KEY = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVseWZ4eXJkYnV5a3lrbGZqZmRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDIwMjQsImV4cCI6MjA5NjU3ODAyNH0.irrMM8iKJVGnOBW6VQ4BHlkwiVIDtB97EPiHvasOWyg';
+
+  console.log('① 读取系统登记记录...');
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?select=note&limit=1000`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` },
+  });
+  const rows = await r.json();
+  const used = new Set();
+  for (const rec of rows) {
+    const note = (rec.note || '').replace(/\s*\[[^\]]*\]/g, '');
+    for (const m of note.matchAll(/([A-Za-z0-9][A-Za-z0-9\-]*)[×x](\d+)/g)) {
+      if (m[1].length >= 3) used.add(m[1]);
+    }
+  }
+  console.log(`   登记记录 ${rows.length} 条，去重商品编码 ${used.size} 个`);
+
+  const skuFile = path.join(OUT_DIR, 'sku_info_map.json');
+  const styleFile = path.join(OUT_DIR, 'return_style_map.json');
+  const skuMap = readJson(skuFile, {});
+  const styleMap = readJson(styleFile, {});
+  const missing = [...used].filter(c => !skuMap[c]);
+  if (!missing.length) { console.log('✅ 无需补齐，所有登记商品都已匹配'); return; }
+  console.log(`② 缺失 ${missing.length} 个，从聚水潭补齐...`);
+
+  // 查聚水潭
+  const fresh = new Map();
+  for (let i = 0; i < missing.length; i += BATCH) {
+    const chunk = missing.slice(i, i + BATCH);
+    const d = await jstPost('/open/sku/query', { page_index: 1, page_size: PAGE_SIZE, sku_ids: chunk.join(',') });
+    if (d.code === 0) for (const row of (d.data && d.data.datas) || []) fresh.set(row.sku_id, row);
+    else console.error(`  查询失败(code=${d.code}): ${d.msg}`);
+    await sleep(JST.delayMs);
+  }
+  const notFound = missing.filter(c => !fresh.has(c));
+  console.log(`   聚水潭返回 ${fresh.size} 个，找不到 ${notFound.length} 个${notFound.length ? '：' + notFound.join(', ') : ''}`);
+
+  // 供应商名称映射
+  const suppliers = await fetchAllSuppliers();
+  const supById = {};
+  for (const s of suppliers) if (s.supplier_id != null) supById[String(s.supplier_id)] = s;
+
+  let added = 0;
+  for (const [sid, sku] of fresh) {
+    const iId = (sku.i_id || '').trim();
+    const [color, size] = parseColorSize(sku.properties_value);
+    skuMap[sid] = [iId, color, size];
+    const sup = sku.supplier_id != null ? supById[String(sku.supplier_id)] : null;
+    const supName = sup && sup.name ? sup.name.trim() : '';
+    if (iId && supName && !styleMap[iId]) styleMap[iId] = supName;
+    added++;
+  }
+
+  fs.writeFileSync(skuFile, JSON.stringify(skuMap));
+  fs.writeFileSync(styleFile, JSON.stringify(styleMap));
+  console.log(`✅ 已补齐 ${added} 个商品到 ${skuFile}（共 ${Object.keys(skuMap)} 条）`);
+  console.log(`✅ 款号→供应商已更新（共 ${Object.keys(styleMap)} 条）`);
   console.log('\n完成！请提交到网页同层目录。');
 }
 
