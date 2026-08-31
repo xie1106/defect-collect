@@ -126,7 +126,7 @@ async function getDefectRecords(env, po_id) {
     headers: { 'apikey': env.SUPABASE_KEY, 'Authorization': `Bearer ${env.SUPABASE_KEY}` }
   });
   const all = await r.json();
-  return all.filter(rec => !(rec.note||'').includes('[1688:'));
+  return all;  // 1688与非1688采购单都创建聚水潭退货单（1688需人工在1688后台申请退款，本单用于面单/物流）
 }
 
 async function getSupplierFromPO(env, po_id) {

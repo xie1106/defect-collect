@@ -1208,7 +1208,32 @@ async function open1688Return(poId) {
 async function open1688ReturnAndCreateOrder(poId, btn) {
     // 1. Open 1688 return page
     await open1688Return(poId);
-    // 2. Also create JST return order (tag as pending for cron)
+    // 2. 创建聚水潭退货单（1688也要建，用于电子面单/物流），调用退货 worker
+    const workerUrl = (APP_CONFIG.returnWorkerUrl||'').replace(/\/+$/,'');
+    if (workerUrl) {
+        try {
+            const resp = await fetch(workerUrl + '/create-return', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ po_id: poId })
+            });
+            const data = await resp.json().catch(()=>({}));
+            if (data && data.success) {
+                showToast(`✅ 已跳转1688退货\n聚水潭退货单已创建 ${data.order_id||''}`, '#059669');
+                btn.textContent = '✅ 已下单'; btn.onclick = null;
+                setTimeout(()=>loadHistory(), 1500);
+                return;
+            }
+            showToast(`❌ 聚水潭建单失败: ${(data&&data.msg)||'未知错误'}`, '#dc2626');
+            btn.textContent = '重试'; btn.disabled = false;
+            return;
+        } catch(e) {
+            showToast('❌ 网络错误: ' + e.message, '#dc2626');
+            btn.disabled = false;
+            return;
+        }
+    }
+    // 未配置 worker：仅标记处理中
     const list = getRecords();
     const items = list.filter(r => r.po_id == poId && r.status === 'pending');
     if (!items.length) { showToast('无待处理记录', '#6b7280'); return; }
@@ -1219,7 +1244,7 @@ async function open1688ReturnAndCreateOrder(poId, btn) {
             method: 'PATCH', headers: h, body: JSON.stringify({ note })
         });
     }
-    showToast(`✅ 已跳转1688退货 + 退货订单创建中(${items.length}条)\n仅标记处理中，未自动创建订单`, '#059669');
+    showToast(`✅ 已跳转1688退货 + 已标记处理中(${items.length}条)\n未配置退货服务，未自动创建订单`, '#d97706');
     btn.textContent = '⏳ 处理中';
     btn.disabled = true;
     setTimeout(() => fetchRecords(), 3000);
