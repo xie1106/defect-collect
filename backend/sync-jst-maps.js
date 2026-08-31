@@ -13,6 +13,7 @@
 //   node sync-jst-maps.js [输出目录，默认上一级目录] [full|incremental]
 //     full        全量：以现有 sku_info_map.json 的 SKU 名单为基础，批量刷新（默认）
 //     incremental 增量：只同步最近 N 天（默认7天）新改动的商品，合并进现有文件
+//     supplier    只更新供应商：用聚水潭『商品多供应商』接口重建 款号→供应商
 // 可选环境变量：
 //   JST_DAYS           incremental 的天数，默认 7
 //   JST_DELAY_MS       请求间隔毫秒，默认 700（限流保护）
@@ -173,6 +174,12 @@ function parseColorSize(val) {
 // ---------- 主流程 ----------
 async function main() {
   const skuFile = path.join(OUT_DIR, 'sku_info_map.json');
+  if (MODE === 'supplier') {
+    const skuMap = readJson(skuFile, {});
+    const styleMap = readJson(path.join(OUT_DIR, 'return_style_map.json'), {});
+    await runSupplierUpdate(skuMap, styleMap);
+    return;
+  }
   const styleFile = path.join(OUT_DIR, 'return_style_map.json');
   const addrFile = path.join(OUT_DIR, 'return_addr_map.json');
   const oldSkuMap = readJson(skuFile, {});
@@ -287,6 +294,85 @@ async function querySkuBatchByTime(begin, end) {
     await sleep(JST.delayMs);
   }
   return [...seen.values()];
+}
+
+// ---------- 供应商模式：用『商品多供应商』接口重建 款号→供应商 ----------
+const INVALID_SUPPLIERS = ['吕**-整烫', '吕老板整烫', '市场'];
+
+async function fetchSupplierRelations(skuIds) {
+  const out = [];
+  let page = 1;
+  while (true) {
+    const d = await jstPost('/open/webapi/itemapi/suppliersku/getsupplierskulist', {
+      page_index: page, page_size: PAGE_SIZE, skuIds,
+    });
+    if (d.code !== 0) { console.error(`  多供应商查询失败(code=${d.code}): ${d.msg}`); return out; }
+    const rows = (d.data && d.data.list) || [];
+    out.push(...rows);
+    const pg = d.data && d.data.page;
+    if (!pg || rows.length < PAGE_SIZE || out.length >= pg.count || page >= pg.pages) break;
+    page++;
+    await sleep(JST.delayMs);
+  }
+  return out;
+}
+
+async function runSupplierUpdate(skuMap, oldStyleMap) {
+  const ids = Object.keys(skuMap);
+  console.log(`① 多供应商模式：处理 ${ids.length} 个 SKU（每次 ${BATCH} 个）...`);
+  const rels = [];
+  let done = 0;
+  for (let i = 0; i < ids.length; i += BATCH) {
+    const chunk = ids.slice(i, i + BATCH);
+    const rows = await fetchSupplierRelations(chunk);
+    rels.push(...rows);
+    done += chunk.length;
+    if (done % 5000 === 0 || done === ids.length) console.log(`   ...${done}/${ids.length}`);
+    await sleep(JST.delayMs);
+  }
+  console.log(`   共获取 ${rels.length} 条供应商关联`);
+
+  // 款号 -> 各供应商出现次数（过滤无效供应商）
+  const styleCount = {};
+  for (const r of rels) {
+    const iId = (r.i_id || '').trim();
+    const name = (r.supplier_name || '').trim();
+    if (!iId || !name || INVALID_SUPPLIERS.includes(name)) continue;
+    if (!styleCount[iId]) styleCount[iId] = {};
+    styleCount[iId][name] = (styleCount[iId][name] || 0) + 1;
+  }
+
+  // 每个款号取出现次数最多的供应商；无有效供应商则保留旧值
+  const styleSupplier = { ...oldStyleMap };
+  let added = 0, keptOld = 0;
+  for (const [iId, counts] of Object.entries(styleCount)) {
+    const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+    if (!styleSupplier[iId]) added++;
+    styleSupplier[iId] = best;
+  }
+  for (const iId of Object.keys(styleSupplier)) if (!styleCount[iId]) keptOld++;
+
+  // 供应商退货地址照旧刷新
+  console.log('② 拉取聚水潭供应商...');
+  const suppliers = await fetchAllSuppliers();
+  const addrMap = { ...readJson(path.join(OUT_DIR, 'return_addr_map.json'), {}) };
+  for (const s of suppliers) {
+    const name = (s.name || '').trim();
+    if (!name) continue;
+    const info = {};
+    if (s.address) info.address = s.address;
+    if (s.mobile) info.mobile = s.mobile;
+    if (s.contacts) info.contacts = s.contacts;
+    if (Object.keys(info).length) addrMap[name] = info;
+  }
+
+  const styleFile = path.join(OUT_DIR, 'return_style_map.json');
+  const addrFile = path.join(OUT_DIR, 'return_addr_map.json');
+  fs.writeFileSync(styleFile, JSON.stringify(styleSupplier));
+  fs.writeFileSync(addrFile, JSON.stringify(addrMap));
+  console.log(`✅ 已生成 ${styleFile}（${Object.keys(styleSupplier)} 条；新增 ${added}，沿用旧值 ${keptOld}）`);
+  console.log(`✅ 已生成 ${addrFile}（${Object.keys(addrMap)} 条）`);
+  console.log('\n完成！请提交到网页同层目录。');
 }
 
 main().catch(e => { console.error('❌ 同步失败:', e.message); process.exit(1); });
