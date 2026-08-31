@@ -10,11 +10,11 @@
     ③ 数据表名 / 图片存储桶名 / 加载条数等抽为可配置项。
   重要说明（系统如何工作）：
     · 前端只负责"采集 + 打标签 + 展示状态"；
-    · 点"一键退货"= 给记录打 [退货:待处理] 标签；
-    · 后台 return-worker（Cloudflare Worker）实时调用聚水潭 API
-      创建退货单，并把 [退货:已下单:内部单号] 回写到记录；
+    · 记录状态（如"处理中/未匹配"）只是状态标记，后台【不会】自动创建聚水潭退货单；
+    · 只有点"一键退货"才会创建聚水潭退货单：前端直接调用退货服务
+      （return-worker）实时创建，并把 [退货:已下单:内部单号] 回写到记录；
     · 1688 退款申请由人工在 1688 后台操作（系统跳转对应订单页）；
-    · 退款/退货状态由后台定时任务（约每2小时）同步回 Supabase。
+    · 退款/退货状态需手动触发同步。
   ════════════════════════════════════════════════════════════════
 -->
 
@@ -206,11 +206,12 @@ const APP_CONFIG = {
     // --- 聚水潭对接（后端 return-worker 使用；此处仅留档）---
     returnShopId: '21571486',         // 外贸采购退货店铺 shop_id
 
-    // --- 后端服务地址（可选，预留）---
-    // 若以后要让前端"一键退货"直接调用后端实时创建聚水潭退货单，
-    // 在此填入后端地址（如 Cloudflare Worker / API 网关）；留空则维持
-    // 原机制：前端打 [退货:待处理] 标签，由后台定时任务处理。
-    backendBaseUrl: '',
+    // --- 退货创建服务（一键退货）---
+    // 规则：只有点"一键退货"才会创建聚水潭退货单；
+    // 记录被标记为 [退货:待处理]（处理中）等状态时，后台【不会】自动创建退货单。
+    // 填入退货 worker 地址后，前端"一键退货"会直接调用它创建订单；
+    // 留空则"一键退货"仅更新状态，不创建订单。
+    returnWorkerUrl: '',
 };
 
 // 兼容旧代码引用（下方业务代码无需改动）
@@ -1012,7 +1013,27 @@ async function createReturnOrder(poId, btn) {
     btn.textContent = '⏳ 提交中...';
     btn.disabled = true;
     try {
-        // 写一条退货请求到Supabase，后台cron自动处理
+        // 规则：只有点"一键退货"才创建聚水潭退货单。配置了 returnWorkerUrl 则直接调用创建；
+        // 未配置则仅更新状态（[退货:待处理]），后台不会自动创建。
+        const workerUrl = (APP_CONFIG.returnWorkerUrl||'').replace(/\/+$/,'');
+        if (workerUrl) {
+            const resp = await fetch(workerUrl + '/create-return', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({ po_id: poId })
+            });
+            const data = await resp.json().catch(()=>({}));
+            if (data && data.success) {
+                showToast(`✅ 退货订单已创建 ${data.order_id||''}\n${data.detail||''}`, '#059669');
+                btn.textContent = '✅ 已创建'; btn.style.background='#059669'; btn.style.borderColor='#059669'; btn.onclick=null;
+                setTimeout(()=>loadHistory(), 1200);
+                return;
+            }
+            showToast(`❌ 创建失败: ${(data&&data.msg)||'未知错误'}`, '#dc2626');
+            btn.textContent = origText; btn.disabled = false;
+            return;
+        }
+        // 写一条退货请求到Supabase（仅状态标记，后台不自动创建）
         const r = await fetch(SUPABASE_URL + '/rest/v1/defect_reports?po_id=eq.' + poId + '&status=eq.pending&note=not.like.*%5B退货:*', {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
         });
@@ -1027,7 +1048,7 @@ async function createReturnOrder(poId, btn) {
                 body: JSON.stringify({ note })
             });
         }
-        showToast(`✅ 退货请求已提交(${records.length}条)\n约1分钟内自动创建订单`, '#059669');
+        showToast(`✅ 已标记处理中(${records.length}条)\n未配置退货服务，未自动创建订单`, '#d97706');
         btn.textContent = '⏳ 处理中';
         btn.style.background = '#6b7280';
         btn.style.borderColor = '#6b7280';
@@ -1133,7 +1154,7 @@ async function confirmBatchReturn() {
     }
 
     overlay.style.display = 'none';
-    showToast(`✅ 已提交${selectedSuppliers.length}个供应商共${totalTagged}条退货请求\n约2分钟内自动创建订单`, '#059669');
+    showToast(`✅ 已提交${selectedSuppliers.length}个供应商共${totalTagged}条退货请求\n仅标记处理中，未自动创建订单`, '#059669');
     setTimeout(() => fetchRecords(), 2000);
 }
 
@@ -1198,7 +1219,7 @@ async function open1688ReturnAndCreateOrder(poId, btn) {
             method: 'PATCH', headers: h, body: JSON.stringify({ note })
         });
     }
-    showToast(`✅ 已跳转1688退货 + 退货订单创建中(${items.length}条)\n约2分钟后自动创建聚水潭订单`, '#059669');
+    showToast(`✅ 已跳转1688退货 + 退货订单创建中(${items.length}条)\n仅标记处理中，未自动创建订单`, '#059669');
     btn.textContent = '⏳ 处理中';
     btn.disabled = true;
     setTimeout(() => fetchRecords(), 3000);
@@ -1310,7 +1331,7 @@ async function confirmBatchReturnAll() {
 
     overlay.style.display = 'none';
     const msg1688 = poIdsToOpen.size ? `\n已打开${poIdsToOpen.size}个1688退货页面` : '';
-    showToast(`✅ 已提交${selectedSuppliers.length}个供应商共${totalTagged}条${msg1688}\n约2分钟内自动创建聚水潭退货订单`, '#059669');
+    showToast(`✅ 已提交${selectedSuppliers.length}个供应商共${totalTagged}条${msg1688}\n仅标记处理中，未自动创建订单`, '#059669');
     setTimeout(() => fetchRecords(), 3000);
 }
 
