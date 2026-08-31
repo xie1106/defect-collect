@@ -90,6 +90,14 @@
                     <option value="yto">圆通速递</option>
                 </select>
             </div>
+            <details style="margin-bottom:12px;">
+                <summary style="font-size:12px;color:#666;cursor:pointer;">📦 发件人信息（退货寄出地址，默认已填）</summary>
+                <div style="margin-top:6px;">
+                    <div class="form-group"><label>发件人</label><input type="text" id="senderName" value="次品退货部"></div>
+                    <div class="form-group"><label>发件电话</label><input type="tel" id="senderPhone" value="13316255984"></div>
+                    <div class="form-group"><label>发件地址</label><textarea id="senderAddr">广东省 广州市 番禺区 大石街道会江鸿盛三路9号高昇产业园A301</textarea></div>
+                </div>
+            </details>
             <button class="btn btn-primary" onclick="createReturn()" style="margin-top:8px;">📋 生成面单</button>
         </div>
     </div>
@@ -157,6 +165,22 @@ let suppliers = JSON.parse(localStorage.getItem('suppliers') || 'null') || DEFAU
 localStorage.setItem('suppliers', JSON.stringify(suppliers));
 // 退货订单（localStorage暂存，后续可用Supabase）
 let returnOrders = JSON.parse(localStorage.getItem('returnOrders') || '[]');
+// === 圆通电子面单配置 ===
+const YTO_PROXY_URL = 'https://yto-proxy.458914253.workers.dev'; // 圆通面单代理
+// 发件人默认值（我方退货发出地址，可在表单里改）
+let DEFAULT_SENDER = { name:'次品退货部', phone:'13316255984', address:'广东省 广州市 番禺区 大石街道会江鸿盛三路9号高昇产业园A301' };
+function splitAddr(name, phone, address) {
+    const m = (address||'').match(/(.*?省)?(.*?市)?(.*?区|.*?县|.*?旗)?(.*)/);
+    return { name, phone, province:(m&&m[1])||'', city:(m&&m[2])||'', district:(m&&m[3])||'', address:((m&&m[4])||address||'').trim() };
+}
+function parseYtoWaybill(data) {
+    try {
+        const raw = (data && data.raw) || '';
+        const m = raw.match(/<mailNo>([^<]+)<\/mailNo>/i) || raw.match(/<waybillNo>([^<]+)<\/waybillNo>/i);
+        return m ? m[1] : '';
+    } catch(e){ return ''; }
+}
+
 
 function switchPanel(name) {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -301,7 +325,7 @@ function importExcel(event) {
 </script>
 <script>
 // === 退货下单 ===
-function createReturn() {
+async function createReturn() {
     const poId = document.getElementById('returnPoId').value.trim();
     const supplierIdx = document.getElementById('returnSupplier').value;
     const contact = document.getElementById('returnContact').value.trim();
@@ -320,6 +344,30 @@ function createReturn() {
         createdAt: new Date().toISOString(),
         waybillNo: ''
     };
+
+    // 调用圆通生成电子面单（yto-proxy）
+    const sender = {
+        name: document.getElementById('senderName').value.trim() || DEFAULT_SENDER.name,
+        phone: document.getElementById('senderPhone').value.trim() || DEFAULT_SENDER.phone,
+        address: document.getElementById('senderAddr').value.trim() || DEFAULT_SENDER.address
+    };
+    try {
+        const resp = await fetch(YTO_PROXY_URL, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ action: 'createOrder', data: {
+                orderId: poId,
+                sender: splitAddr(sender.name, sender.phone, sender.address),
+                receiver: splitAddr(contact, phone, addr),
+                itemName: items || '服装退货'
+            }})
+        });
+        const data = await resp.json();
+        order.waybillNo = parseYtoWaybill(data) || '';
+        if (order.waybillNo) { order.status = 'shipped'; showToast('✅ 电子面单已生成: ' + order.waybillNo, '#10b981'); }
+        else { showToast('⚠️ 圆通未返回运单号，请检查圆通接口配置', '#d97706'); }
+    } catch(e) { showToast('❌ 获取面单失败: ' + e.message, '#ef4444'); }
+
     returnOrders.unshift(order);
     localStorage.setItem('returnOrders', JSON.stringify(returnOrders));
     showWaybill(order);
