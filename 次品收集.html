@@ -927,8 +927,12 @@ function getSupplierForGroup(items) {
     const validName = (v) => { const n = String(v||'').trim(); return (v && !n.includes('*') && n !== '市场') ? v : null; };
     // Try extracting supplier from [1688:...供应商:xxx...] tag first
     for (const r of items) {
-        const m = (r.note||'').match(/供应商:([^\s\]]+)/);
-        if (m && m[1]) { const n = validName(m[1]); if (n) return n; }
+        const re = /供应商:([^\s\]]+)/g;
+        let m;
+        while ((m = re.exec(r.note||'')) !== null) {
+            const n = validName(m[1]);
+            if (n) return n;
+        }
     }
     if (!_styleSupplierMap) return null;
     for (const r of items) {
