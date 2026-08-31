@@ -924,7 +924,7 @@ async function loadStyleMap() {
 }
 function getSupplierForGroup(items) {
     // 打码/脱敏的供应商名（含*号）视为未匹配
-    const validName = (v) => (v && !String(v).includes('*')) ? v : null;
+    const validName = (v) => { const n = String(v||'').trim(); return (v && !n.includes('*') && n !== '市场') ? v : null; };
     // Try extracting supplier from [1688:...供应商:xxx...] tag first
     for (const r of items) {
         const m = (r.note||'').match(/供应商:([^\s\]]+)/);
