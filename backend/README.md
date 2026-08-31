@@ -69,3 +69,13 @@ node sync-jst-maps.js  ..```
 > - 不带时间参数 = 全量同步；如只需增量，加 `$env:JST_MODIFIED_BEGIN` / `$env:JST_MODIFIED_END`（格式 `YYYY-MM-DD HH:mm:ss`，间隔≤7天）
 > - 生成的 3 个 json 会写到网页同层目录（覆盖同名文件），提交到仓库后前端即可用最新资料
 > - 建议：每天定时跑一次（如 Windows 计划任务），保持资料最新
+
+### 商品分类过滤
+
+同步时**只保留以下 15 个服装分类**的商品，其余分类一律排除（分类以聚水潭类目为准，含子类）：
+
+背心、短裤、长裤、七分裤、短袖衬衫、套装、长袖衬衫、毛衣、外套、卫衣、羽绒外套、短袖T、长袖T、马甲、裙子
+
+- `sku_info_map.json` / `return_style_map.json` 只含这些分类的商品
+- `return_addr_map.json` 保留全部供应商（退货流程需要）
+- 增量更新：`node sync-jst-maps.js ..\ incremental`（默认同步最近 7 天，可用 `$env:JST_DAYS` 调整）
