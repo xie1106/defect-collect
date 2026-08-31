@@ -43,7 +43,7 @@ export default {
         }
         
         // Try style map
-        const docSupplier = findSupplierFromStyle(env, i_id);
+        const docSupplier = await findSupplierFromStyle(env, i_id);
         if (docSupplier) {
           supplier = docSupplier;
         } else {
@@ -140,14 +140,22 @@ async function getSupplierFromPO(env, po_id) {
   return null;
 }
 
-function findSupplierFromStyle(env, i_id) {
+async function findSupplierFromStyle(env, i_id) {
   if (!i_id) return null;
   const STYLE_MAP = JSON.parse(env.STYLE_MAP || '{}');
   const key = i_id.trim().toUpperCase();
-  if (STYLE_MAP[key]) return STYLE_MAP[key];
-  for (const [k,v] of Object.entries(STYLE_MAP)) {
-    if (key.includes(k) || k.includes(key)) return v;
-  }
+  const matchIn = (map) => {
+    if (map[key]) return map[key];
+    for (const [k,v] of Object.entries(map)) {
+      if (key.includes(k.toUpperCase()) || k.toUpperCase().includes(key)) return v;
+    }
+    return null;
+  };
+  let v = matchIn(STYLE_MAP);
+  if (v) return v;
+  try { const r = await fetch('https://xie1106.github.io/defect-collect/return_style_map.json', { cf: { cacheTtl: 600 } });
+    if (r.ok) { const map = await r.json(); v = matchIn(map); if (v) return v; }
+  } catch(e) {}
   return null;
 }
 
@@ -168,6 +176,19 @@ async function findReturnAddress(env, supplier) {
     const nameNorm = name.replace(/档口/g,'').trim().toLowerCase();
     if (norm === nameNorm || norm.includes(nameNorm) || nameNorm.includes(norm)) return info;
   }
+  // 3. 线上退货地址表（与前端一致）
+  try { const r = await fetch('https://xie1106.github.io/defect-collect/return_addr_map.json', { cf: { cacheTtl: 600 } });
+    if (r.ok) {
+      const map = await r.json();
+      for (const [name, info] of Object.entries(map)) {
+        const nameNorm = name.replace(/档口/g,'').trim().toLowerCase();
+        if (norm === nameNorm || norm.includes(nameNorm) || nameNorm.includes(norm)) {
+          if (typeof info === 'string') return { address: info, mobile: '', contacts: '' };
+          return info;
+        }
+      }
+    }
+  } catch(e) {}
   return null;
 }
 
@@ -175,8 +196,9 @@ function parseSkuItems(records) {
   const items = [];
   for (const rec of records) {
     const note = (rec.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
-    const m = note.match(/^([A-Za-z0-9\-]+)[×x](\d+)/);
-    if (m) items.push({ sku_id: m[1], qty: parseInt(m[2]) });
+    const re = /([A-Za-z0-9\-]+)[×x](\d+)/g;
+    let m;
+    while ((m = re.exec(note)) !== null) items.push({ sku_id: m[1], qty: parseInt(m[2]) });
   }
   return items;
 }
