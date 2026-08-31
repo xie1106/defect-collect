@@ -1,0 +1,7 @@
+name = "yto-proxy"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+YTO_PARTNER_ID = "K200416574"
+YTO_SECRET = "4EI8FSK0"

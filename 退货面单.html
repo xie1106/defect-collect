@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>退货面单系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f7fa; height: 100vh; overflow: hidden; }
+        .container { max-width: 500px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; height: 100%; padding: 0 12px; }
+        h1 { text-align: center; font-size: 18px; padding: 14px 0; color: #333; }
+        .tabs { display: flex; gap: 0; margin-bottom: 12px; background: #fff; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .tab-btn { flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 600; border: none; background: #fff; cursor: pointer; color: #666; transition: all 0.2s; }
+        .tab-btn.active { background: #4A90D9; color: #fff; }
+        .panel { display: none; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .panel.active { display: block; }
+        .card { background: #fff; border-radius: 10px; padding: 14px; margin-bottom: 10px; border: 1px solid #e2e8f0; }
+        .card-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 10px; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; }
+        .form-group textarea { height: 60px; resize: none; }
+        .btn { padding: 12px 20px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; }
+        .btn-primary { background: #4A90D9; color: #fff; }
+        .btn-success { background: #10b981; color: #fff; }
+        .btn-danger { background: #ef4444; color: #fff; }
+        .btn-outline { background: #fff; color: #4A90D9; border: 1.5px solid #4A90D9; }
+        .supplier-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #4A90D9; }
+        .supplier-item .name { font-weight: 600; font-size: 14px; }
+        .supplier-item .addr { font-size: 12px; color: #666; margin-top: 2px; }
+        .supplier-item .actions { display: flex; gap: 8px; }
+        .supplier-item .actions button { padding: 4px 10px; border-radius: 6px; border: 1px solid #ddd; background: #fff; font-size: 12px; cursor: pointer; }
+        .order-item { padding: 12px; border: 1px solid #eee; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #10b981; }
+        .order-item .header { display: flex; justify-content: space-between; align-items: center; }
+        .order-item .po { font-weight: 600; font-size: 14px; }
+        .order-item .status { padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+        .status-pending { background: #fef3c7; color: #d97706; }
+        .status-shipped { background: #d1fae5; color: #059669; }
+        .toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); padding: 12px 24px; border-radius: 8px; color: #fff; font-size: 14px; z-index: 9999; display: none; }
+        /* 面单预览 */
+        .waybill { width: 76mm; height: 130mm; border: 1px solid #000; padding: 4mm; font-size: 10px; font-family: monospace; margin: 0 auto; background: #fff; }
+        .waybill .title { text-align: center; font-size: 16px; font-weight: bold; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 6px; }
+        .waybill .section { border-bottom: 1px solid #000; padding: 4px 0; margin-bottom: 4px; }
+        .waybill .label { font-weight: bold; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>📦 退货面单系统</h1>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchPanel('return')">退货下单</button>
+        <button class="tab-btn" onclick="switchPanel('orders')">退货记录</button>
+        <button class="tab-btn" onclick="switchPanel('suppliers')">供应商</button>
+    </div>
+
+    <!-- 退货下单 -->
+    <div class="panel active" id="panel-return">
+        <div class="card">
+            <div class="card-title">退货信息</div>
+            <div class="form-group">
+                <label>采购单号</label>
+                <input type="text" id="returnPoId" placeholder="输入或从次品系统带入">
+            </div>
+            <div class="form-group">
+                <label>供应商</label>
+                <select id="returnSupplier" onchange="fillSupplierAddr()">
+                    <option value="">选择供应商</option>
+                </select>
+                <div id="returnRemark" style="margin-top:4px;"></div>
+            </div>
+            <div class="form-group">
+                <label>收件人</label>
+                <input type="text" id="returnContact" placeholder="自动填充">
+            </div>
+            <div class="form-group">
+                <label>电话</label>
+                <input type="tel" id="returnPhone" placeholder="自动填充">
+            </div>
+            <div class="form-group">
+                <label>退货地址</label>
+                <textarea id="returnAddr" placeholder="自动填充"></textarea>
+            </div>
+            <div class="form-group">
+                <label>退货明细</label>
+                <textarea id="returnItems" placeholder="款号×数量，如：WM5225×2, Y6662×1"></textarea>
+            </div>
+            <div class="form-group">
+                <label>快递</label>
+                <select id="returnExpress">
+                    <option value="yto">圆通速递</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="createReturn()" style="margin-top:8px;">📋 生成面单</button>
+        </div>
+    </div>
+
+    <!-- 退货记录 -->
+    <div class="panel" id="panel-orders">
+        <div id="orderList"></div>
+    </div>
+
+    <!-- 供应商管理 -->
+    <div class="panel" id="panel-suppliers">
+        <div style="margin-bottom:10px;display:flex;gap:8px;">
+            <button class="btn btn-outline" onclick="showAddSupplier()" style="flex:1;">+ 添加供应商</button>
+            <button class="btn btn-outline" onclick="document.getElementById('importFile').click()" style="flex:1;border-color:#10b981;color:#10b981;">📥 导入Excel</button>
+            <input type="file" id="importFile" accept=".xlsx,.xls" style="display:none;" onchange="importExcel(event)">
+        </div>
+        <div id="supplierList"></div>
+        <!-- 添加供应商表单 -->
+        <div id="addSupplierForm" style="display:none;">
+            <div class="card">
+                <div class="card-title">添加供应商</div>
+                <div class="form-group"><label>供应商名称</label><input type="text" id="sName"></div>
+                <div class="form-group"><label>收件人</label><input type="text" id="sContact"></div>
+                <div class="form-group"><label>电话</label><input type="tel" id="sPhone"></div>
+                <div class="form-group"><label>退货地址</label><input type="text" id="sAddress"></div>
+                <div class="form-group"><label>备注/须知</label><input type="text" id="sRemark" placeholder="如：到付拒收"></div>
+                <div style="display:flex;gap:8px;margin-top:10px;">
+                    <button class="btn btn-success" onclick="saveSupplier()" style="flex:1;">保存</button>
+                    <button class="btn btn-outline" onclick="hideAddSupplier()" style="flex:1;">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 面单预览弹窗 -->
+    <div id="waybillModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;overflow-y:auto;padding:20px;">
+        <div style="max-width:320px;margin:0 auto;">
+            <div id="waybillContent"></div>
+            <div style="display:flex;gap:10px;margin-top:16px;">
+                <button class="btn btn-primary" onclick="printWaybill()" style="flex:1;">🖨️ 打印</button>
+                <button class="btn btn-outline" onclick="closeWaybill()" style="flex:1;border-color:#fff;color:#fff;">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+<script>
+const SUPABASE_URL = 'https://elyfxyrdbuykyklfjfdr.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVseWZ4eXJkYnV5a3lrbGZqZmRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDIwMjQsImV4cCI6MjA5NjU3ODAyNH0.irrMM8iKJVGnOBW6VQ4BHlkwiVIDtB97EPiHvasOWyg';
+
+// 供应商数据（localStorage存储）
+const DEFAULT_SUPPLIERS = [
+  {"name":"UNF","contact":"刘生","phone":"13822254885","address":"广东省广州市荔湾区光复南路48号B01","remark":"包写开单名"},
+  {"name":"MEIM","contact":"安迪","phone":"13570419585","address":"广东广州市荔湾区岭南街道光复南路93号C1-C2","remark":"退货退版记得备注下名字，发单号给我"},
+  {"name":"RHSHANNA","contact":"陈生","phone":"13428815740","address":"广东省广州市荔湾区杨巷1号115档","remark":"退回麻烦里面塞个纸条备注一下自己的开单名字、数量。到付拒收！"},
+  {"name":"byd","contact":"阿峰","phone":"18898403035","address":"广州市荔湾区光复南路102号K+R","remark":"不要到付，到付仓库拒收"},
+  {"name":"唐森","contact":"戴晓晓","phone":"13318428058","address":"广东省广州市荔湾区光复南路85号B1B2档","remark":""},
+  {"name":"bfborfend","contact":"仓库阿鸿主管","phone":"13416229955","address":"广东省佛山市南海区大沥镇泌冲社区华南藤编产业园一期2号楼二层","remark":"1号客梯、货梯上来二楼"},
+  {"name":"EXTREME CAUSE","contact":"吴小姐","phone":"15920168449","address":"广州市荔湾区光复南路121档","remark":"到付拒收"},
+  {"name":"poppjayezy","contact":"邓小姐","phone":"13533021390","address":"广东省佛山市南海区大沥镇黄岐泌冲二村泌二大街20号10楼","remark":"到付件一律拒收"},
+  {"name":"GEESAS","contact":"居瑟斯","phone":"13798107393","address":"广东省广州市荔湾区光复南134号","remark":""}
+];
+let suppliers = JSON.parse(localStorage.getItem('suppliers') || 'null') || DEFAULT_SUPPLIERS;
+localStorage.setItem('suppliers', JSON.stringify(suppliers));
+// 退货订单（localStorage暂存，后续可用Supabase）
+let returnOrders = JSON.parse(localStorage.getItem('returnOrders') || '[]');
+
+function switchPanel(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    event.target.classList.add('active');
+    if (name === 'suppliers') renderSuppliers();
+    if (name === 'orders') renderOrders();
+}
+
+function showToast(msg, color) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.style.background = color || '#333';
+    t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 2000);
+}
+
+// === 供应商管理 ===
+function renderSuppliers() {
+    const el = document.getElementById('supplierList');
+    if (suppliers.length === 0) { el.innerHTML = '<div style="color:#999;text-align:center;padding:20px;font-size:13px;">暂无供应商，请添加</div>'; return; }
+    el.innerHTML = suppliers.map((s, i) => `
+        <div class="supplier-item">
+            <div>
+                <div class="name">${s.name}</div>
+                <div class="addr">${s.contact} ${s.phone}</div>
+                <div class="addr">${s.address}</div>
+                ${s.remark ? '<div style="color:#dc2626;font-size:11px;margin-top:2px;">⚠️ '+s.remark+'</div>' : ''}
+            </div>
+            <div class="actions">
+                <button onclick="editSupplier(${i})">✏️</button>
+                <button onclick="deleteSupplier(${i})" style="color:#dc2626;">✕</button>
+            </div>
+        </div>`).join('');
+    // 更新退货下单的下拉
+    updateSupplierSelect();
+}
+
+function updateSupplierSelect() {
+    const sel = document.getElementById('returnSupplier');
+    sel.innerHTML = '<option value="">选择供应商</option>' + suppliers.map((s,i) => `<option value="${i}">${s.name}</option>`).join('');
+}
+
+function fillSupplierAddr() {
+    const idx = document.getElementById('returnSupplier').value;
+    if (idx === '') return;
+    const s = suppliers[idx];
+    document.getElementById('returnContact').value = s.contact;
+    document.getElementById('returnPhone').value = s.phone;
+    document.getElementById('returnAddr').value = s.address;
+    // Show remark
+    const remarkEl = document.getElementById('returnRemark');
+    if (remarkEl) remarkEl.innerHTML = s.remark ? '<span style="color:#dc2626;font-size:12px;">⚠️ ' + s.remark + '</span>' : '';
+}
+
+function showAddSupplier() { document.getElementById('addSupplierForm').style.display = 'block'; }
+function hideAddSupplier() { document.getElementById('addSupplierForm').style.display = 'none'; clearSupplierForm(); }
+function clearSupplierForm() { ['sName','sContact','sPhone','sAddress','sRemark'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; }); }
+
+function saveSupplier() {
+    const s = {
+        name: document.getElementById('sName').value.trim(),
+        contact: document.getElementById('sContact').value.trim(),
+        phone: document.getElementById('sPhone').value.trim(),
+        address: document.getElementById('sAddress').value.trim(),
+        remark: document.getElementById('sRemark') ? document.getElementById('sRemark').value.trim() : ''
+    };
+    if (!s.name) { showToast('请填写供应商名称', '#ef4444'); return; }
+    suppliers.push(s);
+    localStorage.setItem('suppliers', JSON.stringify(suppliers));
+    hideAddSupplier();
+    renderSuppliers();
+    showToast('已添加', '#10b981');
+}
+
+function deleteSupplier(i) {
+    if (!confirm('确定删除 ' + suppliers[i].name + '？')) return;
+    suppliers.splice(i, 1);
+    localStorage.setItem('suppliers', JSON.stringify(suppliers));
+    renderSuppliers();
+}
+
+function editSupplier(i) {
+    const s = suppliers[i];
+    document.getElementById('sName').value = s.name;
+    document.getElementById('sContact').value = s.contact;
+    document.getElementById('sPhone').value = s.phone;
+    document.getElementById('sAddress').value = s.address;
+    document.getElementById('sRemark').value = s.remark || '';
+    suppliers.splice(i, 1);
+    localStorage.setItem('suppliers', JSON.stringify(suppliers));
+    showAddSupplier();
+}
+
+// Excel导入
+function importExcel(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            // Simple CSV/TSV parse for exported xlsx (use SheetJS if available)
+            // For now, parse as text - user should export as CSV
+            // Actually let's use a lightweight xlsx parser
+            showToast('正在解析...', '#4A90D9');
+            // Use fetch to load SheetJS CDN
+            const script = document.createElement('script');
+            script.src = 'https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js';
+            script.onload = function() {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, {type:'array'});
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                const rows = XLSX.utils.sheet_to_json(sheet, {header:1});
+                const newSuppliers = [];
+                for (let i = 1; i < rows.length; i++) {
+                    const name = (rows[i][0]||'').toString().trim();
+                    const raw = (rows[i][1]||'').toString().trim();
+                    if (!name || !raw) continue;
+                    const parts = raw.replace(/\n/g,'').split(/[，,]/);
+                    const contact = (parts[0]||'').trim();
+                    const phone = (parts[1]||'').trim();
+                    const address = (parts.slice(2).join(',')).trim();
+                    let remark = '';
+                    const m = address.match(/[（(](.+?)[）)]/);
+                    if (m) remark = m[1];
+                    newSuppliers.push({name, contact, phone, address: address.replace(/[（(].+?[）)]/g,'').trim(), remark});
+                }
+                if (newSuppliers.length > 0) {
+                    suppliers = newSuppliers;
+                    localStorage.setItem('suppliers', JSON.stringify(suppliers));
+                    renderSuppliers();
+                    showToast('导入成功: ' + newSuppliers.length + '个供应商', '#10b981');
+                } else {
+                    showToast('未找到有效数据', '#ef4444');
+                }
+            };
+            document.head.appendChild(script);
+        } catch(err) { showToast('解析失败', '#ef4444'); }
+    };
+    reader.readAsArrayBuffer(file);
+    event.target.value = '';
+}
+</script>
+<script>
+// === 退货下单 ===
+function createReturn() {
+    const poId = document.getElementById('returnPoId').value.trim();
+    const supplierIdx = document.getElementById('returnSupplier').value;
+    const contact = document.getElementById('returnContact').value.trim();
+    const phone = document.getElementById('returnPhone').value.trim();
+    const addr = document.getElementById('returnAddr').value.trim();
+    const items = document.getElementById('returnItems').value.trim();
+    if (!poId) { showToast('请输入采购单号', '#ef4444'); return; }
+    if (!contact || !phone || !addr) { showToast('请填写收件信息', '#ef4444'); return; }
+
+    const order = {
+        id: Date.now(),
+        poId, contact, phone, addr, items,
+        supplier: supplierIdx !== '' ? suppliers[supplierIdx].name : '未知',
+        express: '圆通速递',
+        status: 'pending',
+        createdAt: new Date().toISOString(),
+        waybillNo: ''
+    };
+    returnOrders.unshift(order);
+    localStorage.setItem('returnOrders', JSON.stringify(returnOrders));
+    showWaybill(order);
+    showToast('退货单已创建', '#10b981');
+}
+
+// === 面单预览 ===
+function showWaybill(order) {
+    const html = `
+    <div class="waybill">
+        <div class="title">圆通速递</div>
+        <div class="section">
+            <div class="label">寄件人</div>
+            <div>广州市捷展贸易有限公司</div>
+            <div>广州市海珠区</div>
+            <div>020-XXXXXXXX</div>
+        </div>
+        <div class="section">
+            <div class="label">收件人</div>
+            <div>${order.contact}</div>
+            <div>${order.addr}</div>
+            <div>${order.phone}</div>
+        </div>
+        <div class="section">
+            <div class="label">退货明细</div>
+            <div>采购单号: ${order.poId}</div>
+            <div>${order.items || '无明细'}</div>
+        </div>
+        <div class="section">
+            <div class="label">供应商</div>
+            <div>${order.supplier}</div>
+        </div>
+        <div style="text-align:center;padding:8px;font-size:11px;color:#666;">
+            ${new Date(order.createdAt).toLocaleString()}<br>
+            运单号: ${order.waybillNo || '等待圆通API返回'}
+        </div>
+    </div>`;
+    document.getElementById('waybillContent').innerHTML = html;
+    document.getElementById('waybillModal').style.display = 'block';
+}
+
+function closeWaybill() { document.getElementById('waybillModal').style.display = 'none'; }
+
+function printWaybill() {
+    const content = document.getElementById('waybillContent').innerHTML;
+    const win = window.open('', '_blank');
+    win.document.write(`<html><head><style>
+        .waybill{width:76mm;height:130mm;border:1px solid #000;padding:4mm;font-size:10px;font-family:monospace;background:#fff;}
+        .waybill .title{text-align:center;font-size:16px;font-weight:bold;border-bottom:2px solid #000;padding-bottom:4px;margin-bottom:6px;}
+        .waybill .section{border-bottom:1px solid #000;padding:4px 0;margin-bottom:4px;}
+        .waybill .label{font-weight:bold;}
+        @media print{@page{size:76mm 130mm;margin:0;}}
+    </style></head><body>${content}</body></html>`);
+    win.document.close();
+    win.print();
+}
+
+// === 退货记录 ===
+function renderOrders() {
+    const el = document.getElementById('orderList');
+    if (returnOrders.length === 0) { el.innerHTML = '<div style="color:#999;text-align:center;padding:20px;font-size:13px;">暂无退货记录</div>'; return; }
+    el.innerHTML = returnOrders.map(o => `
+        <div class="order-item">
+            <div class="header">
+                <span class="po">采购单 ${o.poId}</span>
+                <span class="status ${o.status === 'shipped' ? 'status-shipped' : 'status-pending'}">${o.status === 'shipped' ? '已寄出' : '待寄出'}</span>
+            </div>
+            <div style="font-size:12px;color:#666;margin-top:4px;">
+                ${o.supplier} · ${o.express}<br>
+                ${o.items || ''}<br>
+                ${new Date(o.createdAt).toLocaleString()}
+            </div>
+            <div style="margin-top:6px;display:flex;gap:8px;">
+                <button onclick="showWaybill(${JSON.stringify(o).replace(/"/g,'&quot;')})" style="padding:4px 10px;border:1px solid #4A90D9;border-radius:6px;background:#fff;color:#4A90D9;font-size:12px;cursor:pointer;">查看面单</button>
+                <button onclick="deleteOrder(${o.id})" style="padding:4px 10px;border:1px solid #dc2626;border-radius:6px;background:#fff;color:#dc2626;font-size:12px;cursor:pointer;">删除</button>
+            </div>
+        </div>`).join('');
+}
+
+function deleteOrder(id) {
+    returnOrders = returnOrders.filter(o => o.id !== id);
+    localStorage.setItem('returnOrders', JSON.stringify(returnOrders));
+    renderOrders();
+    showToast('已删除', '#10b981');
+}
+
+// 初始化
+updateSupplierSelect();
+</script>

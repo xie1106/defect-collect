@@ -1,0 +1,15 @@
+name = "defect-return-worker"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+JST_APP_KEY = "f9606648e2044c7fa9df4bb6516a7269"
+JST_BASE_URL = "https://openapi.jushuitan.com"
+RETURN_SHOP_ID = "21571486"
+SUPABASE_URL = "https://elyfxyrdbuykyklfjfdr.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVseWZ4eXJkYnV5a3lrbGZqZmRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDIwMjQsImV4cCI6MjA5NjU3ODAyNH0.irrMM8iKJVGnOBW6VQ4BHlkwiVIDtB97EPiHvasOWyg"
+
+STYLE_MAP = '{"6025":"广州青木服饰有限公司","Q6055":"广州青木服饰有限公司","WM5578":"陈秀娟","WM12864S25":"广州曼坤贸易有限公司","Y6662":"广州曼坤贸易有限公司"}'
+RETURN_ADDR_MAP = '{"广州青木服饰有限公司":{"address":"广东省 广州市 番禺区 洛浦街道西山村开发南路2号金华美工业区2栋6楼","mobile":"13560432732","contacts":"OR售后仓库"}}'
+
+# JST_APP_SECRET and JST_ACCESS_TOKEN should be set via wrangler secret
