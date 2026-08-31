@@ -753,8 +753,8 @@ function loadHistory() {
         r._realIdx = realIdx;
         const rt = parseReturnTag(r.note);
         const rf = parseRefundTag(r.note);
-        const supplierMatch = (r.note||'').match(/供应商:([^\]\s]+)/);
-        const supplier = supplierMatch ? supplierMatch[1] : '_none';
+        const supplierMatch = (r.note||'').match(/供应商:([^\]]+?)(?=\s*次品:|\])/);
+        const supplier = supplierMatch ? supplierMatch[1].trim() : '_none';
         if (r.status === 'pending' && !rf && !rt) {
             // 待处理（无退货无退款）：按采购单号+供应商合并
             const key = 'p_' + r.po_id + '_' + supplier;
@@ -927,7 +927,7 @@ function getSupplierForGroup(items) {
     const validName = (v) => { const n = String(v||'').trim(); return (v && !n.includes('*') && n !== '市场') ? v : null; };
     // Try extracting supplier from [1688:...供应商:xxx...] tag first
     for (const r of items) {
-        const re = /供应商:([^\s\]]+)/g;
+        const re = /供应商:([^\]]+?)(?=\s*次品:|\])/g;
         let m;
         while ((m = re.exec(r.note||'')) !== null) {
             const n = validName(m[1]);
