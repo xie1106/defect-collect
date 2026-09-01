@@ -36,12 +36,12 @@ export default {
 
       if (action === 'createOrder') {
         // Simple order creation (散件下单)
-        apiUrl = 'http://openapi.yto.net.cn/service/waybill_no/get_waybill_no';
+        apiUrl = 'http://openapi.yto.net.cn/service/e_order_create/v1/R9Wao5';
         xml = buildCreateOrderXml(data);
       } else if (action === 'getWaybillNo') {
         // Get waybill number
-        apiUrl = 'http://openapi.yto.net.cn/service/waybill_no/get_waybill_no';
-        xml = buildGetWaybillXml(data);
+        apiUrl = 'http://openapi.yto.net.cn/service/e_order_create/v1/R9Wao5';
+        xml = buildCreateOrderXml(data); // e_order_create returns mailNo
       } else {
         return new Response(JSON.stringify({ error: 'Unknown action: ' + action }), { status: 400, headers: corsHeaders });
       }
@@ -85,6 +85,7 @@ function buildCreateOrderXml(data) {
 <RequestOrder>
   <clientID>${data.clientId || 'K200416574'}</clientID>
   <logisticProviderID>YTO</logisticProviderID>
+  <customerId>${data.customerId || 'K200416574'}</customerId>
   <txLogisticID>${data.orderId || 'JZ' + Date.now()}</txLogisticID>
   <orderType>1</orderType>
   <serviceType>0</serviceType>
