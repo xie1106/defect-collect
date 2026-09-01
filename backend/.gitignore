@@ -1,0 +1,4 @@
+# 本地同步脚本（含聚水潭密钥 / Supabase service key，不入库）
+jst-sync/sync-local.js
+jst-sync/run-sync.bat
+jst-sync/sync-log.txt

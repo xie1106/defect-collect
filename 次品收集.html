@@ -24,6 +24,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>次品照片收集系统</title>
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+    <script src="facesheet-pdf.js"></script>
+    <script src="https://unpkg.com/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+    <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f5f5f5; height: 100vh; padding: 0; margin: 0; display: flex; flex-direction: column; overflow: hidden; }
@@ -212,6 +217,11 @@ const APP_CONFIG = {
     // 填入退货 worker 地址后，前端"一键退货"会直接调用它创建订单；
     // 留空则"一键退货"仅更新状态，不创建订单。
     returnWorkerUrl: 'https://defect-return-worker.458914253.workers.dev',
+
+    // --- 圆通电子面单（打印面单）---
+    ytoProxyUrl: 'https://elyfxyrdbuykyklfjfdr.supabase.co/functions/v1/yto-proxy',   // 圆通面单代理（Supabase，国内直连）
+    ytoCustomerId: 'K200416574',                              // 圆通客户编码
+    returnSender: { name: '谢焕君', phone: '13316255984', address: '广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' },
 };
 
 // 兼容旧代码引用（下方业务代码无需改动）
@@ -249,8 +259,33 @@ function proxyImg(url, width) {
 function thumbImg(url) { return proxyImg(url, 100); }
 function fullImg(url) { return proxyImg(url, 800); }
 
-// Load SKU info map for display
-const skuInfoMapPromise = fetch('sku_info_map.json?v='+Date.now()).then(r=>r.ok?r.json():{}).then(d=>{skuInfoMap=d||{};}).catch(()=>{});
+// ═══ 映射数据加载：优先从 Supabase(mapping_data) 读取（聚水潭自动同步），失败则用本地 JSON 兜底 ═══
+// 本地兜底（GitHub 上线后也能用）
+function _localMap(url, fb) {
+  return fetch(url + '?v=' + Date.now()).then(r => r.ok ? r.json() : fb).catch(() => fb);
+}
+async function loadAllMaps() {
+  // Supabase 版本（含聚水潭自动同步的新商品/供应商/地址）
+  try {
+    const url = SUPABASE_URL + '/rest/v1/mapping_data?select=id,data';
+    const r = await fetch(url, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+    if (r.ok) {
+      const rows = await r.json();
+      const byId = {};
+      for (const row of rows) byId[row.id] = row.data || {};
+      if (byId['sku_info'] && Object.keys(byId['sku_info']).length) skuInfoMap = byId['sku_info'];
+      if (byId['return_style'] && Object.keys(byId['return_style']).length) _styleSupplierMap = byId['return_style'];
+      if (byId['return_addr'] && Object.keys(byId['return_addr']).length) _returnAddrMap = byId['return_addr'];
+    }
+  } catch(e) {}
+  // 兜底：本地 JSON（Supabase 未同步或离线时）
+  if (!Object.keys(skuInfoMap).length) { try { skuInfoMap = await _localMap('sku_info_map.json', {}); } catch(e){} }
+  if (!Object.keys(_returnAddrMap).length) { try { _returnAddrMap = await _localMap('return_addr_map.json', {}); } catch(e){} }
+}
+let _styleSupplierMap = null;
+const skuInfoMapPromise = loadAllMaps().catch(()=>{});
+const returnAddrMapPromise = skuInfoMapPromise;
+let _returnAddrMap = {};
 
 function formatSkuDisplay(code, qty) {
     const info = skuInfoMap[code];
@@ -862,9 +897,11 @@ function loadHistory() {
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
         const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;">取消</button>` : '';
+        const waybillBtn = (supplierName && getReturnAddress(supplierName)) ? `<button onclick="printWaybillForGroup('${g.po_id}',this)" style="color:#fff;background:#0ea5e9;border:1px solid #0ea5e9;border-radius:4px;">🖨️ 面单</button>` : '';
         html += `<div class="record-actions">
                 ${returnBtn}
                 ${non1688ReturnBtn}
+                ${waybillBtn}
                 ${cancelBtn}
                 ${!groupReturn && !groupRefund ? `<button onclick="editGroup('${g.po_id}')" style="color:#1677ff;border-color:#1677ff;">✏️ 编辑</button>` : ''}
             </div>
@@ -916,12 +953,16 @@ function setPageSize(size, btn) {
 function goPage(p) { currentPage = p; loadHistory(); }
 
 // 供应商映射：i_id → supplier_name
-let _styleSupplierMap = null;
 async function loadStyleMap() {
+    // loadAllMaps 已从 Supabase 读取 return_style；这里只做本地兜底
+    if (_styleSupplierMap && Object.keys(_styleSupplierMap).length) return _styleSupplierMap;
     try {
         const r = await fetch('return_style_map.json?t=' + Date.now());
-        _styleSupplierMap = await r.json();
-    } catch(e) { _styleSupplierMap = {}; }
+        const d = await r.json();
+        if (d && Object.keys(d).length) _styleSupplierMap = d;
+    } catch(e) {}
+    if (!_styleSupplierMap) _styleSupplierMap = {};
+    return _styleSupplierMap;
 }
 function getSupplierForGroup(items) {
     // 打码/脱敏的供应商名（含*号）视为未匹配
@@ -958,6 +999,232 @@ function getSupplierForGroup(items) {
         }
     }
     return null;
+}
+
+// ═══════════════ 圆通电子面单（打印面单）═══════════════
+// 退货地址查询：供应商 → return_addr_map.json
+function getReturnAddress(supplier) {
+    if (!supplier || !_returnAddrMap) return null;
+    const norm = String(supplier).replace(/档口/g,'').trim().toLowerCase();
+    for (const [name, info] of Object.entries(_returnAddrMap)) {
+        const nameNorm = String(name).replace(/档口/g,'').trim().toLowerCase();
+        if (norm === nameNorm || norm.includes(nameNorm) || nameNorm.includes(norm)) {
+            return typeof info === 'string' ? info : (info.address || info);
+        }
+    }
+    return null;
+}
+// 解析 "姓名，电话，地址"
+function parseAddrInfo(addrStr) {
+    const s = String(addrStr || '').trim();
+    if (!s) return null;
+    const parts = s.split(/[,，]/).map(p => p.trim()).filter(Boolean);
+    if (parts.length < 2) return null;
+    let name = parts[0], phone = parts[1], address = parts.slice(2).join('，');
+    if (!/^\d{6,}$/.test(phone) && parts.length >= 3) {
+        phone = parts[parts.length - 2] || '';
+        address = parts.slice(0, -1).join('，');
+    }
+    return { name, phone, address };
+}
+function splitAddr(name, phone, address) {
+    const m = (address||'').match(/(.*?省)?(.*?市)?(.*?区|.*?县|.*?旗)?(.*)/);
+    return { name, phone, province:(m&&m[1])||'', city:(m&&m[2])||'', district:(m&&m[3])||'', address:((m&&m[4])||address||'').trim() };
+}
+let _lastWaybill = null;
+// 生成圆通电子面单并预览（点击"🖨️ 面单"）
+async function printWaybillForGroup(poId, btn) {
+    const list = getRecords();
+    const items = list.filter(r => String(r.po_id) === String(poId));
+    if (!items.length) { showToast('未找到记录', '#dc2626'); return; }
+    const supplier = getSupplierForGroup(items);
+    if (!supplier) { showToast('该采购单未匹配到有效供应商', '#dc2626'); return; }
+    const receiver = parseAddrInfo(getReturnAddress(supplier));
+    if (!receiver) { showToast('供应商「' + supplier + '」暂无退货地址', '#d97706'); return; }
+    // SKU 明细汇总
+    const skuMap = {};
+    items.forEach(r => {
+        const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
+        const m = note.match(/^([^|]+)/);
+        if (m) { m[1].split(',').forEach(p => { const sm = p.trim().match(/(.+?)×(\d+)/); if (sm) skuMap[sm[1]] = (skuMap[sm[1]]||0) + parseInt(sm[2]); }); }
+    });
+    const skuText = Object.entries(skuMap).map(([k,v])=>formatSkuDisplay(k.trim(),v)).join(', ') || (items[0].note||'服装退货');
+    const orig = btn ? btn.textContent : '';
+    if (btn) { btn.textContent = '⏳ 生成中...'; btn.disabled = true; }
+    try {
+        const sender = APP_CONFIG.returnSender || { name:'谢焕君', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' };
+        const _ac = new AbortController();
+        const _tm = setTimeout(() => _ac.abort(), 30000);
+        const resp = await fetch((APP_CONFIG.ytoProxyUrl||'').replace(/\/+$/,''), {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ action:'createOrder', data: {
+                orderId: 'RET' + String(poId) + Date.now(),
+                sender: splitAddr(sender.name, sender.phone, sender.address),
+                receiver: splitAddr(receiver.name, receiver.phone, receiver.address),
+                itemName: skuText
+            }}), signal: _ac.signal });
+        clearTimeout(_tm);
+        const data = await resp.json().catch(()=>({}));
+        const raw = (data && data.raw) || '';
+        const mailNoM = raw.match(/<mailNo>([^<]+)<\/mailNo>/i);
+        const mailNo = mailNoM ? mailNoM[1] : '';
+        if (!mailNo) {
+            showToast('⚠️ 圆通未返回运单号: ' + raw.slice(0, 120), '#d97706');
+            if (btn) { btn.textContent = orig; btn.disabled = false; }
+            return;
+        }
+        // 解析面单打印所需数据（二维码/三段码/网点）
+        const qrM = raw.match(/<qrCode>([^<]+)<\/qrCode>/i);
+    // 三段码路由码：尝试多种字段名
+    // 三段码路由码：尝试多种字段，取第一个"含数字且含连字符"的值（排除大头笔如"易世达华信"）
+    let threeStageCode = '';
+    const segFields = ['threeStageCode','routingCode','routeCode','threeCode','segmentCode','printKeyWord','wayBillCode','segCode'];
+    for (const f of segFields) {
+        const mm = raw.match(new RegExp('<' + f + '>([^<]+)</' + f + '>', 'i'));
+        if (mm && mm[1] && /\d/.test(mm[1]) && /-/.test(mm[1])) { threeStageCode = mm[1]; break; }
+    }
+        const saM = raw.match(/<shortAddress>([^<]*)<\/shortAddress>/i);
+        const pkM = raw.match(/<printKeyWord>([^<]*)<\/printKeyWord>/i);
+        const rbM = raw.match(/<consigneeBranchCode>([^<]*)<\/consigneeBranchCode>/i);
+        const cbM = raw.match(/<packageCenterCode>([^<]*)<\/packageCenterCode>/i);
+        showWaybillModal({
+            poId, supplier, receiver, skuText, skuMap, mailNo, sender,
+            qrJson: qrM ? qrM[1] : '',
+            shortAddr: saM ? saM[1] : '',
+                threeStageCode: threeStageCode,
+            printKey: pkM ? pkM[1] : '',
+            branchCode: rbM ? rbM[1] : '',
+            centerCode: cbM ? cbM[1] : '',
+            createdAt: new Date().toLocaleString()
+        });
+        showToast('✅ 电子面单已生成: ' + mailNo, '#059669');
+        if (btn) { btn.textContent = '🖨️ ' + mailNo; btn.disabled = false; }
+    } catch(e) {
+        showToast('❌ 获取面单失败: ' + e.message, '#dc2626');
+        if (btn) { btn.textContent = orig; btn.disabled = false; }
+    }
+}
+function showWaybillModal(w) {
+    _lastWaybill = w;
+    document.getElementById('waybillPoId').textContent = w.poId;
+    document.getElementById('waybillSupplier').textContent = w.supplier;
+    document.getElementById('waybillMailNo').textContent = w.mailNo;
+    document.getElementById('waybillSender').textContent = w.sender.name + '  ' + w.sender.phone;
+    document.getElementById('waybillSenderAddr').textContent = w.sender.address;
+    document.getElementById('waybillReceiver').textContent = w.receiver.name + '  ' + w.receiver.phone;
+    document.getElementById('waybillReceiverAddr').textContent = [w.receiver.province, w.receiver.city, w.receiver.district, w.receiver.address].filter(Boolean).join('');
+    document.getElementById('waybillItems').textContent = w.skuText;
+    document.getElementById('waybillTime').textContent = w.createdAt;
+    document.getElementById('waybillSeg').textContent = w.shortAddr || '-';
+    renderWaybillPreview(w);
+    document.getElementById('waybillModal').style.display = 'flex';
+}
+function renderWaybillPreview(w) {
+    const bc = document.getElementById('waybillBarcodePrev');
+    if (bc) bc.innerHTML = '';
+    try {
+        if (typeof JsBarcode !== 'undefined' && bc) {
+            const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+            JsBarcode(svg, w.mailNo, { format:'CODE128', width:1.6, height:48, displayValue:false, margin:0 });
+            svg.setAttribute('style','max-width:100%;height:auto;');
+            bc.appendChild(svg);
+        } else if (bc) { bc.textContent = w.mailNo; }
+    } catch(e) { if (bc) bc.textContent = w.mailNo; }
+}
+function closeWaybillModal() { document.getElementById('waybillModal').style.display = 'none'; }
+async function copyWaybillNo() {
+    const no = document.getElementById('waybillMailNo').textContent;
+    try { await navigator.clipboard.writeText(no); showToast('✅ 运单号已复制: ' + no, '#059669'); }
+    catch(e) { showToast('复制失败，请手动选择复制', 'orange'); }
+}
+// 从收货地址提取"目的地"地标（如：洛浦街道西山村开发南路2号 → 西山村）
+function extractLandmark(addr) {
+    const a = String(addr || '');
+    const m = a.match(/(?:街道|镇|乡|社区)([^，,号\d]*?(?:村|苑|花园|小区|大厦|城|园|巷|里))/);
+    if (m && m[1]) return m[1].trim();
+    const d = a.match(/([^省市区县]+?(?:区|县))/);
+    return d ? d[1] : '';
+}
+
+// 生成底部明细表格行：采购单号 | 款号 | 颜色 | 码 | 数量
+function buildSkuTableRows(w) {
+    const rows = [];
+    if (w && w.skuMap) {
+        for (const [code, qty] of Object.entries(w.skuMap)) {
+            const info = skuInfoMap[code];
+            const style = info && info[0] ? info[0] : code;
+            const color = info && info[1] ? info[1] : '';
+            const size = info && info[2] ? info[2] : '';
+            rows.push({ style, color, size, qty });
+        }
+    }
+    if (!rows.length && w && w.skuText) {
+        rows.push({ style: w.skuText, color: '', size: '', qty: '' });
+    }
+    return rows;
+}
+
+// 把条形码 SVG 旋转90°（x/y 坐标互换）生成竖排条码
+function rotateSvg90(svgStr) {
+    try {
+        let out = svgStr;
+        const wm = out.match(/width="([\d.]+)"/);
+        const hm = out.match(/height="([\d.]+)"/);
+        if (!wm || !hm) return svgStr;
+        const W = parseFloat(wm[1]), H = parseFloat(hm[1]);
+        out = out.replace(/width="[^"]*"/, 'width="' + H + '"').replace(/height="[^"]*"/, 'height="' + W + '"');
+        out = out.replace(/viewBox="[^"]*"/, 'viewBox="0 0 ' + H + ' ' + W + '"');
+        out = out.replace(/<svg /, '<svg preserveAspectRatio="none" ');
+        out = out.replace(/<rect x="([\d.]+)" y="([\d.]+)" width="([\d.]+)" height="([\d.]+)"/g,
+            (all, x, y, w, h) => '<rect x="0" y="' + x + '" width="' + h + '" height="' + w + '"');
+        return out;
+    } catch(e) { return svgStr; }
+}
+
+async function printWaybillNow() {
+    if (!_lastWaybill) return;
+    const w = _lastWaybill;
+    if (typeof generateFacesheetPdf === 'undefined') {
+        showToast('⚠️ PDF 生成组件未加载，请检查网络后重试', '#d97706');
+        return;
+    }
+    const dtStr = w.createdAt || '';
+    const dtArr = dtStr.split(' ');
+    const datePart = dtArr[0] || dtStr;
+    const timePart = dtArr[1] || '';
+    const receiverAddr = [w.receiver.province, w.receiver.city, w.receiver.district, w.receiver.address].filter(Boolean).join('');
+    const landmark = extractLandmark(receiverAddr);
+    // 收件地址：去空格后整段传给面单，由面单自适应换行
+    const addrLines = [receiverAddr.replace(/\s+/g, '')];
+    const rows = buildSkuTableRows(w);
+    const totalQty = rows.reduce((s, r) => s + (parseInt(r.qty) || 0), 0) || 1;
+    const data = {
+        mailNo: w.mailNo,
+        date: datePart,
+        time: timePart,
+        // 三段码路由码：优先用真正的三段码字段，否则回退到大头笔
+        seg: w.threeStageCode || (w.printKey && /^[\d-]+$/.test(w.printKey) ? w.printKey : ''),
+        landmark: landmark,
+        dest: w.printKey || '',   // 大头笔 (如"易世达华信")
+        dest2: '省',   // 省字永远默认
+        receiver: { name: w.receiver.name, phone: w.receiver.phone, addressLines: addrLines },
+        sender: { name: w.sender.name + ' ' + w.sender.phone, address: w.sender.address },
+        poId: w.poId,
+        rows: rows,
+        totalQty: totalQty,
+        code: '',
+        qty: '共' + totalQty + '件'
+    };
+    try {
+        // HTML/CSS 版电子面单（与聚水潭打印版式一致，横向 129x75mm）
+        localStorage.setItem('facesheet_data', JSON.stringify(data));
+        const win = window.open('facesheet.html?v=' + Date.now(), '_blank');
+        if (!win) { showToast('请允许弹出窗口', 'orange'); return; }
+        showToast('✅ 电子面单已生成: ' + w.mailNo, '#059669');
+    } catch(e) {
+        showToast('❌ 生成面单失败: ' + e.message, '#dc2626');
+    }
 }
 
 // ═══════════════ 退货与退款操作（一键退货 / 批量 / 重匹配 / 取消重试） ═══════════════
@@ -1812,7 +2079,7 @@ function showToast(msg, color) {
 initPhotoGrid();
 // ═══════════════ 初始化与页面启动 ═══════════════
 loadStyleMap().then(() => fetchRecords());
-skuInfoMapPromise.then(() => { if (window._records) loadHistory(); });
+Promise.all([skuInfoMapPromise, returnAddrMapPromise]).then(() => { if (window._records) loadHistory(); });
 
 // 未提交内容退出提示
 window.addEventListener('beforeunload', function(e) {
@@ -1883,5 +2150,41 @@ document.getElementById('historyList').addEventListener('scroll', function() {
     }
 }, {passive: true});
 </script>
+<!-- 圆通面单预览弹窗 -->
+<div id="waybillModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeWaybillModal()">
+    <div style="background:#fff;border-radius:14px;max-width:420px;width:100%;overflow:hidden;">
+        <div style="background:#0ea5e9;color:#fff;padding:14px 16px;font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;">
+            <span>🖨️ 圆通退货面单</span>
+            <button onclick="closeWaybillModal()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;line-height:1;">✕</button>
+        </div>
+        <div style="padding:16px;">
+            <div style="text-align:center;background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:12px;margin-bottom:12px;">
+                <div style="font-size:11px;color:#0369a1;">运单号（点击复制）</div>
+                <div id="waybillMailNo" style="font-size:22px;font-weight:800;letter-spacing:1px;color:#0c4a6e;cursor:pointer;" onclick="copyWaybillNo()">-</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px;margin-bottom:12px;">
+                <div id="waybillBarcodePrev" style="flex:1;text-align:center;overflow:hidden;"></div>
+                <div style="font-size:12px;line-height:1.8;flex-shrink:0;">
+                    <div style="color:#666;">三段码</div>
+                    <div id="waybillSeg" style="font-weight:800;font-size:14px;color:#0c4a6e;">-</div>
+                </div>
+            </div>
+            <div style="font-size:13px;line-height:2;">
+                <div><b>采购单：</b><span id="waybillPoId"></span></div>
+                <div><b>供应商：</b><span id="waybillSupplier"></span></div>
+                <div><b>寄件人：</b><span id="waybillSender"></span></div>
+                <div style="padding-left:56px;color:#555;" id="waybillSenderAddr"></div>
+                <div><b>收件人：</b><span id="waybillReceiver"></span></div>
+                <div style="padding-left:56px;color:#555;" id="waybillReceiverAddr"></div>
+                <div><b>退货明细：</b><span id="waybillItems"></span></div>
+                <div style="color:#999;font-size:12px;" id="waybillTime"></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:14px;">
+                <button onclick="copyWaybillNo()" style="flex:1;padding:10px;background:#fff;border:1px solid #0ea5e9;color:#0ea5e9;border-radius:8px;font-size:14px;cursor:pointer;">📋 复制运单号</button>
+                <button onclick="printWaybillNow()" style="flex:1;padding:10px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">🖨️ 打印面单</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

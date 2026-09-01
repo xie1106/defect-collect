@@ -1,0 +1,18 @@
+name = "jst-sync-worker"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+JST_BASE_URL = "https://openapi.jushuitan.com"
+JST_APP_KEY = "f9606648e2044c7fa9df4bb6516a7269"
+SUPABASE_URL = "https://elyfxyrdbuykyklfjfdr.supabase.co"
+INCR_DAYS = "7"
+
+# JST_APP_SECRET / JST_ACCESS_TOKEN / SUPABASE_SERVICE_KEY 用 wrangler secret 设置：
+#   wrangler secret put JST_APP_SECRET
+#   wrangler secret put JST_ACCESS_TOKEN
+#   wrangler secret put SUPABASE_SERVICE_KEY
+
+# 定时任务：每天 03:00 + 11:00 + 19:00 自动增量同步
+[triggers]
+crons = ["0 3 * * *", "0 11 * * *", "0 19 * * *"]
