@@ -1,37 +1,21 @@
 // ============================================================
 // jst-sync-worker —— 聚水潭 → 次品系统 自动同步（Cloudflare Worker 版）
 // ------------------------------------------------------------
-// 为什么需要 Worker：聚水潭开放平台对商品资料接口启用了 IP 白名单，
-//   Cloudflare Worker 的出口 IP 已在白名单内（现有 return-worker 可直连聚水潭），
-//   而 Supabase Edge Function 出口 IP 会轮换、无法加入白名单。
-//
-// 功能：把 3 个映射写入 Supabase mapping_data（与 sync-local.js 相同逻辑）：
-//   sku_info      SKU → [款号, 颜色, 码数]
-//   return_style  款号 → 供应商名称
-//   return_addr   供应商 → 退货地址
-//
 // 触发：
-//   POST /sync                手动增量同步（返回结果 JSON）
-//   POST /sync?mode=full      全量分片刷新（配合 full_cursor，多次调用直至完成）
+//   POST /sync                手动同步（等待完成，返回结果）
+//   POST /sync?fire=1         后台触发，立即返回（结果写 mapping_data.sync_runs）
 //   Scheduled（cron）         每天 03:00/11:00/19:00 自动增量同步
-//
 // 环境变量：
 //   JST_APP_KEY / JST_APP_SECRET / JST_ACCESS_TOKEN   聚水潭开放平台
-//   SUPABASE_URL / SUPABASE_SERVICE_KEY               Supabase 服务端密钥（写库）
+//   SUPABASE_URL / SUPABASE_SERVICE_KEY               Supabase 服务端密钥
 //   INCR_DAYS                                        增量回看天数（默认 7）
-//
-// 部署：
-//   cd backend/jst-sync/worker
-//   wrangler secret put JST_APP_SECRET
-//   wrangler secret put JST_ACCESS_TOKEN
-//   wrangler secret put SUPABASE_SERVICE_KEY
-//   wrangler deploy
 // ============================================================
 
 const ALLOWED_CATEGORIES = new Set(['背心','短裤','长裤','七分裤','短袖衬衫','套装','长袖衬衫','毛衣','外套','卫衣','羽绒外套','短袖T','长袖T','马甲','裙子']);
 const PAGE_SIZE = 50;
 const BATCH = 50;
 const FULL_CHUNK = 2000;
+const VER = 'v6';
 
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' },
@@ -41,9 +25,9 @@ const fmt = dt => dt.toISOString().replace('T',' ').slice(0,19);
 
 export default {
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runSync(env, 'incremental'));
+    ctx.waitUntil(runAndLog(env, 'incremental', 'cron'));
   },
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') return new Response(null, { headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type' } });
     if (request.method !== 'POST') return json({ error: 'POST only' }, 405);
     try {
@@ -51,7 +35,11 @@ export default {
       let body = {};
       try { body = await request.json(); } catch (e) { body = {}; }
       const mode = url.searchParams.get('mode') || body.mode || 'incremental';
-      const out = await runSync(env, mode);
+      if (url.searchParams.get('fire') === '1') {
+        ctx.waitUntil(runAndLog(env, mode, 'manual'));
+        return json({ started: true, mode, ver: VER, note: '同步已在后台启动，结果写入 mapping_data.sync_runs' });
+      }
+      const out = await runAndLog(env, mode, 'manual');
       return json(out);
     } catch (e) {
       return json({ error: e.message, stack: e.stack }, 500);
@@ -59,8 +47,35 @@ export default {
   },
 };
 
+// 运行 + 写日志（保留最近 20 条）
+async function runAndLog(env, mode, source) {
+  try {
+    const out = await runSync(env, mode);
+    await logRun(env, { ver: VER, source, ok: true, mode, counts: out.counts, time: out.time });
+    return out;
+  } catch (e) {
+    await logRun(env, { ver: VER, source, ok: false, mode, error: e.message, time: new Date().toISOString() }).catch(() => {});
+    return { ok: false, error: e.message };
+  }
+}
+
+async function logRun(env, entry) {
+  try {
+    let runs = [];
+    const rows = await sb(env, '/rest/v1/mapping_data?select=data&id=eq.sync_runs');
+    if (rows[0] && Array.isArray(rows[0].data)) runs = rows[0].data;
+    runs.unshift(entry);
+    if (runs.length > 20) runs.length = 20;
+    await sb(env, '/rest/v1/mapping_data', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify({ id: 'sync_runs', data: runs, updated_at: new Date().toISOString() }),
+    });
+  } catch (e) { /* 日志失败不影响同步 */ }
+}
+
 // ---------- 聚水潭请求 ----------
-function jstSign(params, secret) {
+async function jstSign(params, secret) {
   const sorted = Object.keys(params).sort();
   let str = secret;
   for (const k of sorted) if (k !== 'sign' && params[k]) str += k + params[k];
@@ -309,7 +324,7 @@ async function runSync(env, mode) {
   if (mode === 'full') await saveCursor(env, cursor);
 
   return {
-    ok: true, mode, time: new Date().toISOString(),
+    ok: true, mode, ver: VER, time: new Date().toISOString(),
     counts: { sku_info: Object.keys(skuInfo).length, return_style: Object.keys(styleSupplier).length, return_addr: Object.keys(addrMap).length, fresh_fetched: freshMap.size },
     delta: { addedSku, updatedSku, addedStyle, updatedStyle, addrAdded, addrUpdated, backfill },
     cursor,

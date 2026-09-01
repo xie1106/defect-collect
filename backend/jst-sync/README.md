@@ -1,58 +1,48 @@
 # 聚水潭自动同步（方案A）
 
-次品图片收集系统**自动**获取聚水潭的「商品（SKU 颜色/码数/款号）、供应商、退货地址」，无需人工处理。
+次品图片收集系统**自动**获取聚水潭的「商品（SKU 颜色/码数/款号）、供应商、退货地址」。
 
-## 为什么不能直接在 Supabase 里同步？
+## ⚠️ 关键限制：聚水潭 IP 白名单
 
-聚水潭开放平台对普通商品资料接口 `/open/sku/query` 启用了 **IP 白名单**。
-Supabase Edge Function 的出口 IP 是动态轮换的（实测多次调用返回不同 IP：
-13.229.156.50 / 13.214.147.75 / 18.138.224.65），无法加入白名单，会被聚水潭拒绝（code=110）。
+聚水潭开放平台对普通商品资料接口启用了 **IP 白名单**，且：
+- **Supabase Edge Function** 出口 IP 轮换（实测 13.229.156.50 / 13.214.147.75 / 18.138.224.65）→ 无法入白名单
+- **Cloudflare Worker** 出口 IP 也轮换（实测 108.162.237.216 / 162.158.172.227 / 172.71.238.132 / 172.64.200.119）→ 同样无法入白名单
+- **本机（办公室电脑）** IP 已入白名单 → 可直连聚水潭 ✅
 
-能直连聚水潭的环境：**本机（白名单 IP）** 和 **Cloudflare Worker（出口 IP 已在白名单）**。
+因此：**当前唯一可靠、且已在自动运行的是本机计划任务**。
 
-## 当前运行的方案：本机计划任务
+## ✅ 当前运行方案：本机计划任务（已生效）
 
-- **任务名**：`JST-AutoSync`（Windows 计划任务，每 2 小时运行一次）
-- **脚本**：`sync-local.js`（本目录，Node 18+）
-- **做什么**：
-  1. 读取 Supabase `mapping_data` 现有 3 个映射
-  2. 增量查询聚水潭最近 7 天改动的商品
-  3. 补齐登记记录里缺失的 SKU / 款号供应商
-  4. 全量刷新供应商 + 类目
-  5. 合并写回 Supabase `mapping_data`
-- **日志**：`sync-log.txt`（本目录）
-- 手动执行：`node sync-local.js incremental`（或 `full` 全量分片刷新）
+- 任务名：`JST-AutoSync`（每 2 小时，系统权限）
+- 脚本：`sync-local.js`（本目录，含密钥，已 gitignore 不入库）
+- 日志：`sync-log.txt`
+- 手动：`node sync-local.js incremental`（或 `full` 全量分片刷新）
+- 效果：商品 53933 / 款号→供应商 1970 / 退货地址 116，前端每次加载从 Supabase 读取
 
-前端 `次品收集.html` 每次加载从 Supabase `mapping_data` 读取最新映射
-（失败时用本地 JSON 兜底），因此商品/供应商/地址更新后刷新网页即可看到。
+## 🚀 云端 Worker（已部署，等 JST 白名单放行后自动生效）
 
-## 云端方案（推荐，待部署）：Cloudflare Worker
+`worker/` 已部署到 Cloudflare：`https://jst-sync-worker.458914253.workers.dev`
+- 定时：每天 03:00 / 11:00 / 19:00 自动增量同步（Cloudflare Cron）
+- 手动触发 / 状态查询（国内可直接访问，经 Supabase 中转）：
+  - `POST https://elyfxyrdbuykyklfjfdr.supabase.co/functions/v1/jst-sync` body `{"mode":"fire-worker"}` → 触发后台同步
+  - 同地址 body `{"mode":"sync-status"}` → 查看最近运行日志（mapping_data.sync_runs）
+- 运行日志：写入 Supabase `mapping_data.id='sync_runs'`（保留最近 20 条）
 
-见 `worker/` 目录（`jst-sync-worker`），逻辑与 `sync-local.js` 相同，
-支持 Cloudflare Cron Triggers 定时自动同步，不依赖本机开机。
-
-部署（需 Cloudflare 账号授权）：
-```
-cd backend/jst-sync/worker
-wrangler secret put JST_APP_SECRET
-wrangler secret put JST_ACCESS_TOKEN
-wrangler secret put SUPABASE_SERVICE_KEY
-wrangler deploy
-```
-触发：`POST https://jst-sync-worker.<你的子域>.workers.dev/sync`（手动）；
-cron 每天 03:00/11:00/19:00 自动增量同步。
+**待办**：在聚水潭开放平台后台把 Cloudflare 出口网段加入 IP 白名单后，worker 即可独立运行、不依赖本机。可加网段（与实测 IP 对应）：
+- `108.162.192.0/18`、`162.158.0.0/15`、`172.64.0.0/13`
 
 ## Supabase Edge Function `jst-sync`
 
-仅保留**状态检查**（GET 返回 mapping_data 各表条数），不再承担同步任务。
+已部署，提供：GET 状态（各映射条数）、POST fire-worker（触发 worker）、POST sync-status（运行日志）。
 部署：`supabase functions deploy jst-sync --project-ref elyfxyrdbuykyklfjfdr`
 
 ## 数据表
 
-`public.mapping_data`（见 `schema.sql`）：
-- `sku_info`：SKU → `[款号, 颜色, 码数]`（当前 5.4 万条，仅 15 个服装分类）
-- `return_style`：款号 → 供应商名称（当前 1970 条）
-- `return_addr`：供应商 → `{address, mobile, contacts}`（当前 116 条）
-- `full_cursor`：全量分片刷新进度（仅 full 模式使用）
+`public.mapping_data`（schema.sql）：
+- `sku_info`：SKU → [款号, 颜色, 码数]（5.4 万条，仅 15 个服装分类）
+- `return_style`：款号 → 供应商名称（1970 条）
+- `return_addr`：供应商 → {address, mobile, contacts}（116 条）
+- `sync_runs`：worker 最近运行日志（20 条）
+- `full_cursor`：全量分片刷新进度（仅 full 模式）
 
-RLS：匿名可读（前端）、仅 service_role 可写（同步脚本/Worker）。
+RLS：匿名可读（前端），仅 service_role 可写（同步脚本/Worker）。
