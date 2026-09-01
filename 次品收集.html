@@ -708,6 +708,25 @@ function parseReturnTag(note) {
     return { status: m[1], orderId: m[2] || '' };
 }
 
+
+// 退货状态配色（已下单/待处理/失败/异常/等待卖家收货/等待买家退货）
+function getReturnBadge(returnInfo) {
+    if (!returnInfo) return '';
+    const statusMap = {
+        '已下单': { text: '已下单', color: '#059669' },
+        '待处理': { text: '处理中', color: '#6b7280' },
+        '失败': { text: '失败', color: '#dc2626' },
+        '异常': { text: '异常', color: '#dc2626' },
+        '等待卖家收货': { text: '等待卖家收货', color: '#8e44ad' },
+        '等待买家退货': { text: '等待买家退货', color: '#3498db' },
+    };
+    const key = returnInfo.status;
+    const s = statusMap[key] || { text: returnInfo.orderId || returnInfo.status, color: '#666' };
+    const icon = key === '已下单' ? '✅' : (key === '失败' || key === '异常') ? '❌' : '⏳';
+    const label = key === '已下单' ? (returnInfo.orderId || '已下单') : s.text;
+    return `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:${s.color}18;color:${s.color};border:1px solid ${s.color}40;">${icon} ${label}${returnInfo.orderId && key !== '已下单' && key !== '待处理' ? ':' + returnInfo.orderId : ''}</span>`;
+}
+
 // 退款状态配色
 function getRefundBadge(refundInfo) {
     if (!refundInfo) return '';
@@ -820,7 +839,7 @@ function loadHistory() {
             const returnInfo = parseReturnTag(r.note);
             const statusClass = r.status==='done'?'badge-done':'badge-error';
             const statusText = r.status==='done'?'已处理':(is1688Single?'异常':'未映射');
-            const badgeHtml = returnInfo ? (returnInfo.status === '已下单' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ ${returnInfo.orderId||'已下单'}</span>` : returnInfo.status === '待处理' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">⏳ 处理中</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ ${returnInfo.orderId||returnInfo.status}</span>`) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`;
+            const badgeHtml = returnInfo ? getReturnBadge(returnInfo) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`;
             const noteDisplay = formatNoteDisplay(r.note);
             const singleSupplier = getSupplierForGroup([r]);
             const singleSupplierHtml = singleSupplier ? `<div style="font-size:11px;color:#8b5cf6;font-weight:500;">🏪 ${singleSupplier}</div>` : '';
@@ -863,8 +882,9 @@ function loadHistory() {
         const groupRefund = items.map(r=>parseRefundTag(r.note)).find(r=>r);
         const groupReturn = items.map(r=>parseReturnTag(r.note)).find(r=>r);
         const groupIs1688 = items.some(r=>(r.note||'').includes('[1688:'));
-        const returnBadge = groupReturn ? (groupReturn.status === '已下单' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ ${groupReturn.orderId || '已下单'}</span>` : groupReturn.status.startsWith('失败') ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ ${groupReturn.orderId || '失败'}</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">⏳ 处理中</span>`) : '';
-        const groupBadgeHtml = groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`);
+        const returnBadge = groupReturn ? getReturnBadge(groupReturn) : '';
+        const defaultBadge = !supplierName ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#d9770618;color:#d97706;border:1px solid #d9770640;">❌ 未匹配</span>` : (getReturnAddress(supplierName) ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">⏳ 处理中</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#e67e2218;color:#e67e22;border:1px solid #e67e2240;">⚠️ 待补地址</span>`);
+        const groupBadgeHtml = groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge);
 
         let html = `<div class="record">
             <div class="record-header">
