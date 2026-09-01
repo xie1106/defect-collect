@@ -913,7 +913,8 @@ function loadHistory() {
         }
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
         const returnBtn = is1688 ? `<button onclick="open1688ReturnAndCreateOrder('${g.po_id}',this)" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">📦 退货</button>` : '';
-        const non1688ReturnBtn = (!is1688 && !hasReturnOrder) ? `<button onclick="createReturnOrder('${g.po_id}',this)" style="color:#fff;background:#f59e0b;border:1px solid #f59e0b;border-radius:4px;">📦 退货</button>` : (groupReturn && groupReturn.status.startsWith('失败') ? `<button onclick="retryReturn('${g.po_id}',this)" style="color:#fff;background:#ef4444;border:1px solid #ef4444;border-radius:4px;">🔄 重试</button>` : '');
+        const retryableAbnormal = groupReturn && (groupReturn.status.startsWith('失败') || groupReturn.status === '异常') && !(groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成'));
+        const non1688ReturnBtn = (!is1688 && !hasReturnOrder) ? `<button onclick="createReturnOrder('${g.po_id}',this)" style="color:#fff;background:#f59e0b;border:1px solid #f59e0b;border-radius:4px;">📦 退货</button>` : (retryableAbnormal ? `<button onclick="retryReturn('${g.po_id}',this)" style="color:#fff;background:#ef4444;border:1px solid #ef4444;border-radius:4px;">🔄 重试</button>` : '');
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
         const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;">取消</button>` : '';
@@ -1284,10 +1285,12 @@ async function retryReturn(poId, btn) {
     btn.disabled = true;
     const h = {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'};
     // Clear failure tags and set to 待处理
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}&note=like.*退货:失败*`, { headers: h });
-    const recs = await r.json();
+    const r1 = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}&note=like.*退货:失败*`, { headers: h });
+    const r2 = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}&note=like.*退货:异常*`, { headers: h });
+    const [a1, a2] = await Promise.all([r1.json(), r2.json()]);
+    const recs = [...new Map([...a1, ...a2].map(r=>[r.id,r])).values()];
     for (const rec of recs) {
-        const note = (rec.note||'').replace(/\s*\[退货:失败[^\]]*\]/g, '') + ' [退货:待处理]';
+        const note = (rec.note||'').replace(/\s*\[退货:失败[^\]]*\]/g, '').replace(/\s*\[退货:异常[^\]]*\]/g, '') + ' [退货:待处理]';
         await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:h, body:JSON.stringify({note}) });
     }
     showToast(`✅ 已重新提交(${recs.length}条)\n约5分钟内自动处理`, '#059669');
