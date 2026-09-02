@@ -239,6 +239,57 @@ async function extractStyleMissingFromRecords(env, skuInfo, styleSupplier) {
 }
 
 // ---------- 主流程 ----------
+
+// 1688 退款状态自动同步：从聚水潭采购单 labels 读取退款进度，写回 [退款:状态]
+const REFUND_LABEL_MAP = {
+  '退款成功': '退款成功',
+  '等待买家退货': '等待买家退货',
+  '等待卖家确认收货': '等待卖家收货',
+  '等待卖家收货': '等待卖家收货',
+  '等待卖家同意': '等待卖家同意',
+  '线上申请取消': '退款关闭',
+  '1688线上单取消失败': '退款关闭',
+  '卖家拒绝': '卖家拒绝',
+  '卖家拒绝申请': '卖家拒绝申请',
+  '卖家拒绝退款': '卖家拒绝退款',
+  '申请失败': '申请失败',
+  '已撤销': '已撤销',
+};
+async function sync1688RefundStatus(env) {
+  let poIds = [];
+  for (let offset = 0; offset < 10000; offset += 1000) {
+    const rows = await sb(env, `/rest/v1/defect_reports?select=po_id,note&limit=1000&offset=${offset}`);
+    if (!rows.length) break;
+    for (const rec of rows) if ((rec.note||'').includes('[1688:')) poIds.push(parseInt(rec.po_id));
+  }
+  poIds = [...new Set(poIds.filter(x=>!isNaN(x)))];
+  if (!poIds.length) return 0;
+  let updated = 0;
+  for (let i = 0; i < poIds.length; i += 20) {
+    const chunk = poIds.slice(i, i + 20);
+    const d = await jstPost(env, '/open/purchase/query', { page_index:1, page_size:50, po_ids: chunk });
+    if (d.code !== 0) continue;
+    const byPo = {};
+    for (const p of (d.data && d.data.datas) || []) byPo[p.po_id] = p;
+    for (const po of chunk) {
+      const p = byPo[po];
+      if (!p) continue;
+      const parts = String(p.labels || '').split(',').map(s=>s.trim()).filter(Boolean);
+      const raw = parts.find(x => x !== '1688一键下单');
+      if (!raw) continue;
+      const status = REFUND_LABEL_MAP[raw] || raw;
+      const recs = await sb(env, `/rest/v1/defect_reports?po_id=eq.${po}`);
+      for (const rec of recs) {
+        const note = (rec.note||'').replace(/\s*\[退款:[^\]]*\]/g, '').trim() + ` [退款:${status}]`;
+        if (note === (rec.note||'')) continue;
+        await sb(env, `/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({note}) });
+        updated++;
+      }
+    }
+  }
+  return updated;
+}
+
 async function runSync(env, mode) {
   const maps = await readMaps(env);
   const skuInfo = maps.sku_info || {};
@@ -322,11 +373,12 @@ async function runSync(env, mode) {
 
   await saveMaps(env, { sku_info: skuInfo, return_style: styleSupplier, return_addr: addrMap });
   if (mode === 'full') await saveCursor(env, cursor);
+  const refundUpdated = await sync1688RefundStatus(env);
 
   return {
     ok: true, mode, ver: VER, time: new Date().toISOString(),
     counts: { sku_info: Object.keys(skuInfo).length, return_style: Object.keys(styleSupplier).length, return_addr: Object.keys(addrMap).length, fresh_fetched: freshMap.size },
-    delta: { addedSku, updatedSku, addedStyle, updatedStyle, addrAdded, addrUpdated, backfill },
+    delta: { addedSku, updatedSku, addedStyle, updatedStyle, addrAdded, addrUpdated, backfill, refundUpdated },
     cursor,
   };
 }
