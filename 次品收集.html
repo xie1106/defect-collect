@@ -143,7 +143,7 @@
         </div>
         <div class="search-box">
             <div style="flex:1;position:relative;">
-                <input type="text" id="searchInput" placeholder="🔍 搜索采购单号/内部单号" inputmode="numeric" oninput="loadHistory()" style="width:100%;padding-right:30px;">
+                <input type="text" id="searchInput" placeholder="🔍 搜索采购单号/快递单号" inputmode="numeric" oninput="loadHistory()" style="width:100%;padding-right:30px;">
                 <button onclick="document.getElementById('searchInput').value='';loadHistory();" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;color:#999;cursor:pointer;padding:2px;">✕</button>
             </div>
             <button onclick="searchScan()" style="padding:8px 14px;background:#4A90D9;color:#fff;border:none;border-radius:8px;font-size:13px;">扫码</button>
@@ -771,7 +771,7 @@ function loadHistory() {
     const list = getRecords();
     const search = document.getElementById('searchInput').value.trim();
     let filtered = list;
-    if (search) filtered = filtered.filter(r => String(r.po_id).includes(search) || (r.note||'').includes(search));
+    if (search) filtered = filtered.filter(r => { const s = String(r.po_id).includes(search); const n = (r.note||'').includes(search); const w = (getWaybillPrinted([r])||'').includes(search); return s || n || w; });
     // Apply source filter (skip if searching)
     if (!search) {
     if (currentFilter === '1688') filtered = filtered.filter(r => (r.note||'').includes('[1688:'));
@@ -833,14 +833,14 @@ function loadHistory() {
             const statusText = r.status==='done'?'已处理':(is1688Single?'异常':'未映射');
             const badgeHtml = returnInfo ? getReturnBadge(returnInfo) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`;
             const printedNo = getWaybillPrinted([r]);
-            const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
+            const printedBadge = printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;user-select:none;">✅ 已打印 ${printedNo}</span>` : '';
             const noteDisplay = formatNoteDisplay(r.note);
             const singleSupplier = getSupplierForGroup([r]);
             const singleSupplierHtml = singleSupplier ? `<div style="font-size:11px;color:#8b5cf6;font-weight:500;">🏪 ${singleSupplier}</div>` : '';
             const sourceTag = is1688Single ? '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#1677ff;color:#fff;margin-left:4px;">1688</span>' : '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#faad14;color:#fff;margin-left:4px;">非1688</span>';
             return `<div class="record">
                 <div class="record-header">
-                    <span class="record-title">采购单 ${r.po_id}${sourceTag}</span>
+                    <span class="record-title" onclick="copyText('${r.po_id}','采购单 ${r.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${r.po_id}${sourceTag}</span>
                     ${badgeHtml}${printedBadge}
                 </div>
                 ${singleSupplierHtml}
@@ -883,11 +883,11 @@ function loadHistory() {
         const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
         const groupBadgeHtml = groupWaybillAbnormal ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>` : (groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge));
         const printedNo = getWaybillPrinted(items);
-        const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
+        const printedBadge = printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;user-select:none;">✅ 已打印 ${printedNo}</span>` : '';
 
         let html = `<div class="record">
             <div class="record-header">
-                <span class="record-title">采购单 ${g.po_id}${tagHtml}${btnPhotos}${btnDetail}</span>
+                <span class="record-title" onclick="copyText('${g.po_id}','采购单 ${g.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${g.po_id}${tagHtml}${btnPhotos}${btnDetail}</span>
                 ${groupBadgeHtml}${printedBadge}
             </div>
             ${supplierHtml}
@@ -1318,6 +1318,11 @@ function renderWaybillPreview(w) {
     } catch(e) { if (bc) bc.textContent = w.mailNo; }
 }
 function closeWaybillModal() { document.getElementById('waybillModal').style.display = 'none'; }
+// 通用复制（带小提示），传入要复制的文本
+async function copyText(text, label) {
+    try { await navigator.clipboard.writeText(String(text)); showToast('✅ 已复制' + (label ? '：' + label : ''), '#059669'); }
+    catch(e) { showToast('复制失败：' + e.message, '#dc2626'); }
+}
 async function copyWaybillNo() {
     const no = document.getElementById('waybillMailNo').textContent;
     try { await navigator.clipboard.writeText(no); showToast('✅ 运单号已复制: ' + no, '#059669'); }
