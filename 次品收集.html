@@ -841,16 +841,15 @@ function loadHistory() {
             const sourceTag = is1688Single ? '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#1677ff;color:#fff;margin-left:4px;">1688</span>' : '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#faad14;color:#fff;margin-left:4px;">非1688</span>';
             return `<div class="record">
                 <div class="record-header">
-                    <span class="record-title" onclick="copyText('${r.po_id}','采购单 ${r.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${r.po_id}${sourceTag}${printedNo ? waybillInlineBtn(r.po_id, printedNo) : ''}</span>
+                    <span class="record-title" onclick="copyText('${r.po_id}','采购单 ${r.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${r.po_id}${sourceTag}</span>
                     ${badgeHtml}
                 </div>
                 ${singleSupplierHtml}
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
                 <div class="record-actions">
                     ${is1688Single?`<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>`:''}
-                    ${singleWaybillNo ? `<button onclick="printWaybillForGroup('${r.po_id}',this)" style="color:#fff;background:#0ea5e9;border:1px solid #0ea5e9;border-radius:4px;">🖨️ 面单</button>` : ''}
+                    ${singleWaybillNo ? `<button onclick="${getPrintedMailNo(r.note) ? 'reprintWaybill' : 'printWaybillForGroup'}('${r.po_id}',this)" style="color:#fff;background:${getPrintedMailNo(r.note) ? '#059669' : '#0ea5e9'};border:1px solid ${getPrintedMailNo(r.note) ? '#059669' : '#0ea5e9'};border-radius:4px;">🖨️ 面单</button>` : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
-                    <button onclick="quickDelete(${r._realIdx})" style="color:#dc2626;border-color:#dc2626;">✕ 删除</button>
                 </div>
             </div>`;
         }
@@ -890,7 +889,7 @@ function loadHistory() {
 
         let html = `<div class="record">
             <div class="record-header">
-                <span class="record-title" onclick="copyText('${g.po_id}','采购单 ${g.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${g.po_id}${tagHtml}${btnPhotos}${btnDetail}${printedNo ? waybillInlineBtn(g.po_id, printedNo) : ''}</span>
+                <span class="record-title" onclick="copyText('${g.po_id}','采购单 ${g.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${g.po_id}${tagHtml}${btnPhotos}${btnDetail}</span>
                 ${groupBadgeHtml}
             </div>
             ${supplierHtml}
@@ -908,7 +907,6 @@ function loadHistory() {
                     <span style="color:#999;">${new Date(r.created_at).toLocaleString()}</span> · ${noteDisplay}
                     <span style="float:right;">
                         <button onclick="editRecord(${r._realIdx})" style="border:none;background:none;color:#4A90D9;font-size:11px;cursor:pointer;margin-right:8px;">✏️</button>
-                        <button onclick="quickDelete(${r._realIdx})" style="border:none;background:none;color:#dc2626;font-size:11px;cursor:pointer;">✕</button>
                     </span>
                 </div>`;
             });
@@ -920,13 +918,14 @@ function loadHistory() {
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
         const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;">取消</button>` : '';
-        const waybillBtn = (supplierName && getReturnAddress(supplierName)) ? `<button onclick="printWaybillForGroup('${g.po_id}',this)" style="color:#fff;background:#0ea5e9;border:1px solid #0ea5e9;border-radius:4px;">🖨️ ${printedNo || '面单'}</button>` : '';
+        const waybillBtn = (supplierName && getReturnAddress(supplierName)) ? `<button onclick="${printedNo ? 'reprintWaybill' : 'printWaybillForGroup'}('${g.po_id}',this)" style="color:#fff;background:${printedNo ? '#059669' : '#0ea5e9'};border:1px solid ${printedNo ? '#059669' : '#0ea5e9'};border-radius:4px;">🖨️ 面单</button>` : '';
         html += `<div class="record-actions">
                 ${returnBtn}
                 ${non1688ReturnBtn}
                 ${waybillBtn}
                 ${cancelBtn}
                 ${!groupReturn && !groupRefund ? `<button onclick="editGroup('${g.po_id}')" style="color:#1677ff;border-color:#1677ff;">✏️ 编辑</button>` : ''}
+                ${printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="margin-left:6px;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;">${printedNo}</span>` : ''}
             </div>
         </div>`;
         return html;
@@ -1066,10 +1065,37 @@ function getWaybillPrinted(items) {
     }
     return '';
 }
-// 快递单号小按钮（放在 1688/非1688 标签后，点击重新打面单）
-function waybillInlineBtn(poId, mailNo) {
-    return `<button onclick="printWaybillForGroup('${poId}',this)" title="点击重新打印面单" style="margin-left:6px;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;cursor:pointer;white-space:nowrap;">🖨️ ${mailNo}</button>`;
+// 仅取运单号（去掉后面 base64 数据）
+function getPrintedMailNo(note) {
+    const m = (note||'').match(/\[面单:已打印:([^\]]+)\]/);
+    if (!m) return '';
+    const i = m[1].indexOf('|');
+    return (i >= 0 ? m[1].slice(0, i) : m[1]).trim();
 }
+// 重新打印：已打印过的不再调圆通接口，直接显示原面单
+async function reprintWaybill(poId, btn, items) {
+    if (!items) items = getRecords().filter(r => String(r.po_id) === String(poId));
+    if (!items.length) { showToast('未找到记录', '#dc2626'); return; }
+    const note = items[0].note || '';
+    const m = note.match(/\[面单:已打印:([^\]]+)\]/);
+    if (!m) { showToast('该采购单暂无已打印面单', '#d97706'); return; }
+    const captured = m[1];
+    const pipeIdx = captured.indexOf('|');
+    const dataPart = pipeIdx >= 0 ? captured.slice(pipeIdx + 1) : '';
+    const mailNo = (pipeIdx >= 0 ? captured.slice(0, pipeIdx) : captured).trim();
+    let w = null;
+    if (dataPart) {
+        try { w = JSON.parse(decodeURIComponent(escape(atob(dataPart)))); } catch(e) { w = null; }
+    }
+    if (w) {
+        showWaybillModal(w);
+        const orig = btn ? btn.textContent : '';
+        if (btn) { btn.textContent = '🖨️ 重打中...'; btn.disabled = true; setTimeout(() => { if (btn) { btn.textContent = orig; btn.disabled = false; } }, 700); }
+    } else {
+        showToast('已打印：' + mailNo + '（老记录未存完整面单数据）', '#d97706');
+    }
+}
+// 快递单号小按钮（放在 1688/非1688 标签后，点击重新打面单）
 function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||''); }
 function isAbnormalNote(note) {
     const rf = parseRefundTag(note);
@@ -1121,6 +1147,7 @@ async function printWaybillForGroup(poId, btn) {
     const list = getRecords();
     const items = list.filter(r => String(r.po_id) === String(poId));
     if (!items.length) { showToast('未找到记录', '#dc2626'); return; }
+    if (getPrintedMailNo(items[0] && items[0].note)) { await reprintWaybill(poId, btn, items); return; }
     const supplier = getSupplierForGroup(items);
     if (!supplier) { showToast('该采购单未匹配到有效供应商', '#dc2626'); return; }
     const w = await generateWaybill(supplier, items, [String(poId)], btn);
@@ -1186,7 +1213,7 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
             centerCode: cbM ? cbM[1] : '',
             createdAt: new Date().toLocaleString()
         };
-        await tagAll('[面单:已打印:' + mailNo + ']');
+        try { const data = btoa(unescape(encodeURIComponent(JSON.stringify(w)))); await tagAll('[面单:已打印:' + mailNo + '|' + data + ']'); } catch(e) { await tagAll('[面单:已打印:' + mailNo + ']'); }
         if (items[0] && !(items[0].note||'').includes('[1688:')) {
             // 非 1688：打面单后状态自动改为完成
             const h2 = {'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'};
