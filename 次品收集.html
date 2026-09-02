@@ -846,6 +846,7 @@ function loadHistory() {
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
                 <div class="record-actions">
                     ${is1688Single?`<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>`:''}
+                    ${is1688Single ? refundStatusSelect(r.po_id) : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
                     <button onclick="quickDelete(${r._realIdx})" style="color:#dc2626;border-color:#dc2626;">✕ 删除</button>
                 </div>
@@ -921,6 +922,7 @@ function loadHistory() {
                 ${returnBtn}
                 ${non1688ReturnBtn}
                 ${waybillBtn}
+                ${is1688 ? refundStatusSelect(g.po_id) : ''}
                 ${cancelBtn}
                 ${!groupReturn && !groupRefund ? `<button onclick="editGroup('${g.po_id}')" style="color:#1677ff;border-color:#1677ff;">✏️ 编辑</button>` : ''}
             </div>
@@ -1066,6 +1068,31 @@ function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||''); }
 function isAbnormalNote(note) {
     const rf = parseRefundTag(note);
     return (rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status)) || isWaybillAbnormal(note);
+}
+
+// 1688 退款状态下拉（人工同步，去1688后台看后手动选）
+function refundStatusSelect(poId) {
+    const opts = ['等待卖家同意','等待买家退货','等待卖家收货','退款成功','退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败','已撤销'];
+    return `<select onchange="setRefundStatus('${poId}', this.value); this.value='';" style="padding:4px 6px;border-radius:6px;border:1px solid #94a3b8;font-size:11px;color:#334155;background:#fff;">
+        <option value="">退款状态▾</option>${opts.map(o=>`<option value="${o}">${o}</option>`).join('')}
+    </select>`;
+}
+async function setRefundStatus(poId, status) {
+    if (!status) return;
+    if (!confirm(`将采购单 ${poId} 的 1688 退款状态设为「${status}」？`)) return;
+    const h = {'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'};
+    try {
+        const r = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}`, { headers: h });
+        const recs = await r.json();
+        if (!recs.length) { showToast('未找到该采购单记录', '#d97706'); return; }
+        for (const rec of recs) {
+            let note = (rec.note||'').replace(/\s*\[退款:[^\]]*\]/g, '').trim();
+            note = note + ` [退款:${status}]`;
+            await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:h, body: JSON.stringify({note}) });
+        }
+        showToast(`✅ 已更新 ${recs.length} 条为「${status}」`, '#059669');
+        setTimeout(()=>loadHistory(), 1000);
+    } catch(e) { showToast('❌ 更新失败: ' + e.message, '#dc2626'); }
 }
 // 解析 "姓名，电话，地址"
 function parseAddrInfo(addrStr) {
