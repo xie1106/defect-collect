@@ -163,6 +163,7 @@
                     <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">买家退货</button>
                     <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">卖家收货</button>
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
+                    <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">🧾 合并打面单</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
                 </div>
         </div>
@@ -1107,24 +1108,32 @@ async function tagWaybill(poId, tag) {
     } catch(e) {}
 }
 // 生成圆通电子面单并预览（点击"🖨️ 面单"）
+
+// 生成圆通电子面单并预览（点击"🖨️ 面单"）
 async function printWaybillForGroup(poId, btn) {
     const list = getRecords();
     const items = list.filter(r => String(r.po_id) === String(poId));
     if (!items.length) { showToast('未找到记录', '#dc2626'); return; }
     const supplier = getSupplierForGroup(items);
     if (!supplier) { showToast('该采购单未匹配到有效供应商', '#dc2626'); return; }
+    const w = await generateWaybill(supplier, items, [String(poId)], btn);
+    if (w) showWaybillModal(w);
+}
+
+// 核心：为指定供应商的若干记录（可跨多个采购单）生成一张面单，并把单号写入这些采购单
+async function generateWaybill(supplier, items, labelPoIds, btn) {
     const receiver = parseAddrInfo(getReturnAddress(supplier));
-    if (!receiver) { showToast('供应商「' + supplier + '」暂无退货地址', '#d97706'); return; }
-    // SKU 明细汇总
+    if (!receiver) { showToast('供应商「' + supplier + '」暂无退货地址', '#d97706'); return null; }
     const skuMap = {};
     items.forEach(r => {
         const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
         const m = note.match(/^([^|]+)/);
         if (m) { m[1].split(',').forEach(p => { const sm = p.trim().match(/(.+?)×(\d+)/); if (sm) skuMap[sm[1]] = (skuMap[sm[1]]||0) + parseInt(sm[2]); }); }
     });
-    const skuText = Object.entries(skuMap).map(([k,v])=>formatSkuDisplay(k.trim(),v)).join(', ') || (items[0].note||'服装退货');
+    const skuText = Object.entries(skuMap).map(([k,v])=>formatSkuDisplay(k.trim(),v)).join(', ') || ((items[0] && items[0].note) || '服装退货');
     const orig = btn ? btn.textContent : '';
     if (btn) { btn.textContent = '⏳ 生成中...'; btn.disabled = true; }
+    const tagAll = async (tag) => { for (const p of labelPoIds) await tagWaybill(p, tag); };
     try {
         const sender = APP_CONFIG.returnSender || { name:'谢焕君', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' };
         const _ac = new AbortController();
@@ -1133,7 +1142,7 @@ async function printWaybillForGroup(poId, btn) {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ action:'createOrder', data: {
-                orderId: 'RET' + String(poId) + Date.now(),
+                orderId: 'RET' + labelPoIds.join('_') + Date.now(),
                 sender: splitAddr(sender.name, sender.phone, sender.address),
                 receiver: splitAddr(receiver.name, receiver.phone, receiver.address),
                 itemName: skuText
@@ -1144,44 +1153,137 @@ async function printWaybillForGroup(poId, btn) {
         const mailNoM = raw.match(/<mailNo>([^<]+)<\/mailNo>/i);
         const mailNo = mailNoM ? mailNoM[1] : '';
         if (!mailNo) {
-            await tagWaybill(poId, '[面单:异常:未返回运单号]');
+            await tagAll('[面单:异常:未返回运单号]');
             showToast('⚠️ 圆通未返回运单号: ' + raw.slice(0, 120), '#d97706');
             if (btn) { btn.textContent = orig; btn.disabled = false; }
-            return;
+            return null;
         }
-        // 解析面单打印所需数据（二维码/三段码/网点）
         const qrM = raw.match(/<qrCode>([^<]+)<\/qrCode>/i);
-    // 三段码路由码：尝试多种字段名
-    // 三段码路由码：尝试多种字段，取第一个"含数字且含连字符"的值（排除大头笔如"易世达华信"）
-    let threeStageCode = '';
-    const segFields = ['threeStageCode','routingCode','routeCode','threeCode','segmentCode','printKeyWord','wayBillCode','segCode'];
-    for (const f of segFields) {
-        const mm = raw.match(new RegExp('<' + f + '>([^<]+)</' + f + '>', 'i'));
-        if (mm && mm[1] && /\d/.test(mm[1]) && /-/.test(mm[1])) { threeStageCode = mm[1]; break; }
-    }
+        let threeStageCode = '';
+        const segFields = ['threeStageCode','routingCode','routeCode','threeCode','segmentCode','printKeyWord','wayBillCode','segCode'];
+        for (const f of segFields) {
+            const mm = raw.match(new RegExp('<' + f + '>([^<]+)</' + f + '>', 'i'));
+            if (mm && mm[1] && /\d/.test(mm[1]) && /-/.test(mm[1])) { threeStageCode = mm[1]; break; }
+        }
         const saM = raw.match(/<shortAddress>([^<]*)<\/shortAddress>/i);
         const pkM = raw.match(/<printKeyWord>([^<]*)<\/printKeyWord>/i);
         const rbM = raw.match(/<consigneeBranchCode>([^<]*)<\/consigneeBranchCode>/i);
         const cbM = raw.match(/<packageCenterCode>([^<]*)<\/packageCenterCode>/i);
-        showWaybillModal({
-            poId, supplier, receiver, skuText, skuMap, mailNo, sender,
+        const w = {
+            poId: labelPoIds.join(','), supplier, receiver, skuText, skuMap, mailNo, sender,
             qrJson: qrM ? qrM[1] : '',
             shortAddr: saM ? saM[1] : '',
-                threeStageCode: threeStageCode,
+            threeStageCode: threeStageCode,
             printKey: pkM ? pkM[1] : '',
             branchCode: rbM ? rbM[1] : '',
             centerCode: cbM ? cbM[1] : '',
             createdAt: new Date().toLocaleString()
-        });
-        await tagWaybill(poId, '[面单:已打印:' + mailNo + ']');
-        showToast('✅ 电子面单已生成: ' + mailNo, '#059669');
+        };
+        await tagAll('[面单:已打印:' + mailNo + ']');
         if (btn) { btn.textContent = '🖨️ ' + mailNo; btn.disabled = false; }
+        return w;
     } catch(e) {
-        await tagWaybill(poId, '[面单:异常:' + String(e.message||'获取失败').slice(0,30) + ']');
+        await tagAll('[面单:异常:' + String(e.message||'获取失败').slice(0,30) + ']');
         showToast('❌ 获取面单失败: ' + e.message, '#dc2626');
         if (btn) { btn.textContent = orig; btn.disabled = false; }
+        return null;
     }
 }
+
+// 按供应商合并打面单：同一供应商的所有待处理采购单合并为一张面单（不创建聚水潭单）
+async function batchPrintBySupplier() {
+    const list = getRecords();
+    const pending = list.filter(r => r.status === 'pending' && !parseReturnTag(r.note) && !parseRefundTag(r.note));
+    if (!pending.length) { showToast('无待处理记录', '#6b7280'); return; }
+    const groups = {};
+    let noSup = 0;
+    for (const r of pending) {
+        const sup = getSupplierForGroup([r]);
+        if (sup) { if (!groups[sup]) groups[sup] = []; groups[sup].push(r); }
+        else noSup++;
+    }
+    const suppliers = Object.keys(groups).sort();
+    if (!suppliers.length) { showToast('没有可合并打印的供应商', '#d97706'); return; }
+    let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
+        <h3 style="margin:0 0 12px;font-size:16px;">按供应商合并打面单</h3>
+        <p style="font-size:12px;color:#666;margin-bottom:12px;">同一供应商的所有待处理采购单合并为<strong>一张面单</strong>（一个快递单号、一次运费），不创建聚水潭单。</p>`;
+    suppliers.forEach((sup) => {
+        const items = groups[sup];
+        const poIds = [...new Set(items.map(r=>String(r.po_id)))];
+        const skuMap = {};
+        items.forEach(r => {
+            const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
+            const m = note.match(/^([^|]+)/);
+            if (m) { m[1].split(',').forEach(p => { const sm = p.trim().match(/(.+?)×(\d+)/); if (sm) skuMap[sm[1]] = (skuMap[sm[1]]||0)+parseInt(sm[2]); }); }
+        });
+        const skuText = Object.entries(skuMap).map(([k,v])=>k.trim()+'×'+v).join(', ');
+        const hasAddr = !!getReturnAddress(sup);
+        html += `<label style="display:flex;align-items:flex-start;gap:8px;padding:10px;margin:4px 0;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;cursor:pointer;">
+            <input type="checkbox" data-supplier="${sup}" ${hasAddr?'checked':'disabled'} style="margin-top:3px;width:18px;height:18px;">
+            <div style="flex:1;">
+                <div style="font-weight:600;font-size:13px;color:#8b5cf6;">${sup} ${hasAddr?'':'<span style="color:#d97706;font-size:11px;">⚠️缺地址</span>'}</div>
+                <div style="font-size:11px;color:#666;margin-top:2px;">采购单: ${poIds.join(', ')}（${items.length}条）</div>
+                <div style="font-size:11px;color:#999;margin-top:1px;">${skuText||'（无明细）'}</div>
+            </div>
+        </label>`;
+    });
+    if (noSup) html += `<div style="padding:8px;margin-top:8px;background:#fef2f2;border-radius:6px;font-size:11px;color:#dc2626;">⚠️ ${noSup}条记录无法匹配供应商，未列入</div>`;
+    html += `<div style="display:flex;gap:8px;margin-top:16px;">
+        <button onclick="confirmBatchPrint()" style="flex:1;padding:10px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">🖨️ 合并打面单</button>
+        <button onclick="document.getElementById('batchReturnOverlay').style.display='none'" style="padding:10px 20px;background:#fff;border:1px solid #d1d5db;border-radius:8px;font-size:14px;cursor:pointer;">取消</button>
+    </div></div>`;
+    let overlay = document.getElementById('batchReturnOverlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'batchReturnOverlay';
+        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;';
+        document.body.appendChild(overlay);
+    }
+    overlay.innerHTML = `<div style="background:white;border-radius:14px;max-width:440px;width:100%;">${html}</div>`;
+    overlay.style.display = 'flex';
+    overlay._printGroups = groups;
+}
+
+async function confirmBatchPrint() {
+    const overlay = document.getElementById('batchReturnOverlay');
+    const checkboxes = overlay.querySelectorAll('input[type=checkbox]:checked');
+    const selected = [...checkboxes].map(cb => cb.dataset.supplier);
+    if (!selected.length) { showToast('请至少选择一个供应商', '#d97706'); return; }
+    const groups = overlay._printGroups;
+    overlay.style.display = 'none';
+    const results = [];
+    for (const sup of selected) {
+        const items = groups[sup];
+        const poIds = [...new Set(items.map(r=>String(r.po_id)))];
+        const w = await generateWaybill(sup, items, poIds, null);
+        if (w) results.push({ supplier: sup, w });
+    }
+    if (!results.length) { showToast('❌ 全部生成失败，请检查地址/圆通接口', '#dc2626'); return; }
+    let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
+        <h3 style="margin:0 0 12px;font-size:16px;">面单已生成（${results.length}张）</h3>`;
+    results.forEach((res, i) => {
+        html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;margin:4px 0;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
+            <div><div style="font-weight:600;font-size:13px;color:#065f46;">${res.supplier}</div>
+            <div style="font-size:11px;color:#666;">运单号：${res.w.mailNo}｜采购单：${res.w.poId}</div></div>
+            <button onclick="showWaybillModal(window.__bp[${i}])" style="padding:6px 12px;background:#0ea5e9;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;">🖨️ 查看/打印</button>
+        </div>`;
+    });
+    html += `<div style="display:flex;gap:8px;margin-top:16px;">
+        <button onclick="document.getElementById('batchReturnOverlay').style.display='none'" style="flex:1;padding:10px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;">完成</button>
+    </div></div>`;
+    let ov = document.getElementById('batchReturnOverlay');
+    if (!ov) {
+        ov = document.createElement('div');
+        ov.id = 'batchReturnOverlay';
+        ov.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;';
+        document.body.appendChild(ov);
+    }
+    ov.innerHTML = `<div style="background:white;border-radius:14px;max-width:440px;width:100%;">${html}</div>`;
+    ov.style.display = 'flex';
+    window.__bp = results.map(r=>r.w);
+    setTimeout(()=>loadHistory(), 1500);
+}
+
 function showWaybillModal(w) {
     _lastWaybill = w;
     document.getElementById('waybillPoId').textContent = w.poId;
