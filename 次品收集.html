@@ -163,7 +163,7 @@
                     <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">买家退货</button>
                     <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">卖家收货</button>
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
-                    <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">🧾 合并打印</button>
+                    <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">合并打印</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
                 </div>
         </div>
@@ -1199,16 +1199,21 @@ async function batchPrintBySupplier() {
     let noSup = 0;
     for (const r of pending) {
         const sup = getSupplierForGroup([r]);
-        if (sup) { if (!groups[sup]) groups[sup] = []; groups[sup].push(r); }
-        else noSup++;
+        if (sup) {
+            const is1688 = (r.note||'').includes('[1688:');
+            const key = sup + '|' + (is1688 ? '1688' : '非1688');
+            if (!groups[key]) groups[key] = { supplier: sup, source: is1688 ? '1688' : '非1688', items: [] };
+            groups[key].items.push(r);
+        } else noSup++;
     }
-    const suppliers = Object.keys(groups).sort();
+    const keys = Object.keys(groups).sort();
     if (!suppliers.length) { showToast('没有可合并打印的供应商', '#d97706'); return; }
     let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
         <h3 style="margin:0 0 12px;font-size:16px;">按供应商合并打印</h3>
         <p style="font-size:12px;color:#666;margin-bottom:12px;">同一供应商的所有待处理采购单合并为一张面单（一个快递单号、一次运费），不创建聚水潭单。</p>`;
-    suppliers.forEach((sup) => {
-        const items = groups[sup];
+    keys.forEach((key) => {
+        const grp = groups[key];
+        const sup = grp.supplier;
         const poIds = [...new Set(items.map(r=>String(r.po_id)))];
         const skuMap = {};
         items.forEach(r => {
@@ -1219,9 +1224,9 @@ async function batchPrintBySupplier() {
         const skuText = Object.entries(skuMap).map(([k,v])=>k.trim()+'×'+v).join(', ');
         const hasAddr = !!getReturnAddress(sup);
         html += `<label style="display:flex;align-items:flex-start;gap:8px;padding:10px;margin:4px 0;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;cursor:pointer;">
-            <input type="checkbox" data-supplier="${sup}" ${hasAddr?'checked':'disabled'} style="margin-top:3px;width:18px;height:18px;">
+            <input type="checkbox" data-key="${key}" ${hasAddr?'checked':'disabled'} style="margin-top:3px;width:18px;height:18px;">
             <div style="flex:1;">
-                <div style="font-weight:600;font-size:13px;color:#8b5cf6;">${sup} ${hasAddr?'':'<span style="color:#d97706;font-size:11px;">⚠️缺地址</span>'}</div>
+                <div style="font-weight:600;font-size:13px;color:#8b5cf6;">${sup} <span style="font-size:11px;color:#fff;background:${grp.source==='1688'?'#1677ff':'#faad14'};padding:1px 6px;border-radius:4px;margin-left:4px;">${grp.source}</span> ${hasAddr?'':'<span style="color:#d97706;font-size:11px;">⚠️缺地址</span>'}</div>
                 <div style="font-size:11px;color:#666;margin-top:2px;">采购单: ${poIds.join(', ')}（${items.length}条）</div>
                 <div style="font-size:11px;color:#999;margin-top:1px;">${skuText||'（无明细）'}</div>
             </div>
@@ -1229,7 +1234,7 @@ async function batchPrintBySupplier() {
     });
     if (noSup) html += `<div style="padding:8px;margin-top:8px;background:#fef2f2;border-radius:6px;font-size:11px;color:#dc2626;">⚠️ ${noSup}条记录无法匹配供应商，未列入</div>`;
     html += `<div style="display:flex;gap:8px;margin-top:16px;">
-        <button onclick="confirmBatchPrint()" style="flex:1;padding:10px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">🖾 合并打印</button>
+        <button onclick="confirmBatchPrint()" style="flex:1;padding:10px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">合并打印</button>
         <button onclick="document.getElementById('batchReturnOverlay').style.display='none'" style="padding:10px 20px;background:#fff;border:1px solid #d1d5db;border-radius:8px;font-size:14px;cursor:pointer;">取消</button>
     </div></div>`;
     let overlay = document.getElementById('batchReturnOverlay');
@@ -1247,25 +1252,26 @@ async function batchPrintBySupplier() {
 async function confirmBatchPrint() {
     const overlay = document.getElementById('batchReturnOverlay');
     const checkboxes = overlay.querySelectorAll('input[type=checkbox]:checked');
-    const selected = [...checkboxes].map(cb => cb.dataset.supplier);
+    const selected = [...checkboxes].map(cb => cb.dataset.key);
     if (!selected.length) { showToast('请至少选择一个供应商', '#d97706'); return; }
     const groups = overlay._printGroups;
     overlay.style.display = 'none';
     const results = [];
-    for (const sup of selected) {
-        const items = groups[sup];
+    for (const key of selected) {
+        const items = grp.items;
         const poIds = [...new Set(items.map(r=>String(r.po_id)))];
         const w = await generateWaybill(sup, items, poIds, null);
-        if (w) results.push({ supplier: sup, w });
+        if (w) results.push({ supplier: grp.supplier, source: grp.source, w });
     }
     if (!results.length) { showToast('❌ 全部生成失败，请检查地址/圆通接口', '#dc2626'); return; }
     let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
         <h3 style="margin:0 0 12px;font-size:16px;">合并打印已生成（${results.length}张）</h3>`;
     results.forEach((res, i) => {
+        const srcColor = res.source === '1688' ? '#1677ff' : '#faad14';
         html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;margin:4px 0;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
-            <div><div style="font-weight:600;font-size:13px;color:#065f46;">${res.supplier}</div>
+            <div><div style="font-weight:600;font-size:13px;color:#065f46;">${res.supplier} <span style="font-size:10px;color:#fff;background:${srcColor};padding:1px 6px;border-radius:4px;margin-left:4px;">${res.source}</span></div>
             <div style="font-size:11px;color:#666;">运单号：${res.w.mailNo}｜采购单：${res.w.poId}</div></div>
-            <button onclick="showWaybillModal(window.__bp[${i}])" style="padding:6px 12px;background:#0ea5e9;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;">🖨️ 查看/打印</button>
+            <button onclick="showWaybillModal(window.__bp[${i}])" style="padding:6px 12px;background:#0ea5e9;color:#fff;border:none;border-radius:6px;font-size:12px;cursor:pointer;">查看/打印</button>
         </div>`;
     });
     html += `<div style="display:flex;gap:8px;margin-top:16px;">
