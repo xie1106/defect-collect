@@ -163,7 +163,7 @@
                     <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">买家退货</button>
                     <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">卖家收货</button>
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
-                    <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">🧾 合并打面单</button>
+                    <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">🧾 合并打印</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
                 </div>
         </div>
@@ -1190,7 +1190,7 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
     }
 }
 
-// 按供应商合并打面单：同一供应商的所有待处理采购单合并为一张面单（不创建聚水潭单）
+// 按供应商合并打印：同一供应商的所有待处理采购单合并为一张面单（不创建聚水潭单）
 async function batchPrintBySupplier() {
     const list = getRecords();
     const pending = list.filter(r => r.status === 'pending' && !parseReturnTag(r.note) && !parseRefundTag(r.note));
@@ -1205,8 +1205,8 @@ async function batchPrintBySupplier() {
     const suppliers = Object.keys(groups).sort();
     if (!suppliers.length) { showToast('没有可合并打印的供应商', '#d97706'); return; }
     let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
-        <h3 style="margin:0 0 12px;font-size:16px;">按供应商合并打面单</h3>
-        <p style="font-size:12px;color:#666;margin-bottom:12px;">同一供应商的所有待处理采购单合并为<strong>一张面单</strong>（一个快递单号、一次运费），不创建聚水潭单。</p>`;
+        <h3 style="margin:0 0 12px;font-size:16px;">按供应商合并打印</h3>
+        <p style="font-size:12px;color:#666;margin-bottom:12px;">同一供应商的所有待处理采购单合并为一张面单（一个快递单号、一次运费），不创建聚水潭单。</p>`;
     suppliers.forEach((sup) => {
         const items = groups[sup];
         const poIds = [...new Set(items.map(r=>String(r.po_id)))];
@@ -1229,7 +1229,7 @@ async function batchPrintBySupplier() {
     });
     if (noSup) html += `<div style="padding:8px;margin-top:8px;background:#fef2f2;border-radius:6px;font-size:11px;color:#dc2626;">⚠️ ${noSup}条记录无法匹配供应商，未列入</div>`;
     html += `<div style="display:flex;gap:8px;margin-top:16px;">
-        <button onclick="confirmBatchPrint()" style="flex:1;padding:10px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">🖨️ 合并打面单</button>
+        <button onclick="confirmBatchPrint()" style="flex:1;padding:10px;background:#0ea5e9;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">🖾 合并打印</button>
         <button onclick="document.getElementById('batchReturnOverlay').style.display='none'" style="padding:10px 20px;background:#fff;border:1px solid #d1d5db;border-radius:8px;font-size:14px;cursor:pointer;">取消</button>
     </div></div>`;
     let overlay = document.getElementById('batchReturnOverlay');
@@ -1260,7 +1260,7 @@ async function confirmBatchPrint() {
     }
     if (!results.length) { showToast('❌ 全部生成失败，请检查地址/圆通接口', '#dc2626'); return; }
     let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
-        <h3 style="margin:0 0 12px;font-size:16px;">面单已生成（${results.length}张）</h3>`;
+        <h3 style="margin:0 0 12px;font-size:16px;">合并打印已生成（${results.length}张）</h3>`;
     results.forEach((res, i) => {
         html += `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;margin:4px 0;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
             <div><div style="font-weight:600;font-size:13px;color:#065f46;">${res.supplier}</div>
