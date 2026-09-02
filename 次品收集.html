@@ -846,7 +846,6 @@ function loadHistory() {
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
                 <div class="record-actions">
                     ${is1688Single?`<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>`:''}
-                    ${is1688Single ? refundStatusSelect(r.po_id) : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
                     <button onclick="quickDelete(${r._realIdx})" style="color:#dc2626;border-color:#dc2626;">✕ 删除</button>
                 </div>
@@ -922,7 +921,6 @@ function loadHistory() {
                 ${returnBtn}
                 ${non1688ReturnBtn}
                 ${waybillBtn}
-                ${is1688 ? refundStatusSelect(g.po_id) : ''}
                 ${cancelBtn}
                 ${!groupReturn && !groupRefund ? `<button onclick="editGroup('${g.po_id}')" style="color:#1677ff;border-color:#1677ff;">✏️ 编辑</button>` : ''}
             </div>
@@ -1070,30 +1068,7 @@ function isAbnormalNote(note) {
     return (rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status)) || isWaybillAbnormal(note);
 }
 
-// 1688 退款状态下拉（人工同步，去1688后台看后手动选）
-function refundStatusSelect(poId) {
-    const opts = ['等待卖家同意','等待买家退货','等待卖家收货','退款成功','退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败','已撤销'];
-    return `<select onchange="setRefundStatus('${poId}', this.value); this.value='';" style="padding:4px 6px;border-radius:6px;border:1px solid #94a3b8;font-size:11px;color:#334155;background:#fff;">
-        <option value="">退款状态▾</option>${opts.map(o=>`<option value="${o}">${o}</option>`).join('')}
-    </select>`;
-}
-async function setRefundStatus(poId, status) {
-    if (!status) return;
-    if (!confirm(`将采购单 ${poId} 的 1688 退款状态设为「${status}」？`)) return;
-    const h = {'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'};
-    try {
-        const r = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}`, { headers: h });
-        const recs = await r.json();
-        if (!recs.length) { showToast('未找到该采购单记录', '#d97706'); return; }
-        for (const rec of recs) {
-            let note = (rec.note||'').replace(/\s*\[退款:[^\]]*\]/g, '').trim();
-            note = note + ` [退款:${status}]`;
-            await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:h, body: JSON.stringify({note}) });
-        }
-        showToast(`✅ 已更新 ${recs.length} 条为「${status}」`, '#059669');
-        setTimeout(()=>loadHistory(), 1000);
-    } catch(e) { showToast('❌ 更新失败: ' + e.message, '#dc2626'); }
-}
+// 1688 退款状态：由每 2 小时自动同步（聚水潭采购单 labels）维护，不再需要手动下拉。
 // 解析 "姓名，电话，地址"
 function parseAddrInfo(addrStr) {
     const s = String(addrStr || '').trim();
@@ -1333,31 +1308,65 @@ async function printWaybillNow() {
 // 1688退货：po_id → 1688订单链接
 let _po1688Map = null;
 
+// 重匹配：对"未匹配"和"退货失败/异常"记录，按最新映射（商品/供应商/地址）重新评估
+// - 清除旧的 [退货:失败]/[退货:异常]/[退货:待处理] 标签，恢复可操作
+// - 补齐/纠正 [供应商]/[地址]/[明细] 标签（仅当缺失或无效时）
+// - 不创建任何退货单/退款单，不改 1688/退款历史标签
+function refreshMatchTags(note) {
+    let n = (note||'').trim();
+    const clean = n.replace(/\s*\[[^\]]*\]/g, '').trim();
+    const skus = [...clean.matchAll(/([A-Za-z0-9][A-Za-z0-9\-]*)[×x](\d+)/g)].map(m=>m[1]);
+    let color='', size='', sup='', addrStr='';
+    for (const sku of skus) {
+        const info = skuInfoMap[sku];
+        if (info && info[0]) { color = info[1]||''; size = info[2]||''; break; }
+    }
+    sup = getSupplierForGroup([{note:n}]) || '';
+    if (sup) { const a = getReturnAddress(sup); if (a) addrStr = typeof a==='string' ? a : [a.contacts||'', a.mobile||'', a.address||''].filter(Boolean).join(','); }
+    const okName = (v) => { const s=String(v||'').trim(); return s && !s.includes('*') && s!=='市场' && s!=='None' && s!=='null'; };
+    const setTag = (re, val) => { const m = n.match(re); if (m) n = n.replace(m[0], val); else n = n + ' ' + val; return n; };
+    const supM = n.match(/\[供应商:([^\]]*)\]/);
+    if (!okName(supM && supM[1]) && sup) n = setTag(/\[供应商:[^\]]*\]/, '[供应商:'+sup+']');
+    const addrM = n.match(/\[地址:([^\]]*)\]/);
+    const curAddr = addrM ? addrM[1].trim() : '';
+    if ((!curAddr || ['None','null',',,',',,None'].includes(curAddr)) && addrStr) n = setTag(/\[地址:[^\]]*\]/, '[地址:'+addrStr+']');
+    const detM = n.match(/\[明细:([^\]]*)\]/);
+    const curDet = detM ? detM[1].trim() : '';
+    const wantDet = [color,size].filter(Boolean).join(';');
+    const detBad = !curDet || ['None','null'].includes(curDet) || /^[;,]/.test(curDet);
+    if (wantDet && (detBad || (curDet && curDet!==wantDet))) n = setTag(/\[明细:[^\]]*\]/, '[明细:'+wantDet+']');
+    return n;
+}
 async function retryAllFailed() {
-    if (!confirm('重新匹配所有"未匹配"和"退货失败"的记录？\n后台将重新检查供应商匹配。')) return;
+    if (!confirm('重新匹配所有"未匹配"和"退货失败/异常"的记录？\n将按最新映射重新评估（不创建任何退货/退款单）。')) return;
     const list = getRecords();
     const targets = list.filter(r => {
         const rt = parseReturnTag(r.note);
         const rf = parseRefundTag(r.note);
-        // 退货失败的
-        if (rt && rt.status === '失败') return true;
-        // 未匹配供应商的pending（无退货标签、无退款标签）
-        if (r.status === 'pending' && !rf && !rt && !getSupplierForGroup([r])) return true;
+        // 退货失败/异常（退款未完成）
+        if (rt && (rt.status === '失败' || rt.status === '异常') && !(rf && (rf.status === '退款成功' || rf.status === '完成'))) return true;
+        // 未匹配（缺供应商/地址/颜色/码数等）的待处理记录
+        if (r.status === 'pending' && !rf && !rt && getMissingMatch([r]).length > 0) return true;
         return false;
     });
     if (!targets.length) { showToast('无需重匹配的记录', '#6b7280'); return; }
     const h = {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'};
     let count = 0;
     for (const rec of targets) {
-        let note = (rec.note||'').replace(/\s*\[退货:失败[^\]]*\]/g, '').replace(/\s*\[退货:待处理\]/g, '').replace(/\s*\[系统:重新匹配\]/g, '').trim();
+        let note = (rec.note||'')
+            .replace(/\s*\[退货:失败[^\]]*\]/g, '')
+            .replace(/\s*\[退货:异常[^\]]*\]/g, '')
+            .replace(/\s*\[退货:待处理\]/g, '')
+            .replace(/\s*\[系统:重新匹配\]/g, '').trim();
+        note = refreshMatchTags(note);
         note += ' [系统:重新匹配]';
         await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
             method: 'PATCH', headers: h, body: JSON.stringify({note})
         });
         count++;
     }
-    showToast(`✅ 已提交${count}条记录重新匹配\n后台约2分钟内完成`, '#059669');
-    setTimeout(() => fetchRecords(), 3000);
+    showToast(`✅ 已重新匹配 ${count} 条（按最新映射更新，不创建退货/退款单）`, '#059669');
+    setTimeout(() => fetchRecords(), 1500);
 }
 
 async function retryReturn(poId, btn) {
