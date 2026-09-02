@@ -812,7 +812,7 @@ function loadHistory() {
         r._realIdx = realIdx;
         const rt = parseReturnTag(r.note);
         const rf = parseRefundTag(r.note);
-        if (r.status === 'pending' && !rf && !rt) {
+        if (!rf && !rt) {
             // 待处理（无退货无退款）：仅同采购单号合并
             const key = 'p_' + r.po_id;
             if (!pendingMap[key]) { pendingMap[key] = []; groups.push({type:'group', po_id:r.po_id, items:pendingMap[key]}); }
@@ -830,10 +830,10 @@ function loadHistory() {
             const is1688Single = (r.note||'').includes('[1688:');
             const returnInfo = parseReturnTag(r.note);
             const statusClass = r.status==='done'?'badge-done':'badge-error';
-            const statusText = r.status==='done'?'已处理':(is1688Single?'异常':'未映射');
+            const statusText = r.status==='done'?'完成':(is1688Single?'异常':'未映射');
             const badgeHtml = returnInfo ? getReturnBadge(returnInfo) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`;
             const printedNo = getWaybillPrinted([r]);
-            const printedBadge = printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;user-select:none;">✅ 已打印 ${printedNo}</span>` : '';
+
             const noteDisplay = formatNoteDisplay(r.note);
             const singleSupplier = getSupplierForGroup([r]);
             const singleWaybillNo = singleSupplier ? getReturnAddress(singleSupplier) : null;
@@ -841,8 +841,8 @@ function loadHistory() {
             const sourceTag = is1688Single ? '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#1677ff;color:#fff;margin-left:4px;">1688</span>' : '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#faad14;color:#fff;margin-left:4px;">非1688</span>';
             return `<div class="record">
                 <div class="record-header">
-                    <span class="record-title" onclick="copyText('${r.po_id}','采购单 ${r.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${r.po_id}${sourceTag}</span>
-                    ${badgeHtml}${printedBadge}
+                    <span class="record-title" onclick="copyText('${r.po_id}','采购单 ${r.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${r.po_id}${sourceTag}${printedNo ? waybillInlineBtn(r.po_id, printedNo) : ''}</span>
+                    ${badgeHtml}
                 </div>
                 ${singleSupplierHtml}
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
@@ -880,17 +880,18 @@ function loadHistory() {
         const groupIs1688 = items.some(r=>(r.note||'').includes('[1688:'));
         const returnBadge = groupReturn ? getReturnBadge(groupReturn) : '';
         const groupMissing = getMissingMatch(items);
-        const defaultBadge = `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
+        const groupPrinted = items.every(r => getWaybillPrinted([r]));
+        const defaultBadge = groupPrinted ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">完成</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
         const missingReasonHtml = groupMissing.length ? `<div style="font-size:11px;color:#d97706;margin-top:2px;">⚠️ 未匹配：${groupMissing.join('、')}</div>` : '';
         const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
         const groupBadgeHtml = groupWaybillAbnormal ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>` : (groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge));
         const printedNo = getWaybillPrinted(items);
-        const printedBadge = printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;user-select:none;">✅ 已打印 ${printedNo}</span>` : '';
+
 
         let html = `<div class="record">
             <div class="record-header">
-                <span class="record-title" onclick="copyText('${g.po_id}','采购单 ${g.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${g.po_id}${tagHtml}${btnPhotos}${btnDetail}</span>
-                ${groupBadgeHtml}${printedBadge}
+                <span class="record-title" onclick="copyText('${g.po_id}','采购单 ${g.po_id}')" title="点击复制采购单号" style="cursor:pointer;">采购单 ${g.po_id}${tagHtml}${btnPhotos}${btnDetail}${printedNo ? waybillInlineBtn(g.po_id, printedNo) : ''}</span>
+                ${groupBadgeHtml}
             </div>
             ${supplierHtml}
             ${missingReasonHtml}
@@ -1065,6 +1066,10 @@ function getWaybillPrinted(items) {
     }
     return '';
 }
+// 快递单号小按钮（放在 1688/非1688 标签后，点击重新打面单）
+function waybillInlineBtn(poId, mailNo) {
+    return `<button onclick="printWaybillForGroup('${poId}',this)" title="点击重新打印面单" style="margin-left:6px;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;background:#e0f2fe;color:#0369a1;border:1px solid #bae6fd;cursor:pointer;white-space:nowrap;">🖨️ ${mailNo}</button>`;
+}
 function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||''); }
 function isAbnormalNote(note) {
     const rf = parseRefundTag(note);
@@ -1182,6 +1187,11 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
             createdAt: new Date().toLocaleString()
         };
         await tagAll('[面单:已打印:' + mailNo + ']');
+        if (items[0] && !(items[0].note||'').includes('[1688:')) {
+            // 非 1688：打面单后状态自动改为完成
+            const h2 = {'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'};
+            for (const r of items) { await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${r.id}`, { method:'PATCH', headers:h2, body: JSON.stringify({status:'done'}) }); }
+        }
         if (btn) { btn.textContent = '🖨️ ' + mailNo; btn.disabled = false; }
         return w;
     } catch(e) {
