@@ -826,6 +826,8 @@ function loadHistory() {
             const statusClass = r.status==='done'?'badge-done':'badge-error';
             const statusText = r.status==='done'?'已处理':(is1688Single?'异常':'未映射');
             const badgeHtml = returnInfo ? getReturnBadge(returnInfo) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`;
+            const printedNo = getWaybillPrinted([r]);
+            const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
             const noteDisplay = formatNoteDisplay(r.note);
             const singleSupplier = getSupplierForGroup([r]);
             const singleSupplierHtml = singleSupplier ? `<div style="font-size:11px;color:#8b5cf6;font-weight:500;">🏪 ${singleSupplier}</div>` : '';
@@ -833,12 +835,12 @@ function loadHistory() {
             return `<div class="record">
                 <div class="record-header">
                     <span class="record-title">采购单 ${r.po_id}${sourceTag}</span>
-                    ${badgeHtml}
+                    ${badgeHtml}${printedBadge}
                 </div>
                 ${singleSupplierHtml}
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
                 <div class="record-actions">
-                    ${is1688Single?`<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">📦 退货</button>`:''}
+                    ${is1688Single?`<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>`:''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
                     <button onclick="quickDelete(${r._realIdx})" style="color:#dc2626;border-color:#dc2626;">✕ 删除</button>
                 </div>
@@ -878,7 +880,7 @@ function loadHistory() {
         let html = `<div class="record">
             <div class="record-header">
                 <span class="record-title">采购单 ${g.po_id}${tagHtml}${btnPhotos}${btnDetail}</span>
-                ${groupBadgeHtml}
+                ${groupBadgeHtml}${printedBadge}
             </div>
             ${supplierHtml}
             ${missingReasonHtml}
@@ -890,7 +892,9 @@ function loadHistory() {
         if(count>1) {
             html += `<div id="${expandId}" style="display:none;margin-top:8px;border-top:1px solid #f0f0f0;padding-top:8px;">`;
             items.forEach(r => {
-                const noteDisplay = formatNoteDisplay(r.note);
+                const printedNo = getWaybillPrinted([r]);
+            const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
+            const noteDisplay = formatNoteDisplay(r.note);
                 html += `<div style="padding:8px 10px;background:${items.indexOf(r)%2===0?'#eef4fb':'#f8fafc'};border-left:4px solid #2b7de9;border-radius:0 6px 6px 0;margin-bottom:6px;font-size:12px;">
                     <span style="color:#999;">${new Date(r.created_at).toLocaleString()}</span> · ${noteDisplay}
                     <span style="float:right;">
@@ -901,13 +905,15 @@ function loadHistory() {
             });
             html += `</div>`;
         }
+        const printedNo = getWaybillPrinted(items);
+        const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
         const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : '';
         const non1688ReturnBtn = '';
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
         const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;">取消</button>` : '';
-        const waybillBtn = (supplierName && getReturnAddress(supplierName)) ? `<button onclick="printWaybillForGroup('${g.po_id}',this)" style="color:#fff;background:#0ea5e9;border:1px solid #0ea5e9;border-radius:4px;">🖨️ 面单</button>` : '';
+        const waybillBtn = (supplierName && getReturnAddress(supplierName)) ? `<button onclick="printWaybillForGroup('${g.po_id}',this)" style="color:#fff;background:#0ea5e9;border:1px solid #0ea5e9;border-radius:4px;">🖨️ ${printedNo || '面单'}</button>` : '';
         html += `<div class="record-actions">
                 ${returnBtn}
                 ${non1688ReturnBtn}
@@ -1046,6 +1052,13 @@ function getMissingMatch(items) {
     }
     return [...missing];
 }
+function getWaybillPrinted(items) {
+    for (const r of (Array.isArray(items) ? items : [items])) {
+        const m = (r.note||'').match(/\[面单:已打印:([^\]]+)\]/);
+        if (m && m[1]) return m[1];
+    }
+    return '';
+}
 function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||''); }
 function isAbnormalNote(note) {
     const rf = parseRefundTag(note);
@@ -1076,7 +1089,13 @@ async function tagWaybill(poId, tag) {
         const r = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}`, { headers: h });
         const recs = await r.json();
         for (const rec of recs) {
-            let note = (rec.note||'').replace(/\s*\[面单:[^\]]*\]/g, '').trim();
+            let note = (rec.note||'');
+            // 写入"异常"时保留已打印状态；写入"已打印"时清掉旧的已打印/异常
+            if (tag && tag.includes('面单:异常')) {
+                note = note.replace(/\s*\[面单:异常[^\]]*\]/g, '').trim();
+            } else {
+                note = note.replace(/\s*\[面单:[^\]]*\]/g, '').trim();
+            }
             if (tag) note = note + ' ' + tag;
             await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:h, body: JSON.stringify({note}) });
         }
@@ -1149,7 +1168,7 @@ async function printWaybillForGroup(poId, btn) {
             centerCode: cbM ? cbM[1] : '',
             createdAt: new Date().toLocaleString()
         });
-        await tagWaybill(poId, '');
+        await tagWaybill(poId, '[面单:已打印:' + mailNo + ']');
         showToast('✅ 电子面单已生成: ' + mailNo, '#059669');
         if (btn) { btn.textContent = '🖨️ ' + mailNo; btn.disabled = false; }
     } catch(e) {
