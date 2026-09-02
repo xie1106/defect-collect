@@ -836,6 +836,7 @@ function loadHistory() {
             const printedBadge = printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;user-select:none;">✅ 已打印 ${printedNo}</span>` : '';
             const noteDisplay = formatNoteDisplay(r.note);
             const singleSupplier = getSupplierForGroup([r]);
+            const singleWaybillNo = singleSupplier ? getReturnAddress(singleSupplier) : null;
             const singleSupplierHtml = singleSupplier ? `<div style="font-size:11px;color:#8b5cf6;font-weight:500;">🏪 ${singleSupplier}</div>` : '';
             const sourceTag = is1688Single ? '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#1677ff;color:#fff;margin-left:4px;">1688</span>' : '<span style="display:inline-block;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:700;background:#faad14;color:#fff;margin-left:4px;">非1688</span>';
             return `<div class="record">
@@ -847,6 +848,7 @@ function loadHistory() {
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
                 <div class="record-actions">
                     ${is1688Single?`<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>`:''}
+                    ${singleWaybillNo ? `<button onclick="printWaybillForGroup('${r.po_id}',this)" style="color:#fff;background:#0ea5e9;border:1px solid #0ea5e9;border-radius:4px;">🖨️ 面单</button>` : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
                     <button onclick="quickDelete(${r._realIdx})" style="color:#dc2626;border-color:#dc2626;">✕ 删除</button>
                 </div>
