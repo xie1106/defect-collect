@@ -260,13 +260,18 @@ function fullImg(url) { return proxyImg(url, 800); }
 // ═══ 映射数据加载：优先从 Supabase(mapping_data) 读取（聚水潭自动同步），失败则用本地 JSON 兜底 ═══
 // 本地兜底（GitHub 上线后也能用）
 function _localMap(url, fb) {
-  return fetch(url + '?v=' + Date.now()).then(r => r.ok ? r.json() : fb).catch(() => fb);
+  const ctrl = new AbortController();
+  const tm = setTimeout(() => ctrl.abort(), 8000);
+  return fetch(url + '?v=' + Date.now(), { signal: ctrl.signal }).then(r => { clearTimeout(tm); return r.ok ? r.json() : fb; }).catch(() => { clearTimeout(tm); return fb; });
 }
 async function loadAllMaps() {
   // Supabase 版本（含聚水潭自动同步的新商品/供应商/地址）
   try {
     const url = SUPABASE_URL + '/rest/v1/mapping_data?select=id,data';
-    const r = await fetch(url, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+    const ctrl = new AbortController();
+    const tm = setTimeout(() => ctrl.abort(), 10000);
+    const r = await fetch(url, { headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }, signal: ctrl.signal });
+    clearTimeout(tm);
     if (r.ok) {
       const rows = await r.json();
       const byId = {};
@@ -876,6 +881,8 @@ function loadHistory() {
         const missingReasonHtml = groupMissing.length ? `<div style="font-size:11px;color:#d97706;margin-top:2px;">⚠️ 未匹配：${groupMissing.join('、')}</div>` : '';
         const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
         const groupBadgeHtml = groupWaybillAbnormal ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>` : (groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge));
+        const printedNo = getWaybillPrinted(items);
+        const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
 
         let html = `<div class="record">
             <div class="record-header">
@@ -892,9 +899,7 @@ function loadHistory() {
         if(count>1) {
             html += `<div id="${expandId}" style="display:none;margin-top:8px;border-top:1px solid #f0f0f0;padding-top:8px;">`;
             items.forEach(r => {
-                const printedNo = getWaybillPrinted([r]);
-            const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
-            const noteDisplay = formatNoteDisplay(r.note);
+                const noteDisplay = formatNoteDisplay(r.note);
                 html += `<div style="padding:8px 10px;background:${items.indexOf(r)%2===0?'#eef4fb':'#f8fafc'};border-left:4px solid #2b7de9;border-radius:0 6px 6px 0;margin-bottom:6px;font-size:12px;">
                     <span style="color:#999;">${new Date(r.created_at).toLocaleString()}</span> · ${noteDisplay}
                     <span style="float:right;">
@@ -905,8 +910,6 @@ function loadHistory() {
             });
             html += `</div>`;
         }
-        const printedNo = getWaybillPrinted(items);
-        const printedBadge = printedNo ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${printedNo}</span>` : '';
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
         const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : '';
         const non1688ReturnBtn = '';
