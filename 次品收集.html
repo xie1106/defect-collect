@@ -1092,7 +1092,28 @@ async function reprintWaybill(poId, btn, items) {
         const orig = btn ? btn.textContent : '';
         if (btn) { btn.textContent = '🖨️ 重打中...'; btn.disabled = true; setTimeout(() => { if (btn) { btn.textContent = orig; btn.disabled = false; } }, 700); }
     } else {
-        showToast('已打印：' + mailNo + '（老记录未存完整面单数据）', '#d97706');
+        // 老记录没有完整面单数据 → 用当前映射+原运单号构造最小面单对象直接显示（不调圆通、不覆盖原运单号）
+        const supplier = getSupplierForGroup(items);
+        const receiver = supplier ? parseAddrInfo(getReturnAddress(supplier)) : null;
+        const skuMap = {};
+        items.forEach(r => {
+            const nt = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
+            const mm = nt.match(/^([^|]+)/);
+            if (mm) { mm[1].split(',').forEach(p => { const sm = p.trim().match(/(.+?)×(\d+)/); if (sm) skuMap[sm[1]] = (skuMap[sm[1]]||0) + parseInt(sm[2]); }); }
+        });
+        const skuText = Object.entries(skuMap).map(([k,v])=>formatSkuDisplay(k.trim(),v)).join(', ') || ((items[0] && items[0].note) || '服装退货');
+        const w = {
+            poId: String(poId),
+            supplier: supplier || '未知',
+            receiver: receiver || {name:'', phone:'', address:'', province:'', city:'', district:''},
+            skuText, skuMap, mailNo,
+            sender: APP_CONFIG.returnSender || {name:'谢焕君', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301'},
+            qrJson: '', shortAddr: '', threeStageCode: '', printKey: '', branchCode: '', centerCode: '',
+            createdAt: new Date().toLocaleString()
+        };
+        showWaybillModal(w);
+        const orig = btn ? btn.textContent : '';
+        if (btn) { btn.textContent = '🖨️ 重打中...'; btn.disabled = true; setTimeout(() => { if (btn) { btn.textContent = orig; btn.disabled = false; } }, 700); }
     }
 }
 // 快递单号小按钮（放在 1688/非1688 标签后，点击重新打面单）
