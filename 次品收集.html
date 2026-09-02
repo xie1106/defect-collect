@@ -9,12 +9,12 @@
     ② 为各功能模块添加分区注释，便于维护与后续逐步调整；
     ③ 数据表名 / 图片存储桶名 / 加载条数等抽为可配置项。
   重要说明（系统如何工作）：
-    · 前端只负责"采集 + 打标签 + 展示状态"；
-    · 记录状态（如"处理中/未匹配"）只是状态标记，后台【不会】自动创建聚水潭退货单；
-    · 只有点"一键退货"才会创建聚水潭退货单：前端直接调用退货服务
-      （return-worker）实时创建，并把 [退货:已下单:内部单号] 回写到记录；
-    · 1688 退款申请由人工在 1688 后台操作（系统跳转对应订单页）；
-    · 退款/退货状态需手动触发同步。
+    · 前端负责"采集 + 打标签 + 展示状态 + 打印面单"；
+    · 记录状态是状态标记，后台【不会】自动创建聚水潭退货单；
+    · 不再通过"退货按钮/聚水潭API"创建退货单，直接点【🖨️ 面单】打印圆通电子面单；
+    · 1688 采购单点【🔗 1688后台】跳转到 1688 订单页，人工申请退款并填写快递单号；
+    · 未匹配会标明原因（缺供应商/缺退货地址/缺颜色/缺码数等）；
+    · 异常 = 退款被拒 或 快递单号获取异常。
   ════════════════════════════════════════════════════════════════
 -->
 
@@ -163,7 +163,6 @@
                     <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">买家退货</button>
                     <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">卖家收货</button>
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
-                    <button class="tab-btn" onclick="batchReturnAll()" style="color:#fff;background:#059669;border-color:#059669;">退货</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
                 </div>
         </div>
@@ -211,11 +210,10 @@ const APP_CONFIG = {
     // --- 聚水潭对接（后端 return-worker 使用；此处仅留档）---
     returnShopId: '21571486',         // 外贸采购退货店铺 shop_id
 
-    // --- 退货创建服务（一键退货）---
-    // 规则：只有点"一键退货"才会创建聚水潭退货单；
-    // 记录被标记为 [退货:待处理]（处理中）等状态时，后台【不会】自动创建退货单。
-    // 填入退货 worker 地址后，前端"一键退货"会直接调用它创建订单；
-    // 留空则"一键退货"仅更新状态，不创建订单。
+    // --- 面单打印（不再通过聚水潭API创建退货单）---
+    // 退货流程改为：直接点【🖨️ 面单】打印圆通电子面单寄回；
+    // 1688 采购单额外点【🔗 1688后台】跳转 1688 订单页人工申请退款/填快递单号。
+    // 以下地址保留（历史记录/备用）：
     returnWorkerUrl: 'https://defect-return-worker.458914253.workers.dev',
 
     // --- 圆通电子面单（打印面单）---
@@ -777,20 +775,20 @@ function loadHistory() {
     if (!search) {
     if (currentTab === 'all') {} // 显示全部
     else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note));
-    else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && !getSupplierForGroup([r])) || (rt && (rt.orderId||'').includes('无法匹配')); });
+    else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); });
     else if (currentTab === 'return_failed') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return rt && rt.status === '失败' && !(rt.orderId||'').includes('无法匹配'); });
     else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家同意' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家同意'))); });
     else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); return rf && (rf.status === '等待买家退货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待买家退货'))); });
     else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家收货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家收货'))); });
     else if (currentTab === 'done_all') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单')); return isRefundDone || isNon1688Done; });
-    else if (currentTab === '1688_error') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); return rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status); });
+    else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
     } // end if (!search)
 
     const allPending = new Set(list.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note)).map(r=>r.po_id)).size;
     const allRefunding = new Set(list.filter(r => isRefunding(r.note)).map(r=>r.po_id)).size;
     const allDone = new Set(list.filter(r => { const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单')); return isRefundDone || isNon1688Done; }).map(r=>r.po_id)).size;
-    const allUnmatched = new Set(list.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && !getSupplierForGroup([r])) || (rt && (rt.orderId||'').includes('无法匹配')); }).map(r=>r.po_id)).size;
-    const allError = new Set(list.filter(r => { const rf = parseRefundTag(r.note); return rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status); }).map(r=>r.po_id)).size;
+    const allUnmatched = new Set(list.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); }).map(r=>r.po_id)).size;
+    const allError = new Set(list.filter(r => isAbnormalNote(r.note)).map(r=>r.po_id)).size;
     document.getElementById('pendingCount').textContent = `待处理:${allPending}`;
     document.getElementById('refundingCount').textContent = `退款中:${allRefunding}`;
     document.getElementById('doneCount').textContent = `已完成:${allDone}`;
@@ -808,25 +806,13 @@ function loadHistory() {
         r._realIdx = realIdx;
         const rt = parseReturnTag(r.note);
         const rf = parseRefundTag(r.note);
-        const supplierMatch = (r.note||'').match(/供应商:([^\]]+?)(?=\s*次品:|\])/);
-        const supplier = supplierMatch ? supplierMatch[1].trim() : '_none';
         if (r.status === 'pending' && !rf && !rt) {
-            // 待处理（无退货无退款）：按采购单号+供应商合并
-            const key = 'p_' + r.po_id + '_' + supplier;
-            if (!pendingMap[key]) { pendingMap[key] = []; groups.push({type:'group', po_id:r.po_id, items:pendingMap[key]}); }
-            pendingMap[key].push(r);
-        } else if (rt) {
-            // 有退货标签：按采购单号+退货订单号分组
-            const key = 'r_' + r.po_id + '_' + (rt.orderId||rt.status||'');
-            if (!pendingMap[key]) { pendingMap[key] = []; groups.push({type:'group', po_id:r.po_id, items:pendingMap[key]}); }
-            pendingMap[key].push(r);
-        } else if (rf) {
-            // 有退款标签：按采购单号+退款状态分组
-            const key = 'rf_' + r.po_id + '_' + (rf.status||'');
+            // 待处理（无退货无退款）：仅同采购单号合并
+            const key = 'p_' + r.po_id;
             if (!pendingMap[key]) { pendingMap[key] = []; groups.push({type:'group', po_id:r.po_id, items:pendingMap[key]}); }
             pendingMap[key].push(r);
         } else {
-            // 其他：独立显示
+            // 其他状态（有退货/退款标签或已处理）：独立显示，不合并
             groups.push({type:'single', record:r});
         }
     });
@@ -883,8 +869,11 @@ function loadHistory() {
         const groupReturn = items.map(r=>parseReturnTag(r.note)).find(r=>r);
         const groupIs1688 = items.some(r=>(r.note||'').includes('[1688:'));
         const returnBadge = groupReturn ? getReturnBadge(groupReturn) : '';
-        const defaultBadge = !supplierName ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#d9770618;color:#d97706;border:1px solid #d9770640;">❌ 未匹配</span>` : (getReturnAddress(supplierName) ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">⏳ 处理中</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#e67e2218;color:#e67e22;border:1px solid #e67e2240;">⚠️ 待补地址</span>`);
-        const groupBadgeHtml = groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge);
+        const groupMissing = getMissingMatch(items);
+        const defaultBadge = `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
+        const missingReasonHtml = groupMissing.length ? `<div style="font-size:11px;color:#d97706;margin-top:2px;">⚠️ 未匹配：${groupMissing.join('、')}</div>` : '';
+        const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
+        const groupBadgeHtml = groupWaybillAbnormal ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>` : (groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge));
 
         let html = `<div class="record">
             <div class="record-header">
@@ -892,6 +881,7 @@ function loadHistory() {
                 ${groupBadgeHtml}
             </div>
             ${supplierHtml}
+            ${missingReasonHtml}
             <div style="font-size:12px;color:#555;margin-top:4px;">${skuSummary}</div>
             <div class="record-time">${latestTime}${count>1?' · 合并'+count+'次提交':''}</div>
             <div id="${photosId}" style="display:none;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px;" data-photos='${JSON.stringify(allPhotos)}' data-poid="${g.po_id}">
@@ -912,9 +902,8 @@ function loadHistory() {
             html += `</div>`;
         }
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
-        const returnBtn = is1688 ? `<button onclick="open1688ReturnAndCreateOrder('${g.po_id}',this)" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">📦 退货</button>` : '';
-        const retryableAbnormal = groupReturn && (groupReturn.status.startsWith('失败') || groupReturn.status === '异常') && !(groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成'));
-        const non1688ReturnBtn = (!is1688 && !hasReturnOrder) ? `<button onclick="createReturnOrder('${g.po_id}',this)" style="color:#fff;background:#f59e0b;border:1px solid #f59e0b;border-radius:4px;">📦 退货</button>` : (retryableAbnormal ? `<button onclick="retryReturn('${g.po_id}',this)" style="color:#fff;background:#ef4444;border:1px solid #ef4444;border-radius:4px;">🔄 重试</button>` : '');
+        const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : '';
+        const non1688ReturnBtn = '';
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
         const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;">取消</button>` : '';
@@ -1035,6 +1024,33 @@ function getReturnAddress(supplier) {
     }
     return null;
 }
+
+// 判断一组记录缺少哪些匹配要素（供应商/地址/颜色/码数）→ 未匹配原因
+function getMissingMatch(items) {
+    const missing = new Set();
+    const list = Array.isArray(items) ? items : [items];
+    for (const r of list) {
+        const note = (r.note||'');
+        const clean = note.replace(/\s*\[[^\]]*\]/g, '').trim();
+        const skus = [...clean.matchAll(/([A-Za-z0-9][A-Za-z0-9\-]*)[×x](\d+)/g)].map(m=>m[1]);
+        if (!skus.length) missing.add('缺商品明细');
+        for (const sku of skus) {
+            const info = skuInfoMap[sku];
+            if (!info || !info[0]) { missing.add('缺商品资料'); continue; }
+            if (!info[1]) missing.add('缺颜色');
+            if (!info[2]) missing.add('缺码数');
+        }
+        const supplier = getSupplierForGroup([r]);
+        if (!supplier) missing.add('缺供应商');
+        else if (!getReturnAddress(supplier)) missing.add('缺退货地址');
+    }
+    return [...missing];
+}
+function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||''); }
+function isAbnormalNote(note) {
+    const rf = parseRefundTag(note);
+    return (rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status)) || isWaybillAbnormal(note);
+}
 // 解析 "姓名，电话，地址"
 function parseAddrInfo(addrStr) {
     const s = String(addrStr || '').trim();
@@ -1053,6 +1069,19 @@ function splitAddr(name, phone, address) {
     return { name, phone, province:(m&&m[1])||'', city:(m&&m[2])||'', district:(m&&m[3])||'', address:((m&&m[4])||address||'').trim() };
 }
 let _lastWaybill = null;
+// 给采购单所有记录写入/清除面单状态标签
+async function tagWaybill(poId, tag) {
+    try {
+        const h = {'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'};
+        const r = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}`, { headers: h });
+        const recs = await r.json();
+        for (const rec of recs) {
+            let note = (rec.note||'').replace(/\s*\[面单:[^\]]*\]/g, '').trim();
+            if (tag) note = note + ' ' + tag;
+            await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:h, body: JSON.stringify({note}) });
+        }
+    } catch(e) {}
+}
 // 生成圆通电子面单并预览（点击"🖨️ 面单"）
 async function printWaybillForGroup(poId, btn) {
     const list = getRecords();
@@ -1091,6 +1120,7 @@ async function printWaybillForGroup(poId, btn) {
         const mailNoM = raw.match(/<mailNo>([^<]+)<\/mailNo>/i);
         const mailNo = mailNoM ? mailNoM[1] : '';
         if (!mailNo) {
+            await tagWaybill(poId, '[面单:异常:未返回运单号]');
             showToast('⚠️ 圆通未返回运单号: ' + raw.slice(0, 120), '#d97706');
             if (btn) { btn.textContent = orig; btn.disabled = false; }
             return;
@@ -1119,9 +1149,11 @@ async function printWaybillForGroup(poId, btn) {
             centerCode: cbM ? cbM[1] : '',
             createdAt: new Date().toLocaleString()
         });
+        await tagWaybill(poId, '');
         showToast('✅ 电子面单已生成: ' + mailNo, '#059669');
         if (btn) { btn.textContent = '🖨️ ' + mailNo; btn.disabled = false; }
     } catch(e) {
+        await tagWaybill(poId, '[面单:异常:' + String(e.message||'获取失败').slice(0,30) + ']');
         showToast('❌ 获取面单失败: ' + e.message, '#dc2626');
         if (btn) { btn.textContent = orig; btn.disabled = false; }
     }
