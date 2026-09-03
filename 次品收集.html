@@ -828,6 +828,7 @@ function loadHistory() {
             const r = g.record;
             const refundInfo = parseRefundTag(r.note);
             const is1688Single = (r.note||'').includes('[1688:');
+            const hasReal1688Single = /\[1688:(\d{10,})\]/.test(r.note||'');
             const returnInfo = parseReturnTag(r.note);
             const statusClass = r.status==='done'?'badge-done':'badge-error';
             const statusText = r.status==='done'?'完成':(is1688Single?'异常':'未映射');
@@ -847,7 +848,7 @@ function loadHistory() {
                 ${singleSupplierHtml}
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
                 <div class="record-actions">
-                    ${is1688Single?`<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>`:''}
+                    ${is1688Single && hasReal1688Single ? `<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : ''}
                     ${singleWaybillNo ? `<button onclick="${getPrintedMailNo(r.note) ? 'reprintWaybill' : 'printWaybillForGroup'}('${r.po_id}',this)" style="color:#fff;background:${getPrintedMailNo(r.note) ? '#059669' : '#0ea5e9'};border:1px solid ${getPrintedMailNo(r.note) ? '#059669' : '#0ea5e9'};border-radius:4px;">🖨️ 面单</button>` : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
                 </div>
@@ -874,6 +875,7 @@ function loadHistory() {
         });
         const skuSummary = Object.entries(skuMap).map(([k,v])=>formatSkuDisplay(k.trim(),v)).join(' <span style="color:#dc2626;font-weight:700;">|</span> ') || '';
         const latestTime = new Date(items[0].created_at).toLocaleString();
+        const hasReal1688 = items.some(r => /\[1688:(\d{10,})\]/.test(r.note||''));
         const groupRefund = items.map(r=>parseRefundTag(r.note)).find(r=>r);
         const groupReturn = items.map(r=>parseReturnTag(r.note)).find(r=>r);
         const groupIs1688 = items.some(r=>(r.note||'').includes('[1688:'));
@@ -913,7 +915,7 @@ function loadHistory() {
             html += `</div>`;
         }
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
-        const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : '';
+        const returnBtn = (is1688 && hasReal1688) ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : '';
         const non1688ReturnBtn = '';
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
