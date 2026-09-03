@@ -1750,7 +1750,16 @@ async function open1688Return(poId) {
             _po1688Map = await r.json();
         } catch(e) { _po1688Map = {}; }
     }
-    const orderId = _po1688Map[poId];
+    // 优先查映射表；没有再从 note 解析 1688 真订单号（10+ 位纯数字）
+    let orderId = _po1688Map[poId];
+    if (!orderId) {
+        const list = getRecords();
+        const rec = list.find(r => String(r.po_id) === String(poId));
+        if (rec) {
+            const m = (rec.note || '').match(/\[1688:(\d{10,})\]/);
+            if (m) orderId = m[1];
+        }
+    }
     if (orderId) {
         window.open('https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId, '_blank');
     } else {
