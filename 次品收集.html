@@ -848,7 +848,7 @@ function loadHistory() {
                 ${singleSupplierHtml}
                 <div class="record-time">${new Date(r.created_at).toLocaleString()}${noteDisplay?' · '+noteDisplay:''}</div>
                 <div class="record-actions">
-                    ${is1688Single && hasReal1688Single ? `<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : ''}
+                    ${is1688Single ? `<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;" title="${hasReal1688Single ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688后台</button>` : ''}
                     ${singleWaybillNo ? `<button onclick="${getPrintedMailNo(r.note) ? 'reprintWaybill' : 'printWaybillForGroup'}('${r.po_id}',this)" style="color:#fff;background:${getPrintedMailNo(r.note) ? '#059669' : '#0ea5e9'};border:1px solid ${getPrintedMailNo(r.note) ? '#059669' : '#0ea5e9'};border-radius:4px;">🖨️ 面单</button>` : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
                 </div>
@@ -915,7 +915,7 @@ function loadHistory() {
             html += `</div>`;
         }
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
-        const returnBtn = (is1688 && hasReal1688) ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;">🔗 1688后台</button>` : '';
+        const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;" title="${hasReal1688 ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688后台</button>` : '';
         const non1688ReturnBtn = '';
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
@@ -991,38 +991,56 @@ async function loadStyleMap() {
 function getSupplierForGroup(items) {
     // 打码/脱敏的供应商名（含*号）视为未匹配
     const validName = (v) => { const n = String(v||'').trim(); return (v && !n.includes('*') && n !== '市场') ? v : null; };
-    // Try extracting supplier from [1688:...供应商:xxx...] tag first
+    // 1) 提取 note 里的供应商（最高优先级）
+    let noteSupplier = null;
     for (const r of items) {
         const re = /供应商:([^\]]+?)(?=\s*次品:|\])/g;
         let m;
         while ((m = re.exec(r.note||'')) !== null) {
             const n = validName(m[1]);
-            if (n) return n;
+            if (n) { noteSupplier = n; break; }
         }
+        if (noteSupplier) break;
     }
-    if (!_styleSupplierMap) return null;
-    for (const r of items) {
-        const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
-        const m = note.match(/^([A-Za-z0-9\-]+)/);
-        if (!m) continue;
-        const raw = m[1];
-        // Try exact match first (case-insensitive)
-        for (const [k, v] of Object.entries(_styleSupplierMap)) {
-            if (k.toUpperCase() === raw.toUpperCase()) return validName(v);
-        }
-        // Progressive trim: try shorter prefixes
-        for (let len = raw.length - 1; len >= 3; len--) {
-            const prefix = raw.substring(0, len);
+    // 1a) 若 note 供应商在退货地址表里有记录，直接用（保持原行为）
+    if (noteSupplier && (!_returnAddrMap || getReturnAddress(noteSupplier))) return noteSupplier;
+    // 2) 否则从 return_style_map 按款号兜底（修复 note 供应商无地址的场景，如 812026 案例）
+    if (_styleSupplierMap && Object.keys(_styleSupplierMap).length) {
+        for (const r of items) {
+            const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
+            const m = note.match(/^([A-Za-z0-9\-]+)/);
+            if (!m) continue;
+            const raw = m[1];
+            const tryMatch = (k, v) => {
+                if (k.toUpperCase() !== raw.toUpperCase()) return null;
+                const sv = validName(v);
+                if (!sv) return null;
+                if (_returnAddrMap && !getReturnAddress(sv)) return null;
+                return sv;
+            };
+            // Exact match first
             for (const [k, v] of Object.entries(_styleSupplierMap)) {
-                if (k.toUpperCase() === prefix.toUpperCase()) return validName(v);
+                const r = tryMatch(k, v); if (r) return r;
+            }
+            // Progressive trim: shorter prefixes
+            for (let len = raw.length - 1; len >= 3; len--) {
+                const prefix = raw.substring(0, len);
+                for (const [k, v] of Object.entries(_styleSupplierMap)) {
+                    if (k.toUpperCase() === prefix.toUpperCase()) {
+                        const r = tryMatch(k, v); if (r) return r;
+                    }
+                }
+            }
+            // startsWith
+            for (const [k, v] of Object.entries(_styleSupplierMap)) {
+                if (raw.toUpperCase().startsWith(k.toUpperCase()) || k.toUpperCase().startsWith(raw.toUpperCase())) {
+                    const r = tryMatch(k, v); if (r) return r;
+                }
             }
         }
-        // Try startsWith match
-        for (const [k, v] of Object.entries(_styleSupplierMap)) {
-            if (raw.toUpperCase().startsWith(k.toUpperCase()) || k.toUpperCase().startsWith(raw.toUpperCase())) return validName(v);
-        }
     }
-    return null;
+    // 3) 最后兜底：返回 note 供应商（哪怕无地址，避免显示空）
+    return noteSupplier;
 }
 
 // ═══════════════ 圆通电子面单（打印面单）═══════════════
@@ -1765,7 +1783,8 @@ async function open1688Return(poId) {
     if (orderId) {
         window.open('https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId, '_blank');
     } else {
-        showToast('未找到该采购单的1688订单号', '#ef4444');
+        showToast(`⚠️ PO ${poId} 未找到1688订单号，已打开1688工作台请手动查找`, '#f59e0b');
+        window.open('https://air.1688.com/app/ctf-page/order-list/index.html', '_blank');
     }
 }
 
