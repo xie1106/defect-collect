@@ -165,6 +165,7 @@
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
                     <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">合并打印</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
+                    <button class="tab-btn" id="syncJstBtn" onclick="manualSyncJST()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">🔄 同步聚水潭</button>
                 </div>
         </div>
         </div><!-- end inner sticky -->
@@ -1527,6 +1528,68 @@ function refreshMatchTags(note) {
     if (wantDet && (detBad || (curDet && curDet!==wantDet))) n = setTag(/\[明细:[^\]]*\]/, '[明细:'+wantDet+']');
     return n;
 }
+// 手动触发聚水潭同步（通过 Supabase Edge Function jst-sync → 调 Cloudflare Worker）
+async function manualSyncJST() {
+    const btn = document.getElementById("syncJstBtn");
+    if (!btn) return;
+    const origText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "⏳ 同步中...";
+    btn.style.background = "#6b7280";
+    btn.style.borderColor = "#6b7280";
+    try {
+        const r = await fetch(SUPABASE_URL + "/functions/v1/jst-sync", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "apikey": SUPABASE_KEY, "Authorization": "Bearer " + SUPABASE_KEY },
+            body: JSON.stringify({ mode: "fire-worker" })
+        });
+        const data = await r.json().catch(()=>({}));
+        if (data && data.ok && data.worker_http === 200) {
+            btn.textContent = "✅ 已触发";
+            btn.style.background = "#059669";
+            btn.style.borderColor = "#059669";
+            showToast("✅ 同步已触发，" + ((data.worker_response && data.worker_response.note) || "Worker 立即返回，后台执行") + "\n约 30-60 秒后刷新页面", "#059669");
+            // 60 秒后自动 reload 数据
+            setTimeout(async () => {
+                showToast("🔄 正在刷新数据...", "#4A90D9");
+                await loadAllMaps();
+                btn.textContent = origText;
+                btn.style.background = "#0ea5e9";
+                btn.style.borderColor = "#0ea5e9";
+                btn.disabled = false;
+                loadHistory();
+            }, 30000);
+        } else {
+            // 失败：尝试解析被拒 IP
+            let errMsg = (data && data.worker_response) || (data && data.worker_error) || ("HTTP " + r.status);
+            const ipMatch = String(errMsg).match(/(\d+\.\d+\.\d+\.\d+)/);
+            if (ipMatch) errMsg += "\n被拒 IP: " + ipMatch[1] + "（请加到聚水潭 IP 白名单）";
+            btn.textContent = "❌ 失败";
+            btn.style.background = "#dc2626";
+            btn.style.borderColor = "#dc2626";
+            showToast("❌ 同步失败: " + errMsg, "#dc2626");
+            setTimeout(() => {
+                btn.textContent = origText;
+                btn.style.background = "#0ea5e9";
+                btn.style.borderColor = "#0ea5e9";
+                btn.disabled = false;
+            }, 5000);
+        }
+    } catch(e) {
+        btn.textContent = "❌ 错误";
+        btn.style.background = "#dc2626";
+        btn.style.borderColor = "#dc2626";
+        showToast("❌ 网络错误: " + e.message, "#dc2626");
+        setTimeout(() => {
+            btn.textContent = origText;
+            btn.style.background = "#0ea5e9";
+            btn.style.borderColor = "#0ea5e9";
+            btn.disabled = false;
+        }, 5000);
+    }
+}
+
+
 async function retryAllFailed() {
     if (!confirm('重新匹配所有"未匹配"和"退货失败/异常"的记录？\n将按最新映射重新评估（不创建任何退货/退款单）。')) return;
     const list = getRecords();
