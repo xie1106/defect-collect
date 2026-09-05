@@ -165,6 +165,7 @@
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
                     <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">合并打印</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
+                        <a class="tab-btn" href="https://xie1106.github.io/warehouse-schedule/defect-refund-sop.html" target="_blank" style="color:#fff;background:#7c3aed;border-color:#7c3aed;text-decoration:none;">📖 SOP</a>
                 </div>
         </div>
         </div><!-- end inner sticky -->
@@ -208,14 +209,13 @@ const APP_CONFIG = {
     photoBucket: 'defect-photos',     // 次品图片存储桶名
     fetchLimit: 500,                  // 列表一次最多加载的记录数
 
-    // --- 聚水潭对接（后端 return-worker 使用；此处仅留档）---
+    // --- 聚水潭对接（按 SOP 不再创建退货单；退货单相关的旧代码已清理）---
     returnShopId: '21571486',         // 外贸采购退货店铺 shop_id
 
     // --- 面单打印（不再通过聚水潭API创建退货单）---
     // 退货流程改为：直接点【🖨️ 面单】打印圆通电子面单寄回；
     // 1688 采购单额外点【🔗 1688后台】跳转 1688 订单页人工申请退款/填快递单号。
     // 以下地址保留（历史记录/备用）：
-    returnWorkerUrl: 'https://defect-return-worker.458914253.workers.dev',
 
     // --- 圆通电子面单（打印面单）---
     ytoProxyUrl: 'https://elyfxyrdbuykyklfjfdr.supabase.co/functions/v1/yto-proxy',   // 圆通面单代理（Supabase，国内直连）
@@ -227,7 +227,6 @@ const APP_CONFIG = {
 const SUPABASE_URL = APP_CONFIG.supabaseUrl;
 const SUPABASE_KEY = APP_CONFIG.supabaseKey;
 const PHOTO_BUCKET = APP_CONFIG.photoBucket;
-
 
 // ═══════════════ 全局状态 ═══════════════
 let photos = [];
@@ -712,7 +711,6 @@ function parseReturnTag(note) {
     return { status: m[1], orderId: m[2] || '' };
 }
 
-
 // 退货状态配色（已下单/待处理/失败/异常/等待卖家收货/等待买家退货）
 function getReturnBadge(returnInfo) {
     if (!returnInfo) return '';
@@ -888,7 +886,6 @@ function loadHistory() {
         const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
         const groupBadgeHtml = groupWaybillAbnormal ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>` : (groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge));
         const printedNo = getWaybillPrinted(items);
-
 
         let html = `<div class="record">
             <div class="record-header">
@@ -1562,177 +1559,8 @@ async function retryAllFailed() {
     setTimeout(() => fetchRecords(), 1500);
 }
 
-async function retryReturn(poId, btn) {
-    if (!confirm(`重试采购单 ${poId} 退货？`)) return;
-    btn.textContent = '⏳ 处理中...';
-    btn.disabled = true;
-    const h = {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'};
-    // Clear failure tags and set to 待处理
-    const r1 = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}&note=like.*退货:失败*`, { headers: h });
-    const r2 = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?po_id=eq.${poId}&note=like.*退货:异常*`, { headers: h });
-    const [a1, a2] = await Promise.all([r1.json(), r2.json()]);
-    const recs = [...new Map([...a1, ...a2].map(r=>[r.id,r])).values()];
-    for (const rec of recs) {
-        const note = (rec.note||'').replace(/\s*\[退货:失败[^\]]*\]/g, '').replace(/\s*\[退货:异常[^\]]*\]/g, '') + ' [退货:待处理]';
-        await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:h, body:JSON.stringify({note}) });
-    }
-    showToast(`✅ 已重新提交(${recs.length}条)\n约5分钟内自动处理`, '#059669');
-    setTimeout(() => loadHistory(), 1500);
-}
-
-async function createReturnOrder(poId, btn) {
-    if (!confirm(`确定为采购单 ${poId} 创建退货订单？`)) return;
-    const origText = btn.textContent;
-    btn.textContent = '⏳ 提交中...';
-    btn.disabled = true;
-    try {
-        // 规则：只有点"一键退货"才创建聚水潭退货单。配置了 returnWorkerUrl 则直接调用创建；
-        // 未配置则仅更新状态（[退货:待处理]），后台不会自动创建。
-        const workerUrl = (APP_CONFIG.returnWorkerUrl||'').replace(/\/+$/,'');
-        if (workerUrl) {
-            const resp = await fetch(workerUrl + '/create-return', {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ po_id: poId })
-            });
-            const data = await resp.json().catch(()=>({}));
-            if (data && data.success) {
-                showToast(`✅ 退货订单已创建 ${data.order_id||''}\n${data.detail||''}`, '#059669');
-                btn.textContent = '✅ 已创建'; btn.style.background='#059669'; btn.style.borderColor='#059669'; btn.onclick=null;
-                setTimeout(()=>loadHistory(), 1200);
-                return;
-            }
-            showToast(`❌ 创建失败: ${(data&&data.msg)||'未知错误'}`, '#dc2626');
-            btn.textContent = origText; btn.disabled = false;
-            return;
-        }
-        // 写一条退货请求到Supabase（仅状态标记，后台不自动创建）
-        const r = await fetch(SUPABASE_URL + '/rest/v1/defect_reports?po_id=eq.' + poId + '&status=eq.pending&note=not.like.*%5B退货:*', {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-        });
-        const records = await r.json();
-        if (!records.length) { showToast('❌ 无待处理记录', '#dc2626'); btn.textContent = origText; btn.disabled = false; return; }
-        // Tag all records with [退货:待处理]
-        for (const rec of records) {
-            const note = (rec.note || '') + ' [退货:待处理]';
-            await fetch(SUPABASE_URL + '/rest/v1/defect_reports?id=eq.' + rec.id, {
-                method: 'PATCH',
-                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' },
-                body: JSON.stringify({ note })
-            });
-        }
-        showToast(`✅ 已标记处理中(${records.length}条)\n未配置退货服务，未自动创建订单`, '#d97706');
-        btn.textContent = '⏳ 处理中';
-        btn.style.background = '#6b7280';
-        btn.style.borderColor = '#6b7280';
-        btn.onclick = null;
-    } catch(e) {
-        showToast('❌ 网络错误: ' + e.message, '#dc2626');
-        btn.textContent = origText;
-        btn.disabled = false;
-    }
-}
-
-async function batchReturnBySupplier() {
-    const list = getRecords();
-    // Filter non-1688 pending records without return tag
-    const pending = list.filter(r => r.status === 'pending' && !(r.note||'').includes('[1688:') && !(r.note||'').includes('[退货:已下单') && !(r.note||'').includes('[退货:待处理') && !(r.note||'').includes('[退货:失败'));
-    if (!pending.length) { showToast('无待处理的非1688记录', '#6b7280'); return; }
-
-    // Group by supplier
-    const supplierGroups = {};
-    const unmatched = [];
-    for (const r of pending) {
-        const supplier = getSupplierForGroup([r]);
-        if (supplier) {
-            if (!supplierGroups[supplier]) supplierGroups[supplier] = [];
-            supplierGroups[supplier].push(r);
-        } else {
-            unmatched.push(r);
-        }
-    }
-
-    // Build confirmation UI
-    const suppliers = Object.keys(supplierGroups).sort();
-    if (!suppliers.length) { showToast('所有待处理记录都无法匹配供应商', '#dc2626'); return; }
-
-    let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
-        <h3 style="margin:0 0 12px;font-size:16px;">一键退货</h3>
-        <p style="font-size:12px;color:#666;margin-bottom:12px;">勾选要退货的供应商，同一供应商的所有待处理记录将合并为一个退货订单</p>`;
-    
-    suppliers.forEach((sup, i) => {
-        const items = supplierGroups[sup];
-        const poIds = [...new Set(items.map(r => r.po_id))];
-        const skuMap = {};
-        items.forEach(r => {
-            const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
-            const m = note.match(/^([^|×x]+)[×x](\d+)/);
-            if (m) { skuMap[m[1]] = (skuMap[m[1]]||0) + parseInt(m[2]); }
-            else { const sm = note.match(/^([A-Za-z0-9\-]+)/); if(sm) skuMap[sm[1]] = (skuMap[sm[1]]||0) + 1; }
-        });
-        const skuText = Object.entries(skuMap).map(([k,v])=>`${k}×${v}`).join(', ');
-        html += `<label style="display:flex;align-items:flex-start;gap:8px;padding:10px;margin:4px 0;background:#f9fafb;border-radius:8px;border:1px solid #e5e7eb;cursor:pointer;">
-            <input type="checkbox" checked data-supplier="${sup}" style="margin-top:3px;width:18px;height:18px;">
-            <div style="flex:1;">
-                <div style="font-weight:600;font-size:13px;color:#8b5cf6;">${sup}</div>
-                <div style="font-size:11px;color:#666;margin-top:2px;">采购单: ${poIds.join(', ')} (${items.length}条)</div>
-                <div style="font-size:11px;color:#999;margin-top:1px;">${skuText}</div>
-            </div>
-        </label>`;
-    });
-
-    if (unmatched.length) {
-        const unmatchedPos = [...new Set(unmatched.map(r=>r.po_id))];
-        html += `<div style="padding:8px;margin-top:8px;background:#fef2f2;border-radius:6px;font-size:11px;color:#dc2626;">
-            ⚠️ ${unmatched.length}条记录无法匹配供应商(采购单: ${unmatchedPos.slice(0,5).join(', ')}${unmatchedPos.length>5?'...':''})
-        </div>`;
-    }
-
-    html += `<div style="display:flex;gap:8px;margin-top:16px;">
-        <button onclick="confirmBatchReturn()" style="flex:1;padding:10px;background:#8b5cf6;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">确认退货</button>
-        <button onclick="document.getElementById('batchReturnOverlay').style.display='none'" style="padding:10px 20px;background:#fff;border:1px solid #d1d5db;border-radius:8px;font-size:14px;cursor:pointer;">取消</button>
-    </div></div>`;
-
-    let overlay = document.getElementById('batchReturnOverlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = 'batchReturnOverlay';
-        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;';
-        document.body.appendChild(overlay);
-    }
-    overlay.innerHTML = `<div style="background:white;border-radius:14px;max-width:400px;width:100%;">${html}</div>`;
-    overlay.style.display = 'flex';
-    overlay._supplierGroups = supplierGroups;
-}
-
-async function confirmBatchReturn() {
-    const overlay = document.getElementById('batchReturnOverlay');
-    const checkboxes = overlay.querySelectorAll('input[type=checkbox]:checked');
-    const selectedSuppliers = [...checkboxes].map(cb => cb.dataset.supplier);
-    if (!selectedSuppliers.length) { showToast('请至少选择一个供应商', '#d97706'); return; }
-
-    const supplierGroups = overlay._supplierGroups;
-    const h = {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'};
-    let totalTagged = 0;
-
-    for (const supplier of selectedSuppliers) {
-        const items = supplierGroups[supplier];
-        for (const rec of items) {
-            const note = (rec.note || '') + ' [退货:待处理]';
-            await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
-                method: 'PATCH', headers: h, body: JSON.stringify({note})
-            });
-            totalTagged++;
-        }
-    }
-
-    overlay.style.display = 'none';
-    showToast(`✅ 已提交${selectedSuppliers.length}个供应商共${totalTagged}条退货请求\n仅标记处理中，未自动创建订单`, '#059669');
-    setTimeout(() => fetchRecords(), 2000);
-}
-
 async function cancelReturnOrder(poId, orderId, btn) {
-    const ok = await showConfirm(`确定取消采购单 ${poId} 的退货订单？\n\n⚠️ 取消后聚水潭退货单将作废，需要重新点"退货"创建。1688退款流程不受影响。`);
+    const ok = await showConfirm(`清理采购单 ${poId} 的旧[退货:已下单]标签？\n\n注：本系统（SOP）不再创建聚水潭退货单，此操作仅清理历史标签，让记录恢复为待处理。`);
     if (!ok) return;
     btn.textContent = '取消中...';
     btn.disabled = true;
@@ -1748,17 +1576,6 @@ async function cancelReturnOrder(poId, orderId, btn) {
             body: JSON.stringify({note, status: 'pending'})
         });
     }
-    // Mark in Supabase that this order should be cancelled (for cron to update JST remark)
-    // Store cancel request for the cron script to process
-    if (orderId) {
-        try {
-            await fetch(`${SUPABASE_URL}/rest/v1/defect_reports`, {
-                method: 'POST', headers: {...h, 'Prefer': 'return=minimal'},
-                body: JSON.stringify({po_id: poId, status: 'cancel_request', note: `[取消退货:${orderId}]`, photos: []})
-            });
-        } catch(e) {}
-    }
-    showToast(`✅ 已取消，${recs.length}条记录恢复为待处理`, '#059669');
     setTimeout(() => fetchRecords(), 1500);
 }
 
@@ -1786,273 +1603,6 @@ async function open1688Return(poId) {
         showToast(`⚠️ PO ${poId} 未找到1688订单号，已打开1688工作台请手动查找`, '#f59e0b');
         window.open('https://air.1688.com/app/ctf-page/order-list/index.html', '_blank');
     }
-}
-
-async function open1688ReturnAndCreateOrder(poId, btn) {
-    // 1. Open 1688 return page
-    await open1688Return(poId);
-    // 2. 创建聚水潭退货单（1688也要建，用于电子面单/物流），调用退货 worker
-    const workerUrl = (APP_CONFIG.returnWorkerUrl||'').replace(/\/+$/,'');
-    if (workerUrl) {
-        try {
-            const resp = await fetch(workerUrl + '/create-return', {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({ po_id: poId })
-            });
-            const data = await resp.json().catch(()=>({}));
-            if (data && data.success) {
-                showToast(`✅ 已跳转1688退货\n聚水潭退货单已创建 ${data.order_id||''}`, '#059669');
-                btn.textContent = '✅ 已下单'; btn.onclick = null;
-                setTimeout(()=>loadHistory(), 1500);
-                return;
-            }
-            showToast(`❌ 聚水潭建单失败: ${(data&&data.msg)||'未知错误'}`, '#dc2626');
-            btn.textContent = '重试'; btn.disabled = false;
-            return;
-        } catch(e) {
-            showToast('❌ 网络错误: ' + e.message, '#dc2626');
-            btn.disabled = false;
-            return;
-        }
-    }
-    // 未配置 worker：仅标记处理中
-    const list = getRecords();
-    const items = list.filter(r => r.po_id == poId && r.status === 'pending');
-    if (!items.length) { showToast('无待处理记录', '#6b7280'); return; }
-    const h = {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'};
-    for (const rec of items) {
-        const note = (rec.note || '') + ' [退货:待处理]';
-        await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
-            method: 'PATCH', headers: h, body: JSON.stringify({ note })
-        });
-    }
-    showToast(`✅ 已跳转1688退货 + 已标记处理中(${items.length}条)\n未配置退货服务，未自动创建订单`, '#d97706');
-    btn.textContent = '⏳ 处理中';
-    btn.disabled = true;
-    setTimeout(() => fetchRecords(), 3000);
-}
-
-async function batchReturnAll() {
-    const list = getRecords();
-    // All pending records that haven't created JST return order yet
-    const pending = list.filter(r => r.status === 'pending' && !parseReturnTag(r.note));
-    if (!pending.length) { showToast('无待处理记录', '#6b7280'); return; }
-
-    // Group by supplier
-    const supplierGroups = {};
-    const unmatched = [];
-    for (const r of pending) {
-        const supplier = getSupplierForGroup([r]);
-        if (supplier) {
-            if (!supplierGroups[supplier]) supplierGroups[supplier] = { items: [], has1688: false, hasNon1688: false };
-            supplierGroups[supplier].items.push(r);
-            if ((r.note||'').includes('[1688:')) supplierGroups[supplier].has1688 = true;
-            else supplierGroups[supplier].hasNon1688 = true;
-        } else {
-            unmatched.push(r);
-        }
-    }
-
-    const suppliers = Object.keys(supplierGroups).sort();
-    if (!suppliers.length) { showToast('所有记录都无法匹配供应商', '#dc2626'); return; }
-
-    let html = `<div style="padding:16px;flex:1;overflow-y:auto;">
-        <h3 style="margin:0 0 8px;font-size:16px;">一键退货</h3>`;
-
-    suppliers.forEach(sup => {
-        const group = supplierGroups[sup];
-        const items = group.items;
-        const poIds = [...new Set(items.map(r => r.po_id))];
-        const typeTag = (group.has1688 && group.hasNon1688) ? '🔵🟡' : group.has1688 ? '🔵' : '🟡';
-        html += `<label style="display:flex;align-items:center;gap:8px;padding:8px 10px;margin:3px 0;background:#f0f7ff;border-radius:8px;border:1px solid #bfdbfe;cursor:pointer;">
-            <input type="checkbox" checked data-supplier="${sup}" style="width:18px;height:18px;">
-            <div style="flex:1;">
-                <div style="font-weight:600;font-size:13px;color:#1d4ed8;">${typeTag} ${sup}</div>
-                <div style="font-size:11px;color:#999;">${poIds.length}单 ${items.length}条</div>
-            </div>
-        </label>`;
-    });
-
-    if (unmatched.length) {
-        const unmatchedPos = [...new Set(unmatched.map(r=>r.po_id))];
-        html += `<div style="padding:8px;margin-top:8px;background:#fef2f2;border-radius:6px;font-size:11px;color:#dc2626;">
-            ⚠️ ${unmatched.length}条(${unmatchedPos.length}个采购单)无法匹配供应商</div>`;
-    }
-
-    html += `</div><div style="padding:12px 16px;border-top:1px solid #e5e7eb;display:flex;gap:8px;">
-        <button onclick="confirmBatchReturnAll()" style="flex:1;padding:10px;background:#059669;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">确认退货</button>
-        <button onclick="document.getElementById('batchReturnOverlay').style.display='none'" style="padding:10px 20px;background:#fff;border:1px solid #d1d5db;border-radius:8px;font-size:14px;cursor:pointer;">取消</button>
-    </div>`;
-
-    let overlay = document.getElementById('batchReturnOverlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = 'batchReturnOverlay';
-        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;';
-        document.body.appendChild(overlay);
-    }
-    overlay.innerHTML = `<div style="background:white;border-radius:14px;max-width:400px;width:100%;max-height:80vh;display:flex;flex-direction:column;">${html}</div>`;
-    overlay.style.display = 'flex';
-    overlay._supplierGroups = supplierGroups;
-}
-
-async function confirmBatchReturnAll() {
-    const overlay = document.getElementById('batchReturnOverlay');
-    const checkboxes = overlay.querySelectorAll('input[type=checkbox]:checked');
-    const selectedSuppliers = [...checkboxes].map(cb => cb.dataset.supplier);
-    if (!selectedSuppliers.length) { showToast('请至少选择一个供应商', '#d97706'); return; }
-
-    const supplierGroups = overlay._supplierGroups;
-    const h = {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'};
-
-    // Load 1688 map for opening links
-    if (!_po1688Map) {
-        try { const r = await fetch('po_1688_map.json?t='+Date.now()); _po1688Map = await r.json(); } catch(e) { _po1688Map = {}; }
-    }
-
-    let totalTagged = 0;
-    const poIdsToOpen = new Set();
-
-    for (const supplier of selectedSuppliers) {
-        const group = supplierGroups[supplier];
-        for (const rec of group.items) {
-            const note = (rec.note || '') + ' [退货:待处理]';
-            await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
-                method: 'PATCH', headers: h, body: JSON.stringify({note})
-            });
-            totalTagged++;
-            // Only open 1688 links for 1688 records
-            if ((rec.note||'').includes('[1688:')) {
-                poIdsToOpen.add(String(rec.po_id));
-            }
-        }
-    }
-
-    // Open 1688 links
-    for (const poId of poIdsToOpen) {
-        const orderId = _po1688Map[poId];
-        if (orderId) {
-            window.open('https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId, '_blank');
-        }
-    }
-
-    overlay.style.display = 'none';
-    const msg1688 = poIdsToOpen.size ? `\n已打开${poIdsToOpen.size}个1688退货页面` : '';
-    showToast(`✅ 已提交${selectedSuppliers.length}个供应商共${totalTagged}条${msg1688}\n仅标记处理中，未自动创建订单`, '#059669');
-    setTimeout(() => fetchRecords(), 3000);
-}
-
-async function batch1688Return() {
-    const list = getRecords();
-    // Filter: 1688, pending, no refund tag, no return tag
-    const pending = list.filter(r => r.status === 'pending' && (r.note||'').includes('[1688:') && !parseRefundTag(r.note) && !parseReturnTag(r.note));
-    if (!pending.length) { showToast('无未申请的1688记录', '#6b7280'); return; }
-
-    // Group by supplier
-    const supplierGroups = {};
-    const unmatched = [];
-    for (const r of pending) {
-        const supplier = getSupplierForGroup([r]);
-        if (supplier) {
-            if (!supplierGroups[supplier]) supplierGroups[supplier] = [];
-            supplierGroups[supplier].push(r);
-        } else {
-            unmatched.push(r);
-        }
-    }
-
-    const suppliers = Object.keys(supplierGroups).sort();
-    if (!suppliers.length) { showToast('所有记录都无法匹配供应商', '#dc2626'); return; }
-
-    let html = `<div style="padding:16px;max-height:70vh;overflow-y:auto;">
-        <h3 style="margin:0 0 12px;font-size:16px;">1688 一键退货</h3>
-        <p style="font-size:12px;color:#666;margin-bottom:12px;">同一供应商合并为一个聚水潭退货订单，同时跳转1688后台申请退款</p>`;
-
-    suppliers.forEach(sup => {
-        const items = supplierGroups[sup];
-        const poIds = [...new Set(items.map(r => r.po_id))];
-        const skuMap = {};
-        items.forEach(r => {
-            const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
-            const m = note.match(/^([^|×x]+)[×x](\d+)/);
-            if (m) { skuMap[m[1]] = (skuMap[m[1]]||0) + parseInt(m[2]); }
-            else { const sm = note.match(/^([A-Za-z0-9\-]+)/); if(sm) skuMap[sm[1]] = (skuMap[sm[1]]||0) + 1; }
-        });
-        const skuText = Object.entries(skuMap).map(([k,v])=>`${k}×${v}`).join(', ');
-        html += `<label style="display:flex;align-items:flex-start;gap:8px;padding:10px;margin:4px 0;background:#f0f7ff;border-radius:8px;border:1px solid #bfdbfe;cursor:pointer;">
-            <input type="checkbox" checked data-supplier="${sup}" style="margin-top:3px;width:18px;height:18px;">
-            <div style="flex:1;">
-                <div style="font-weight:600;font-size:13px;color:#1d4ed8;">${sup}</div>
-                <div style="font-size:11px;color:#666;margin-top:2px;">采购单: ${poIds.join(', ')} (${items.length}条)</div>
-                <div style="font-size:11px;color:#999;margin-top:1px;">${skuText}</div>
-            </div>
-        </label>`;
-    });
-
-    if (unmatched.length) {
-        html += `<div style="padding:8px;margin-top:8px;background:#fef2f2;border-radius:6px;font-size:11px;color:#dc2626;">
-            ⚠️ ${unmatched.length}条无法匹配供应商</div>`;
-    }
-
-    html += `<div style="display:flex;gap:8px;margin-top:16px;">
-        <button onclick="confirmBatch1688Return()" style="flex:1;padding:10px;background:#1677ff;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;">确认退货</button>
-        <button onclick="document.getElementById('batchReturnOverlay').style.display='none'" style="padding:10px 20px;background:#fff;border:1px solid #d1d5db;border-radius:8px;font-size:14px;cursor:pointer;">取消</button>
-    </div></div>`;
-
-    let overlay = document.getElementById('batchReturnOverlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = 'batchReturnOverlay';
-        overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;';
-        document.body.appendChild(overlay);
-    }
-    overlay.innerHTML = `<div style="background:white;border-radius:14px;max-width:400px;width:100%;">${html}</div>`;
-    overlay.style.display = 'flex';
-    overlay._supplierGroups = supplierGroups;
-    overlay._is1688 = true;
-}
-
-async function confirmBatch1688Return() {
-    const overlay = document.getElementById('batchReturnOverlay');
-    const checkboxes = overlay.querySelectorAll('input[type=checkbox]:checked');
-    const selectedSuppliers = [...checkboxes].map(cb => cb.dataset.supplier);
-    if (!selectedSuppliers.length) { showToast('请至少选择一个供应商', '#d97706'); return; }
-
-    const supplierGroups = overlay._supplierGroups;
-    const h = {'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'};
-
-    // Load 1688 map for opening links
-    if (!_po1688Map) {
-        try { const r = await fetch('po_1688_map.json?t='+Date.now()); _po1688Map = await r.json(); } catch(e) { _po1688Map = {}; }
-    }
-
-    let totalTagged = 0;
-    const poIdsToOpen = new Set();
-
-    for (const supplier of selectedSuppliers) {
-        const items = supplierGroups[supplier];
-        for (const rec of items) {
-            const note = (rec.note || '') + ' [退货:待处理]';
-            await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
-                method: 'PATCH', headers: h, body: JSON.stringify({note})
-            });
-            totalTagged++;
-            poIdsToOpen.add(String(rec.po_id));
-        }
-    }
-
-    // Open 1688 links for each unique PO
-    for (const poId of poIdsToOpen) {
-        const orderId = _po1688Map[poId];
-        if (orderId) {
-            window.open('https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId, '_blank');
-        }
-    }
-
-    overlay.style.display = 'none';
-    showToast(`✅ 已提交${selectedSuppliers.length}个供应商共${totalTagged}条\n已打开${poIdsToOpen.size}个1688退货页面\n约2分钟内自动创建聚水潭订单`, '#059669');
-    setTimeout(() => fetchRecords(), 3000);
 }
 
 async function markDoneGroup(poId) {
