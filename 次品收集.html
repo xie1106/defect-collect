@@ -1660,15 +1660,23 @@ async function open1688Return(poId) {
             if (m) orderId = m[1];
         }
     }
-    // 1688 订单号格式校验：应该以 33 开头 19 位数字
+    // 检查订单号是否有效（19 位以 33 开头）
     const isValid1688Id = orderId && /^33\d{17}$/.test(orderId);
-    if (orderId && !isValid1688Id) {
-        showToast(`${poId} note 里 1688 订单号格式异常（${orderId}），已打开1688工作台`, '#f59e0b');
+    let url;
+    let toastMsg;
+    if (!orderId) {
+        // note 里没有 1688 订单号 — 可能本身就是外贸外采（无 1688 订单）
+        toastMsg = `${poId} 无 1688 订单号（可能是外贸外采）`;
+        url = 'https://air.1688.com/';  // 1688 主页（无需登录）
+    } else if (!isValid1688Id) {
+        // note 里有 [1688:xxx] 但格式异常（不是 19 位以 33 开头）
+        toastMsg = `${poId} 1688 订单号格式异常（${orderId}），打开1688主页`;
+        url = 'https://air.1688.com/';
+    } else {
+        // 真实有效订单号
+        url = 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId;
     }
-    const url = isValid1688Id
-        ? 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId
-        : 'https://air.1688.com/app/ctf-page/order-list/index.html';
-    if (!orderId) showToast(`${poId} 未找到1688订单号，已打开1688工作台请手动查找`, '#f59e0b');
+    if (toastMsg) showToast(toastMsg, '#f59e0b');
     // 创建临时 <a> 标签模拟点击，避开弹窗拦截
     const a = document.createElement('a');
     a.href = url;
