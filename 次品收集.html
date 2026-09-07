@@ -1656,16 +1656,23 @@ async function open1688Return(poId) {
         const list = getRecords();
         const rec = list.find(r => String(r.po_id) === String(poId));
         if (rec) {
-            const m = (rec.note || '').match(/\[1688:(\d{10,})\]/);
+            const m = (rec.note || '').match(/\\[1688:(\\d{10,})\\]/);
             if (m) orderId = m[1];
         }
     }
-    if (orderId) {
-        window.open('https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId, '_blank');
-    } else {
-        showToast(`⚠️ PO ${poId} 未找到1688订单号，已打开1688工作台请手动查找`, '#f59e0b');
-        window.open('https://air.1688.com/app/ctf-page/order-list/index.html', '_blank');
-    }
+    const url = orderId
+        ? 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId
+        : 'https://air.1688.com/app/ctf-page/order-list/index.html';
+    if (!orderId) showToast(`${poId} 未找到1688订单号，已打开1688工作台请手动查找`, '#f59e0b');
+    // 创建临时 <a> 标签模拟点击，避开弹窗拦截
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => a.remove(), 100);
 }
 
 async function markDoneGroup(poId) {
