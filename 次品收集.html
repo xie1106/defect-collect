@@ -1665,9 +1665,22 @@ async function open1688Return(poId) {
     let url;
     let toastMsg;
     if (!orderId) {
-        // note 里没有 1688 订单号 — 可能本身就是外贸外采（无 1688 订单）
-        toastMsg = `${poId} 无 1688 订单号（可能是外贸外采）`;
-        url = 'https://www.1688.com/';  // 1688 主页（无需登录）
+        const userInput = window.prompt('1) 聚水潭采购单管理 \\n\\n2) 找采购单 ${poId}\\n3) 复制【线上采购单号】列(19位以33开头) \\n4) 粘贴(取消=跳1688主页) \\n\\n1688 主订单号:');
+        if (userInput && /^33\d{17}$/.test(userInput.trim())) {
+            const newOrderId = userInput.trim();
+            const rec = getRecords().find(r => String(r.po_id) === String(poId));
+            if (rec && rec.id) {
+                const newNote = (rec.note || '') + ' [1688:' + newOrderId + ']';
+                fetch(SUPABASE_URL + '/rest/v1/defect_reports?id=eq.' + rec.id, {
+                    method:'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' },                    body: JSON.stringify({ note: newNote })
+                });
+            }
+            toastMsg = `${poId} 已跳到1688订单详情(订单号已保存)`;
+            url = 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + newOrderId;
+        } else {
+            toastMsg = `${poId} 无1688订单号,跳到1688主页`;
+            url = 'https://www.1688.com/';
+        }
     } else if (!isValid1688Id) {
         // note 里有 [1688:xxx] 但格式异常（不是 19 位以 33 开头）
         toastMsg = `${poId} 1688 订单号格式异常（${orderId}），打开1688主页`;
