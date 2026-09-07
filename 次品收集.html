@@ -1667,11 +1667,11 @@ async function open1688Return(poId) {
     if (!orderId) {
         // note 里没有 1688 订单号 — 可能本身就是外贸外采（无 1688 订单）
         toastMsg = `${poId} 无 1688 订单号（可能是外贸外采）`;
-        url = 'https://air.1688.com/';  // 1688 主页（无需登录）
+        url = 'https://www.1688.com/';  // 1688 主页（无需登录）
     } else if (!isValid1688Id) {
         // note 里有 [1688:xxx] 但格式异常（不是 19 位以 33 开头）
         toastMsg = `${poId} 1688 订单号格式异常（${orderId}），打开1688主页`;
-        url = 'https://air.1688.com/';
+        url = 'https://www.1688.com/';
     } else {
         // 真实有效订单号
         url = 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId;
