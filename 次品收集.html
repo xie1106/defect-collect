@@ -1660,7 +1660,12 @@ async function open1688Return(poId) {
             if (m) orderId = m[1];
         }
     }
-    const url = orderId
+    // 1688 订单号格式校验：应该以 33 开头 19 位数字
+    const isValid1688Id = orderId && /^33\d{17}$/.test(orderId);
+    if (orderId && !isValid1688Id) {
+        showToast(`${poId} note 里 1688 订单号格式异常（${orderId}），已打开1688工作台`, '#f59e0b');
+    }
+    const url = isValid1688Id
         ? 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId
         : 'https://air.1688.com/app/ctf-page/order-list/index.html';
     if (!orderId) showToast(`${poId} 未找到1688订单号，已打开1688工作台请手动查找`, '#f59e0b');
