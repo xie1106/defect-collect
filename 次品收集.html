@@ -1656,7 +1656,7 @@ async function open1688Return(poId) {
         const list = getRecords();
         const rec = list.find(r => String(r.po_id) === String(poId));
         if (rec) {
-            const m = (rec.note || '').match(/\\[1688:(\\d{10,})\\]/);
+            const m = (rec.note || '').match(/[1688:(\d{10,})]/);
             if (m) orderId = m[1];
         }
     }
@@ -1665,7 +1665,13 @@ async function open1688Return(poId) {
     let url;
     let toastMsg;
     if (!orderId) {
-        const userInput = window.prompt('1) 聚水潭采购单管理 \\n\\n2) 找采购单 ${poId}\\n3) 复制【线上采购单号】列(19位以33开头) \\n4) 粘贴(取消=跳1688主页) \\n\\n1688 主订单号:');
+        const userInput = window.prompt(`1) 打开聚水潭 - 采购单管理
+
+2) 找采购单 ${poId}
+3) 复制【线上采购单号】列(19位以33开头)
+4) 粘贴(取消=跳1688主页)
+
+1688 主订单号:`);
         if (userInput && /^33\d{17}$/.test(userInput.trim())) {
             const newOrderId = userInput.trim();
             const rec = getRecords().find(r => String(r.po_id) === String(poId));
