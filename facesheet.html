@@ -39,8 +39,11 @@
 <!-- ===== 横向条码 ===== -->
 <canvas id="barcodeH" class="abs" style="left:5.7mm; top:22.0mm; width:50.7mm; height:10.9mm;"></canvas>
 
-<!-- ===== 竖向条码（竖线右侧区域，从21mm到79mm） ===== -->
-<canvas id="barcodeV" class="abs" style="left:59.0mm; top:21.0mm; width:10.9mm; height:58.0mm;"></canvas>
+<!-- ===== 横条码下方运单号 ===== -->
+<div class="abs dtxt" id="el_mailno_barcode" style="left:5.7mm; top:33.0mm; font-size:8pt; font-family:Arial; width:50.7mm; text-align:center;"></div>
+
+<!-- ===== 竖向条码（竖线右侧区域，缩短避免截断） ===== -->
+<canvas id="barcodeV" class="abs" style="left:59.0mm; top:21.0mm; width:10.9mm; height:48.0mm;"></canvas>
 
 <!-- ===== 运单号（顶部区域 0-12mm） ===== -->
 <div class="abs dtxt" id="el_mailno_top" style="left:1.3mm; top:5.4mm; font-size:8pt; font-family:Arial;"></div>
@@ -60,8 +63,8 @@
 <div class="abs wtxt" id="el_raddr" style="left:9.6mm; top:54.0mm; font-size:10pt; font-weight:normal; max-width:47mm; max-height:14mm; line-height:1.3; overflow:hidden;"></div>
 
 <!-- ===== 寄件人区域（69-79mm） ===== -->
-<div class="abs dtxt" id="el_sname" style="left:9.6mm; top:70.0mm; font-size:9pt; font-weight:normal; max-width:47mm;"></div>
-<div class="abs wtxt" id="el_saddr" style="left:9.6mm; top:73.5mm; font-size:9pt; font-weight:normal; max-width:47mm; max-height:5mm; line-height:1.2; overflow:hidden;"></div>
+<div class="abs dtxt" id="el_sname" style="left:9.6mm; top:70.0mm; font-size:7.5pt; font-weight:normal; max-width:47mm;"></div>
+<div class="abs wtxt" id="el_saddr" style="left:9.6mm; top:73.0mm; font-size:7.5pt; font-weight:normal; max-width:47mm; max-height:6mm; line-height:1.2; overflow:hidden;"></div>
 
 <!-- ===== 商品信息区域（79mm以下） ===== -->
 <div class="abs dtxt" id="el_pono" style="left:0.8mm; top:80.0mm; font-size:8pt; font-weight:bold;"></div>
@@ -144,13 +147,17 @@ function loadFacesheetData(d) {
   setText('el_time', timeStr);
   setText('el_pageno', '第1/1个');
 
-  // 大头笔（次品收集推送用 dest/landmark/seg）
-  var printKey = d.dest || d.printKey || d.landmark || d.shortAddress || '';
-  setText('el_printKey', printKey);
+  // 大头笔 = 三段码（seg/shortAddr），不是公司名
+  var seg = d.seg || d.shortAddress || d.printKey || '';
+  setText('el_printKey', seg);
 
-  // 集包地
-  setText('el_dest2', d.dest2 || '');
-  setText('el_pkgName', d.packageCenterName || d.landmark || '');
+  // 横条码下方运单号
+  setText('el_mailno_barcode', mailNo);
+
+  // 集包地（"末"字 + 公司名）
+  setText('el_dest2', d.dest2 || '末');
+  var pkgName = d.landmark || d.dest || d.packageCenterName || '';
+  setText('el_pkgName', pkgName);
 
   // 收件人（退货场景：收件人=供应商）
   var recv = d.receiver || {};
@@ -199,7 +206,7 @@ function loadFacesheetData(d) {
   // 条码
   setupCanvas("barcodeH", 50.70, 10.90);
   drawH(document.getElementById("barcodeH"), mailNo);
-  setupCanvas("barcodeV", 10.90, 58.00);
+  setupCanvas("barcodeV", 10.90, 48.00);
   drawV(document.getElementById("barcodeV"), mailNo);
 }
 
