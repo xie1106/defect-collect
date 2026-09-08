@@ -203,8 +203,8 @@
 // ════════════════════════════════════════════════════════════════
 const APP_CONFIG = {
     // --- Supabase（数据库 + 图片存储）---
-    supabaseUrl: 'https://tlnlzbnwxkorquhpwmca.supabase.co',
-    supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsbmx6Ym53eGtvcnF1aHB3bWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4MzU2MjksImV4cCI6MjEwNDQxMTYyOX0.jmekmRo7FCwuRPS9qhy34U1LCKmNgs1PAE0xXzTAKvI',
+    supabaseUrl: 'https://elyfxyrdbuykyklfjfdr.supabase.co',
+    supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVseWZ4eXJkYnV5a3lrbGZqZmRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDIwMjQsImV4cCI6MjA5NjU3ODAyNH0.irrMM8iKJVGnOBW6VQ4BHlkwiVIDtB97EPiHvasOWyg',
     tableName: 'defect_reports',      // 次品记录表名
     photoBucket: 'defect-photos',     // 次品图片存储桶名
     fetchLimit: 500,                  // 列表一次最多加载的记录数
@@ -218,7 +218,7 @@ const APP_CONFIG = {
     // 以下地址保留（历史记录/备用）：
 
     // --- 圆通电子面单（打印面单）---
-    ytoProxyUrl: 'https://yto-proxy.458914253.workers.dev',   // 圆通面单代理（Supabase，国内直连）
+    ytoProxyUrl: 'https://elyfxyrdbuykyklfjfdr.supabase.co/functions/v1/yto-proxy',   // 圆通面单代理（Supabase，国内直连）
     ytoCustomerId: 'K200416574',                              // 圆通客户编码
     returnSender: { name: '谢焕君', phone: '13316255984', address: '广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' },
 };
@@ -1653,6 +1653,8 @@ async function open1688Return(poId) {
     // 优先查映射表；没有再从 note 解析 1688 真订单号（10+ 位纯数字）
     let orderId = _po1688Map[poId];
     if (!orderId) {
+        // note 里没有 1688 主订单号 - 直接跳 1688 主页（不弹窗）
+        url = 'https://www.1688.com/';
         const list = getRecords();
         const rec = list.find(r => String(r.po_id) === String(poId));
         if (rec) {
@@ -1663,36 +1665,14 @@ async function open1688Return(poId) {
     // 检查订单号是否有效（19 位以 33 开头）
     const isValid1688Id = orderId && /^33\d{17}$/.test(orderId);
     let url;
-    let toastMsg;
     if (!orderId) {
-        const userInput = window.prompt(`1) 打开聚水潭 - 采购单管理
-
-2) 找采购单 ${poId}
-3) 复制【线上采购单号】列(19位以33开头)
-4) 粘贴(取消=跳1688主页)
-
-1688 主订单号:`);
-        if (userInput && /^33\d{17}$/.test(userInput.trim())) {
-            const newOrderId = userInput.trim();
-            const rec = getRecords().find(r => String(r.po_id) === String(poId));
-            if (rec && rec.id) {
-                const newNote = (rec.note || '') + ' [1688:' + newOrderId + ']';
-                fetch(SUPABASE_URL + '/rest/v1/defect_reports?id=eq.' + rec.id, {
-                    method:'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' },                    body: JSON.stringify({ note: newNote })
-                });
-            }
-            toastMsg = `${poId} 已跳到1688订单详情(订单号已保存)`;
-            url = 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + newOrderId;
-        } else {
-            toastMsg = `${poId} 无1688订单号,跳到1688主页`;
-            url = 'https://www.1688.com/';
-        }
+        // note 里没有 1688 主订单号 - 直接跳 1688 主页（不弹窗）
+        url = 'https://www.1688.com/';
     } else if (!isValid1688Id) {
-        // note 里有 [1688:xxx] 但格式异常（不是 19 位以 33 开头）
-        toastMsg = `${poId} 1688 订单号格式异常（${orderId}），打开1688主页`;
+        // 格式异常 - 直接跳 1688 主页（不弹窗）
         url = 'https://www.1688.com/';
     } else {
-        // 真实有效订单号
+        // 有效 - 直接跳订单详情
         url = 'https://air.1688.com/app/ctf-page/trade-order-detail/index.html?orderId=' + orderId;
     }
     if (toastMsg) showToast(toastMsg, '#f59e0b');
