@@ -428,7 +428,6 @@ async function confirmBatch1688Return() {
 </script>
     <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
     <script src="https://unpkg.com/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
-    <script src="facesheet-pdf.js"></script>
     <script src="https://unpkg.com/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
     <script src="https://unpkg.com/qrcode-generator@1.4.4/qrcode.js"></script>
     <style>
@@ -1939,10 +1938,7 @@ function rotateSvg90(svgStr) {
 async function printWaybillNow() {
     if (!_lastWaybill) return;
     const w = _lastWaybill;
-    if (typeof generateFacesheetPdf === 'undefined') {
-        showToast('⚠️ PDF 生成组件未加载，请检查网络后重试', '#d97706');
-        return;
-    }
+
     const dtStr = w.createdAt || '';
     const dtArr = dtStr.split(' ');
     const datePart = dtArr[0] || dtStr;
