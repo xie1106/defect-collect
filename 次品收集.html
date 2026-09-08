@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <!--
   ════════════════════════════════════════════════════════════════
-  次品照片收集系统 · 复刻版（v1.0）
+  次品照片收集系统 v2.0（2026-09-08 更新）
   ────────────────────────────────────────────────────────────────
-  本文件基于线上仓库版 (github.com/xie1106/warehouse-schedule) 复刻，
-  完整保留原有全部功能，仅做以下整理：
-    ① 顶部集中系统配置（APP_CONFIG），以后调整配置无需改业务代码；
-    ② 为各功能模块添加分区注释，便于维护与后续逐步调整；
-    ③ 数据表名 / 图片存储桶名 / 加载条数等抽为可配置项。
-  重要说明（系统如何工作）：
-    · 前端负责"采集 + 打标签 + 展示状态 + 打印面单"；
-    · 记录状态是状态标记，后台【不会】自动创建聚水潭退货单；
-    · 不再通过"退货按钮/聚水潭API"创建退货单，直接点【🖨️ 面单】打印圆通电子面单；
-    · 1688 采购单点【🔗 1688后台】跳转到 1688 订单页，人工申请退款并填写快递单号；
-    · 未匹配会标明原因（缺供应商/缺退货地址/缺颜色/缺码数等）；
-    · 异常 = 退款被拒 或 快递单号获取异常。
+  系统架构：
+    · Supabase（新项目 tlnlzbnwxkorquhpwmca）：仅存 defect_reports 表
+    · GitHub Pages：mapping数据(JSON) + 1688采购单状态(JSON) + 前端页面
+    · Cloudflare Worker：圆通面单代理 (yto-proxy.458914253.workers.dev)
+    · 面单模板：facesheet.html（HTML/CSS/JsBarcode，不再用PDF）
+
+  数据流：
+    · mapping数据（SKU/供应商/退货地址）→ 本地JSON加载，不走Supabase
+    · 1688采购单退款状态 → 聚水潭API同步 → purchase_status.json → GitHub Pages
+    · 次品记录 → Supabase defect_reports 表
+    · 照片上传 → Supabase Storage defect-photos bucket
+
+  操作流程（SOP）：
+    1. 扫码录入次品 → 自动匹配供应商和退货地址
+    2. 非1688采购单 → 直接点【🖨️ 面单】打印圆通电子面单寄回
+    3. 1688采购单 → 先到1688后台申请退款 → 聚水潭自动同步状态 → 系统自动更新
+    4. 面单打印 → 新窗口打开facesheet.html → 自动填充数据 → 打印
+    5. 可取消已打印面单（状态回到待处理）
+
+  TAB说明：
+    · 待处理：新录入的次品，等待退货操作
+    · 未匹配：缺供应商/缺退货地址/缺商品资料
+    · 失败：退货创建失败的记录
+    · 异常：退款被拒或数据异常
+    · 等待同意：1688退款等待卖家同意
+    · 等待退货：1688等待买家寄回商品
+    · 等待收货：1688等待卖家收货确认
+    · 完成：退款成功或已发货完成
+
+  Supabase优化：
+    · 本地缓存 + 增量拉取（只拉最近3天）
+    · 2个月前已完成记录自动清理
+    · mapping数据100%从GitHub Pages加载
   ════════════════════════════════════════════════════════════════
 -->
 
@@ -563,7 +584,6 @@ async function confirmBatch1688Return() {
                     <button class="tab-btn" onclick="toggleTab('1688_wait_agree',this)" style="color:#e67e22;">等待同意</button>
                     <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">等待退货</button>
                     <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">等待收货</button>
-                    <button class="tab-btn" onclick="toggleTab('1688_refund_closed',this)" style="color:#6b7280;">退款关闭</button>
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
                     <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">合并打印</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
@@ -1271,7 +1291,6 @@ function loadHistory() {
     else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待买家退货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待买家退货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待买家退货'))); });
     else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家收货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家收货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家收货'))); });
     else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '退款成功') return true; const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单')); return isRefundDone || isNon1688Done; });
-    else if (currentTab === '1688_refund_closed') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); return ps === '退款关闭'; });
     else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
     } // end if (!search)
 
