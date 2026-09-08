@@ -560,9 +560,10 @@ async function confirmBatch1688Return() {
                     <button class="tab-btn" onclick="toggleTab('1688_error',this)" style="color:#ef4444;">异常</button>
                 </div>
                 <div style="display:flex;gap:3px;padding:2px 2px;flex-wrap:nowrap;overflow-x:auto;">
-                    <button class="tab-btn" onclick="toggleTab('1688_wait_agree',this)" style="color:#e67e22;">卖家同意</button>
-                    <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">买家退货</button>
-                    <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">卖家收货</button>
+                    <button class="tab-btn" onclick="toggleTab('1688_wait_agree',this)" style="color:#e67e22;">等待同意</button>
+                    <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">等待退货</button>
+                    <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">等待收货</button>
+                    <button class="tab-btn" onclick="toggleTab('1688_refund_closed',this)" style="color:#6b7280;">退款关闭</button>
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
                     <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">合并打印</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
@@ -676,6 +677,30 @@ async function loadAllMaps() {
 let _styleSupplierMap = null;
 const skuInfoMapPromise = loadAllMaps().catch(()=>{});
 const returnAddrMapPromise = skuInfoMapPromise;
+
+// 1688采购单状态（从聚水潭同步，本地JSON加载）
+let _purchaseStatusMap = {};
+async function loadPurchaseStatus() {
+    try {
+        const r = await fetch('purchase_status.json?t=' + Date.now());
+        if (r.ok) {
+            const data = await r.json();
+            _purchaseStatusMap = data.records || {};
+            console.log('📦 1688采购单状态加载:', Object.keys(_purchaseStatusMap).length, '条');
+        }
+    } catch(e) {}
+}
+function getPurchaseRefundStatus(poId) {
+    const rec = _purchaseStatusMap[String(poId)];
+    if (!rec) return null;
+    return rec.refund_status || null;
+}
+function getPurchaseLabels(poId) {
+    const rec = _purchaseStatusMap[String(poId)];
+    if (!rec) return '';
+    return rec.labels || '';
+}
+const purchaseStatusPromise = loadPurchaseStatus().catch(()=>{});
 let _returnAddrMap = {};
 
 function formatSkuDisplay(code, qty) {
@@ -1242,10 +1267,11 @@ function loadHistory() {
     else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note));
     else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); });
     else if (currentTab === 'return_failed') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return rt && rt.status === '失败' && !(rt.orderId||'').includes('无法匹配'); });
-    else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家同意' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家同意'))); });
-    else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); return rf && (rf.status === '等待买家退货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待买家退货'))); });
-    else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家收货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家收货'))); });
-    else if (currentTab === 'done_all') filtered = filtered.filter(r => { const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单')); return isRefundDone || isNon1688Done; });
+    else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家同意' || ps === '线上申请取消') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家同意' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家同意'))); });
+    else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待买家退货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待买家退货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待买家退货'))); });
+    else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家收货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家收货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家收货'))); });
+    else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '退款成功') return true; const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单')); return isRefundDone || isNon1688Done; });
+    else if (currentTab === '1688_refund_closed') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); return ps === '退款关闭'; });
     else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
     } // end if (!search)
 
@@ -1291,7 +1317,9 @@ function loadHistory() {
             const returnInfo = parseReturnTag(r.note);
             const statusClass = r.status==='done'?'badge-done':'badge-error';
             const statusText = r.status==='done'?'完成':(is1688Single?'异常':'未映射');
-            const badgeHtml = returnInfo ? getReturnBadge(returnInfo) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`;
+            const psRefund = getPurchaseRefundStatus(r.po_id);
+            const psBadge = psRefund ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:${psRefund==='退款成功'?'#05966918;color:#059669;border:1px solid #05966940':psRefund==='退款关闭'?'#6b728018;color:#6b7280;border:1px solid #6b728040':'#e67e2218;color:#e67e22;border:1px solid #e67e2240'};">${psRefund}</span>` : '';
+            const badgeHtml = psBadge || (returnInfo ? getReturnBadge(returnInfo) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`);
             const printedNo = getWaybillPrinted([r]);
 
             const noteDisplay = formatNoteDisplay(r.note);
@@ -1353,7 +1381,9 @@ function loadHistory() {
         const defaultBadge = groupPrinted ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">完成</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
         const missingReasonHtml = groupMissing.length ? `<div style="font-size:11px;color:#d97706;margin-top:2px;">⚠️ 未匹配：${groupMissing.join('、')}</div>` : '';
         const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
-        const groupBadgeHtml = groupWaybillAbnormal ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>` : (groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge));
+        const groupPsRefund = getPurchaseRefundStatus(g.po_id);
+        const groupPsBadge = groupPsRefund ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:${groupPsRefund==='退款成功'?'#05966918;color:#059669;border:1px solid #05966940':groupPsRefund==='退款关闭'?'#6b728018;color:#6b7280;border:1px solid #6b728040':'#e67e2218;color:#e67e22;border:1px solid #e67e2240'};">${groupPsRefund}</span>` : '';
+        const groupBadgeHtml = groupPsBadge || (groupWaybillAbnormal ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>` : (groupRefund ? (getRefundBadge(groupRefund) + (groupReturn && groupReturn.orderId ? ` <span style="font-size:10px;color:#059669;">📦${groupReturn.orderId}</span>` : '')) : (returnBadge || defaultBadge)));
         const printedNo = getPrintedMailNo(items[0] && items[0].note);
 
         let html = `<div class="record">
