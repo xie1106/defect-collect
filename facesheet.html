@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>电子面单</title>
 <style>
-@media print { @page { size:75.14mm 129.12mm; margin:0; } body { margin:0; } .toolbar { display:none !important; } }
+@media print { @page { size:75.14mm 129.12mm; margin:0; } body { margin:0; } .toolbar { display:none !important; } .abs { -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact; } }
 @media screen { body { background:#eee; } .page { margin:20px auto; box-shadow:0 2px 8px rgba(0,0,0,.3); } }
 * { margin:0; padding:0; box-sizing:border-box; }
 .toolbar { position:fixed; top:0; left:0; right:0; z-index:99; background:#fff; padding:8px 16px; border-bottom:1px solid #ccc; display:flex; gap:12px; align-items:center; justify-content:flex-end; }
@@ -40,10 +40,10 @@
 <canvas id="barcodeH" class="abs" style="left:5.7mm; top:22.0mm; width:50.7mm; height:10.9mm;"></canvas>
 
 <!-- ===== 横条码下方运单号 ===== -->
-<div class="abs dtxt" id="el_mailno_barcode" style="left:5.7mm; top:33.0mm; font-size:8pt; font-family:Arial; width:50.7mm; text-align:center;"></div>
+<div class="abs dtxt" id="el_mailno_barcode" style="left:5.7mm; top:33.0mm; font-size:10pt; font-family:Arial; width:50.7mm; text-align:center;"></div>
 
 <!-- ===== 竖向条码（竖线右侧区域，缩短避免截断） ===== -->
-<canvas id="barcodeV" class="abs" style="left:59.0mm; top:21.0mm; width:10.9mm; height:48.0mm;"></canvas>
+<canvas id="barcodeV" class="abs" style="left:59.0mm; top:24.0mm; width:10.9mm; height:48.0mm;"></canvas>
 
 <!-- ===== 运单号（顶部区域 0-12mm） ===== -->
 <div class="abs dtxt" id="el_mailno_top" style="left:1.3mm; top:5.4mm; font-size:8pt; font-family:Arial;"></div>
