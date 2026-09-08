@@ -628,7 +628,7 @@ const APP_CONFIG = {
     supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsbmx6Ym53eGtvcnF1aHB3bWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4MzU2MjksImV4cCI6MjEwNDQxMTYyOX0.jmekmRo7FCwuRPS9qhy34U1LCKmNgs1PAE0xXzTAKvI',
     tableName: 'defect_reports',      // 次品记录表名
     photoBucket: 'defect-photos',     // 次品图片存储桶名
-    fetchLimit: 500,                  // 列表一次最多加载的记录数
+    fetchLimit: 200,                  // 列表一次最多加载的记录数（优化：减少到200）
 
     // --- 聚水潭对接（按 SOP 不再创建退货单；退货单相关的旧代码已清理）---
     returnShopId: '21571486',         // 外贸采购退货店铺 shop_id
@@ -664,7 +664,7 @@ if (collectOpen) {
 let currentTab = 'all';
 let currentFilter = 'all'; // all | 1688 | non1688
 let editingIdx = -1;
-let pageSize = 9999;
+let pageSize = 50; // 每页50条，优化性能
 let currentPage = 1;
 let skuInfoMap = {};
 
@@ -1327,7 +1327,14 @@ function loadHistory() {
         }
     });
 
-    el.innerHTML = groups.map((g, gi) => {
+    // 分页切割
+    const totalGroups = groups.length;
+    const totalPages = Math.ceil(totalGroups / pageSize);
+    const start = (currentPage - 1) * pageSize;
+    const end = start + pageSize;
+    const pagedGroups = groups.slice(start, end);
+    
+    el.innerHTML = pagedGroups.map((g, gi) => {
         if (g.type === 'single') {
             const r = g.record;
             const refundInfo = parseRefundTag(r.note);
@@ -1450,7 +1457,31 @@ function loadHistory() {
         </div>`;
         return html;
     }).join('');
-    document.getElementById('pagination').innerHTML = '';
+    
+    // 生成分页按钮
+    if (totalPages > 1) {
+        let paginationHtml = '<div style="display:flex;justify-content:center;align-items:center;gap:8px;padding:16px;font-size:12px;">';
+        paginationHtml += `<span style="color:#666;">共 ${totalGroups} 组，第 ${currentPage}/${totalPages} 页</span>`;
+        if (currentPage > 1) paginationHtml += `<button onclick="goPage(${currentPage - 1})" style="padding:4px 12px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;">上一页</button>`;
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) {
+                paginationHtml += `<button onclick="goPage(${i})" style="padding:4px 10px;border:1px solid ${i === currentPage ? '#4A90D9' : '#ddd'};border-radius:4px;background:${i === currentPage ? '#4A90D9' : '#fff'};color:${i === currentPage ? '#fff' : '#333'};cursor:pointer;">${i}</button>`;
+            }
+        } else {
+            paginationHtml += `<button onclick="goPage(1)" style="padding:4px 10px;border:1px solid ${currentPage === 1 ? '#4A90D9' : '#ddd'};border-radius:4px;background:${currentPage === 1 ? '#4A90D9' : '#fff'};color:${currentPage === 1 ? '#fff' : '#333'};cursor:pointer;">1</button>`;
+            if (currentPage > 3) paginationHtml += '<span>...</span>';
+            for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+                paginationHtml += `<button onclick="goPage(${i})" style="padding:4px 10px;border:1px solid ${i === currentPage ? '#4A90D9' : '#ddd'};border-radius:4px;background:${i === currentPage ? '#4A90D9' : '#fff'};color:${i === currentPage ? '#fff' : '#333'};cursor:pointer;">${i}</button>`;
+            }
+            if (currentPage < totalPages - 2) paginationHtml += '<span>...</span>';
+            paginationHtml += `<button onclick="goPage(${totalPages})" style="padding:4px 10px;border:1px solid ${currentPage === totalPages ? '#4A90D9' : '#ddd'};border-radius:4px;background:${currentPage === totalPages ? '#4A90D9' : '#fff'};color:${currentPage === totalPages ? '#fff' : '#333'};cursor:pointer;">${totalPages}</button>`;
+        }
+        if (currentPage < totalPages) paginationHtml += `<button onclick="goPage(${currentPage + 1})" style="padding:4px 12px;border:1px solid #ddd;border-radius:4px;background:#fff;cursor:pointer;">下一页</button>`;
+        paginationHtml += '</div>';
+        document.getElementById('pagination').innerHTML = paginationHtml;
+    } else {
+        document.getElementById('pagination').innerHTML = '';
+    }
 }
 
 // ═══════════════ 编辑与删除 ═══════════════
