@@ -187,7 +187,7 @@ function loadFacesheetData(d) {
     var it = items[i];
     var qty = parseInt(it.qty) || 1;
     if (!totalQty) totalQty += qty;
-    var sku = it.sku || '';
+    var sku = it.style || it.sku || '';
     var color = it.color || '';
     var size = it.size || '';
     var spec = it.spec || [color, size].filter(Boolean).join(';');
