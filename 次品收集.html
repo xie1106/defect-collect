@@ -628,7 +628,7 @@ const APP_CONFIG = {
     supabaseKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsbmx6Ym53eGtvcnF1aHB3bWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4MzU2MjksImV4cCI6MjEwNDQxMTYyOX0.jmekmRo7FCwuRPS9qhy34U1LCKmNgs1PAE0xXzTAKvI',
     tableName: 'defect_reports',      // 次品记录表名
     photoBucket: 'defect-photos',     // 次品图片存储桶名
-    fetchLimit: 200,                  // 列表一次最多加载的记录数（优化：减少到200）
+    fetchLimit: 500,                  // 全量加载（分页在前端处理）
 
     // --- 聚水潭对接（按 SOP 不再创建退货单；退货单相关的旧代码已清理）---
     returnShopId: '21571486',         // 外贸采购退货店铺 shop_id
