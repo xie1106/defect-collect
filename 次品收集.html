@@ -27,10 +27,13 @@
     · 未匹配：缺供应商/缺退货地址/缺商品资料
     · 失败：退货创建失败的记录
     · 异常：退款被拒或数据异常
+    · 等待同意：1688退款等待卖家同意（聚水潭labels同步）
+    · 等待退货：1688等待买家寄回商品（聚水潭labels同步）
+    · 等待收货：1688等待卖家收货确认（聚水潭labels同步）
     · 完成：退款成功或已发货完成
-  注意：聚水潭采购单API的labels字段仅包含最终状态（退款成功/退款关闭），
-  不包含1688线上售后中间状态（等待卖家同意/等待买家退货/等待卖家收货）。
-  售后/退款查询接口无权限（/open/refund/query 返回190）。
+  数据来源：聚水潭采购单labels字段包含1688线上售后状态（退款成功/
+  线上申请取消/等待卖家同意/等待买家退货/等待卖家收货/退款关闭）。
+  定时同步脚本 sync_purchase_status.py 每天拉取最新状态。
 
   Supabase优化：
     · 本地缓存 + 增量拉取（只拉最近3天）
@@ -581,7 +584,9 @@ async function confirmBatch1688Return() {
                     <button class="tab-btn" onclick="toggleTab('1688_error',this)" style="color:#ef4444;">异常</button>
                 </div>
                 <div style="display:flex;gap:3px;padding:2px 2px;flex-wrap:nowrap;overflow-x:auto;">
-                    <!-- 1688售后中间状态TAB已移除：聚水潭API无法获取等待同意/退货/收货状态 -->
+                    <button class="tab-btn" onclick="toggleTab('1688_wait_agree',this)" style="color:#e67e22;">等待同意</button>
+                    <button class="tab-btn" onclick="toggleTab('1688_wait_send',this)" style="color:#2563eb;">等待退货</button>
+                    <button class="tab-btn" onclick="toggleTab('1688_wait_receive',this)" style="color:#7c3aed;">等待收货</button>
                     <button class="tab-btn" onclick="toggleTab('done_all',this)" style="color:#059669;">完成</button>
                     <button class="tab-btn" onclick="batchPrintBySupplier()" style="color:#fff;background:#0ea5e9;border-color:#0ea5e9;">合并打印</button>
                     <button class="tab-btn" onclick="retryAllFailed()" style="color:#fff;background:#dc2626;border-color:#dc2626;">重匹配</button>
