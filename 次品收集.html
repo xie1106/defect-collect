@@ -1087,7 +1087,16 @@ async function syncToServer(record) {
 // 本地缓存：减少Supabase API调用，节省流量
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
+const CACHE_VER_KEY = 'defect_cache_ver';
+const CACHE_VER = '20260908b'; // 改版本号强制清缓存
 function _getCachedRecords() {
+    // 版本号不匹配则清缓存
+    if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
+        localStorage.removeItem(CACHE_KEY);
+        localStorage.removeItem(CACHE_TS_KEY);
+        localStorage.setItem(CACHE_VER_KEY, CACHE_VER);
+        return null;
+    }
     try { const s = localStorage.getItem(CACHE_KEY); return s ? JSON.parse(s) : null; } catch(e) { return null; }
 }
 function _setCachedRecords(records) {
