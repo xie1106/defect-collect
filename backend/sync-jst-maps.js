@@ -379,8 +379,8 @@ async function runSupplierUpdate(skuMap, oldStyleMap) {
 
 // ---------- record 模式：按系统登记记录补齐缺失 SKU ----------
 async function runRecordUpdate() {
-  const SUPABASE_URL = process.env.SUPABASE_URL || 'https://elyfxyrdbuykyklfjfdr.supabase.co';
-  const SUPABASE_KEY = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVseWZ4eXJkYnV5a3lrbGZqZmRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEwMDIwMjQsImV4cCI6MjA5NjU3ODAyNH0.irrMM8iKJVGnOBW6VQ4BHlkwiVIDtB97EPiHvasOWyg';
+  const SUPABASE_URL = process.env.SUPABASE_URL || 'https://tlnlzbnwxkorquhpwmca.supabase.co';
+  const SUPABASE_KEY = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsbmx6Ym53eGtvcnF1aHB3bWNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg4MzU2MjksImV4cCI6MjEwNDQxMTYyOX0.jmekmRo7FCwuRPS9qhy34U1LCKmNgs1PAE0xXzTAKvI';
 
   console.log('① 读取系统登记记录...');
   const r = await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?select=note&limit=1000`, {

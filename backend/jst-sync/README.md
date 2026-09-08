@@ -24,7 +24,7 @@
 `worker/` 已部署到 Cloudflare：`https://jst-sync-worker.458914253.workers.dev`
 - 定时：每天 03:00 / 11:00 / 19:00 自动增量同步（Cloudflare Cron）
 - 手动触发 / 状态查询（国内可直接访问，经 Supabase 中转）：
-  - `POST https://elyfxyrdbuykyklfjfdr.supabase.co/functions/v1/jst-sync` body `{"mode":"fire-worker"}` → 触发后台同步
+  - `POST https://tlnlzbnwxkorquhpwmca.supabase.co/functions/v1/jst-sync` body `{"mode":"fire-worker"}` → 触发后台同步
   - 同地址 body `{"mode":"sync-status"}` → 查看最近运行日志（mapping_data.sync_runs）
 - 运行日志：写入 Supabase `mapping_data.id='sync_runs'`（保留最近 20 条）
 
@@ -34,7 +34,7 @@
 ## Supabase Edge Function `jst-sync`
 
 已部署，提供：GET 状态（各映射条数）、POST fire-worker（触发 worker）、POST sync-status（运行日志）。
-部署：`supabase functions deploy jst-sync --project-ref elyfxyrdbuykyklfjfdr`
+部署：`supabase functions deploy jst-sync --project-ref tlnlzbnwxkorquhpwmca`
 
 ## 数据表
 

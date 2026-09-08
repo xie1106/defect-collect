@@ -9,7 +9,7 @@
 // GET                              → 状态 + 各映射条数
 // POST {"mode":"fire-worker"}      → 触发 Cloudflare Worker 后台同步（立即返回）
 // POST {"mode":"sync-status"}      → 返回最近同步运行日志
-// 部署: supabase functions deploy jst-sync --project-ref elyfxyrdbuykyklfjfdr
+// 部署: supabase functions deploy jst-sync --project-ref tlnlzbnwxkorquhpwmca
 // ------------------------------------------------------------
 const CORS = {
   "Access-Control-Allow-Origin": "*",

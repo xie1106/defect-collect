@@ -1,5 +1,5 @@
 // Supabase Edge Function: yto-proxy（圆通电子面单代理）
-// 部署: supabase functions deploy yto-proxy --project-ref elyfxyrdbuykyklfjfdr
+// 部署: supabase functions deploy yto-proxy --project-ref tlnlzbnwxkorquhpwmca
 // 密钥: YTO_PARTNER_ID=K200416574  YTO_SECRET=4EI8FSK0
 
 Deno.serve(async (req) => {

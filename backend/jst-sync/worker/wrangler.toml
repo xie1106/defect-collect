@@ -5,7 +5,7 @@ compatibility_date = "2024-01-01"
 [vars]
 JST_BASE_URL = "https://openapi.jushuitan.com"
 JST_APP_KEY = "f9606648e2044c7fa9df4bb6516a7269"
-SUPABASE_URL = "https://elyfxyrdbuykyklfjfdr.supabase.co"
+SUPABASE_URL = "https://tlnlzbnwxkorquhpwmca.supabase.co"
 INCR_DAYS = "7"
 
 # JST_APP_SECRET / JST_ACCESS_TOKEN / SUPABASE_SERVICE_KEY 用 wrangler secret 设置：
