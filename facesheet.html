@@ -130,9 +130,13 @@ function drawV(canvas, text) {
 function loadFacesheetData(d) {
   if (!d) return;
   var mailNo = d.mailNo || '';
-  var now = new Date();
-  var dateStr = now.getFullYear() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + String(now.getDate()).padStart(2,'0');
-  var timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+  var dateStr = d.date || '';
+  var timeStr = d.time || '';
+  if (!dateStr) {
+    var now = new Date();
+    dateStr = now.getFullYear() + '/' + String(now.getMonth()+1).padStart(2,'0') + '/' + String(now.getDate()).padStart(2,'0');
+    timeStr = String(now.getHours()).padStart(2,'0') + ':' + String(now.getMinutes()).padStart(2,'0') + ':' + String(now.getSeconds()).padStart(2,'0');
+  }
 
   // 运单号
   setText('el_mailno_top', mailNo);
@@ -140,42 +144,48 @@ function loadFacesheetData(d) {
   setText('el_time', timeStr);
   setText('el_pageno', '第1/1个');
 
-  // 大头笔
-  setText('el_printKey', d.printKey || d.shortAddress || '');
+  // 大头笔（次品收集推送用 dest/landmark/seg）
+  var printKey = d.dest || d.printKey || d.landmark || d.shortAddress || '';
+  setText('el_printKey', printKey);
 
   // 集包地
   setText('el_dest2', d.dest2 || '');
-  setText('el_pkgName', d.packageCenterName || '');
+  setText('el_pkgName', d.packageCenterName || d.landmark || '');
 
   // 收件人（退货场景：收件人=供应商）
-  var rPhone = d.receiverPhone || '';
-  var rProvince = d.receiverProvince || '';
-  var rName = d.receiverName || '';
-  setText('el_rname', rName + ' ' + rPhone + ' ' + rProvince);
-  var rAddr = (d.receiverCity||'') + (d.receiverDistrict||'') + (d.receiverAddress||'');
-  setText('el_raddr', rAddr);
+  var recv = d.receiver || {};
+  var rName = recv.name || d.receiverName || '';
+  var rPhone = recv.phone || d.receiverPhone || '';
+  var addrLines = recv.addressLines || [];
+  var rAddrStr = addrLines.join('') || ((d.receiverCity||'') + (d.receiverDistrict||'') + (d.receiverAddress||''));
+  setText('el_rname', [rName, rPhone].filter(Boolean).join(' '));
+  setText('el_raddr', rAddrStr);
 
   // 寄件人
-  var sName = d.senderName || '';
-  var sPhone = d.senderPhone || '';
-  setText('el_sname', sName + ' ' + sPhone);
-  var sAddr = (d.senderProvince||'') + (d.senderCity||'') + (d.senderDistrict||'') + (d.senderAddress||'');
+  var sndr = d.sender || {};
+  var sName = sndr.name || d.senderName || '';
+  var sPhone = sndr.phone || d.senderPhone || '';
+  var sAddr = sndr.address || ((d.senderProvince||'') + (d.senderCity||'') + (d.senderDistrict||'') + (d.senderAddress||''));
+  setText('el_sname', [sName, sPhone].filter(Boolean).join(' '));
   setText('el_saddr', sAddr);
 
   // 商品信息
-  setText('el_pono', '采购单号：' + (d.poNo || ''));
-  var items = d.items || [];
-  var totalQty = 0;
+  setText('el_pono', '采购单号：' + (d.poId || d.poNo || ''));
+  var items = d.rows || d.items || [];
+  var totalQty = d.totalQty || 0;
   var itemsHtml = '';
   for (var i = 0; i < items.length; i++) {
     var it = items[i];
-    var qty = it.qty || 1;
-    totalQty += qty;
+    var qty = parseInt(it.qty) || 1;
+    if (!totalQty) totalQty += qty;
     var sku = it.sku || '';
-    var spec = it.spec || '';
-    var loc = it.location || '';
-    itemsHtml += '<div style="font-size:8pt; line-height:1.3;">' + sku + ' ' + spec + '*' + qty + '件 ' + (loc ? '(' + loc + ')' : '') + '</div>';
+    var color = it.color || '';
+    var size = it.size || '';
+    var spec = it.spec || [color, size].filter(Boolean).join(';');
+    var loc = it.loc || it.location || '';
+    itemsHtml += '<div style="font-size:8pt; line-height:1.3;">' + sku + ' ' + spec + '*' + qty + '件 ' + (loc ? '(' + loc + ') ' : '') + '</div>';
   }
+  if (!totalQty) totalQty = parseInt(d.qty) || 1;
   document.getElementById('el_items').innerHTML = itemsHtml;
   setText('el_total', '合计');
   setText('el_totaln', totalQty + '');
