@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909c'; // 改版本号强制清缓存
+const CACHE_VER = '20260909d'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1302,13 +1302,13 @@ function loadHistory() {
     else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家同意' || ps === '线上申请取消') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家同意' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家同意'))); });
     else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待买家退货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待买家退货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待买家退货'))); });
     else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家收货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家收货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家收货'))); });
-    else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '退款成功') return true; const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单')); return isRefundDone || isNon1688Done; });
+    else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '退款成功') return true; const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isRefundDone || isNon1688Done; });
     else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
     } // end if (!search)
 
     const allPending = new Set(list.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note)).map(r=>r.po_id)).size;
     const allRefunding = new Set(list.filter(r => isRefunding(r.note)).map(r=>r.po_id)).size;
-    const allDone = new Set(list.filter(r => { const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单')); return isRefundDone || isNon1688Done; }).map(r=>r.po_id)).size;
+    const allDone = new Set(list.filter(r => { const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isRefundDone || isNon1688Done; }).map(r=>r.po_id)).size;
     const allUnmatched = new Set(list.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); }).map(r=>r.po_id)).size;
     const allError = new Set(list.filter(r => isAbnormalNote(r.note)).map(r=>r.po_id)).size;
     document.getElementById('pendingCount').textContent = `待处理:${allPending}`;
@@ -1416,7 +1416,7 @@ function loadHistory() {
         const returnBadge = groupReturn ? getReturnBadge(groupReturn) : '';
         const groupMissing = getMissingMatch(items);
         const groupPrinted = items.every(r => getWaybillPrinted([r]));
-        const defaultBadge = groupPrinted ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">完成</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
+        const defaultBadge = groupPrinted ? (groupIs1688 ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#0ea5e918;color:#0ea5e9;border:1px solid #0ea5e940;">已打印</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">完成</span>`) : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
         const missingReasonHtml = groupMissing.length ? `<div style="font-size:11px;color:#d97706;margin-top:2px;">⚠️ 未匹配：${groupMissing.join('、')}</div>` : '';
         const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
         const groupPsRefund = getPurchaseRefundStatus(g.po_id);
@@ -1450,21 +1450,20 @@ function loadHistory() {
             html += `</div>`;
         }
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
-        const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;" title="${hasReal1688 ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688后台</button>` : '';
+        const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:6px;padding:4px 10px;font-size:11px;" title="${hasReal1688 ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688后台</button>` : '';
         const non1688ReturnBtn = '';
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
-        const waybillBtn = supplierName && getReturnAddress(supplierName) ? `<button onclick="${printedNo ? 'reprintWaybill' : 'printWaybillForGroup'}('${g.po_id}',this)" style="color:#fff;background:${printedNo ? '#059669' : '#0ea5e9'};border:1px solid ${printedNo ? '#059669' : '#0ea5e9'};border-radius:4px;" title="${printedNo ? '已打印：'+printedNo+'，点击重打' : '打印圆通电子面单'}">${printedNo ? '🖨️ 重打' : '🖨️ 面单'}</button>` : '';
-        const cancelBtn2 = printedNo ? `<button onclick="cancelWaybill('${g.po_id}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;font-size:11px;" title="取消面单">✕ 取消</button>` : '';
-        const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;">取消</button>` : '';
-        html += `<div class="record-actions">
+        const waybillBtn = supplierName && getReturnAddress(supplierName) ? `<button onclick="${printedNo ? 'reprintWaybill' : 'printWaybillForGroup'}('${g.po_id}',this)" style="color:#fff;background:${printedNo ? '#059669' : '#0ea5e9'};border:1px solid ${printedNo ? '#059669' : '#0ea5e9'};border-radius:6px;padding:4px 10px;font-size:11px;" title="${printedNo ? '已打印：'+printedNo+'，点击重打' : '打印圆通电子面单'}">${printedNo ? '🖨️ 重打' : '🖨️ 面单'}</button>` : '';
+        const cancelBtn2 = printedNo ? `<button onclick="cancelWaybill('${g.po_id}',this)" style="color:#999;background:none;border:1px solid #ddd;border-radius:6px;padding:4px 8px;font-size:11px;" title="取消面单，状态变回待处理">✕</button>` : '';
+        const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:6px;padding:4px 8px;font-size:11px;">取消</button>` : '';
+        html += `<div class="record-actions" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;">
+                ${printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;letter-spacing:0.5px;">📦 ${printedNo}</span>` : ''}
                 ${returnBtn}
-                ${non1688ReturnBtn}
                 ${waybillBtn}
                 ${cancelBtn2}
                 ${cancelBtn}
-                <button onclick="editGroup('${g.po_id}')" style="color:#1677ff;border-color:#1677ff;">✏️ 编辑</button>
-                ${printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="margin-left:6px;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;">${printedNo}</span>` : ''}
+                <button onclick="editGroup('${g.po_id}')" style="color:#999;background:none;border:1px solid #ddd;border-radius:6px;padding:4px 8px;font-size:11px;">✏️</button>
             </div>
         </div>`;
         return html;
