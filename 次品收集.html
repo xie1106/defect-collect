@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909b'; // 改版本号强制清缓存
+const CACHE_VER = '20260909c'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1869,7 +1869,7 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
             centerCode: cbM ? cbM[1] : '',
             createdAt: new Date().toLocaleString()
         };
-        try { const data = btoa(unescape(encodeURIComponent(JSON.stringify(w)))); await tagAll('[面单:已打印:' + mailNo + '|' + data + ']'); } catch(e) { await tagAll('[面单:已打印:' + mailNo + ']'); }
+        await tagAll('[面单:已打印:' + mailNo + ']');
         if (items[0] && !(items[0].note||'').includes('[1688:')) {
             // 非 1688：打面单后状态自动改为完成
             const h2 = {'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'};
