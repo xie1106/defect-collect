@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909i'; // 改版本号强制清缓存
+const CACHE_VER = '20260909j'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1365,7 +1365,7 @@ function loadHistory() {
                     ${singlePhotos.map((p,pi)=>`<img class="img-loading" src="${thumbImg(p)}" data-full="${p}" loading="lazy" onload="this.classList.remove('img-loading')" onerror="this.onerror=null;this.src='${p}'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:4px;cursor:pointer;" onclick="var c=this.parentElement;openModal(null,JSON.parse(c.dataset.photos),${pi},c.dataset.poid)">`).join('')}
                 </div>
                 <div class="record-actions">
-                    ${is1688Single ? `<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;" title="${hasReal1688Single ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688后台</button>` : ''}
+                    ${is1688Single ? `<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;" title="${hasReal1688Single ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688</button>` : ''}
                     ${singleWaybillNo ? `<button onclick="${_printedSingle ? 'reprintWaybill' : 'printWaybillForGroup'}('${r.po_id}',this)" style="color:#fff;background:${_printedSingle ? '#059669' : '#0ea5e9'};border:1px solid ${_printedSingle ? '#059669' : '#0ea5e9'};border-radius:4px;" title="${_printedSingle ? '已打印：'+_printedSingle+'，点击重打' : '打印圆通电子面单'}">${_printedSingle ? '🖨️ 重打' : '🖨️ 面单'}</button>` : ''}
                     ${_printedSingle ? `<button onclick="cancelWaybill('${r.po_id}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;font-size:11px;" title="取消面单，状态变回待处理">✕ 取消</button>` : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
@@ -1435,7 +1435,7 @@ function loadHistory() {
             html += `</div>`;
         }
         const hasReturnOrder = groupReturn && groupReturn.status !== '待处理';
-        const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:6px;padding:4px 10px;font-size:11px;" title="${hasReal1688 ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688后台</button>` : '';
+        const returnBtn = is1688 ? `<button onclick="open1688Return('${g.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:6px;padding:4px 10px;font-size:11px;" title="${hasReal1688 ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688</button>` : '';
         const non1688ReturnBtn = '';
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
@@ -1443,12 +1443,12 @@ function loadHistory() {
         const cancelBtn2 = printedNo ? `<button onclick="cancelWaybill('${g.po_id}',this)" style="color:#dc2626;background:none;border:1px solid #fca5a5;border-radius:6px;padding:4px 10px;font-size:11px;" title="取消面单，状态变回待处理">取消</button>` : '';
         const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:6px;padding:4px 8px;font-size:11px;">取消</button>` : '';
         html += `<div class="record-actions" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;">
-                ${printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;letter-spacing:0.5px;">📦 ${printedNo}</span>` : ''}
                 ${returnBtn}
                 ${waybillBtn}
                 ${cancelBtn2}
                 ${cancelBtn}
                 <button onclick="editGroup('${g.po_id}')" style="color:#999;background:none;border:1px solid #ddd;border-radius:6px;padding:4px 8px;font-size:11px;">✏️</button>
+                ${printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;letter-spacing:0.5px;">${printedNo}</span>` : ''}
             </div>
         </div>`;
         return html;
