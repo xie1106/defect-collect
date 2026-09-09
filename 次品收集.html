@@ -642,7 +642,7 @@ const APP_CONFIG = {
     // 以下地址保留（历史记录/备用）：
 
     // --- 圆通电子面单（打印面单）---
-    ytoProxyUrl: 'https://yto-vercel.vercel.app/api',   // 圆通面单代理（Vercel，国内直连）
+    ytoProxyUrl: 'https://yto-vercel.vercel.app/api',   // 圆通面单代理（Vercel中转→Cloudflare Worker→圆通HTTP）
     ytoCustomerId: 'K200416574',                              // 圆通客户编码
     returnSender: { name: '谢焕君', phone: '13316255984', address: '广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' },
 };
@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909d'; // 改版本号强制清缓存
+const CACHE_VER = '20260909e'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1416,7 +1416,7 @@ function loadHistory() {
         const returnBadge = groupReturn ? getReturnBadge(groupReturn) : '';
         const groupMissing = getMissingMatch(items);
         const groupPrinted = items.every(r => getWaybillPrinted([r]));
-        const defaultBadge = groupPrinted ? (groupIs1688 ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#0ea5e918;color:#0ea5e9;border:1px solid #0ea5e940;">已打印</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">完成</span>`) : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
+        const defaultBadge = groupPrinted ? (groupIs1688 ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#e67e2218;color:#e67e22;border:1px solid #e67e2240;">等待同意</span>` : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">完成</span>`) : `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`;
         const missingReasonHtml = groupMissing.length ? `<div style="font-size:11px;color:#d97706;margin-top:2px;">⚠️ 未匹配：${groupMissing.join('、')}</div>` : '';
         const groupWaybillAbnormal = items.some(r=>isWaybillAbnormal(r.note));
         const groupPsRefund = getPurchaseRefundStatus(g.po_id);
