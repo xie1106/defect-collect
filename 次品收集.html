@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909e'; // 改版本号强制清缓存
+const CACHE_VER = '20260909f'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1792,7 +1792,14 @@ async function tagWaybill(poId, tag) {
             }
             if (tag) note = note + ' ' + tag;
             await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, { method:'PATCH', headers:h, body: JSON.stringify({note}) });
+            // 同步更新本地缓存
+            if (window._records) {
+                const local = window._records.find(r => r.id === rec.id);
+                if (local) local.note = note;
+            }
         }
+        // 同步localStorage缓存
+        if (window._records) _setCachedRecords(window._records);
     } catch(e) {}
 }
 // 生成圆通电子面单并预览（点击"🖨️ 面单"）
