@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909h'; // 改版本号强制清缓存
+const CACHE_VER = '20260909i'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1117,18 +1117,11 @@ async function fetchRecords() {
         loadHistory();
     }
 
-    // 2. 增量拉取：只拉缓存之后更新的记录 + 最近3天全量（防漏）
+    // 2. 每次全量拉取最新数据（确保其他设备的修改能同步）
     try {
         const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), 15000);
-        let url = `${SUPABASE_URL}/rest/v1/defect_reports?select=id,po_id,photos,status,note,created_at&order=created_at.desc`;
-        if (cacheTs && cached && cached.length > 50) {
-            // 增量模式：拉最近3天的数据（覆盖可能的更新）
-            const threeDaysAgo = new Date(Date.now() - 3*86400000).toISOString();
-            url += `&created_at=gte.${threeDaysAgo}`;
-        } else {
-            url += `&limit=${APP_CONFIG.fetchLimit}`;
-        }
+        let url = `${SUPABASE_URL}/rest/v1/defect_reports?select=id,po_id,photos,status,note,created_at&order=created_at.desc&limit=${APP_CONFIG.fetchLimit}`;
         const r = await fetch(url, {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` },
             signal: ctrl.signal
@@ -1136,15 +1129,7 @@ async function fetchRecords() {
         clearTimeout(timer);
         if (r.ok) {
             const freshData = await r.json();
-            if (cacheTs && cached && cached.length > 50) {
-                // 合并增量数据到缓存
-                const freshIds = new Set(freshData.map(r => r.id));
-                const merged = freshData.concat(cached.filter(r => !freshIds.has(r.id)));
-                merged.sort((a, b) => b.created_at.localeCompare(a.created_at));
-                window._records = merged.slice(0, APP_CONFIG.fetchLimit);
-            } else {
-                window._records = freshData;
-            }
+            window._records = freshData;
             _setCachedRecords(window._records);
         }
     } catch(e) {
