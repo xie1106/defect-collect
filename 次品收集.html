@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909f'; // 改版本号强制清缓存
+const CACHE_VER = '20260909g'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1455,7 +1455,7 @@ function loadHistory() {
         const refundDone = groupRefund && (groupRefund.status === '退款成功' || groupRefund.status === '完成');
         const refundSellerReceived = groupRefund && (groupRefund.status === '等待卖家收货');
         const waybillBtn = supplierName && getReturnAddress(supplierName) ? `<button onclick="${printedNo ? 'reprintWaybill' : 'printWaybillForGroup'}('${g.po_id}',this)" style="color:#fff;background:${printedNo ? '#059669' : '#0ea5e9'};border:1px solid ${printedNo ? '#059669' : '#0ea5e9'};border-radius:6px;padding:4px 10px;font-size:11px;" title="${printedNo ? '已打印：'+printedNo+'，点击重打' : '打印圆通电子面单'}">${printedNo ? '🖨️ 重打' : '🖨️ 面单'}</button>` : '';
-        const cancelBtn2 = printedNo ? `<button onclick="cancelWaybill('${g.po_id}',this)" style="color:#999;background:none;border:1px solid #ddd;border-radius:6px;padding:4px 8px;font-size:11px;" title="取消面单，状态变回待处理">✕</button>` : '';
+        const cancelBtn2 = printedNo ? `<button onclick="cancelWaybill('${g.po_id}',this)" style="color:#dc2626;background:none;border:1px solid #fca5a5;border-radius:6px;padding:4px 10px;font-size:11px;" title="取消面单，状态变回待处理">取消</button>` : '';
         const cancelBtn = (groupReturn && groupReturn.status === '已下单' && !refundDone && !refundSellerReceived) ? `<button onclick="cancelReturnOrder('${g.po_id}','${groupReturn.orderId||''}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:6px;padding:4px 8px;font-size:11px;">取消</button>` : '';
         html += `<div class="record-actions" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;">
                 ${printedNo ? `<span onclick="copyText('${printedNo}','${printedNo}')" title="点击复制快递单号" style="padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;letter-spacing:0.5px;">📦 ${printedNo}</span>` : ''}
@@ -1667,7 +1667,6 @@ function getPrintedMailNo(note) {
 }
 // 重新打印：已打印过的不再调圆通接口，直接显示原面单
 async function cancelWaybill(poId, btn) {
-    if (!confirm('确认取消采购单 ' + poId + ' 的面单？\n取消后状态变为待处理，可重新打印。')) return;
     const orig = btn ? btn.textContent : '';
     if (btn) { btn.textContent = '⏳...'; btn.disabled = true; }
     try {
@@ -1679,14 +1678,19 @@ async function cancelWaybill(poId, btn) {
             await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
                 method:'PATCH', headers:h, body: JSON.stringify({note, status:'pending'})
             });
+            // 同步本地缓存
+            if (window._records) {
+                const local = window._records.find(r2 => r2.id === rec.id);
+                if (local) { local.note = note; local.status = 'pending'; }
+            }
         }
-        showToast('✅ 已取消面单，状态变为待处理', '#059669');
-        await fetchRecords();
+        if (window._records) _setCachedRecords(window._records);
+        showToast('✅ 已取消面单 ' + poId, '#059669');
         loadHistory();
     } catch(e) {
         showToast('❌ 取消失败: ' + e.message, '#dc2626');
-        if (btn) { btn.textContent = orig; btn.disabled = false; }
     }
+    if (btn) { btn.textContent = orig; btn.disabled = false; }
 }
 
 async function reprintWaybill(poId, btn, items) {
