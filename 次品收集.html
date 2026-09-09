@@ -642,7 +642,7 @@ const APP_CONFIG = {
     // 以下地址保留（历史记录/备用）：
 
     // --- 圆通电子面单（打印面单）---
-    ytoProxyUrl: 'https://yto-proxy.458914253.workers.dev',   // 圆通面单代理（Supabase，国内直连）
+    ytoProxyUrl: 'https://yto-vercel.vercel.app/api',   // 圆通面单代理（Vercel，国内直连）
     ytoCustomerId: 'K200416574',                              // 圆通客户编码
     returnSender: { name: '谢焕君', phone: '13316255984', address: '广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' },
 };
@@ -1088,7 +1088,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909a'; // 改版本号强制清缓存
+const CACHE_VER = '20260909b'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
