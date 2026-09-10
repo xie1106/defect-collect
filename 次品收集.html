@@ -1095,7 +1095,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260910b'; // 改版本号强制清缓存
+const CACHE_VER = '20260910c'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1761,9 +1761,12 @@ function parseAddrInfo(addrStr) {
     return { name, phone, address };
 }
 function splitAddr(name, phone, address) {
-    // 去除多余空格
-    const addr = (address||'').replace(/\s+/g, '');
-    const m = addr.match(/(.*?省)?(.*?市)?(.*?区|.*?县|.*?旗)?(.*)/);
+    // 去除多余空格，修正常见地址格式问题
+    let addr = (address||'').replace(/\s+/g, '');
+    // 修正"广东省广东广州市"→"广东省广州市"等重复省名问题
+    addr = addr.replace(/(.*?省)\1?/g, '$1').replace(/省[^市区县]*?(?=市)/, '省');
+    addr = addr.replace(/广东省广东/,'广东省').replace(/浙江省浙江/,'浙江省').replace(/江苏省江苏/,'江苏省');
+    const m = addr.match(/(.*?省|.*?自治区)?(.*?市)?(.*?区|.*?县|.*?旗)?(.*)/);
     let province = (m&&m[1])||'', city = (m&&m[2])||'', district = (m&&m[3])||'';
     // 自动补省：如果没有省但有市，根据常见城市补省
     if (!province && city) {
