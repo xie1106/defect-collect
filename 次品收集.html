@@ -1095,7 +1095,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260910c'; // 改版本号强制清缓存
+const CACHE_VER = '20260910d'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1840,7 +1840,7 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
             body: JSON.stringify({ action:'createOrder', data: {
                 orderId: 'RET' + labelPoIds.join('_') + Date.now(),
                 sender: splitAddr(sender.name, sender.phone, sender.address),
-                receiver: splitAddr(receiver.name, receiver.phone, receiver.address),
+                receiver: splitAddr(receiver.name, receiver.phone, (receiver.address||'').replace(/[（(][^）)]*[）)]/g,'').replace(/[，,]\s*$/,'')),
                 itemName: skuText
             }}), signal: _ac.signal });
         clearTimeout(_tm);
