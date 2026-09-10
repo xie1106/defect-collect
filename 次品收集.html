@@ -1095,7 +1095,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260910e'; // 改版本号强制清缓存
+const CACHE_VER = '20260910f'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1833,13 +1833,25 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
         const sender = APP_CONFIG.returnSender || { name:'谢焕君', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' };
         const _ac = new AbortController();
         const _tm = setTimeout(() => _ac.abort(), 30000);
+        const _receiverAddr = (receiver.address||'').replace(/[（(][^）)]*[）)]/g,'').replace(/[，,]\s*$/,'');
+        const _receiverParsed = splitAddr(receiver.name, receiver.phone, _receiverAddr);
+        const _senderParsed = splitAddr(sender.name, sender.phone, sender.address);
+        console.log('🚚 receiver原始address:', receiver.address);
+        console.log('🚚 receiver去括号后:', _receiverAddr);
+        console.log('🚚 receiver解析结果:', JSON.stringify(_receiverParsed));
+        // 如果省为空，弹toast提示而不是发请求
+        if (!_receiverParsed.province) {
+            showToast('⚠️ 地址解析失败：无法识别省份，请检查退货地址格式。地址：' + _receiverAddr, '#dc2626', 8000);
+            if (btn) { btn.textContent = orig; btn.disabled = false; }
+            return null;
+        }
         const resp = await fetch((APP_CONFIG.ytoProxyUrl||'').replace(/\/+$/,''), {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify({ action:'createOrder', data: {
                 orderId: 'RET' + labelPoIds.join('_') + Date.now(),
-                sender: splitAddr(sender.name, sender.phone, sender.address),
-                receiver: splitAddr(receiver.name, receiver.phone, (receiver.address||'').replace(/[（(][^）)]*[）)]/g,'').replace(/[，,]\s*$/,'')),
+                sender: _senderParsed,
+                receiver: _receiverParsed,
                 itemName: skuText
             }}), signal: _ac.signal });
         clearTimeout(_tm);
