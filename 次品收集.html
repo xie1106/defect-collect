@@ -728,11 +728,18 @@ let _returnAddrMap = {};
 
 function formatSkuDisplay(code, qty) {
     const info = skuInfoMap[code];
-    if (info && Array.isArray(info) && info[0]) {
-        const parts = [info[0]];
-        if (info[1]) parts.push(info[1]);
-        if (info[2]) parts.push(info[2]);
-        return parts.join(' · ') + ' ×' + qty;
+    if (info) {
+        if (Array.isArray(info) && info[0]) {
+            const parts = [info[0]];
+            if (info[1]) parts.push(info[1]);
+            if (info[2]) parts.push(info[2]);
+            return parts.join(' · ') + ' ×' + qty;
+        } else if (info.name) {
+            const parts = [info.name];
+            if (info.color) parts.push(info.color);
+            if (info.size) parts.push(info.size);
+            return parts.join(' · ') + ' ×' + qty;
+        }
     }
     return code + '×' + qty;
 }
@@ -1088,7 +1095,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260909j'; // 改版本号强制清缓存
+const CACHE_VER = '20260910a'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1281,7 +1288,7 @@ function loadHistory() {
     // Apply tab filter (skip if searching)
     if (!search) {
     if (currentTab === 'all') {} // 显示全部
-    else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note));
+    else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r]));
     else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); });
     else if (currentTab === 'return_failed') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return rt && rt.status === '失败' && !(rt.orderId||'').includes('无法匹配'); });
     else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家同意' || ps === '线上申请取消') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家同意' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家同意'))); });
@@ -1370,6 +1377,7 @@ function loadHistory() {
                     ${_printedSingle ? `<button onclick="cancelWaybill('${r.po_id}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;font-size:11px;" title="取消面单，状态变回待处理">✕ 取消</button>` : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
                     <button onclick="editRecord(${r._realIdx})" style="color:#1677ff;border-color:#1677ff;">✏️ 编辑</button>
+                    ${_printedSingle ? `<span onclick="copyText('${_printedSingle}','${_printedSingle}')" title="点击复制快递单号" style="padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;letter-spacing:0.5px;">${_printedSingle}</span>` : ''}
                 </div>
             </div>`;
         }
@@ -2155,7 +2163,10 @@ function refreshMatchTags(note) {
     let color='', size='', sup='', addrStr='';
     for (const sku of skus) {
         const info = skuInfoMap[sku];
-        if (info && info[0]) { color = info[1]||''; size = info[2]||''; break; }
+        if (info) {
+            if (Array.isArray(info) && info[0]) { color = info[1]||''; size = info[2]||''; break; }
+            else if (info.color || info.size) { color = info.color||''; size = info.size||''; break; }
+        }
     }
     sup = getSupplierForGroup([{note:n}]) || '';
     if (sup) { const a = getReturnAddress(sup); if (a) addrStr = typeof a==='string' ? a : [a.contacts||'', a.mobile||'', a.address||''].filter(Boolean).join(','); }
