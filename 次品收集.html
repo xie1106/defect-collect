@@ -1095,7 +1095,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260910a'; // 改版本号强制清缓存
+const CACHE_VER = '20260910b'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1376,7 +1376,7 @@ function loadHistory() {
                     ${singleWaybillNo ? `<button onclick="${_printedSingle ? 'reprintWaybill' : 'printWaybillForGroup'}('${r.po_id}',this)" style="color:#fff;background:${_printedSingle ? '#059669' : '#0ea5e9'};border:1px solid ${_printedSingle ? '#059669' : '#0ea5e9'};border-radius:4px;" title="${_printedSingle ? '已打印：'+_printedSingle+'，点击重打' : '打印圆通电子面单'}">${_printedSingle ? '🖨️ 重打' : '🖨️ 面单'}</button>` : ''}
                     ${_printedSingle ? `<button onclick="cancelWaybill('${r.po_id}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;font-size:11px;" title="取消面单，状态变回待处理">✕ 取消</button>` : ''}
                     ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
-                    <button onclick="editRecord(${r._realIdx})" style="color:#1677ff;border-color:#1677ff;">✏️ 编辑</button>
+                    <button onclick="editRecord(${r._realIdx})" style="color:#1677ff;border-color:#1677ff;">✏️</button>
                     ${_printedSingle ? `<span onclick="copyText('${_printedSingle}','${_printedSingle}')" title="点击复制快递单号" style="padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;letter-spacing:0.5px;">${_printedSingle}</span>` : ''}
                 </div>
             </div>`;
@@ -2171,17 +2171,18 @@ function refreshMatchTags(note) {
     sup = getSupplierForGroup([{note:n}]) || '';
     if (sup) { const a = getReturnAddress(sup); if (a) addrStr = typeof a==='string' ? a : [a.contacts||'', a.mobile||'', a.address||''].filter(Boolean).join(','); }
     const okName = (v) => { const s=String(v||'').trim(); return s && !s.includes('*') && s!=='市场' && s!=='None' && s!=='null'; };
-    const setTag = (re, val) => { const m = n.match(re); if (m) n = n.replace(m[0], val); else n = n + ' ' + val; return n; };
-    const supM = n.match(/\[供应商:([^\]]*)\]/);
-    if (!okName(supM && supM[1]) && sup) n = setTag(/\[供应商:[^\]]*\]/, '[供应商:'+sup+']');
-    const addrM = n.match(/\[地址:([^\]]*)\]/);
-    const curAddr = addrM ? addrM[1].trim() : '';
-    if ((!curAddr || ['None','null',',,',',,None'].includes(curAddr)) && addrStr) n = setTag(/\[地址:[^\]]*\]/, '[地址:'+addrStr+']');
-    const detM = n.match(/\[明细:([^\]]*)\]/);
-    const curDet = detM ? detM[1].trim() : '';
+    
+    // 先去掉所有旧的供应商/地址/明细标签（避免重复追加）
+    n = n.replace(/\s*\[供应商:[^\]]*\]/g, '');
+    n = n.replace(/\s*\[地址:[^\]]*\]/g, '');
+    n = n.replace(/\s*\[明细:[^\]]*\]/g, '');
+    n = n.trim();
+    
+    // 添加新标签
+    if (sup && okName(sup)) n += ' [供应商:' + sup + ']';
+    if (addrStr) n += ' [地址:' + addrStr + ']';
     const wantDet = [color,size].filter(Boolean).join(';');
-    const detBad = !curDet || ['None','null'].includes(curDet) || /^[;,]/.test(curDet);
-    if (wantDet && (detBad || (curDet && curDet!==wantDet))) n = setTag(/\[明细:[^\]]*\]/, '[明细:'+wantDet+']');
+    if (wantDet) n += ' [明细:' + wantDet + ']';
     return n;
 }
 // 手动触发聚水潭同步（通过 Supabase Edge Function jst-sync → 调 Cloudflare Worker）
