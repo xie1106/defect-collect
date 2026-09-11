@@ -718,9 +718,6 @@ async function loadPurchaseStatus() {
         const r2 = await fetch('po_supplier_map.json?t=' + Date.now());
         if (r2.ok) { _poSupplierMap = await r2.json(); console.log('📦 采购单供应商加载:', Object.keys(_poSupplierMap).length, '条'); }
     } catch(e) {}
-            console.log('📦 1688采购单状态加载:', Object.keys(_purchaseStatusMap).length, '条');
-        }
-    } catch(e) {}
 }
 function getPurchaseRefundStatus(poId) {
     const rec = _purchaseStatusMap[String(poId)];
@@ -1105,7 +1102,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260911d'; // 改版本号强制清缓存
+const CACHE_VER = '20260911e'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
