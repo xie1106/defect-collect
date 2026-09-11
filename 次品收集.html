@@ -1102,7 +1102,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260911e'; // 改版本号强制清缓存
+const CACHE_VER = '20260911f'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1295,19 +1295,19 @@ function loadHistory() {
     // Apply tab filter (skip if searching)
     if (!search) {
     if (currentTab === 'all') {} // 显示全部
-    else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r]));
+    else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id) && !parseReturnTag(r.note) && !getWaybillPrinted([r]));
     else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); });
     else if (currentTab === 'return_failed') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return rt && rt.status === '失败' && !(rt.orderId||'').includes('无法匹配'); });
-    else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家同意' || ps === '线上申请取消') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家同意' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家同意'))); });
-    else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待买家退货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待买家退货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待买家退货'))); });
-    else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '等待卖家收货') return true; const rf = parseRefundTag(r.note); return rf && (rf.status === '等待卖家收货' || (rf.status === '退款中' && (rf.refundId||'').includes('等待卖家收货'))); });
-    else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '退款成功') return true; const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isRefundDone || isNon1688Done; });
+    else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); return ps === '等待卖家同意' || ps === '线上申请取消'; });
+    else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); return ps === '等待买家退货'; });
+    else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); return ps === '等待卖家收货'; });
+    else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '退款成功') return true; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isNon1688Done; });
     else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
     } // end if (!search)
 
-    const allPending = new Set(list.filter(r => r.status === 'pending' && !parseRefundTag(r.note) && !parseReturnTag(r.note)).map(r=>r.po_id)).size;
+    const allPending = new Set(list.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id) && !parseReturnTag(r.note)).map(r=>r.po_id)).size;
     const allRefunding = new Set(list.filter(r => isRefunding(r.note)).map(r=>r.po_id)).size;
-    const allDone = new Set(list.filter(r => { const rf = parseRefundTag(r.note); const isRefundDone = rf && rf.status === '退款成功'; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isRefundDone || isNon1688Done; }).map(r=>r.po_id)).size;
+    const allDone = new Set(list.filter(r => { const ps = getPurchaseRefundStatus(r.po_id); if (ps === '退款成功') return true; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isNon1688Done; }).map(r=>r.po_id)).size;
     const allUnmatched = new Set(list.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); }).map(r=>r.po_id)).size;
     const allError = new Set(list.filter(r => isAbnormalNote(r.note)).map(r=>r.po_id)).size;
     document.getElementById('pendingCount').textContent = `待处理:${allPending}`;
@@ -1326,14 +1326,14 @@ function loadHistory() {
         const realIdx = list.indexOf(r);
         r._realIdx = realIdx;
         const rt = parseReturnTag(r.note);
-        const rf = parseRefundTag(r.note);
-        if (!rf && !rt) {
-            // 待处理（无退货无退款）：仅同采购单号合并
+        const ps = getPurchaseRefundStatus(r.po_id);
+        if (!ps && !rt) {
+            // 待处理（无退货、聚水潭无退款状态）：同采购单号合并
             const key = 'p_' + r.po_id;
             if (!pendingMap[key]) { pendingMap[key] = []; groups.push({type:'group', po_id:r.po_id, items:pendingMap[key]}); }
             pendingMap[key].push(r);
         } else {
-            // 其他状态（有退货/退款标签或已处理）：独立显示，不合并
+            // 有退货标签或聚水潭有退款状态：独立显示
             groups.push({type:'single', record:r});
         }
     });
