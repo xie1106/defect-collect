@@ -644,7 +644,7 @@ const APP_CONFIG = {
     // --- 圆通电子面单（打印面单）---
     ytoProxyUrl: 'https://tlnlzbnwxkorquhpwmca.supabase.co/functions/v1/yto-proxy',   // 圆通面单代理（Supabase→Cloudflare Worker→圆通HTTP）
     ytoCustomerId: 'K200416574',                              // 圆通客户编码
-    returnSender: { name: '谢焕君', phone: '13316255984', address: '广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' },
+    returnSender: { name: '外采', phone: '13316255984', address: '广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' },
 };
 
 // 兼容旧代码引用（下方业务代码无需改动）
@@ -1758,7 +1758,7 @@ async function reprintWaybill(poId, btn, items) {
             supplier: supplier || '未知',
             receiver: receiver || {name:'', phone:'', address:'', province:'', city:'', district:''},
             skuText, skuMap, mailNo,
-            sender: APP_CONFIG.returnSender || {name:'谢焕君', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301'},
+            sender: APP_CONFIG.returnSender || {name:'外采', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301'},
             qrJson: '', shortAddr: '', threeStageCode: '', printKey: '', branchCode: '', centerCode: '',
             createdAt: new Date().toLocaleString()
         };
@@ -1859,7 +1859,7 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
     if (btn) { btn.textContent = '⏳ 生成中...'; btn.disabled = true; }
     const tagAll = async (tag) => { for (const p of labelPoIds) await tagWaybill(p, tag); };
     try {
-        const sender = APP_CONFIG.returnSender || { name:'谢焕君', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' };
+        const sender = APP_CONFIG.returnSender || { name:'外采', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' };
         const _ac = new AbortController();
         const _tm = setTimeout(() => _ac.abort(), 30000);
         // 收件人地址解析 - 先去括号备注再解析省市区
