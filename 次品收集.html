@@ -694,7 +694,9 @@ function _localMap(url, fb) {
 async function loadAllMaps() {
   // 从本地JSON加载（GitHub Pages，免费无流量限制）
   try { skuInfoMap = await _localMap('sku_info_map.json', {}); } catch(e) {}
-  try { _returnAddrMap = await _localMap('return_addr_map.json', {}); } catch(e) {}
+  try { _returnAddrMap = await _localMap('return_addr_map_v2.json', {}); } catch(e) {
+    try { _returnAddrMap = await _localMap('return_addr_map.json', {}); } catch(e2) {}
+  }
   try { _styleSupplierMap = await _localMap('return_style_map.json', null); } catch(e) {}
 }
 let _styleSupplierMap = null;
@@ -1095,7 +1097,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260911b'; // 改版本号强制清缓存
+const CACHE_VER = '20260911c'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
