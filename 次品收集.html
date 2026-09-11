@@ -694,9 +694,7 @@ function _localMap(url, fb) {
 async function loadAllMaps() {
   // 从本地JSON加载（GitHub Pages，免费无流量限制）
   try { skuInfoMap = await _localMap('sku_info_map.json', {}); } catch(e) {}
-  try { _returnAddrMap = await _localMap('return_addr_map_v2.json', {}); } catch(e) {
-    try { _returnAddrMap = await _localMap('return_addr_map.json', {}); } catch(e2) {}
-  }
+  try { _returnAddrMap = await _localMap('return_addr_map_v2.json', {}); } catch(e) {}
   try { _styleSupplierMap = await _localMap('return_style_map.json', null); } catch(e) {}
 }
 let _styleSupplierMap = null;
