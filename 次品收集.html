@@ -703,12 +703,21 @@ const returnAddrMapPromise = skuInfoMapPromise;
 
 // 1688采购单状态（从聚水潭同步，本地JSON加载）
 let _purchaseStatusMap = {};
+let _poSupplierMap = {};
 async function loadPurchaseStatus() {
     try {
         const r = await fetch('purchase_status.json?t=' + Date.now());
         if (r.ok) {
             const data = await r.json();
-            _purchaseStatusMap = data.records || {};
+            // 兼容两种格式：{records: {poId: {refund_status}}} 或 {poId: "状态"}
+            _purchaseStatusMap = data.records || data || {};
+            console.log('📦 1688采购单状态加载:', Object.keys(_purchaseStatusMap).length, '条');
+        }
+    } catch(e) {}
+    try {
+        const r2 = await fetch('po_supplier_map.json?t=' + Date.now());
+        if (r2.ok) { _poSupplierMap = await r2.json(); console.log('📦 采购单供应商加载:', Object.keys(_poSupplierMap).length, '条'); }
+    } catch(e) {}
             console.log('📦 1688采购单状态加载:', Object.keys(_purchaseStatusMap).length, '条');
         }
     } catch(e) {}
@@ -716,6 +725,7 @@ async function loadPurchaseStatus() {
 function getPurchaseRefundStatus(poId) {
     const rec = _purchaseStatusMap[String(poId)];
     if (!rec) return null;
+    if (typeof rec === 'string') return rec;
     return rec.refund_status || null;
 }
 function getPurchaseLabels(poId) {
@@ -1095,7 +1105,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260911c'; // 改版本号强制清缓存
+const CACHE_VER = '20260911d'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1592,6 +1602,12 @@ function getSupplierForGroup(items) {
             }
         }
     }
+    // 2b) 从采购单→供应商映射查
+    if (_poSupplierMap && items.length) {
+        const poId = String(items[0].po_id||'');
+        const sv = validName(_poSupplierMap[poId]);
+        if (sv && (!_returnAddrMap || getReturnAddress(sv))) return sv;
+    }
     // 3) 最后兜底：返回 note 供应商（哪怕无地址，避免显示空）
     return noteSupplier;
 }
@@ -1835,8 +1851,6 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
     const _addrRaw = getReturnAddress(supplier);
     const receiver = parseAddrInfo(_addrRaw);
     if (!receiver) { showToast('供应商「' + supplier + '」暂无退货地址', '#d97706'); return null; }
-    // 优先使用return_addr_map中预解析的省市区（避免前端正则解析出错）
-    const _preAddr = getPreParsedAddr(supplier);
     const skuMap = {};
     items.forEach(r => {
         const note = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
@@ -1851,21 +1865,19 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
         const sender = APP_CONFIG.returnSender || { name:'谢焕君', phone:'13316255984', address:'广东省广州市番禺区大石街道会江鸿盛三路9号高昇产业园A301' };
         const _ac = new AbortController();
         const _tm = setTimeout(() => _ac.abort(), 30000);
-        let _receiverParsed;
-        if (_preAddr && _preAddr.province) {
-            // 使用预解析的省市区（最可靠）
-            _receiverParsed = { name: receiver.name, phone: receiver.phone, province: _preAddr.province, city: _preAddr.city, district: _preAddr.district, address: _preAddr.detail };
-            console.log('🚚 使用预解析地址:', JSON.stringify(_receiverParsed));
-        } else {
-            // 降级：前端正则解析
-            const _receiverAddr = (receiver.address||'').replace(/[（(][^）)]*[）)]/g,'').replace(/[，,]\s*$/,'');
-            _receiverParsed = splitAddr(receiver.name, receiver.phone, _receiverAddr);
-            console.log('🚚 降级正则解析:', JSON.stringify(_receiverParsed));
-        }
+        // 收件人地址解析 - 先去括号备注再解析省市区
+        const _cleanAddr = (receiver.address||'').replace(/[（(][^）)]*[）)]/g,'').replace(/[，,]\s*$/,'').replace(/\s+/g,'');
+        const _am = _cleanAddr.match(/^(.*?省|.*?自治区)?(.*?市)?(.*?区|.*?县|.*?旗)?(.*)/);
+        let _rProv = (_am&&_am[1])||'', _rCity = (_am&&_am[2])||'', _rDist = (_am&&_am[3])||'', _rDet = (_am&&_am[4])||'';
+        if (!_rProv && _rCity) { const _cm={'广州市':'广东省','深圳市':'广东省','东莞市':'广东省','佛山市':'广东省','中山市':'广东省','珠海市':'广东省','惠州市':'广东省','杭州市':'浙江省','温州市':'浙江省','宁波市':'浙江省','揭阳市':'广东省','苏州市':'江苏省','南京市':'江苏省','上海市':'上海市','北京市':'北京市','成都市':'四川省','重庆市':'重庆市','武汉市':'湖北省'}; _rProv=_cm[_rCity]||''; }
+        // 用预解析字段覆盖（如果有）
+        const _pre = getPreParsedAddr(supplier);
+        if (_pre&&_pre.province) { _rProv=_pre.province; _rCity=_pre.city||_rCity; _rDist=_pre.district||_rDist; _rDet=_pre.detail||_rDet; }
+        const _receiverParsed = { name:receiver.name, phone:receiver.phone, province:_rProv, city:_rCity, district:_rDist, address:_rDet };
         const _senderParsed = splitAddr(sender.name, sender.phone, sender.address);
-        // 如果省为空，弹toast提示而不是发请求
+        console.log('🚚 receiver:', JSON.stringify(_receiverParsed));
         if (!_receiverParsed.province) {
-            showToast('⚠️ 地址解析失败：无法识别省份，请检查退货地址', '#dc2626', 8000);
+            showToast('⚠️ 地址解析失败：无法识别省份，地址：'+_cleanAddr, '#dc2626', 8000);
             if (btn) { btn.textContent = orig; btn.disabled = false; }
             return null;
         }
