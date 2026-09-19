@@ -1104,7 +1104,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260919d'; // 改版本号强制清缓存
+const CACHE_VER = '20260919e'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1307,11 +1307,11 @@ function loadHistory() {
     else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
     } // end if (!search)
 
-    const allPending = new Set(list.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id, r.note) && !parseReturnTag(r.note)).map(r=>r.po_id)).size;
-    const allRefunding = new Set(list.filter(r => isRefunding(r.note)).map(r=>r.po_id)).size;
-    const allDone = new Set(list.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); if (ps === '退款成功') return true; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isNon1688Done; }).map(r=>r.po_id)).size;
-    const allUnmatched = new Set(list.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); }).map(r=>r.po_id)).size;
-    const allError = new Set(list.filter(r => isAbnormalNote(r.note)).map(r=>r.po_id)).size;
+    const allPending = list.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id, r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r])).length;
+    const allRefunding = list.filter(r => isRefunding(r.note)).length;
+    const allDone = list.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); if (ps === '退款成功') return true; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isNon1688Done; }).length;
+    const allUnmatched = list.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); }).length;
+    const allError = list.filter(r => isAbnormalNote(r.note)).length;
     document.getElementById('pendingCount').textContent = `待处理:${allPending}`;
     document.getElementById('refundingCount').textContent = `退款中:${allRefunding}`;
     document.getElementById('doneCount').textContent = `已完成:${allDone}`;
