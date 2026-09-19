@@ -101,7 +101,7 @@ async function createReturnOrder(poId, btn) {
 async function batchReturnBySupplier() {
     const list = getRecords();
     // Filter non-1688 pending records without return tag
-    const pending = list.filter(r => r.status === 'pending' && !(r.note||'').includes('[1688:') && !(r.note||'').includes('[退货:已下单') && !(r.note||'').includes('[退货:待处理') && !(r.note||'').includes('[退货:失败'));
+    const pending = list.filter(r => r.status === 'pending' && !(r.note||'').includes('[1688:') && !getWaybillPrinted([r]) && !(r.note||'').includes('[退货:已下单') && !(r.note||'').includes('[退货:待处理') && !(r.note||'').includes('[退货:失败'));
     if (!pending.length) { showToast('无待处理的非1688记录', '#6b7280'); return; }
 
     // Group by supplier
@@ -230,7 +230,7 @@ async function cancelReturnOrder(poId, orderId, btn) {
 async function batchReturnAll() {
     const list = getRecords();
     // All pending records that haven't created JST return order yet
-    const pending = list.filter(r => r.status === 'pending' && !parseReturnTag(r.note));
+    const pending = list.filter(r => r.status === 'pending' && !parseReturnTag(r.note) && !getWaybillPrinted([r]));
     if (!pending.length) { showToast('无待处理记录', '#6b7280'); return; }
 
     // Group by supplier
@@ -1104,7 +1104,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260919b'; // 改版本号强制清缓存
+const CACHE_VER = '20260919c'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
