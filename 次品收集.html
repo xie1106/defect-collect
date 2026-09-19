@@ -1104,7 +1104,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260919e'; // 改版本号强制清缓存
+const CACHE_VER = '20260919f'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -2705,7 +2705,7 @@ function showToast(msg, color) {
 initPhotoGrid();
 // ═══════════════ 初始化与页面启动 ═══════════════
 loadStyleMap().then(() => fetchRecords());
-Promise.all([skuInfoMapPromise, returnAddrMapPromise]).then(() => { if (window._records) loadHistory(); });
+Promise.all([skuInfoMapPromise, returnAddrMapPromise, purchaseStatusPromise]).then(() => { if (window._records) loadHistory(); });
 
 // 未提交内容退出提示
 window.addEventListener('beforeunload', function(e) {
