@@ -1104,7 +1104,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260919c'; // 改版本号强制清缓存
+const CACHE_VER = '20260919d'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1384,7 +1384,7 @@ function loadHistory() {
                     ${is1688Single ? `<button onclick="open1688Return('${r.po_id}')" style="color:#fff;background:#1677ff;border:1px solid #1677ff;border-radius:4px;" title="${hasReal1688Single ? '打开1688订单详情' : '未找到1688订单号，将打开1688工作台'}">🔗 1688</button>` : ''}
                     ${singleWaybillNo ? `<button onclick="${_printedSingle ? 'reprintWaybill' : 'printWaybillForGroup'}('${r.po_id}',this)" style="color:#fff;background:${_printedSingle ? '#059669' : '#0ea5e9'};border:1px solid ${_printedSingle ? '#059669' : '#0ea5e9'};border-radius:4px;" title="${_printedSingle ? '已打印：'+_printedSingle+'，点击重打' : '打印圆通电子面单'}">${_printedSingle ? '🖨️ 重打' : '🖨️ 面单'}</button>` : ''}
                     ${_printedSingle ? `<button onclick="cancelWaybill('${r.po_id}',this)" style="color:#dc2626;border:1px solid #dc2626;border-radius:4px;font-size:11px;" title="取消面单，状态变回待处理">✕ 取消</button>` : ''}
-                    ${refundInfo||is1688Single?'':(r.status==='done'?`<button onclick="markUndone(${r._realIdx})" style="color:#d97706;border-color:#d97706;">↩ 反完成</button>`:`<button onclick="markDone(${r._realIdx})" style="color:#059669;border-color:#059669;">✅ 完成</button>`)}
+                    ${refundInfo||is1688Single?'':''}
                     <button onclick="editRecord(${r._realIdx})" style="color:#1677ff;border-color:#1677ff;">✏️</button>
                     ${_printedSingle ? `<span onclick="copyText('${_printedSingle}','${_printedSingle}')" title="点击复制快递单号" style="padding:3px 10px;border-radius:6px;font-size:12px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;cursor:pointer;letter-spacing:0.5px;">${_printedSingle}</span>` : ''}
                 </div>
@@ -2404,17 +2404,6 @@ async function open1688Return(poId) {
     setTimeout(() => a.remove(), 100);
 }
 
-async function markDoneGroup(poId) {
-    const list = getRecords();
-    const items = list.filter(r => r.po_id === poId && r.status === 'pending');
-    for (const r of items) {
-        r.status = 'done';
-        if (r.id) fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${r.id}`, { method:'PATCH', headers:{'apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Content-Type':'application/json'}, body:JSON.stringify({status:'done'}) });
-    }
-    loadHistory();
-    showToast('已全部完成 ✓', 'green');
-}
-
 async function deleteAndEdit(idx, poId) {
     const ok = await showConfirm('确定删除这条记录？');
     if (!ok) return;
@@ -2558,34 +2547,6 @@ async function deleteRecord(idx) {
     }
     await fetchRecords();
     showToast('已删除', 'green');
-}
-
-async function markDone(idx) {
-    const list = getRecords();
-    const rec = list[idx];
-    if (rec && rec.id) {
-        rec.status = 'done';
-        fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
-            method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: 'done' })
-        });
-    }
-    loadHistory();
-    showToast('已标记完成', 'green');
-}
-
-async function markUndone(idx) {
-    const list = getRecords();
-    const rec = list[idx];
-    if (rec && rec.id) {
-        rec.status = 'pending';
-        fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${rec.id}`, {
-            method: 'PATCH', headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: 'pending' })
-        });
-    }
-    loadHistory();
-    showToast('已恢复为待处理', 'green');
 }
 
 async function togglePhotos(idx) {
