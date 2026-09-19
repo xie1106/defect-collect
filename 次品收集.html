@@ -1104,7 +1104,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20260919a'; // 改版本号强制清缓存
+const CACHE_VER = '20260919b'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1930,7 +1930,11 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
         if (btn) { btn.textContent = '🖨️ ' + mailNo; btn.disabled = false; }
         return w;
     } catch(e) {
-        await tagAll('[面单:异常:' + String(e.message||'获取失败').slice(0,30) + ']');
+        // 如果已经打印成功（note里有"已打印"），不写异常标签
+        const alreadyPrinted = items.some(r => (r.note||'').includes('[面单:已打印:'));
+        if (!alreadyPrinted) {
+            await tagAll('[面单:异常:' + String(e.message||'获取失败').slice(0,30) + ']');
+        }
         showToast('❌ 获取面单失败: ' + e.message, '#dc2626');
         if (btn) { btn.textContent = orig; btn.disabled = false; }
         return null;
