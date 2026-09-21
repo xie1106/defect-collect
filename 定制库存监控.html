@@ -62,6 +62,8 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
         <button class="btn btn-sort" id="btn-asc" onclick="setSort('asc')">库存↑</button>
         <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
         <button class="btn btn-blue" onclick="exportCSV('sku')">📥 按SKU</button>
+        <button class="btn" onclick="toggleAll(true)">展开全部</button>
+        <button class="btn" onclick="toggleAll(false)">收起全部</button>
     </div>
     <div class="updated" id="updated"></div>
 </div>
@@ -102,6 +104,11 @@ function setSort(dir) {
     document.getElementById('btn-desc').classList.toggle('active', dir === 'desc');
     document.getElementById('btn-asc').classList.toggle('active', dir === 'asc');
     renderList();
+}
+
+function toggleAll(open) {
+    document.querySelectorAll('.sku-panel').forEach(el => el.classList.toggle('open', open));
+    document.querySelectorAll('.arrow').forEach(el => el.classList.toggle('open', open));
 }
 
 function toggleSku(iid) {
