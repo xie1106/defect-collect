@@ -7,68 +7,75 @@
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:#f5f7fa; color:#333; }
-.header { background:#fff; padding:16px 20px; border-bottom:1px solid #e5e7eb; position:sticky; top:0; z-index:10; }
-.header h1 { font-size:18px; font-weight:600; }
-.header .stats { font-size:13px; color:#6b7280; margin-top:4px; }
-.header .updated { font-size:12px; color:#9ca3af; margin-top:2px; }
-.toolbar { padding:12px 20px; background:#fff; border-bottom:1px solid #e5e7eb; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
-.toolbar input { flex:1; min-width:200px; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:14px; outline:none; }
-.toolbar input:focus { border-color:#3b82f6; box-shadow:0 0 0 2px rgba(59,130,246,0.15); }
-.btn { padding:8px 14px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; background:#fff; cursor:pointer; white-space:nowrap; }
-.btn:hover { background:#f9fafb; }
-.btn-primary { background:#3b82f6; color:#fff; border-color:#3b82f6; }
-.btn-primary:hover { background:#2563eb; }
-/* TABLE HEADER */
-.table-header { display:grid; grid-template-columns:2fr 1fr 80px 80px 80px 1fr; padding:8px 20px; background:#f9fafb;
-  font-size:12px; color:#6b7280; font-weight:600; border-bottom:1px solid #e5e7eb; }
+.top-bar { background:#fff; padding:16px 20px 12px; border-bottom:1px solid #e5e7eb; position:sticky; top:0; z-index:10; }
+.top-row { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.top-row h1 { font-size:17px; font-weight:600; }
+.top-row .stats { font-size:13px; color:#6b7280; }
+.ctrl-row { display:flex; align-items:center; gap:8px; margin-top:10px; flex-wrap:wrap; }
+.ctrl-row input { flex:1; min-width:160px; padding:7px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; outline:none; }
+.ctrl-row input:focus { border-color:#3b82f6; }
+.btn { padding:6px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:12px; background:#fff; cursor:pointer; white-space:nowrap; }
+.btn:hover { background:#f3f4f6; }
+.btn-blue { background:#3b82f6; color:#fff; border-color:#3b82f6; }
+.btn-blue:hover { background:#2563eb; }
+.btn-sort { min-width:70px; }
+.btn-sort.active { background:#eff6ff; border-color:#93c5fd; color:#1d4ed8; font-weight:600; }
+.updated { font-size:11px; color:#9ca3af; margin-top:6px; }
+/* TABLE */
+.th-row { display:grid; grid-template-columns:2.5fr 1.5fr 70px 70px 70px 100px; padding:6px 20px; background:#f9fafb;
+/* PLACEHOLDER_TH */
+  font-size:11px; color:#6b7280; font-weight:600; border-bottom:1px solid #e5e7eb; text-transform:uppercase; letter-spacing:0.5px; }
 .list { padding:0 0 80px; }
-/* PLACEHOLDER_MORE_STYLES */
-.card { background:#fff; border-bottom:1px solid #e5e7eb; }
-.card-header { display:grid; grid-template-columns:2fr 1fr 80px 80px 80px 1fr; padding:10px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
-.card-header:hover { background:#f9fafb; }
-.iid-cell { display:flex; align-items:center; gap:8px; }
-.iid { font-weight:600; font-size:14px; color:#1f2937; }
-.badge { padding:2px 8px; border-radius:4px; font-size:12px; font-weight:500; display:inline-block; }
+.card { background:#fff; border-bottom:1px solid #f3f4f6; }
+.card-header { display:grid; grid-template-columns:2.5fr 1.5fr 70px 70px 70px 100px; padding:10px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
+.card-header:hover { background:#fafbfc; }
+.iid-cell { display:flex; align-items:center; gap:6px; overflow:hidden; }
+.iid { font-weight:600; font-size:13px; color:#1f2937; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.wh-cell { display:flex; flex-wrap:wrap; gap:3px; }
+.wh-tag { background:#f3f4f6; color:#374151; padding:1px 6px; border-radius:3px; font-size:11px; white-space:nowrap; }
+.wh-main { background:#dbeafe; color:#1e40af; }
+.badge { padding:1px 7px; border-radius:4px; font-size:12px; font-weight:500; display:inline-block; }
 .badge-qty { background:#dbeafe; color:#1d4ed8; }
 .age-green { background:#d1fae5; color:#065f46; }
 .age-yellow { background:#fef3c7; color:#92400e; }
 .age-red { background:#fee2e2; color:#991b1b; }
-.sku-table { display:none; padding:0 20px 12px; }
-.sku-table.open { display:block; }
-.sku-table table { width:100%; border-collapse:collapse; font-size:13px; }
-.sku-table th { text-align:left; padding:6px 8px; background:#f9fafb; color:#6b7280; font-weight:500; border-bottom:1px solid #e5e7eb; }
-.sku-table td { padding:6px 8px; border-bottom:1px solid #f3f4f6; }
-.arrow { transition:transform 0.2s; font-size:11px; color:#9ca3af; }
+.cell-c { text-align:center; }
+.sku-panel { display:none; padding:0 20px 10px; }
+.sku-panel.open { display:block; }
+.sku-panel table { width:100%; border-collapse:collapse; font-size:12px; }
+.sku-panel th { text-align:left; padding:5px 8px; background:#f9fafb; color:#6b7280; font-weight:500; border-bottom:1px solid #e5e7eb; }
+.sku-panel td { padding:5px 8px; border-bottom:1px solid #f3f4f6; }
+.arrow { transition:transform 0.15s; font-size:10px; color:#9ca3af; }
 .arrow.open { transform:rotate(90deg); }
 .empty { text-align:center; padding:40px; color:#9ca3af; font-size:14px; }
-.cell-center { text-align:center; }
-.wh-tag { background:#f3f4f6; color:#374151; padding:2px 6px; border-radius:3px; font-size:12px; }
 </style>
 </head>
 <body>
-<div class="header">
-    <h1>📦 定制类目库存监控</h1>
-    <div class="stats" id="stats">加载中...</div>
+<div class="top-bar">
+    <div class="top-row">
+        <h1>📦 定制类目库存监控</h1>
+        <div class="stats" id="stats">加载中...</div>
+    </div>
+    <div class="ctrl-row">
+        <input type="text" id="search" placeholder="搜索款号..." oninput="renderList()">
+        <button class="btn btn-sort active" id="btn-desc" onclick="setSort('desc')">库存↓</button>
+        <button class="btn btn-sort" id="btn-asc" onclick="setSort('asc')">库存↑</button>
+        <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
+        <button class="btn btn-blue" onclick="exportCSV('sku')">📥 按SKU</button>
+    </div>
     <div class="updated" id="updated"></div>
 </div>
-<div class="toolbar">
-    <input type="text" id="search" placeholder="搜索款号..." oninput="renderList()">
-    <button class="btn btn-primary" onclick="exportCSV('style')">📥 按款号导出</button>
-    <button class="btn btn-primary" onclick="exportCSV('sku')">📥 按SKU导出</button>
-</div>
-<!-- PLACEHOLDER_BODY -->
-<div class="table-header">
-    <div>款号</div>
-    <div>仓库</div>
-    <div class="cell-center">库存</div>
-    <div class="cell-center">在库天数</div>
-    <div class="cell-center">SKU数</div>
-    <div>入库时间</div>
+<!-- PLACEHOLDER_TABLE -->
+<div class="th-row">
+    <div>款号</div><div>仓库</div><div class="cell-c">库存</div><div class="cell-c">在库天数</div><div class="cell-c">SKU</div><div>最近入库</div>
 </div>
 <div class="list" id="list"></div>
 <script>
 let DATA = null;
-/* PLACEHOLDER_SCRIPT */
+let sortDir = 'desc';
+/* PLACEHOLDER_JS */
+
+const MAIN_WH = '广州市捷展贸易有限公司';
 
 async function loadData() {
     try {
@@ -76,17 +83,25 @@ async function loadData() {
         DATA = await r.json();
         document.getElementById('stats').textContent =
             `${DATA.total_styles} 个款号 · ${DATA.total_skus} 个SKU · 总库存 ${DATA.total_qty}`;
-        document.getElementById('updated').textContent = '更新时间: ' + DATA.updated_at;
+        document.getElementById('updated').textContent = '更新: ' + DATA.updated_at;
         renderList();
-    } catch(e) {
-        document.getElementById('stats').textContent = '❌ 数据加载失败';
-    }
+    } catch(e) { document.getElementById('stats').textContent = '❌ 加载失败'; }
 }
 
-function ageClass(days) {
-    if (days <= 30) return 'age-green';
-    if (days <= 60) return 'age-yellow';
-    return 'age-red';
+function ageClass(d) { return d <= 30 ? 'age-green' : d <= 60 ? 'age-yellow' : 'age-red'; }
+
+function whLabel(name) {
+    if (!name) return '';
+    // 主仓标记
+    if (name === '进货仓' || name === '主仓' || name.includes('捷展')) return `<span class="wh-tag wh-main">主仓</span>`;
+    return `<span class="wh-tag">${name}</span>`;
+}
+
+function setSort(dir) {
+    sortDir = dir;
+    document.getElementById('btn-desc').classList.toggle('active', dir === 'desc');
+    document.getElementById('btn-asc').classList.toggle('active', dir === 'asc');
+    renderList();
 }
 
 function toggleSku(iid) {
@@ -99,40 +114,31 @@ function toggleSku(iid) {
 function renderList() {
     if (!DATA) return;
     const q = (document.getElementById('search').value || '').trim().toLowerCase();
-    const list = DATA.styles.filter(s =>
-        !q || s.i_id.toLowerCase().includes(q) || (s.name||'').toLowerCase().includes(q)
-    );
-    if (!list.length) {
-        document.getElementById('list').innerHTML = '<div class="empty">无匹配结果</div>';
-        return;
-    }
+    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q));
+    list.sort((a, b) => sortDir === 'desc' ? b.total_qty - a.total_qty : a.total_qty - b.total_qty);
+
+    if (!list.length) { document.getElementById('list').innerHTML = '<div class="empty">无匹配结果</div>'; return; }
+
     let html = '';
     for (const s of list) {
         const ac = ageClass(s.age_days);
+        const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
+        const whHtml = whs.length ? whs.map(whLabel).join('') : '-';
         const dateStr = s.io_date || s.created || '';
         html += `<div class="card">
             <div class="card-header" onclick="toggleSku('${s.i_id}')">
-                <div class="iid-cell">
-                    <span class="arrow" id="arrow-${s.i_id}">▶</span>
-                    <span class="iid">${s.i_id}</span>
-                </div>
-                <div>${s.warehouse ? '<span class="wh-tag">'+s.warehouse+'</span>' : '-'}</div>
-                <div class="cell-center"><span class="badge badge-qty">${s.total_qty}</span></div>
-                <div class="cell-center"><span class="badge ${ac}">${s.age_days}天</span></div>
-                <div class="cell-center">${s.skus.length}</div>
+                <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid">${s.i_id}</span></div>
+                <div class="wh-cell">${whHtml}</div>
+                <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
+                <div class="cell-c"><span class="badge ${ac}">${s.age_days}天</span></div>
+                <div class="cell-c">${s.skus.length}</div>
                 <div style="color:#6b7280;font-size:12px">${dateStr}</div>
             </div>
-            <div class="sku-table" id="skus-${s.i_id}">
-                <table>
-                    <thead><tr><th>SKU编码</th><th>颜色</th><th>尺码</th><th>库存</th><th>仓库</th><th>入库时间</th></tr></thead>
-                    <tbody>`;
-        for (const sku of s.skus) {
-            html += `<tr>
-                <td>${sku.sku_id}</td><td>${sku.color}</td><td>${sku.size}</td>
-                <td><strong>${sku.qty}</strong></td>
-                <td>${sku.warehouse||s.warehouse||'-'}</td>
-                <td style="color:#6b7280;font-size:12px">${sku.io_date||dateStr}</td>
-            </tr>`;
+            <div class="sku-panel" id="skus-${s.i_id}"><table>
+                <thead><tr><th>SKU</th><th>颜色</th><th>尺码</th><th>库存</th><th>仓库</th><th>入库</th></tr></thead><tbody>`;
+        for (const k of s.skus) {
+            const kw = k.warehouse || (whs[0]||'');
+            html += `<tr><td>${k.sku_id}</td><td>${k.color}</td><td>${k.size}</td><td><b>${k.qty}</b></td><td>${kw}</td><td style="color:#9ca3af">${k.io_date||dateStr}</td></tr>`;
         }
         html += '</tbody></table></div></div>';
     }
@@ -141,23 +147,24 @@ function renderList() {
 
 function exportCSV(mode) {
     if (!DATA) return;
-    let csv = '\uFEFF'; // BOM for Excel
+    let csv = '\uFEFF';
     if (mode === 'style') {
-        csv += '款号,仓库,总库存,在库天数,SKU数,入库时间\n';
+        csv += '款号,仓库,总库存,在库天数,SKU数,最近入库\n';
         for (const s of DATA.styles) {
-            csv += `${s.i_id},${s.warehouse||''},${s.total_qty},${s.age_days},${s.skus.length},${s.io_date||s.created||''}\n`;
+            const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean).join('+');
+            csv += `${s.i_id},"${whs}",${s.total_qty},${s.age_days},${s.skus.length},${s.io_date||s.created||''}\n`;
         }
     } else {
         csv += 'SKU编码,款号,颜色,尺码,库存,仓库,入库时间\n';
         for (const s of DATA.styles) {
-            for (const sku of s.skus) {
-                csv += `${sku.sku_id},${s.i_id},${sku.color},${sku.size},${sku.qty},${sku.warehouse||s.warehouse||''},${sku.io_date||s.io_date||s.created||''}\n`;
+            const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
+            for (const k of s.skus) {
+                csv += `${k.sku_id},${s.i_id},${k.color},${k.size},${k.qty},"${k.warehouse||whs[0]||''}",${k.io_date||s.io_date||''}\n`;
             }
         }
     }
-    const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
     const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
     a.download = mode === 'style' ? '定制库存_按款号.csv' : '定制库存_按SKU.csv';
     a.click();
 }
