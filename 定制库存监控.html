@@ -22,15 +22,15 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .btn-sort.active { background:#eff6ff; border-color:#93c5fd; color:#1d4ed8; font-weight:600; }
 .updated { font-size:11px; color:#9ca3af; margin-top:6px; }
 /* TABLE */
-.th-row { display:grid; grid-template-columns:2.5fr 1.5fr 70px 70px 70px 100px; padding:6px 20px; background:#f9fafb;
+.th-row { display:grid; grid-template-columns:3fr 80px 80px 60px 100px 1.2fr; padding:8px 20px; background:#f9fafb;
 /* PLACEHOLDER_TH */
-  font-size:11px; color:#6b7280; font-weight:600; border-bottom:1px solid #e5e7eb; letter-spacing:0.5px; }
+  font-size:12px; color:#374151; font-weight:700; border-bottom:1px solid #e5e7eb; letter-spacing:0.5px; }
 .th-row .sortable { cursor:pointer; user-select:none; display:flex; align-items:center; gap:2px; justify-content:center; }
 .th-row .sortable:hover { color:#1d4ed8; }
 .th-row .sortable.active { color:#1d4ed8; font-weight:700; }
 .list { padding:0 0 80px; }
 .card { background:#fff; border-bottom:1px solid #f3f4f6; }
-.card-header { display:grid; grid-template-columns:2.5fr 1.5fr 70px 70px 70px 100px; padding:10px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
+.card-header { display:grid; grid-template-columns:3fr 80px 80px 60px 100px 1.2fr; padding:12px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
 .card-header:hover { background:#fafbfc; }
 .iid-cell { display:flex; align-items:center; gap:6px; overflow:hidden; }
 .iid { font-weight:600; font-size:13px; color:#1f2937; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; }
@@ -47,13 +47,13 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .age-yellow { background:#fef3c7; color:#92400e; }
 .age-red { background:#fee2e2; color:#991b1b; }
 .cell-c { text-align:center; }
-.sku-panel { display:none; padding:0 20px 10px; }
+.sku-panel { display:none; padding:4px 20px 12px 44px; }
 .sku-panel.open { display:block; }
 .card.expanded { background:#fffbeb; }
 .card.expanded > .card-header { background:#fef9c3; }
-.sku-panel table { width:100%; border-collapse:collapse; font-size:12px; }
-.sku-panel th { text-align:left; padding:5px 8px; background:#f9fafb; color:#6b7280; font-weight:500; border-bottom:1px solid #e5e7eb; }
-.sku-panel td { padding:5px 8px; border-bottom:1px solid #f3f4f6; }
+.sku-panel table { width:100%; border-collapse:collapse; font-size:13px; }
+.sku-panel th { text-align:left; padding:6px 10px; background:#f9fafb; color:#374151; font-weight:600; border-bottom:1px solid #e5e7eb; }
+.sku-panel td { padding:6px 10px; border-bottom:1px solid #f3f4f6; }
 .arrow { transition:transform 0.15s; font-size:10px; color:#9ca3af; }
 .arrow.open { transform:rotate(90deg); }
 .empty { text-align:center; padding:40px; color:#9ca3af; font-size:14px; }
@@ -76,10 +76,11 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 </div>
 <!-- PLACEHOLDER_TABLE -->
 <div class="th-row">
-    <div>款号</div><div>仓库</div>
+    <div>款号</div>
     <div class="sortable active" id="th-qty" onclick="setSort('qty')">库存 <span id="th-qty-arrow">↓</span></div>
     <div class="cell-c">在库天数</div><div class="cell-c">SKU</div>
     <div class="sortable" id="th-date" onclick="setSort('date')">最近入库 <span id="th-date-arrow"></span></div>
+    <div>仓库</div>
 </div>
 <div class="list" id="list"></div>
 <div class="toast-copy" id="copyToast">已复制</div>
@@ -175,17 +176,17 @@ function renderList() {
         html += `<div class="card">
             <div class="card-header" onclick="toggleSku('${s.i_id}')">
                 <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
-                <div class="wh-cell">${whHtml}</div>
                 <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
                 <div class="cell-c"><span class="badge ${ac}">${s.age_days}天</span></div>
                 <div class="cell-c">${s.skus.length}</div>
                 <div style="color:#6b7280;font-size:12px">${dateStr}</div>
+                <div class="wh-cell">${whHtml}</div>
             </div>
             <div class="sku-panel" id="skus-${s.i_id}"><table>
-                <thead><tr><th>SKU</th><th>颜色</th><th>尺码</th><th>库存</th><th>仓库</th><th>入库</th></tr></thead><tbody>`;
+                <thead><tr><th>SKU编码</th><th>颜色</th><th>尺码</th><th>库存</th><th>入库时间</th><th>仓库</th></tr></thead><tbody>`;
         for (const k of s.skus) {
             const kw = k.warehouse || (whs[0]||'');
-            html += `<tr><td class="copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</td><td>${k.color}</td><td>${k.size}</td><td><b>${k.qty}</b></td><td>${whLabel(kw)}</td><td style="color:#9ca3af">${k.io_date||dateStr}</td></tr>`;
+            html += `<tr><td class="copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</td><td>${k.color}</td><td>${k.size}</td><td><b>${k.qty}</b></td><td style="color:#9ca3af">${k.io_date||dateStr}</td><td>${whLabel(kw)}</td></tr>`;
         }
         html += '</tbody></table></div></div>';
     }

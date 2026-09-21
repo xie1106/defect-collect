@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-09-21 22:12:05",
-  "total_styles": 44,
-  "total_skus": 203,
-  "total_qty": 9150,
+  "updated_at": "2026-09-21 22:35:56",
+  "total_styles": 46,
+  "total_skus": 209,
+  "total_qty": 10205,
   "styles": [
     {
       "i_id": "DZTX260509-72",
@@ -2288,6 +2288,28 @@
       ]
     },
     {
+      "i_id": "DZWY260325-90",
+      "name": "定制",
+      "io_date": "2026-09-21",
+      "created": "2026-08-06",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 0,
+      "total_qty": 303,
+      "skus": [
+        {
+          "sku_id": "DZWY260325-9002F",
+          "color": "黑色",
+          "size": "F",
+          "qty": 303,
+          "properties": "黑色;F",
+          "io_date": "2026-09-21",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
       "i_id": "DZMY260728-93",
       "name": "定制",
       "io_date": "2026-09-21",
@@ -2398,6 +2420,64 @@
           "size": "XXL",
           "qty": 11,
           "properties": "黑色;XXL",
+          "io_date": "2026-09-21",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT260709-71",
+      "name": "定制",
+      "io_date": "2026-09-21",
+      "created": "2026-07-30",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 0,
+      "total_qty": 752,
+      "skus": [
+        {
+          "sku_id": "DZWT260709-7101L",
+          "color": "白色",
+          "size": "L",
+          "qty": 224,
+          "properties": "白色;L",
+          "io_date": "2026-09-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260709-7101M",
+          "color": "白色",
+          "size": "M",
+          "qty": 85,
+          "properties": "白色;M",
+          "io_date": "2026-09-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260709-7101S",
+          "color": "白色",
+          "size": "S",
+          "qty": 155,
+          "properties": "白色;S",
+          "io_date": "2026-09-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260709-7101XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 168,
+          "properties": "白色;XL",
+          "io_date": "2026-09-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260709-7101XXL",
+          "color": "白色",
+          "size": "XXL",
+          "qty": 120,
+          "properties": "白色;XXL",
           "io_date": "2026-09-21",
           "warehouse": "进货仓"
         }
