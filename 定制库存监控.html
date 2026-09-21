@@ -64,7 +64,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
         <div class="stats" id="stats">加载中...</div>
     </div>
     <div class="ctrl-row">
-        <input type="text" id="search" placeholder="搜索款号..." oninput="renderList()">
+        <input type="text" id="search" placeholder="搜索款号 / SKU编码..." oninput="renderList()">
         <button class="btn" onclick="toggleAll(true)">展开全部</button>
         <button class="btn" onclick="toggleAll(false)">收起全部</button>
         <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
@@ -148,7 +148,7 @@ function toggleSku(iid) {
 function renderList() {
     if (!DATA) return;
     const q = (document.getElementById('search').value || '').trim().toLowerCase();
-    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q));
+    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q)));
     if (sortField === 'qty') {
         list.sort((a, b) => sortDir === 'desc' ? b.total_qty - a.total_qty : a.total_qty - b.total_qty);
     } else if (sortField === 'date') {
