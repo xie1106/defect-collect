@@ -49,6 +49,8 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .cell-c { text-align:center; }
 .sku-panel { display:none; padding:0 20px 10px; }
 .sku-panel.open { display:block; }
+.card.expanded { background:#fffbeb; }
+.card.expanded > .card-header { background:#fef9c3; }
 .sku-panel table { width:100%; border-collapse:collapse; font-size:12px; }
 .sku-panel th { text-align:left; padding:5px 8px; background:#f9fafb; color:#6b7280; font-weight:500; border-bottom:1px solid #e5e7eb; }
 .sku-panel td { padding:5px 8px; border-bottom:1px solid #f3f4f6; }
@@ -136,6 +138,7 @@ function copyText(text, e) {
 function toggleAll(open) {
     document.querySelectorAll('.sku-panel').forEach(el => el.classList.toggle('open', open));
     document.querySelectorAll('.arrow').forEach(el => el.classList.toggle('open', open));
+    document.querySelectorAll('.card').forEach(el => el.classList.toggle('expanded', open));
 }
 
 function toggleSku(iid) {
@@ -143,6 +146,8 @@ function toggleSku(iid) {
     const arrow = document.getElementById('arrow-' + iid);
     if (el) el.classList.toggle('open');
     if (arrow) arrow.classList.toggle('open');
+    const card = el?.closest('.card');
+    if (card) card.classList.toggle('expanded', el.classList.contains('open'));
 }
 
 function renderList() {
@@ -180,7 +185,7 @@ function renderList() {
                 <thead><tr><th>SKU</th><th>颜色</th><th>尺码</th><th>库存</th><th>仓库</th><th>入库</th></tr></thead><tbody>`;
         for (const k of s.skus) {
             const kw = k.warehouse || (whs[0]||'');
-            html += `<tr><td class="copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</td><td>${k.color}</td><td>${k.size}</td><td><b>${k.qty}</b></td><td>${kw}</td><td style="color:#9ca3af">${k.io_date||dateStr}</td></tr>`;
+            html += `<tr><td class="copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</td><td>${k.color}</td><td>${k.size}</td><td><b>${k.qty}</b></td><td>${whLabel(kw)}</td><td style="color:#9ca3af">${k.io_date||dateStr}</td></tr>`;
         }
         html += '</tbody></table></div></div>';
     }
