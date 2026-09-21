@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定制类目库存监控</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; background:#f5f7fa; color:#333; }
+.header { background:#fff; padding:16px 20px; border-bottom:1px solid #e5e7eb; position:sticky; top:0; z-index:10; }
+.header h1 { font-size:18px; font-weight:600; }
+.header .stats { font-size:13px; color:#6b7280; margin-top:4px; }
+.header .updated { font-size:12px; color:#9ca3af; margin-top:2px; }
+.search-bar { padding:12px 20px; background:#fff; border-bottom:1px solid #e5e7eb; }
+.search-bar input { width:100%; padding:8px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:14px; outline:none; }
+.search-bar input:focus { border-color:#3b82f6; box-shadow:0 0 0 2px rgba(59,130,246,0.15); }
+.list { padding:12px 20px 80px; }
+/* PLACEHOLDER_STYLES */
+.card { background:#fff; border-radius:8px; margin-bottom:8px; border:1px solid #e5e7eb; overflow:hidden; }
+.card-header { padding:12px 16px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; }
+.card-header:hover { background:#f9fafb; }
+.card-header .left { display:flex; align-items:center; gap:10px; }
+.card-header .iid { font-weight:600; font-size:15px; color:#1f2937; }
+.card-header .name { font-size:13px; color:#6b7280; }
+.card-header .right { display:flex; align-items:center; gap:12px; font-size:13px; }
+.badge { padding:2px 8px; border-radius:4px; font-size:12px; font-weight:500; }
+.badge-qty { background:#dbeafe; color:#1d4ed8; }
+.badge-age { border-radius:4px; padding:2px 8px; font-size:12px; font-weight:500; }
+.age-green { background:#d1fae5; color:#065f46; }
+.age-yellow { background:#fef3c7; color:#92400e; }
+.age-red { background:#fee2e2; color:#991b1b; }
+.sku-table { display:none; padding:0 16px 12px; }
+.sku-table.open { display:block; }
+.sku-table table { width:100%; border-collapse:collapse; font-size:13px; }
+.sku-table th { text-align:left; padding:6px 8px; background:#f9fafb; color:#6b7280; font-weight:500; border-bottom:1px solid #e5e7eb; }
+.sku-table td { padding:6px 8px; border-bottom:1px solid #f3f4f6; }
+.arrow { transition:transform 0.2s; font-size:12px; color:#9ca3af; }
+.arrow.open { transform:rotate(90deg); }
+.empty { text-align:center; padding:40px; color:#9ca3af; font-size:14px; }
+</style>
+</head>
+<body>
+<div class="header">
+    <h1>📦 定制类目库存监控</h1>
+    <div class="stats" id="stats">加载中...</div>
+    <div class="updated" id="updated"></div>
+</div>
+<div class="search-bar">
+    <input type="text" id="search" placeholder="搜索款号..." oninput="renderList()">
+</div>
+<div class="list" id="list"></div>
+
+<script>
+let DATA = null;
+
+async function loadData() {
+    try {
+        const r = await fetch('custom_inventory.json?t=' + Date.now());
+        DATA = await r.json();
+        document.getElementById('stats').textContent =
+            `${DATA.total_styles} 个款号 · ${DATA.total_skus} 个SKU · 总库存 ${DATA.total_qty}`;
+        document.getElementById('updated').textContent = '更新时间: ' + DATA.updated_at;
+        renderList();
+    } catch(e) {
+        document.getElementById('stats').textContent = '❌ 数据加载失败';
+    }
+}
+/* PLACEHOLDER_SCRIPT */
+
+function ageClass(days) {
+    if (days <= 30) return 'age-green';
+    if (days <= 60) return 'age-yellow';
+    return 'age-red';
+}
+
+function toggleSku(iid) {
+    const el = document.getElementById('skus-' + iid);
+    const arrow = document.getElementById('arrow-' + iid);
+    if (el) { el.classList.toggle('open'); }
+    if (arrow) { arrow.classList.toggle('open'); }
+}
+
+function renderList() {
+    if (!DATA) return;
+    const q = (document.getElementById('search').value || '').trim().toLowerCase();
+    const list = DATA.styles.filter(s =>
+        !q || s.i_id.toLowerCase().includes(q) || (s.name||'').toLowerCase().includes(q)
+    );
+
+    if (!list.length) {
+        document.getElementById('list').innerHTML = '<div class="empty">无匹配结果</div>';
+        return;
+    }
+
+    let html = '';
+    for (const s of list) {
+        const ac = ageClass(s.age_days);
+        html += `<div class="card">
+            <div class="card-header" onclick="toggleSku('${s.i_id}')">
+                <div class="left">
+                    <span class="arrow" id="arrow-${s.i_id}">▶</span>
+                    <span class="iid">${s.i_id}</span>
+                    <span class="name">${s.name||''}</span>
+                </div>
+                <div class="right">
+                    <span class="badge badge-qty">库存 ${s.total_qty}</span>
+                    <span class="badge badge-age ${ac}">${s.age_days}天</span>
+                    <span style="font-size:12px;color:#9ca3af">${s.created}</span>
+                </div>
+            </div>
+            <div class="sku-table" id="skus-${s.i_id}">
+                <table>
+                    <thead><tr><th>SKU编码</th><th>颜色</th><th>尺码</th><th>库存</th></tr></thead>
+                    <tbody>`;
+        for (const sku of s.skus) {
+            html += `<tr>
+                <td>${sku.sku_id}</td>
+                <td>${sku.color}</td>
+                <td>${sku.size}</td>
+                <td><strong>${sku.qty}</strong></td>
+            </tr>`;
+        }
+        html += `</tbody></table></div></div>`;
+    }
+    document.getElementById('list').innerHTML = html;
+}
+
+loadData();
+// 每5分钟自动刷新
+setInterval(loadData, 300000);
+</script>
+</body>
+</html>
