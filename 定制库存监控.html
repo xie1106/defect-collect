@@ -77,17 +77,17 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 <!-- PLACEHOLDER_TABLE -->
 <div class="th-row">
     <div>款号</div>
-    <div class="sortable active" id="th-qty" onclick="setSort('qty')">库存 <span id="th-qty-arrow">↓</span></div>
+    <div class="sortable" id="th-qty" onclick="setSort('qty')">库存 <span id="th-qty-arrow"></span></div>
     <div class="cell-c">在库天数</div><div class="cell-c">SKU</div>
-    <div class="sortable" id="th-date" onclick="setSort('date')">最近入库 <span id="th-date-arrow"></span></div>
+    <div class="sortable active" id="th-date" onclick="setSort('date')">最近入库 <span id="th-date-arrow">↑</span></div>
     <div>仓库</div>
 </div>
 <div class="list" id="list"></div>
 <div class="toast-copy" id="copyToast">已复制</div>
 <script>
 let DATA = null;
-let sortField = 'qty';
-let sortDir = 'desc';
+let sortField = 'date';
+let sortDir = 'asc';
 /* PLACEHOLDER_JS */
 
 const MAIN_WH = '广州市捷展贸易有限公司';
