@@ -24,7 +24,10 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 /* TABLE */
 .th-row { display:grid; grid-template-columns:2.5fr 1.5fr 70px 70px 70px 100px; padding:6px 20px; background:#f9fafb;
 /* PLACEHOLDER_TH */
-  font-size:11px; color:#6b7280; font-weight:600; border-bottom:1px solid #e5e7eb; text-transform:uppercase; letter-spacing:0.5px; }
+  font-size:11px; color:#6b7280; font-weight:600; border-bottom:1px solid #e5e7eb; letter-spacing:0.5px; }
+.th-row .sortable { cursor:pointer; user-select:none; display:flex; align-items:center; gap:2px; justify-content:center; }
+.th-row .sortable:hover { color:#1d4ed8; }
+.th-row .sortable.active { color:#1d4ed8; font-weight:700; }
 .list { padding:0 0 80px; }
 .card { background:#fff; border-bottom:1px solid #f3f4f6; }
 .card-header { display:grid; grid-template-columns:2.5fr 1.5fr 70px 70px 70px 100px; padding:10px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
@@ -58,22 +61,24 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
     </div>
     <div class="ctrl-row">
         <input type="text" id="search" placeholder="搜索款号..." oninput="renderList()">
-        <button class="btn btn-sort active" id="btn-desc" onclick="setSort('desc')">库存↓</button>
-        <button class="btn btn-sort" id="btn-asc" onclick="setSort('asc')">库存↑</button>
-        <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
-        <button class="btn btn-blue" onclick="exportCSV('sku')">📥 按SKU</button>
         <button class="btn" onclick="toggleAll(true)">展开全部</button>
         <button class="btn" onclick="toggleAll(false)">收起全部</button>
+        <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
+        <button class="btn btn-blue" onclick="exportCSV('sku')">📥 按SKU</button>
     </div>
     <div class="updated" id="updated"></div>
 </div>
 <!-- PLACEHOLDER_TABLE -->
 <div class="th-row">
-    <div>款号</div><div>仓库</div><div class="cell-c">库存</div><div class="cell-c">在库天数</div><div class="cell-c">SKU</div><div>最近入库</div>
+    <div>款号</div><div>仓库</div>
+    <div class="sortable active" id="th-qty" onclick="setSort('qty')">库存 <span id="th-qty-arrow">↓</span></div>
+    <div class="cell-c">在库天数</div><div class="cell-c">SKU</div>
+    <div class="sortable" id="th-date" onclick="setSort('date')">最近入库 <span id="th-date-arrow"></span></div>
 </div>
 <div class="list" id="list"></div>
 <script>
 let DATA = null;
+let sortField = 'qty';
 let sortDir = 'desc';
 /* PLACEHOLDER_JS */
 
@@ -99,10 +104,18 @@ function whLabel(name) {
     return `<span class="wh-tag">${name}</span>`;
 }
 
-function setSort(dir) {
-    sortDir = dir;
-    document.getElementById('btn-desc').classList.toggle('active', dir === 'desc');
-    document.getElementById('btn-asc').classList.toggle('active', dir === 'asc');
+function setSort(field) {
+    if (sortField === field) {
+        sortDir = sortDir === 'desc' ? 'asc' : 'desc';
+    } else {
+        sortField = field;
+        sortDir = 'desc';
+    }
+    // 更新表头样式
+    document.getElementById('th-qty').classList.toggle('active', field === 'qty');
+    document.getElementById('th-date').classList.toggle('active', field === 'date');
+    document.getElementById('th-qty-arrow').textContent = field === 'qty' ? (sortDir === 'desc' ? '↓' : '↑') : '';
+    document.getElementById('th-date-arrow').textContent = field === 'date' ? (sortDir === 'desc' ? '↓' : '↑') : '';
     renderList();
 }
 
@@ -122,7 +135,15 @@ function renderList() {
     if (!DATA) return;
     const q = (document.getElementById('search').value || '').trim().toLowerCase();
     let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q));
-    list.sort((a, b) => sortDir === 'desc' ? b.total_qty - a.total_qty : a.total_qty - b.total_qty);
+    if (sortField === 'qty') {
+        list.sort((a, b) => sortDir === 'desc' ? b.total_qty - a.total_qty : a.total_qty - b.total_qty);
+    } else if (sortField === 'date') {
+        list.sort((a, b) => {
+            const da = a.io_date || a.created || '';
+            const db = b.io_date || b.created || '';
+            return sortDir === 'desc' ? db.localeCompare(da) : da.localeCompare(db);
+        });
+    }
 
     if (!list.length) { document.getElementById('list').innerHTML = '<div class="empty">无匹配结果</div>'; return; }
 
