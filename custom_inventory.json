@@ -1,8 +1,8 @@
 {
-  "updated_at": "2026-09-27 15:12:00",
-  "total_styles": 24,
-  "total_skus": 73,
-  "total_qty": 5831,
+  "updated_at": "2026-09-27 16:27:10",
+  "total_styles": 92,
+  "total_skus": 317,
+  "total_qty": 10343,
   "styles": [
     {
       "i_id": "DSCT260727-71",
@@ -152,6 +152,364 @@
       ]
     },
     {
+      "i_id": "DZTX260514-70",
+      "name": "定制",
+      "io_date": "2026-09-03",
+      "created": "2026-08-04",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 24,
+      "total_qty": 422,
+      "skus": [
+        {
+          "sku_id": "DZTX260514-7001L",
+          "color": "白色",
+          "size": "L",
+          "qty": 56,
+          "properties": "白色;L",
+          "io_date": "2026-08-31",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7001M",
+          "color": "白色",
+          "size": "M",
+          "qty": 53,
+          "properties": "白色;M",
+          "io_date": "2026-08-31",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7001S",
+          "color": "白色",
+          "size": "S",
+          "qty": 31,
+          "properties": "白色;S",
+          "io_date": "2026-08-31",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7001XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 46,
+          "properties": "白色;XL",
+          "io_date": "2026-08-31",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7001XS",
+          "color": "白色",
+          "size": "XS",
+          "qty": 17,
+          "properties": "白色;XS",
+          "io_date": "2026-08-31",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7002L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 60,
+          "properties": "黑色;L",
+          "io_date": "2026-09-03",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7002M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 60,
+          "properties": "黑色;M",
+          "io_date": "2026-09-03",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7002S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 36,
+          "properties": "黑色;S",
+          "io_date": "2026-09-03",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7002XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 42,
+          "properties": "黑色;XL",
+          "io_date": "2026-09-03",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260514-7002XS",
+          "color": "黑色",
+          "size": "XS",
+          "qty": 21,
+          "properties": "黑色;XS",
+          "io_date": "2026-09-03",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX251124-31",
+      "name": "定制",
+      "io_date": "2026-09-16",
+      "created": "2026-05-12",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 11,
+      "total_qty": 363,
+      "skus": [
+        {
+          "sku_id": "DZTX251124-31193L",
+          "color": "活性黑",
+          "size": "L",
+          "qty": 25,
+          "properties": "活性黑;L",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31193M",
+          "color": "活性黑",
+          "size": "M",
+          "qty": 62,
+          "properties": "活性黑;M",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31193S",
+          "color": "活性黑",
+          "size": "S",
+          "qty": 52,
+          "properties": "活性黑;S",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31193XL",
+          "color": "活性黑",
+          "size": "XL",
+          "qty": 26,
+          "properties": "活性黑;XL",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31193XS",
+          "color": "活性黑",
+          "size": "XS",
+          "qty": 16,
+          "properties": "活性黑;XS",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31159L",
+          "color": "粉蓝",
+          "size": "L",
+          "qty": 32,
+          "properties": "粉蓝;L",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31159M",
+          "color": "粉蓝",
+          "size": "M",
+          "qty": 44,
+          "properties": "粉蓝;M",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31159S",
+          "color": "粉蓝",
+          "size": "S",
+          "qty": 56,
+          "properties": "粉蓝;S",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31159XL",
+          "color": "粉蓝",
+          "size": "XL",
+          "qty": 18,
+          "properties": "粉蓝;XL",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251124-31159XS",
+          "color": "粉蓝",
+          "size": "XS",
+          "qty": 32,
+          "properties": "粉蓝;XS",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "PODTX20260319-71",
+      "name": "定制",
+      "io_date": "2026-09-27",
+      "created": "2026-07-18",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 0,
+      "total_qty": 303,
+      "skus": [
+        {
+          "sku_id": "PODTX20260319-7140L",
+          "color": "藕粉",
+          "size": "L",
+          "qty": 114,
+          "properties": "藕粉;L",
+          "io_date": "2026-09-27",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX20260319-7140M",
+          "color": "藕粉",
+          "size": "M",
+          "qty": 70,
+          "properties": "藕粉;M",
+          "io_date": "2026-09-27",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX20260319-7140XL",
+          "color": "藕粉",
+          "size": "XL",
+          "qty": 85,
+          "properties": "藕粉;XL",
+          "io_date": "2026-09-27",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX20260319-7140XXL",
+          "color": "藕粉",
+          "size": "XXL",
+          "qty": 34,
+          "properties": "藕粉;XXL",
+          "io_date": "2026-09-27",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DS250515-74",
+      "name": "定制",
+      "io_date": "2026-09-11",
+      "created": "2026-05-19",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 15,
+      "total_qty": 297,
+      "skus": [
+        {
+          "sku_id": "DS250515-7401L",
+          "color": "白色",
+          "size": "L",
+          "qty": 39,
+          "properties": "白色;L",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7401M",
+          "color": "白色",
+          "size": "M",
+          "qty": 45,
+          "properties": "白色;M",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7401S",
+          "color": "白色",
+          "size": "S",
+          "qty": 25,
+          "properties": "白色;S",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7401XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 35,
+          "properties": "白色;XL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7401XXL",
+          "color": "白色",
+          "size": "XXL",
+          "qty": 10,
+          "properties": "白色;XXL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7402L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 37,
+          "properties": "黑色;L",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7402M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 47,
+          "properties": "黑色;M",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7402S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 29,
+          "properties": "黑色;S",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7402XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 19,
+          "properties": "黑色;XL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7402XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 11,
+          "properties": "黑色;XXL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
       "i_id": "DZTX260528-92",
       "name": "定制",
       "io_date": "2026-09-19",
@@ -228,6 +586,462 @@
       ]
     },
     {
+      "i_id": "DZWY251125-31",
+      "name": "定制",
+      "io_date": "2026-08-01",
+      "created": "2026-06-08",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 57,
+      "total_qty": 242,
+      "skus": [
+        {
+          "sku_id": "PODTX26061338",
+          "color": "深卡其",
+          "size": "L",
+          "qty": 33,
+          "properties": "深卡其;L",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061337",
+          "color": "深卡其",
+          "size": "M",
+          "qty": 45,
+          "properties": "深卡其;M",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061336",
+          "color": "深卡其",
+          "size": "S",
+          "qty": 32,
+          "properties": "深卡其;S",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061339",
+          "color": "深卡其",
+          "size": "XL",
+          "qty": 21,
+          "properties": "深卡其;XL",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251125-31118XS",
+          "color": "深卡其",
+          "size": "XS",
+          "qty": 10,
+          "properties": "深卡其;XS",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061343",
+          "color": "灰色",
+          "size": "L",
+          "qty": 25,
+          "properties": "灰色;L",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061342",
+          "color": "灰色",
+          "size": "M",
+          "qty": 30,
+          "properties": "灰色;M",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061341",
+          "color": "灰色",
+          "size": "S",
+          "qty": 23,
+          "properties": "灰色;S",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061344",
+          "color": "灰色",
+          "size": "XL",
+          "qty": 14,
+          "properties": "灰色;XL",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODTX26061340",
+          "color": "灰色",
+          "size": "XS",
+          "qty": 9,
+          "properties": "灰色;XS",
+          "io_date": "2026-08-01",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DSB241017-71",
+      "name": "定制",
+      "io_date": "2026-09-11",
+      "created": "2026-05-26",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 16,
+      "total_qty": 239,
+      "skus": [
+        {
+          "sku_id": "DSB241017-7151L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 92,
+          "properties": "图片色;L",
+          "io_date": "2026-07-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241017-7151M",
+          "color": "图片色",
+          "size": "M",
+          "qty": 86,
+          "properties": "图片色;M",
+          "io_date": "2026-07-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241017-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 28,
+          "properties": "图片色;XL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241017-7151XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 33,
+          "properties": "图片色;XXL",
+          "io_date": "2026-07-21",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DS250515-73",
+      "name": "定制",
+      "io_date": "2026-09-11",
+      "created": "2026-05-19",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 16,
+      "total_qty": 238,
+      "skus": [
+        {
+          "sku_id": "DS250515-7301L",
+          "color": "白色",
+          "size": "L",
+          "qty": 26,
+          "properties": "白色;L",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7301M",
+          "color": "白色",
+          "size": "M",
+          "qty": 41,
+          "properties": "白色;M",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7301S",
+          "color": "白色",
+          "size": "S",
+          "qty": 10,
+          "properties": "白色;S",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7301XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 15,
+          "properties": "白色;XL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7301XXL",
+          "color": "白色",
+          "size": "XXL",
+          "qty": 9,
+          "properties": "白色;XXL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7302L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 33,
+          "properties": "黑色;L",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7302M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 47,
+          "properties": "黑色;M",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7302S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 13,
+          "properties": "黑色;S",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7302XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 34,
+          "properties": "黑色;XL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250515-7302XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 10,
+          "properties": "黑色;XXL",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DSB241016-77",
+      "name": "定制",
+      "io_date": "2026-07-21",
+      "created": "2026-05-26",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 68,
+      "total_qty": 226,
+      "skus": [
+        {
+          "sku_id": "DSB241016-7751L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 90,
+          "properties": "图片色;L",
+          "io_date": "2026-07-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241016-7751M",
+          "color": "图片色",
+          "size": "M",
+          "qty": 79,
+          "properties": "图片色;M",
+          "io_date": "2026-07-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241016-7751XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 19,
+          "properties": "图片色;XL",
+          "io_date": "2026-07-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241016-7751XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 38,
+          "properties": "图片色;XXL",
+          "io_date": "2026-07-21",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260702-71",
+      "name": "定制",
+      "io_date": "2026-08-20",
+      "created": "2026-07-08",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 37,
+      "total_qty": 214,
+      "skus": [
+        {
+          "sku_id": "DZTX260702-7102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 66,
+          "properties": "黑色;L",
+          "io_date": "2026-08-20",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260702-7102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 83,
+          "properties": "黑色;M",
+          "io_date": "2026-08-20",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260702-7102S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 33,
+          "properties": "黑色;S",
+          "io_date": "2026-08-20",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260702-7102XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 32,
+          "properties": "黑色;XL",
+          "io_date": "2026-08-20",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWY251126-35",
+      "name": "定制",
+      "io_date": "2026-08-21",
+      "created": "2026-06-08",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 37,
+      "total_qty": 213,
+      "skus": [
+        {
+          "sku_id": "DZWY251126-3592L",
+          "color": "墨绿",
+          "size": "L",
+          "qty": 28,
+          "properties": "墨绿;L",
+          "io_date": "2026-08-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3592M",
+          "color": "墨绿",
+          "size": "M",
+          "qty": 14,
+          "properties": "墨绿;M",
+          "io_date": "2026-08-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3592S",
+          "color": "墨绿",
+          "size": "S",
+          "qty": 14,
+          "properties": "墨绿;S",
+          "io_date": "2026-08-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3592XL",
+          "color": "墨绿",
+          "size": "XL",
+          "qty": 15,
+          "properties": "墨绿;XL",
+          "io_date": "2026-08-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3592XS",
+          "color": "墨绿",
+          "size": "XS",
+          "qty": 4,
+          "properties": "墨绿;XS",
+          "io_date": "2026-08-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3505L",
+          "color": "灰色",
+          "size": "L",
+          "qty": 42,
+          "properties": "灰色;L",
+          "io_date": "2026-08-18",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3505M",
+          "color": "灰色",
+          "size": "M",
+          "qty": 42,
+          "properties": "灰色;M",
+          "io_date": "2026-08-18",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3505S",
+          "color": "灰色",
+          "size": "S",
+          "qty": 20,
+          "properties": "灰色;S",
+          "io_date": "2026-08-18",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3505XL",
+          "color": "灰色",
+          "size": "XL",
+          "qty": 24,
+          "properties": "灰色;XL",
+          "io_date": "2026-08-18",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251126-3505XS",
+          "color": "灰色",
+          "size": "XS",
+          "qty": 10,
+          "properties": "灰色;XS",
+          "io_date": "2026-08-18",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
       "i_id": "DZTX260714-31",
       "name": "定制",
       "io_date": "2026-09-24",
@@ -294,6 +1108,220 @@
           "qty": 198,
           "properties": "黑色;1码(L)",
           "io_date": "2026-09-21",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT260527-10",
+      "name": "定制",
+      "io_date": "2026-09-01",
+      "created": "2026-07-02",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 26,
+      "total_qty": 195,
+      "skus": [
+        {
+          "sku_id": "DZWT260527-1061L",
+          "color": "咖色",
+          "size": "L",
+          "qty": 43,
+          "properties": "咖色;L",
+          "io_date": "2026-09-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260527-1061M",
+          "color": "咖色",
+          "size": "M",
+          "qty": 59,
+          "properties": "咖色;M",
+          "io_date": "2026-09-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260527-1061S",
+          "color": "咖色",
+          "size": "S",
+          "qty": 43,
+          "properties": "咖色;S",
+          "io_date": "2026-09-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260527-1061XL",
+          "color": "咖色",
+          "size": "XL",
+          "qty": 30,
+          "properties": "咖色;XL",
+          "io_date": "2026-09-01",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT260527-1061XS",
+          "color": "咖色",
+          "size": "XS",
+          "qty": 20,
+          "properties": "咖色;XS",
+          "io_date": "2026-09-01",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT251201-30",
+      "name": "定制",
+      "io_date": "2026-09-16",
+      "created": "2026-06-24",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 10,
+      "total_qty": 188,
+      "skus": [
+        {
+          "sku_id": "DZWT251201-3042L",
+          "color": "迷彩",
+          "size": "L",
+          "qty": 42,
+          "properties": "迷彩;L",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT251201-3042M",
+          "color": "迷彩",
+          "size": "M",
+          "qty": 62,
+          "properties": "迷彩;M",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT251201-3042S",
+          "color": "迷彩",
+          "size": "S",
+          "qty": 41,
+          "properties": "迷彩;S",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT251201-3042XL",
+          "color": "迷彩",
+          "size": "XL",
+          "qty": 25,
+          "properties": "迷彩;XL",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWT251201-3042XS",
+          "color": "迷彩",
+          "size": "XS",
+          "qty": 18,
+          "properties": "迷彩;XS",
+          "io_date": "2026-09-16",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DSB250618-72",
+      "name": "定制",
+      "io_date": "2026-09-11",
+      "created": "2026-05-26",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 16,
+      "total_qty": 183,
+      "skus": [
+        {
+          "sku_id": "DSB250618-7251L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 63,
+          "properties": "图片色;L",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB250618-7251M",
+          "color": "图片色",
+          "size": "M",
+          "qty": 46,
+          "properties": "图片色;M",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB250618-7251XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 41,
+          "properties": "图片色;XL",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB250618-7251XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 33,
+          "properties": "图片色;XXL",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DSB250618-71",
+      "name": "定制",
+      "io_date": "2026-07-13",
+      "created": "2026-05-26",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 75,
+      "total_qty": 174,
+      "skus": [
+        {
+          "sku_id": "DSB250618-7151L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 57,
+          "properties": "图片色;L",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB250618-7151M",
+          "color": "图片色",
+          "size": "M",
+          "qty": 49,
+          "properties": "图片色;M",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB250618-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 41,
+          "properties": "图片色;XL",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB250618-7151XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 27,
+          "properties": "图片色;XXL",
+          "io_date": "2026-07-13",
           "warehouse": "进货仓"
         }
       ]
@@ -375,6 +1403,241 @@
       ]
     },
     {
+      "i_id": "DZTX260226-17",
+      "name": "定制",
+      "io_date": "2026-07-13",
+      "created": "2026-02-27",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 76,
+      "total_qty": 145,
+      "skus": [
+        {
+          "sku_id": "DZTX260226-17533XL",
+          "color": "牙白",
+          "size": "3XL",
+          "qty": 2,
+          "properties": "牙白;3XL",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260226-1753L",
+          "color": "牙白",
+          "size": "L",
+          "qty": 43,
+          "properties": "牙白;L",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260226-1753M",
+          "color": "牙白",
+          "size": "M",
+          "qty": 11,
+          "properties": "牙白;M",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260226-1753S",
+          "color": "牙白",
+          "size": "S",
+          "qty": 21,
+          "properties": "牙白;S",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260226-1753XL",
+          "color": "牙白",
+          "size": "XL",
+          "qty": 31,
+          "properties": "牙白;XL",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260226-1753XXL",
+          "color": "牙白",
+          "size": "XXL",
+          "qty": 37,
+          "properties": "牙白;XXL",
+          "io_date": "2026-07-13",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWY251203-31",
+      "name": "定制",
+      "io_date": "2026-08-05",
+      "created": "2026-06-08",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 53,
+      "total_qty": 131,
+      "skus": [
+        {
+          "sku_id": "DZWY251203-3105L",
+          "color": "灰色",
+          "size": "L",
+          "qty": 35,
+          "properties": "灰色;L",
+          "io_date": "2026-08-05",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251203-3105M",
+          "color": "灰色",
+          "size": "M",
+          "qty": 44,
+          "properties": "灰色;M",
+          "io_date": "2026-08-05",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251203-3105S",
+          "color": "灰色",
+          "size": "S",
+          "qty": 24,
+          "properties": "灰色;S",
+          "io_date": "2026-08-05",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251203-3105XL",
+          "color": "灰色",
+          "size": "XL",
+          "qty": 14,
+          "properties": "灰色;XL",
+          "io_date": "2026-08-05",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY251203-3105XS",
+          "color": "灰色",
+          "size": "XS",
+          "qty": 14,
+          "properties": "灰色;XS",
+          "io_date": "2026-08-05",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX240901-72",
+      "name": "定制",
+      "io_date": "",
+      "created": "2024-09-03",
+      "warehouse": [],
+      "age_days": 753,
+      "total_qty": 121,
+      "skus": [
+        {
+          "sku_id": "DZTX240901-7245L",
+          "color": "浅灰",
+          "size": "L",
+          "qty": 8,
+          "properties": "浅灰;L",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7245M",
+          "color": "浅灰",
+          "size": "M",
+          "qty": 26,
+          "properties": "浅灰;M",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7245S",
+          "color": "浅灰",
+          "size": "S",
+          "qty": 7,
+          "properties": "浅灰;S",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7245XL",
+          "color": "浅灰",
+          "size": "XL",
+          "qty": 15,
+          "properties": "浅灰;XL",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7245XXL",
+          "color": "浅灰",
+          "size": "XXL",
+          "qty": 7,
+          "properties": "浅灰;XXL",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7297L",
+          "color": "碳灰",
+          "size": "L",
+          "qty": 7,
+          "properties": "碳灰;L",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7297M",
+          "color": "碳灰",
+          "size": "M",
+          "qty": 22,
+          "properties": "碳灰;M",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7297S",
+          "color": "碳灰",
+          "size": "S",
+          "qty": 8,
+          "properties": "碳灰;S",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7297XL",
+          "color": "碳灰",
+          "size": "XL",
+          "qty": 11,
+          "properties": "碳灰;XL",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-7297XXL",
+          "color": "碳灰",
+          "size": "XXL",
+          "qty": 6,
+          "properties": "碳灰;XXL",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX240901-72287M",
+          "color": "象牙白",
+          "size": "M",
+          "qty": 4,
+          "properties": "象牙白;M",
+          "io_date": "",
+          "warehouse": ""
+        }
+      ]
+    },
+    {
       "i_id": "DSDK260518-10",
       "name": "定制",
       "io_date": "2026-08-17",
@@ -382,7 +1645,7 @@
       "warehouse": [
         "进货仓"
       ],
-      "age_days": 40,
+      "age_days": 41,
       "total_qty": 119,
       "skus": [
         {
@@ -397,6 +1660,127 @@
       ]
     },
     {
+      "i_id": "DSB241210-71",
+      "name": "定制",
+      "io_date": "2026-06-28",
+      "created": "2026-05-19",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 91,
+      "total_qty": 110,
+      "skus": [
+        {
+          "sku_id": "DSB241210-7101L",
+          "color": "白色",
+          "size": "L",
+          "qty": 17,
+          "properties": "白色;L",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7101M",
+          "color": "白色",
+          "size": "M",
+          "qty": 5,
+          "properties": "白色;M",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7101S",
+          "color": "白色",
+          "size": "S",
+          "qty": 6,
+          "properties": "白色;S",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7101XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 5,
+          "properties": "白色;XL",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7101XS",
+          "color": "白色",
+          "size": "XS",
+          "qty": 7,
+          "properties": "白色;XS",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7101XXL",
+          "color": "白色",
+          "size": "XXL",
+          "qty": 8,
+          "properties": "白色;XXL",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 17,
+          "properties": "黑色;L",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 16,
+          "properties": "黑色;M",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7102S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 6,
+          "properties": "黑色;S",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7102XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 7,
+          "properties": "黑色;XL",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7102XS",
+          "color": "黑色",
+          "size": "XS",
+          "qty": 8,
+          "properties": "黑色;XS",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DSB241210-7102XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 8,
+          "properties": "黑色;XXL",
+          "io_date": "2026-06-28",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
       "i_id": "DZMY260728-95",
       "name": "定制",
       "io_date": "2026-09-22",
@@ -404,7 +1788,7 @@
       "warehouse": [
         "进货仓"
       ],
-      "age_days": 4,
+      "age_days": 5,
       "total_qty": 77,
       "skus": [
         {
@@ -462,7 +1846,7 @@
       "warehouse": [
         "进货仓"
       ],
-      "age_days": 4,
+      "age_days": 5,
       "total_qty": 75,
       "skus": [
         {
@@ -513,6 +1897,46 @@
       ]
     },
     {
+      "i_id": "DZTX20250923-11",
+      "name": "定制",
+      "io_date": "2026-04-05",
+      "created": "2025-09-23",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 175,
+      "total_qty": 71,
+      "skus": [
+        {
+          "sku_id": "DZTX20250923-11127L",
+          "color": "咖啡色",
+          "size": "L",
+          "qty": 50,
+          "properties": "咖啡色;L",
+          "io_date": "2026-01-31",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX20250923-11127M",
+          "color": "咖啡色",
+          "size": "M",
+          "qty": 10,
+          "properties": "咖啡色;M",
+          "io_date": "2026-01-31",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX20250923-11142L",
+          "color": "米白",
+          "size": "L",
+          "qty": 11,
+          "properties": "米白;L",
+          "io_date": "2026-01-31",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
       "i_id": "DZMY260319-96",
       "name": "定制",
       "io_date": "2026-09-24",
@@ -520,7 +1944,7 @@
       "warehouse": [
         "进货仓"
       ],
-      "age_days": 2,
+      "age_days": 3,
       "total_qty": 49,
       "skus": [
         {
@@ -566,6 +1990,135 @@
           "qty": 4,
           "properties": "黑色;XXL",
           "io_date": "2026-09-24",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZ12406S24",
+      "name": "定制",
+      "io_date": "2026-06-02",
+      "created": "2024-03-22",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 116,
+      "total_qty": 45,
+      "skus": [
+        {
+          "sku_id": "DZ12406S24553XL",
+          "color": "薄荷曼波",
+          "size": "XL",
+          "qty": 45,
+          "properties": "薄荷曼波;XL",
+          "io_date": "2026-06-02",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DS250220-70",
+      "name": "定制",
+      "io_date": "2026-09-11",
+      "created": "2026-07-28",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 15,
+      "total_qty": 43,
+      "skus": [
+        {
+          "sku_id": "DS250220-7002l",
+          "color": "黑色",
+          "size": "l",
+          "qty": 9,
+          "properties": "黑色;l",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250220-7002m",
+          "color": "黑色",
+          "size": "m",
+          "qty": 11,
+          "properties": "黑色;m",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250220-7002s",
+          "color": "黑色",
+          "size": "s",
+          "qty": 9,
+          "properties": "黑色;s",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250220-7002xl",
+          "color": "黑色",
+          "size": "xl",
+          "qty": 10,
+          "properties": "黑色;xl",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250220-7002xxl",
+          "color": "黑色",
+          "size": "xxl",
+          "qty": 4,
+          "properties": "黑色;xxl",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZ12795S25",
+      "name": "定制",
+      "io_date": "2026-02-04",
+      "created": "2025-12-22",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 235,
+      "total_qty": 40,
+      "skus": [
+        {
+          "sku_id": "DZ12795S2505L",
+          "color": "灰色",
+          "size": "L",
+          "qty": 10,
+          "properties": "灰色;L",
+          "io_date": "2026-02-04",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZ12795S2505M",
+          "color": "灰色",
+          "size": "M",
+          "qty": 10,
+          "properties": "灰色;M",
+          "io_date": "2026-02-04",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZ12795S2505XL",
+          "color": "灰色",
+          "size": "XL",
+          "qty": 10,
+          "properties": "灰色;XL",
+          "io_date": "2026-02-04",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZ12795S2505XXL",
+          "color": "灰色",
+          "size": "XXL",
+          "qty": 10,
+          "properties": "灰色;XXL",
+          "io_date": "2026-02-04",
           "warehouse": "进货仓"
         }
       ]
@@ -656,6 +2209,175 @@
       ]
     },
     {
+      "i_id": "PODWT260501-R2",
+      "name": "定制",
+      "io_date": "2026-09-24",
+      "created": "2026-06-26",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 3,
+      "total_qty": 36,
+      "skus": [
+        {
+          "sku_id": "PODWT260501-R2756L",
+          "color": "墨黑色",
+          "size": "L",
+          "qty": 10,
+          "properties": "墨黑色;L",
+          "io_date": "2026-09-24",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODWT260501-R2756M",
+          "color": "墨黑色",
+          "size": "M",
+          "qty": 10,
+          "properties": "墨黑色;M",
+          "io_date": "2026-09-24",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODWT260501-R2755L",
+          "color": "沙砾卡其",
+          "size": "L",
+          "qty": 10,
+          "properties": "沙砾卡其;L",
+          "io_date": "2026-09-24",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODWT260501-R2755M",
+          "color": "沙砾卡其",
+          "size": "M",
+          "qty": 6,
+          "properties": "沙砾卡其;M",
+          "io_date": "2026-09-24",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZCT251208-32",
+      "name": "定制",
+      "io_date": "2026-06-25",
+      "created": "2026-01-05",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 94,
+      "total_qty": 31,
+      "skus": [
+        {
+          "sku_id": "DZCT251208-32709M",
+          "color": "轩蓝",
+          "size": "M",
+          "qty": 5,
+          "properties": "轩蓝;M",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZCT251208-32709S",
+          "color": "轩蓝",
+          "size": "S",
+          "qty": 13,
+          "properties": "轩蓝;S",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZCT251208-32709XL",
+          "color": "轩蓝",
+          "size": "XL",
+          "qty": 2,
+          "properties": "轩蓝;XL",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZCT251208-32709XS",
+          "color": "轩蓝",
+          "size": "XS",
+          "qty": 9,
+          "properties": "轩蓝;XS",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZCT251208-32709XXL",
+          "color": "轩蓝",
+          "size": "XXL",
+          "qty": 1,
+          "properties": "轩蓝;XXL",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZCT251208-32709XXXL",
+          "color": "轩蓝",
+          "size": "XXXL",
+          "qty": 1,
+          "properties": "轩蓝;XXXL",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260114-61",
+      "name": "定制",
+      "io_date": "2026-04-16",
+      "created": "2026-02-27",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 163,
+      "total_qty": 30,
+      "skus": [
+        {
+          "sku_id": "DZTX260114-61193S",
+          "color": "活性黑",
+          "size": "S",
+          "qty": 9,
+          "properties": "活性黑;S",
+          "io_date": "2026-03-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260114-61193XS",
+          "color": "活性黑",
+          "size": "XS",
+          "qty": 21,
+          "properties": "活性黑;XS",
+          "io_date": "2026-03-25",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "A18",
+      "name": "定制",
+      "io_date": "2026-03-28",
+      "created": "2026-03-13",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 183,
+      "total_qty": 30,
+      "skus": [
+        {
+          "sku_id": "A189043XL",
+          "color": "中国红",
+          "size": "3XL",
+          "qty": 30,
+          "properties": "中国红;3XL",
+          "io_date": "2026-03-14",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
       "i_id": "DZTX260731-13",
       "name": "定制",
       "io_date": "2026-08-27",
@@ -682,6 +2404,957 @@
           "qty": 10,
           "properties": "黑色;XL",
           "io_date": "2026-08-27",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DS250106-71",
+      "name": "定制",
+      "io_date": "2026-09-11",
+      "created": "2026-07-28",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 15,
+      "total_qty": 18,
+      "skus": [
+        {
+          "sku_id": "DS250106-7102l",
+          "color": "黑色",
+          "size": "l",
+          "qty": 3,
+          "properties": "黑色;l",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250106-7102m",
+          "color": "黑色",
+          "size": "m",
+          "qty": 5,
+          "properties": "黑色;m",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250106-7102s",
+          "color": "黑色",
+          "size": "s",
+          "qty": 4,
+          "properties": "黑色;s",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250106-7102xl",
+          "color": "黑色",
+          "size": "xl",
+          "qty": 5,
+          "properties": "黑色;xl",
+          "io_date": "2026-09-11",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS250106-7102xxl",
+          "color": "黑色",
+          "size": "xxl",
+          "qty": 1,
+          "properties": "黑色;xxl",
+          "io_date": "2026-08-22",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZ5488W25",
+      "name": "定制",
+      "io_date": "2026-05-22",
+      "created": "2025-09-18",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 127,
+      "total_qty": 13,
+      "skus": [
+        {
+          "sku_id": "DZ5488W25756L",
+          "color": "墨黑色",
+          "size": "L",
+          "qty": 4,
+          "properties": "墨黑色;L",
+          "io_date": "2026-05-22",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZ5488W25756M",
+          "color": "墨黑色",
+          "size": "M",
+          "qty": 4,
+          "properties": "墨黑色;M",
+          "io_date": "2026-05-22",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZ5488W25756XL",
+          "color": "墨黑色",
+          "size": "XL",
+          "qty": 2,
+          "properties": "墨黑色;XL",
+          "io_date": "2026-05-22",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZ5488W25753S",
+          "color": "次元灰",
+          "size": "S",
+          "qty": 1,
+          "properties": "次元灰;S",
+          "io_date": "2026-05-22",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZ5488W25753XXL",
+          "color": "次元灰",
+          "size": "XXL",
+          "qty": 2,
+          "properties": "次元灰;XXL",
+          "io_date": "2026-05-22",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250418-39",
+      "name": "定制",
+      "io_date": "",
+      "created": "2025-05-14",
+      "warehouse": [],
+      "age_days": 500,
+      "total_qty": 13,
+      "skus": [
+        {
+          "sku_id": "DZTX250418-39642L",
+          "color": "椰奶白",
+          "size": "L",
+          "qty": 2,
+          "properties": "椰奶白;L",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX250418-39642M",
+          "color": "椰奶白",
+          "size": "M",
+          "qty": 5,
+          "properties": "椰奶白;M",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZTX250418-39642S",
+          "color": "椰奶白",
+          "size": "S",
+          "qty": 6,
+          "properties": "椰奶白;S",
+          "io_date": "",
+          "warehouse": ""
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260108-31",
+      "name": "定制",
+      "io_date": "2026-04-25",
+      "created": "2026-02-04",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 154,
+      "total_qty": 12,
+      "skus": [
+        {
+          "sku_id": "DZTX260108-31247L",
+          "color": "炭黑",
+          "size": "L",
+          "qty": 1,
+          "properties": "炭黑;L",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-31247M",
+          "color": "炭黑",
+          "size": "M",
+          "qty": 6,
+          "properties": "炭黑;M",
+          "io_date": "2026-04-17",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-31247S",
+          "color": "炭黑",
+          "size": "S",
+          "qty": 3,
+          "properties": "炭黑;S",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-31247XL",
+          "color": "炭黑",
+          "size": "XL",
+          "qty": 1,
+          "properties": "炭黑;XL",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-31247XXL",
+          "color": "炭黑",
+          "size": "XXL",
+          "qty": 1,
+          "properties": "炭黑;XXL",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260511-710",
+      "name": "定制",
+      "io_date": "2026-06-08",
+      "created": "2026-05-12",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 110,
+      "total_qty": 12,
+      "skus": [
+        {
+          "sku_id": "DZTX260511-710126M",
+          "color": "粉色",
+          "size": "M",
+          "qty": 3,
+          "properties": "粉色;M",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260511-710126S",
+          "color": "粉色",
+          "size": "S",
+          "qty": 5,
+          "properties": "粉色;S",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260511-710126XS",
+          "color": "粉色",
+          "size": "XS",
+          "qty": 2,
+          "properties": "粉色;XS",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260511-71002L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "properties": "黑色;L",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260511-71002XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 1,
+          "properties": "黑色;XL",
+          "io_date": "2026-06-08",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260108-30",
+      "name": "定制",
+      "io_date": "2026-04-25",
+      "created": "2026-02-04",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 154,
+      "total_qty": 11,
+      "skus": [
+        {
+          "sku_id": "DZTX260108-30859XL",
+          "color": "檀棕褐",
+          "size": "XL",
+          "qty": 1,
+          "properties": "檀棕褐;XL",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-30247L",
+          "color": "炭黑",
+          "size": "L",
+          "qty": 3,
+          "properties": "炭黑;L",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-30247M",
+          "color": "炭黑",
+          "size": "M",
+          "qty": 4,
+          "properties": "炭黑;M",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-30247S",
+          "color": "炭黑",
+          "size": "S",
+          "qty": 1,
+          "properties": "炭黑;S",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-30247XL",
+          "color": "炭黑",
+          "size": "XL",
+          "qty": 1,
+          "properties": "炭黑;XL",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260108-30247XXL",
+          "color": "炭黑",
+          "size": "XXL",
+          "qty": 1,
+          "properties": "炭黑;XXL",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZBX260518-16",
+      "name": "定制",
+      "io_date": "2026-06-04",
+      "created": "2026-05-18",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 115,
+      "total_qty": 7,
+      "skus": [
+        {
+          "sku_id": "DZBX260518-16856L",
+          "color": "山竹白",
+          "size": "L",
+          "qty": 4,
+          "properties": "山竹白;L",
+          "io_date": "2026-06-04",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZBX260518-16857M",
+          "color": "黑加仑",
+          "size": "M",
+          "qty": 3,
+          "properties": "黑加仑;M",
+          "io_date": "2026-06-02",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT230831-78",
+      "name": "2301SS防晒衣外套",
+      "io_date": "2026-08-12",
+      "created": "2023-09-16",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 45,
+      "total_qty": 7,
+      "skus": [
+        {
+          "sku_id": "DZWT230831-78230XL",
+          "color": "日光橙",
+          "size": "XL",
+          "qty": 7,
+          "properties": "日光橙;XL",
+          "io_date": "2026-05-25",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250317-74",
+      "name": "定制",
+      "io_date": "2026-05-07",
+      "created": "2025-03-25",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 143,
+      "total_qty": 7,
+      "skus": [
+        {
+          "sku_id": "DZTX250317-74193L",
+          "color": "活性黑",
+          "size": "L",
+          "qty": 2,
+          "properties": "活性黑;L",
+          "io_date": "2026-05-07",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX250317-74193S",
+          "color": "活性黑",
+          "size": "S",
+          "qty": 1,
+          "properties": "活性黑;S",
+          "io_date": "2026-03-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX250317-74170L",
+          "color": "米杏",
+          "size": "L",
+          "qty": 1,
+          "properties": "米杏;L",
+          "io_date": "2026-03-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX250317-74170M",
+          "color": "米杏",
+          "size": "M",
+          "qty": 1,
+          "properties": "米杏;M",
+          "io_date": "2026-03-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX250317-74170S",
+          "color": "米杏",
+          "size": "S",
+          "qty": 1,
+          "properties": "米杏;S",
+          "io_date": "2026-03-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX250317-74170XL",
+          "color": "米杏",
+          "size": "XL",
+          "qty": 1,
+          "properties": "米杏;XL",
+          "io_date": "2026-03-28",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260130-11",
+      "name": "定制",
+      "io_date": "2026-04-07",
+      "created": "2026-01-30",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 172,
+      "total_qty": 6,
+      "skus": [
+        {
+          "sku_id": "DZTX260130-1102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "properties": "黑色;L",
+          "io_date": "2026-04-07",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260130-1102XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 2,
+          "properties": "黑色;XL",
+          "io_date": "2026-04-07",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260130-1102XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 3,
+          "properties": "黑色;XXL",
+          "io_date": "2026-04-07",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "PODTX260803-03",
+      "name": "定制",
+      "io_date": "2026-09-14",
+      "created": "2026-08-11",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 13,
+      "total_qty": 5,
+      "skus": [
+        {
+          "sku_id": "PODTX260803-03278XXL",
+          "color": "石灰白",
+          "size": "XXL",
+          "qty": 5,
+          "properties": "石灰白;XXL",
+          "io_date": "2026-09-14",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZCT260302-34",
+      "name": "定制",
+      "io_date": "2026-04-23",
+      "created": "2026-04-15",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 156,
+      "total_qty": 5,
+      "skus": [
+        {
+          "sku_id": "DZCT260302-34142L",
+          "color": "米白",
+          "size": "L",
+          "qty": 5,
+          "properties": "米白;L",
+          "io_date": "2026-04-23",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX251226-37",
+      "name": "定制",
+      "io_date": "2026-07-28",
+      "created": "2026-03-12",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 60,
+      "total_qty": 5,
+      "skus": [
+        {
+          "sku_id": "DZTX251226-37856XL",
+          "color": "山竹白",
+          "size": "XL",
+          "qty": 1,
+          "properties": "山竹白;XL",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251226-37856XXL",
+          "color": "山竹白",
+          "size": "XXL",
+          "qty": 3,
+          "properties": "山竹白;XXL",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX251226-37856XXXL",
+          "color": "山竹白",
+          "size": "XXXL",
+          "qty": 1,
+          "properties": "山竹白;XXXL",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260807-70",
+      "name": "定制",
+      "io_date": "2026-08-21",
+      "created": "2026-08-07",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 37,
+      "total_qty": 4,
+      "skus": [
+        {
+          "sku_id": "DZTX260807-70516XS",
+          "color": "阳光黄",
+          "size": "XS",
+          "qty": 4,
+          "properties": "阳光黄;XS",
+          "io_date": "2026-08-21",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZFF20251101-42",
+      "name": "定制外套",
+      "io_date": "2026-04-14",
+      "created": "2026-01-10",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 165,
+      "total_qty": 4,
+      "skus": [
+        {
+          "sku_id": "DZFF20251101-42756L",
+          "color": "墨黑色",
+          "size": "L",
+          "qty": 2,
+          "properties": "墨黑色;L",
+          "io_date": "2026-04-14",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZFF20251101-42756M",
+          "color": "墨黑色",
+          "size": "M",
+          "qty": 2,
+          "properties": "墨黑色;M",
+          "io_date": "2026-04-14",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "20240620-20",
+      "name": "定制",
+      "io_date": "",
+      "created": "2024-06-27",
+      "warehouse": [],
+      "age_days": 822,
+      "total_qty": 4,
+      "skus": [
+        {
+          "sku_id": "20240620-2002M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 2,
+          "properties": "黑色;M",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "20240620-2002S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 2,
+          "properties": "黑色;S",
+          "io_date": "",
+          "warehouse": ""
+        }
+      ]
+    },
+    {
+      "i_id": "DZKZ251226-34",
+      "name": "定制",
+      "io_date": "2026-07-28",
+      "created": "2026-03-12",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 60,
+      "total_qty": 4,
+      "skus": [
+        {
+          "sku_id": "DZKZ251226-34232XXL",
+          "color": "大地棕",
+          "size": "XXL",
+          "qty": 1,
+          "properties": "大地棕;XXL",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZKZ251226-3402L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "properties": "黑色;L",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZKZ251226-3402M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 1,
+          "properties": "黑色;M",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZKZ251226-3402XXXL",
+          "color": "黑色",
+          "size": "XXXL",
+          "qty": 1,
+          "properties": "黑色;XXXL",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZKZ251210-31",
+      "name": "定制",
+      "io_date": "2026-09-16",
+      "created": "2026-02-26",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 10,
+      "total_qty": 4,
+      "skus": [
+        {
+          "sku_id": "DZKZ251210-3197XS",
+          "color": "碳灰",
+          "size": "XS",
+          "qty": 4,
+          "properties": "碳灰;XS",
+          "io_date": "2026-04-25",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZFF20251108-47",
+      "name": "定制长裤",
+      "io_date": "2026-04-14",
+      "created": "2026-01-10",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 165,
+      "total_qty": 3,
+      "skus": [
+        {
+          "sku_id": "DZFF20251108-47756S",
+          "color": "墨黑色",
+          "size": "S",
+          "qty": 3,
+          "properties": "墨黑色;S",
+          "io_date": "2026-04-14",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZFF20251108-46",
+      "name": "定制卫衣",
+      "io_date": "2026-04-14",
+      "created": "2026-01-10",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 165,
+      "total_qty": 3,
+      "skus": [
+        {
+          "sku_id": "DZFF20251108-46756L",
+          "color": "墨黑色",
+          "size": "L",
+          "qty": 3,
+          "properties": "墨黑色;L",
+          "io_date": "2026-04-14",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "PODCX260413-43FF",
+      "name": "定制",
+      "io_date": "2026-04-24",
+      "created": "2026-04-13",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 155,
+      "total_qty": 3,
+      "skus": [
+        {
+          "sku_id": "PODCX260413-43FF484L",
+          "color": "环保黑",
+          "size": "L",
+          "qty": 1,
+          "properties": "环保黑;L",
+          "io_date": "2026-04-24",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODCX260413-43FF484M",
+          "color": "环保黑",
+          "size": "M",
+          "qty": 1,
+          "properties": "环保黑;M",
+          "io_date": "2026-04-24",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "PODCX260413-43FF484XL",
+          "color": "环保黑",
+          "size": "XL",
+          "qty": 1,
+          "properties": "环保黑;XL",
+          "io_date": "2026-04-24",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "F04",
+      "name": "定制",
+      "io_date": "2026-04-27",
+      "created": "2026-04-17",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 152,
+      "total_qty": 3,
+      "skus": [
+        {
+          "sku_id": "F04224XL",
+          "color": "奶黄",
+          "size": "XL",
+          "qty": 1,
+          "properties": "奶黄;XL",
+          "io_date": "2026-04-27",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "F04033XL",
+          "color": "宝蓝",
+          "size": "3XL",
+          "qty": 1,
+          "properties": "宝蓝;3XL",
+          "io_date": "2026-04-27",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "F043415XL",
+          "color": "雾霾蓝",
+          "size": "5XL",
+          "qty": 1,
+          "properties": "雾霾蓝;5XL",
+          "io_date": "2026-04-27",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DS260429-20",
+      "name": "定制",
+      "io_date": "2026-08-26",
+      "created": "2026-05-08",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 31,
+      "total_qty": 3,
+      "skus": [
+        {
+          "sku_id": "DS260429-2022F",
+          "color": "蓝色",
+          "size": "F",
+          "qty": 3,
+          "properties": "蓝色;F",
+          "io_date": "2026-08-26",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZKZ251226-35",
+      "name": "定制",
+      "io_date": "2026-07-28",
+      "created": "2026-01-08",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 60,
+      "total_qty": 3,
+      "skus": [
+        {
+          "sku_id": "DZKZ251226-3502L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "properties": "黑色;L",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZKZ251226-3502M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 1,
+          "properties": "黑色;M",
+          "io_date": "2026-07-28",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZKZ251226-3502XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 1,
+          "properties": "黑色;XXL",
+          "io_date": "2026-07-07",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260627-13",
+      "name": "定制",
+      "io_date": "2026-09-08",
+      "created": "2026-06-27",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 18,
+      "total_qty": 2,
+      "skus": [
+        {
+          "sku_id": "DZTX260627-138573XL",
+          "color": "黑加仑",
+          "size": "3XL",
+          "qty": 1,
+          "properties": "黑加仑;3XL",
+          "io_date": "2026-07-06",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZTX260627-13857XL",
+          "color": "黑加仑",
+          "size": "XL",
+          "qty": 1,
+          "properties": "黑加仑;XL",
+          "io_date": "2026-09-08",
           "warehouse": "进货仓"
         }
       ]
@@ -787,7 +3460,7 @@
       "warehouse": [
         "进货仓"
       ],
-      "age_days": 5,
+      "age_days": 6,
       "total_qty": 2,
       "skus": [
         {
@@ -838,6 +3511,119 @@
           "properties": "蓝色;L",
           "io_date": "2026-09-17",
           "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260520-95",
+      "name": "定制",
+      "io_date": "2026-07-19",
+      "created": "2026-06-18",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 69,
+      "total_qty": 2,
+      "skus": [
+        {
+          "sku_id": "DZTX260520-95142F",
+          "color": "米白",
+          "size": "F",
+          "qty": 2,
+          "properties": "米白;F",
+          "io_date": "2026-07-19",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DS260429-21",
+      "name": "定制",
+      "io_date": "2026-05-21",
+      "created": "2026-05-13",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 128,
+      "total_qty": 2,
+      "skus": [
+        {
+          "sku_id": "DS260429-2102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "properties": "黑色;L",
+          "io_date": "2026-05-21",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DS260429-2102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 1,
+          "properties": "黑色;M",
+          "io_date": "2026-05-21",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWY250928-76",
+      "name": "定制",
+      "io_date": "2026-04-10",
+      "created": "2025-10-22",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 169,
+      "total_qty": 2,
+      "skus": [
+        {
+          "sku_id": "DZWY250928-7645XL",
+          "color": "浅灰",
+          "size": "XL",
+          "qty": 1,
+          "properties": "浅灰;XL",
+          "io_date": "2025-12-19",
+          "warehouse": "进货仓"
+        },
+        {
+          "sku_id": "DZWY250928-76162L",
+          "color": "绿色",
+          "size": "L",
+          "qty": 1,
+          "properties": "绿色;L",
+          "io_date": "2026-04-10",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZ13273W23",
+      "name": "OCTTFLAB",
+      "io_date": "",
+      "created": "2024-03-01",
+      "warehouse": [],
+      "age_days": 939,
+      "total_qty": 2,
+      "skus": [
+        {
+          "sku_id": "DZ13273W23401S",
+          "color": "沙丘色",
+          "size": "S",
+          "qty": 1,
+          "properties": "沙丘色;S",
+          "io_date": "",
+          "warehouse": ""
+        },
+        {
+          "sku_id": "DZ13273W23414S",
+          "color": "铁锈色",
+          "size": "S",
+          "qty": 1,
+          "properties": "铁锈色;S",
+          "io_date": "",
+          "warehouse": ""
         }
       ]
     },
@@ -969,6 +3755,292 @@
           "qty": 1,
           "properties": "灰咖;XS",
           "io_date": "2026-08-20",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260710-90",
+      "name": "定制",
+      "io_date": "2026-07-25",
+      "created": "2026-07-10",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 63,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZTX260710-90023XL",
+          "color": "黑色",
+          "size": "3XL",
+          "qty": 1,
+          "properties": "黑色;3XL",
+          "io_date": "2026-07-25",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260526-71",
+      "name": "定制",
+      "io_date": "2026-07-19",
+      "created": "2026-06-18",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 69,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZTX260526-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 1,
+          "properties": "图片色;XL",
+          "io_date": "2026-07-19",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260520-94",
+      "name": "定制",
+      "io_date": "2026-07-19",
+      "created": "2026-06-18",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 69,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZTX260520-94106XL",
+          "color": "米灰",
+          "size": "XL",
+          "qty": 1,
+          "properties": "米灰;XL",
+          "io_date": "2026-07-19",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX20260611",
+      "name": "定制",
+      "io_date": "2026-06-30",
+      "created": "2026-06-12",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 88,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZTX20260611859XL",
+          "color": "檀棕褐",
+          "size": "XL",
+          "qty": 1,
+          "properties": "檀棕褐;XL",
+          "io_date": "2026-06-30",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260202-2",
+      "name": "定制",
+      "io_date": "2026-06-19",
+      "created": "2026-02-03",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 100,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZTX260202-2164M",
+          "color": "藏青色",
+          "size": "M",
+          "qty": 1,
+          "properties": "藏青色;M",
+          "io_date": "2026-06-19",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "PODCX260413-44FF",
+      "name": "定制",
+      "io_date": "2026-05-26",
+      "created": "2026-04-13",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 124,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "PODCX260413-44FF53L",
+          "color": "牙白",
+          "size": "L",
+          "qty": 1,
+          "properties": "牙白;L",
+          "io_date": "2026-05-26",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZCT260429-40",
+      "name": "定制",
+      "io_date": "2026-06-22",
+      "created": "2026-05-22",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 97,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZCT260429-40484XXS",
+          "color": "环保黑",
+          "size": "XXS",
+          "qty": 1,
+          "properties": "环保黑;XXS",
+          "io_date": "2026-06-22",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260512-42",
+      "name": "定制",
+      "io_date": "2026-08-12",
+      "created": "2026-05-20",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 45,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZTX260512-42193XXL",
+          "color": "活性黑",
+          "size": "XXL",
+          "qty": 1,
+          "properties": "活性黑;XXL",
+          "io_date": "2026-06-29",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT251208-38",
+      "name": "定制外套",
+      "io_date": "2026-04-14",
+      "created": "2025-12-10",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 165,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZWT251208-3810M",
+          "color": "浅卡其",
+          "size": "M",
+          "qty": 1,
+          "properties": "浅卡其;M",
+          "io_date": "2026-04-14",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZCS251208-30",
+      "name": "定制长袖衬衣",
+      "io_date": "2026-04-14",
+      "created": "2025-12-10",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 165,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZCS251208-3001L",
+          "color": "白色",
+          "size": "L",
+          "qty": 1,
+          "properties": "白色;L",
+          "io_date": "2026-04-14",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZWY260131-83",
+      "name": "定制",
+      "io_date": "2026-06-25",
+      "created": "2026-04-13",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 93,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZWY260131-83-3",
+          "color": "活性黑",
+          "size": "S",
+          "qty": 1,
+          "properties": "活性黑;S",
+          "io_date": "2026-06-25",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DATX260513-919",
+      "name": "定制",
+      "io_date": "2026-05-26",
+      "created": "2026-05-13",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 123,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DATX260513-919193XL",
+          "color": "活性黑",
+          "size": "XL",
+          "qty": 1,
+          "properties": "活性黑;XL",
+          "io_date": "2026-05-22",
+          "warehouse": "进货仓"
+        }
+      ]
+    },
+    {
+      "i_id": "DZ13371W24",
+      "name": "定制",
+      "io_date": "2026-03-30",
+      "created": "2025-02-10",
+      "warehouse": [
+        "进货仓"
+      ],
+      "age_days": 180,
+      "total_qty": 1,
+      "skus": [
+        {
+          "sku_id": "DZ13371W2439XXL",
+          "color": "卡其",
+          "size": "XXL",
+          "qty": 1,
+          "properties": "卡其;XXL",
+          "io_date": "2026-03-24",
           "warehouse": "进货仓"
         }
       ]
