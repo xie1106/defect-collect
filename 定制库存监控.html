@@ -80,7 +80,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 </div>
 <!-- PLACEHOLDER_TABLE -->
 <div class="th-row">
-    <div></div>
+    <div>图片</div>
     <div>款号</div>
     <div>标签</div>
     <div class="sortable" id="th-qty" onclick="setSort('qty')">实际库存 <span id="th-qty-arrow"></span></div>
@@ -246,19 +246,19 @@ function exportCSV(mode) {
     if (!DATA) return;
     let csv = '\uFEFF';
     if (mode === 'style') {
-        csv += '款号,仓库,总库存,在库天数,SKU数,最近入库\n';
+        csv += '图片,款号,标签,仓库,实际库存,占有,在库天数,SKU数,最近入库\n';
         for (const s of DATA.styles) {
             const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean).join('+');
-            csv += `${s.i_id},"${whs}",${s.total_qty},${s.age_days},${s.skus.length},${s.io_date||s.created||''}\n`;
+            csv += `${s.pic||''},"${s.i_id}","${s.labels||''}","${whs}",${s.total_qty},${s.total_lock||0},${s.age_days},${s.skus.length},${s.io_date||s.created||''}\n`;
         }
     } else {
-        csv += 'SKU编码,款号,颜色,尺码,库存,仓库,入库时间\n';
+        csv += '图片,SKU编码,款号,标签,颜色,尺码,实际库存,占有,仓库,入库时间\n';
         for (const s of DATA.styles) {
             const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
             for (const k of s.skus) {
                 const whd = k.wh_detail || {};
                 const whStr = Object.keys(whd).length ? Object.entries(whd).map(([n,q])=>`${n}:${q}`).join('+') : (k.warehouse||whs[0]||'');
-                csv += `${k.sku_id},${s.i_id},${k.color},${k.size},${k.qty},"${whStr}",${k.io_date||s.io_date||''}\n`;
+                csv += `${s.pic||''},${k.sku_id},"${s.i_id}","${s.labels||''}",${k.color},${k.size},${k.qty},${k.order_lock||0},"${whStr}",${k.io_date||s.io_date||''}\n`;
             }
         }
     }
