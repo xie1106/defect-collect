@@ -139,7 +139,7 @@ function previewImg(e, url) {
     e.stopPropagation();
     const overlay = document.createElement('div');
     overlay.className = 'preview-overlay';
-    overlay.innerHTML = `<img src="${url}">`;
+    overlay.innerHTML = `<img src="${url}" referrerpolicy="no-referrer">`;
     overlay.onclick = () => overlay.remove();
     document.body.appendChild(overlay);
 }
@@ -208,7 +208,7 @@ function renderList() {
             ? whAggKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:1px">${whAgg[wn]}</span>`).join(' ')
             : (whs.length ? whs.map(whLabel).join('') : '-');
         const dateStr = s.io_date || s.created || '';
-        const picHtml = s.pic ? `<img class="thumb" src="${s.pic}" loading="lazy" onclick="previewImg(event,'${s.pic}')" onerror="this.style.display='none'">` : '';
+        const picHtml = s.pic ? `<img class="thumb" src="${s.pic}" loading="lazy" referrerpolicy="no-referrer" onclick="previewImg(event,'${s.pic}')" onerror="this.style.display='none'">` : '';
         const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag">${l.trim()}</span>`).join('') : '<span style="color:#d1d5db">-</span>';
         const lockTotal = s.skus.reduce((a,k) => a + (k.order_lock||0), 0);
         html += `<div class="card">
