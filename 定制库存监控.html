@@ -22,7 +22,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .btn-sort.active { background:#eff6ff; border-color:#93c5fd; color:#1d4ed8; font-weight:600; }
 .updated { font-size:11px; color:#9ca3af; margin-top:6px; }
 /* TABLE */
-.th-row { display:grid; grid-template-columns:50px 1.8fr 1fr 80px 70px 70px 50px 90px 1.2fr; padding:8px 20px; background:#f9fafb; position:sticky; top:100px; z-index:15;
+.th-row { display:grid; grid-template-columns:50px 1.5fr 0.8fr 0.8fr 70px 60px 65px 45px 85px 1fr; padding:8px 20px; background:#f9fafb; position:sticky; top:100px; z-index:15;
 /* PLACEHOLDER_TH */
   font-size:12px; color:#374151; font-weight:700; border-bottom:1px solid #e5e7eb; letter-spacing:0.5px; }
 .th-row .sortable { cursor:pointer; user-select:none; display:flex; align-items:center; gap:2px; justify-content:center; }
@@ -30,7 +30,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .th-row .sortable.active { color:#1d4ed8; font-weight:700; }
 .list { padding:0 0 80px; }
 .card { background:#fff; border-bottom:1px solid #f3f4f6; }
-.card-header { display:grid; grid-template-columns:50px 1.8fr 1fr 80px 70px 70px 50px 90px 1.2fr; padding:12px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
+.card-header { display:grid; grid-template-columns:50px 1.5fr 0.8fr 0.8fr 70px 60px 65px 45px 85px 1fr; padding:12px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
 .card-header:hover { background:#fafbfc; }
 .iid-cell { display:flex; align-items:center; gap:6px; overflow:hidden; }
 .iid { font-weight:600; font-size:13px; color:#1f2937; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; }
@@ -71,7 +71,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
         <div class="stats" id="stats">加载中...</div>
     </div>
     <div class="ctrl-row">
-        <input type="text" id="search" placeholder="搜索款号 / SKU编码 / 标签..." oninput="renderList()">
+        <input type="text" id="search" placeholder="搜索款号 / SKU / 标签 / 销售员..." oninput="renderList()">
         <button class="btn" id="btn-toggle" onclick="toggleAllBtn()">展开全部</button>
         <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
         <button class="btn btn-blue" onclick="exportCSV('sku')">📥 按SKU</button>
@@ -83,6 +83,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
     <div>图片</div>
     <div>款号</div>
     <div>标签</div>
+    <div>销售员</div>
     <div class="sortable" id="th-qty" onclick="setSort('qty')">实际库存 <span id="th-qty-arrow"></span></div>
     <div class="cell-c">占有</div>
     <div class="cell-c">在库天数</div><div class="cell-c">SKU</div>
@@ -177,7 +178,7 @@ function toggleSku(iid) {
 function renderList() {
     if (!DATA) return;
     const q = (document.getElementById('search').value || '').trim().toLowerCase();
-    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q) || (s.labels||'').toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q)));
+    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q) || (s.labels||'').toLowerCase().includes(q) || (s.salesperson||'').toLowerCase().includes(q) || (s.team||'').toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q)));
     if (sortField === 'qty') {
         list.sort((a, b) => sortDir === 'desc' ? b.total_qty - a.total_qty : a.total_qty - b.total_qty);
     } else if (sortField === 'date') {
@@ -216,6 +217,7 @@ function renderList() {
                 <div>${picHtml}</div>
                 <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
                 <div>${labelHtml}</div>
+                <div style="font-size:12px;color:#374151">${s.salesperson||'<span style="color:#d1d5db">-</span>'}</div>
                 <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
                 <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
                 <div class="cell-c"><span class="badge ${ac}">${s.age_days}天</span></div>
