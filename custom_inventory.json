@@ -1,8 +1,8 @@
 {
   "updated_at": "2026-09-28 16:22:21",
-  "total_styles": 115,
-  "total_skus": 544,
-  "total_qty": 15191,
+  "total_styles": 113,
+  "total_skus": 542,
+  "total_qty": 15190,
   "total_lock": 3768,
   "warehouses": [
     {
@@ -5798,35 +5798,6 @@
       "io_date": "2026-09-01"
     },
     {
-      "i_id": "DSTX260818-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://p16-oec-general-useast5.ttcdn-us.com/tos-useast5-i-omjb5zjo8w-tx/7cd4f785658b473ea87a57c6707d3fe4~tplv-fhlh96nyum-origin-jpeg.jpeg?dr=12178&from=520841845&idc=useast5&ps=933b5bde&shcp=2c1af732&shp=1f0b6a75&t=555f072d",
-      "created": "2026-08-18",
-      "warehouse": [
-        "广州市捷展贸易有限公司"
-      ],
-      "age_days": 41,
-      "total_qty": 1,
-      "total_lock": 1,
-      "skus": [
-        {
-          "sku_id": "DSTX260818-7102M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 1,
-          "order_lock": 1,
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 1
-          },
-          "io_date": "2026-09-28"
-        }
-      ],
-      "salesperson": "",
-      "team": "",
-      "io_date": "2026-09-28"
-    },
-    {
       "i_id": "DSCT260730-77",
       "name": "定制",
       "labels": "",
@@ -6830,31 +6801,6 @@
       ],
       "salesperson": "刘胜楠",
       "team": "国内定制-蓝队",
-      "io_date": "2026-09-28"
-    },
-    {
-      "i_id": "PODTX20250702XH-29",
-      "name": "定制",
-      "labels": "压膜二开",
-      "pic": "https://cdn.shopify.com/s/files/1/0800/5612/3704/files/1200-1500_-2_c44c09c4-c8ab-448a-9188-651005a7253e.webp?v=1779876208",
-      "created": "2026-09-07",
-      "warehouse": [],
-      "age_days": 21,
-      "total_qty": 0,
-      "total_lock": 1,
-      "skus": [
-        {
-          "sku_id": "PODTX20250702XH-29107M",
-          "color": "麻灰",
-          "size": "M",
-          "qty": 0,
-          "order_lock": 1,
-          "wh_detail": {},
-          "io_date": "2026-09-28"
-        }
-      ],
-      "salesperson": "林晓虹",
-      "team": "品牌出海 -- 独立站",
       "io_date": "2026-09-28"
     },
     {
