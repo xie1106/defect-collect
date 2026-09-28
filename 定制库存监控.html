@@ -67,8 +67,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
     </div>
     <div class="ctrl-row">
         <input type="text" id="search" placeholder="搜索款号 / SKU编码..." oninput="renderList()">
-        <button class="btn" onclick="toggleAll(true)">展开全部</button>
-        <button class="btn" onclick="toggleAll(false)">收起全部</button>
+        <button class="btn" id="btn-toggle" onclick="toggleAllBtn()">展开全部</button>
         <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
         <button class="btn btn-blue" onclick="exportCSV('sku')">📥 按SKU</button>
     </div>
@@ -141,6 +140,12 @@ function toggleAll(open) {
     document.querySelectorAll('.arrow').forEach(el => el.classList.toggle('open', open));
     document.querySelectorAll('.card').forEach(el => el.classList.toggle('expanded', open));
 }
+let allExpanded = false;
+function toggleAllBtn() {
+    allExpanded = !allExpanded;
+    toggleAll(allExpanded);
+    document.getElementById('btn-toggle').textContent = allExpanded ? '收起全部' : '展开全部';
+}
 
 function toggleSku(iid) {
     const el = document.getElementById('skus-' + iid);
@@ -171,7 +176,19 @@ function renderList() {
     for (const s of list) {
         const ac = ageClass(s.age_days);
         const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
-        const whHtml = whs.length ? whs.map(whLabel).join('') : '-';
+        // 汇总分仓库存
+        const whAgg = {};
+        for (const k of s.skus) {
+            if (k.wh_detail) {
+                for (const [wn, wq] of Object.entries(k.wh_detail)) {
+                    whAgg[wn] = (whAgg[wn]||0) + wq;
+                }
+            }
+        }
+        const whAggKeys = Object.keys(whAgg);
+        const whHtml = whAggKeys.length
+            ? whAggKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:1px">${whAgg[wn]}</span>`).join(' ')
+            : (whs.length ? whs.map(whLabel).join('') : '-');
         const dateStr = s.io_date || s.created || '';
         html += `<div class="card">
             <div class="card-header" onclick="toggleSku('${s.i_id}')">
@@ -185,8 +202,16 @@ function renderList() {
             <div class="sku-panel" id="skus-${s.i_id}"><table>
                 <thead><tr><th>SKU编码</th><th>颜色</th><th>尺码</th><th>库存</th><th>入库时间</th><th>仓库</th></tr></thead><tbody>`;
         for (const k of s.skus) {
-            const kw = k.warehouse || (whs[0]||'');
-            html += `<tr><td class="copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</td><td>${k.color}</td><td>${k.size}</td><td><b>${k.qty}</b></td><td style="color:#9ca3af">${k.io_date||dateStr}</td><td>${whLabel(kw)}</td></tr>`;
+            const whd = k.wh_detail || {};
+            const whKeys = Object.keys(whd);
+            let whHtmlSku;
+            if (whKeys.length > 0) {
+                whHtmlSku = whKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:2px">${whd[wn]}</span>`).join(' ');
+            } else {
+                const kw = k.warehouse || (whs[0]||'');
+                whHtmlSku = kw ? whLabel(kw) : '-';
+            }
+            html += `<tr><td class="copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</td><td>${k.color}</td><td>${k.size}</td><td><b>${k.qty}</b></td><td style="color:#9ca3af">${k.io_date||dateStr}</td><td>${whHtmlSku}</td></tr>`;
         }
         html += '</tbody></table></div></div>';
     }
@@ -207,7 +232,9 @@ function exportCSV(mode) {
         for (const s of DATA.styles) {
             const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
             for (const k of s.skus) {
-                csv += `${k.sku_id},${s.i_id},${k.color},${k.size},${k.qty},"${k.warehouse||whs[0]||''}",${k.io_date||s.io_date||''}\n`;
+                const whd = k.wh_detail || {};
+                const whStr = Object.keys(whd).length ? Object.entries(whd).map(([n,q])=>`${n}:${q}`).join('+') : (k.warehouse||whs[0]||'');
+                csv += `${k.sku_id},${s.i_id},${k.color},${k.size},${k.qty},"${whStr}",${k.io_date||s.io_date||''}\n`;
             }
         }
     }
