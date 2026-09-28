@@ -44,7 +44,9 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .badge { padding:1px 7px; border-radius:4px; font-size:12px; font-weight:500; display:inline-block; }
 .badge-qty { background:#dbeafe; color:#1d4ed8; }
 .badge-lock { background:#fef3c7; color:#92400e; }
-.thumb { width:40px; height:40px; object-fit:cover; border-radius:4px; border:1px solid #e5e7eb; }
+.thumb { width:40px; height:40px; object-fit:cover; border-radius:4px; border:1px solid #e5e7eb; cursor:pointer; }
+.preview-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:100; display:flex; align-items:center; justify-content:center; cursor:pointer; }
+.preview-overlay img { max-width:90vw; max-height:90vh; border-radius:8px; box-shadow:0 8px 32px rgba(0,0,0,0.3); }
 .label-tag { display:inline-block; padding:1px 6px; border-radius:3px; font-size:10px; margin-left:4px; background:#fef3c7; color:#92400e; white-space:nowrap; }
 .age-green { background:#d1fae5; color:#065f46; }
 .age-yellow { background:#fef3c7; color:#92400e; }
@@ -132,6 +134,15 @@ function setSort(field) {
     renderList();
 }
 
+function previewImg(e, url) {
+    e.stopPropagation();
+    const overlay = document.createElement('div');
+    overlay.className = 'preview-overlay';
+    overlay.innerHTML = `<img src="${url}">`;
+    overlay.onclick = () => overlay.remove();
+    document.body.appendChild(overlay);
+}
+
 function copyText(text, e) {
     if (e) e.stopPropagation();
     navigator.clipboard.writeText(text);
@@ -196,7 +207,7 @@ function renderList() {
             ? whAggKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:1px">${whAgg[wn]}</span>`).join(' ')
             : (whs.length ? whs.map(whLabel).join('') : '-');
         const dateStr = s.io_date || s.created || '';
-        const picHtml = s.pic ? `<img class="thumb" src="${s.pic}" loading="lazy" onerror="this.style.display='none'">` : '';
+        const picHtml = s.pic ? `<img class="thumb" src="${s.pic}" loading="lazy" onclick="previewImg(event,'${s.pic}')" onerror="this.style.display='none'">` : '';
         const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag">${l.trim()}</span>`).join('') : '';
         const lockTotal = s.skus.reduce((a,k) => a + (k.order_lock||0), 0);
         html += `<div class="card">
