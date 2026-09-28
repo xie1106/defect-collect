@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-28 15:19:50",
+  "updated_at": "2026-09-28 15:31:43",
   "total_styles": 119,
   "total_skus": 546,
   "total_qty": 18233,
@@ -55,13 +55,13 @@
       "i_id": "DZTX230705-78",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://cbu01.alicdn.com/img/ibank/O1CN01KIV4hR29NF2HwClq2_!!2385118055-0-cib.jpg",
       "io_date": "",
       "created": "2023-07-12",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 1173,
+      "age_days": 1174,
       "total_qty": 127,
       "skus": [
         {
@@ -81,14 +81,14 @@
     {
       "i_id": "DZWT230831-78",
       "name": "2301SS防晒衣外套",
-      "labels": "",
-      "pic": "",
+      "labels": "赠品",
+      "pic": "https://img.alicdn.com/bao/uploaded/i4/2208006596250/O1CN01vajaQJ1w2YCaGKI0z_!!0-item_pic.jpg",
       "io_date": "",
       "created": "2023-09-16",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 1107,
+      "age_days": 1108,
       "total_qty": 7,
       "skus": [
         {
@@ -108,14 +108,14 @@
     {
       "i_id": "DZ13273W23",
       "name": "OCTTFLAB",
-      "labels": "",
-      "pic": "",
+      "labels": "停产产品",
+      "pic": "https://sc04.alicdn.com/kf/H8d6bc0f0daa743bd8488643976e692bbu.jpg",
       "io_date": "",
       "created": "2024-03-01",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 940,
+      "age_days": 941,
       "total_qty": 1,
       "skus": [
         {
@@ -142,7 +142,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 919,
+      "age_days": 920,
       "total_qty": 45,
       "skus": [
         {
@@ -169,7 +169,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 907,
+      "age_days": 908,
       "total_qty": 11,
       "skus": [
         {
@@ -235,7 +235,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 754,
+      "age_days": 755,
       "total_qty": 208,
       "skus": [
         {
@@ -466,7 +466,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 734,
+      "age_days": 735,
       "total_qty": 229,
       "skus": [
         {
@@ -678,14 +678,14 @@
     {
       "i_id": "DZWY240913-73",
       "name": "定制",
-      "labels": "",
-      "pic": "",
+      "labels": "有现货",
+      "pic": "https://cbu01.alicdn.com/img/ibank/O1CN01ID1Vbu29NFFcrWd7h_!!2385118055-0-cib.jpg",
       "io_date": "",
       "created": "2024-09-28",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 729,
+      "age_days": 730,
       "total_qty": 287,
       "skus": [
         {
@@ -1161,14 +1161,14 @@
     {
       "i_id": "DZWY240913-74",
       "name": "定制",
-      "labels": "",
-      "pic": "",
+      "labels": "有现货",
+      "pic": "https://cbu01.alicdn.com/img/ibank/O1CN01ID1Vbu29NFFcrWd7h_!!2385118055-0-cib.jpg",
       "io_date": "",
       "created": "2024-09-28",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 729,
+      "age_days": 730,
       "total_qty": 182,
       "skus": [
         {
@@ -1489,7 +1489,7 @@
       "i_id": "DZ13371W24",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://cbu01.alicdn.com/img/ibank/O1CN01QdoMv629NFKwUly9S_!!2385118055-0-cib.jpg",
       "io_date": "",
       "created": "2025-02-10",
       "warehouse": [
@@ -1609,7 +1609,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 522,
+      "age_days": 523,
       "total_qty": 6,
       "skus": [
         {
@@ -1636,7 +1636,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 501,
+      "age_days": 502,
       "total_qty": 13,
       "skus": [
         {
@@ -1687,7 +1687,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 501,
+      "age_days": 502,
       "total_qty": 41,
       "skus": [
         {
@@ -1837,7 +1837,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 369,
+      "age_days": 370,
       "total_qty": 142,
       "skus": [
         {
@@ -1927,7 +1927,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 291,
+      "age_days": 292,
       "total_qty": 1,
       "skus": [
         {
@@ -1954,7 +1954,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 291,
+      "age_days": 292,
       "total_qty": 1,
       "skus": [
         {
@@ -1981,7 +1981,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 279,
+      "age_days": 280,
       "total_qty": 40,
       "skus": [
         {
@@ -2037,8 +2037,8 @@
     {
       "i_id": "定制",
       "name": "DZCT250822-74",
-      "labels": "",
-      "pic": "",
+      "labels": "已匹配",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251201/60E98F88766B46B0B61BD0C2D718AD8A.png?name=120b0870-b183-4707-a88c-584f91c428f1",
       "io_date": "",
       "created": "2025-12-29",
       "warehouse": [],
@@ -2154,7 +2154,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 260,
+      "age_days": 261,
       "total_qty": 4,
       "skus": [
         {
@@ -2193,7 +2193,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 260,
+      "age_days": 261,
       "total_qty": 3,
       "skus": [
         {
@@ -2220,7 +2220,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 260,
+      "age_days": 261,
       "total_qty": 3,
       "skus": [
         {
@@ -2247,7 +2247,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 240,
+      "age_days": 241,
       "total_qty": 6,
       "skus": [
         {
@@ -2319,13 +2319,13 @@
       "i_id": "DZTX260108-30",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://cdn.shopify.com/s/files/1/0800/5612/3704/files/2000-2000-4_0fb7cbee-65d1-4adb-8f3f-6105a9ce79a2.webp?v=1747648062",
       "io_date": "",
       "created": "2026-02-04",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 235,
+      "age_days": 236,
       "total_qty": 11,
       "skus": [
         {
@@ -2406,13 +2406,13 @@
       "i_id": "DZTX260108-31",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://cdn.shopify.com/s/files/1/0800/5612/3704/files/2000-2000-4_0fb7cbee-65d1-4adb-8f3f-6105a9ce79a2.webp?v=1747648062",
       "io_date": "",
       "created": "2026-02-04",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 235,
+      "age_days": 236,
       "total_qty": 12,
       "skus": [
         {
@@ -2487,7 +2487,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 213,
+      "age_days": 214,
       "total_qty": 4,
       "skus": [
         {
@@ -2546,8 +2546,8 @@
     {
       "i_id": "A18",
       "name": "定制",
-      "labels": "",
-      "pic": "",
+      "labels": "水果棉面料",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260119/4045BB1FF1284DBB99EEE2856DDD2703.jpeg?name=f2062639-ac1f-405e-9125-5be8a20901ed",
       "io_date": "",
       "created": "2026-03-13",
       "warehouse": [
@@ -2580,7 +2580,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 167,
+      "age_days": 168,
       "total_qty": 1,
       "skus": [
         {
@@ -2607,7 +2607,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 167,
+      "age_days": 168,
       "total_qty": 3,
       "skus": [
         {
@@ -2658,7 +2658,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 167,
+      "age_days": 168,
       "total_qty": 1,
       "skus": [
         {
@@ -2685,7 +2685,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 165,
+      "age_days": 166,
       "total_qty": 5,
       "skus": [
         {
@@ -2712,7 +2712,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 163,
+      "age_days": 164,
       "total_qty": 3,
       "skus": [
         {
@@ -2757,13 +2757,13 @@
       "i_id": "DS260429-20",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260428/532C976655A944308C7D63D115540585.png?name=DZTX250402-708-03.png",
       "io_date": "",
       "created": "2026-05-08",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 142,
+      "age_days": 143,
       "total_qty": 3,
       "skus": [
         {
@@ -2784,13 +2784,13 @@
       "i_id": "DZTX260511-710",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260506/370FBA2245414C8C8EA6D9E6AABFCD50.png?name=72de639e-5864-44dd-88b5-2ffa21ca184e",
       "io_date": "",
       "created": "2026-05-12",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 138,
+      "age_days": 139,
       "total_qty": 12,
       "skus": [
         {
@@ -2865,7 +2865,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 137,
+      "age_days": 138,
       "total_qty": 1,
       "skus": [
         {
@@ -2925,13 +2925,13 @@
       "i_id": "DZBX260518-16",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260507/4E10A2DBE67643DA8DD892AB73B90B3D.png?name=558f66c9-6baf-4f2a-b2ff-f9048a64bd89",
       "io_date": "",
       "created": "2026-05-18",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 132,
+      "age_days": 133,
       "total_qty": 7,
       "skus": [
         {
@@ -3129,7 +3129,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 128,
+      "age_days": 129,
       "total_qty": 1,
       "skus": [
         {
@@ -3156,7 +3156,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 118,
+      "age_days": 119,
       "total_qty": 3,
       "skus": [
         {
@@ -3258,7 +3258,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 91,
       "total_qty": 1,
       "skus": [
         {
@@ -3285,7 +3285,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 90,
       "total_qty": 1,
       "skus": [
         {
@@ -3306,13 +3306,13 @@
       "i_id": "DSB250618-71",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/2F2A23F4858C47998D4AB87CEABBA681.png?name=3816a82d-5e4d-4557-854d-b0f78b85010c",
       "io_date": "2026-07-13",
       "created": "2026-05-26",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 77,
       "total_qty": 174,
       "skus": [
         {
@@ -3375,7 +3375,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 77,
       "total_qty": 145,
       "skus": [
         {
@@ -3462,7 +3462,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 71,
       "total_qty": 1,
       "skus": [
         {
@@ -3489,7 +3489,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 71,
       "total_qty": 2,
       "skus": [
         {
@@ -3516,7 +3516,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 71,
       "total_qty": 1,
       "skus": [
         {
@@ -3537,13 +3537,13 @@
       "i_id": "DSB241016-77",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/2F2A23F4858C47998D4AB87CEABBA681.png?name=3816a82d-5e4d-4557-854d-b0f78b85010c",
       "io_date": "2026-07-21",
       "created": "2026-05-26",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 69,
       "total_qty": 226,
       "skus": [
         {
@@ -3606,7 +3606,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 65,
       "total_qty": 1,
       "skus": [
         {
@@ -3627,13 +3627,13 @@
       "i_id": "DZTX251226-37",
       "name": "定制",
       "labels": "待清理",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260119/99DB5CBCB05046BC8ACB950ACA3754DC.jpeg?name=b42a0e68-a396-4f1e-a70e-e255808263bb",
       "io_date": "2026-07-28",
       "created": "2026-03-12",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 62,
       "total_qty": 5,
       "skus": [
         {
@@ -3678,13 +3678,13 @@
       "i_id": "DZKZ251226-34",
       "name": "定制",
       "labels": "待清理",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260119/99DB5CBCB05046BC8ACB950ACA3754DC.jpeg?name=b42a0e68-a396-4f1e-a70e-e255808263bb",
       "io_date": "2026-07-28",
       "created": "2026-03-12",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 62,
       "total_qty": 4,
       "skus": [
         {
@@ -3747,7 +3747,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 62,
       "total_qty": 3,
       "skus": [
         {
@@ -3798,7 +3798,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 58,
       "total_qty": 242,
       "skus": [
         {
@@ -3933,7 +3933,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 54,
       "total_qty": 131,
       "skus": [
         {
@@ -4008,7 +4008,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 44,
       "total_qty": 1,
       "skus": [
         {
@@ -4035,7 +4035,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 42,
       "total_qty": 119,
       "skus": [
         {
@@ -4062,7 +4062,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 40,
+      "age_days": 41,
       "total_qty": 2,
       "skus": [
         {
@@ -4089,7 +4089,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 39,
       "total_qty": 1,
       "skus": [
         {
@@ -4116,7 +4116,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 39,
       "total_qty": 214,
       "skus": [
         {
@@ -4179,7 +4179,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 38,
       "total_qty": 4,
       "skus": [
         {
@@ -4206,7 +4206,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 38,
       "total_qty": 213,
       "skus": [
         {
@@ -4335,13 +4335,13 @@
       "i_id": "DZTX260731-13",
       "name": "定制",
       "labels": "水边高地",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260720/C552B631FB74484788310B46AAC4A885.png?name=4430d7ab-dddc-4403-bc93-540bd9c92206",
       "io_date": "2026-08-27",
       "created": "2026-08-07",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 32,
       "total_qty": 20,
       "skus": [
         {
@@ -4380,7 +4380,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 27,
       "total_qty": 1,
       "skus": [
         {
@@ -4407,7 +4407,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 27,
       "total_qty": 195,
       "skus": [
         {
@@ -4482,7 +4482,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 25,
+      "age_days": 26,
       "total_qty": 29,
       "skus": [
         {
@@ -4545,7 +4545,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 25,
       "total_qty": 422,
       "skus": [
         {
@@ -4791,7 +4791,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 20,
       "total_qty": 2,
       "skus": [
         {
@@ -4830,7 +4830,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 17,
       "total_qty": 172,
       "skus": [
         {
@@ -4929,7 +4929,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 17,
       "total_qty": 43,
       "skus": [
         {
@@ -5004,7 +5004,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 17,
       "total_qty": 18,
       "skus": [
         {
@@ -5073,13 +5073,13 @@
       "i_id": "DSB250618-72",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/2F2A23F4858C47998D4AB87CEABBA681.png?name=3816a82d-5e4d-4557-854d-b0f78b85010c",
       "io_date": "2026-09-11",
       "created": "2026-05-26",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 17,
       "total_qty": 183,
       "skus": [
         {
@@ -5136,13 +5136,13 @@
       "i_id": "DSB241017-71",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/2F2A23F4858C47998D4AB87CEABBA681.png?name=3816a82d-5e4d-4557-854d-b0f78b85010c",
       "io_date": "2026-09-11",
       "created": "2026-05-26",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 17,
       "total_qty": 239,
       "skus": [
         {
@@ -5205,7 +5205,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 17,
       "total_qty": 238,
       "skus": [
         {
@@ -5340,7 +5340,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 17,
       "total_qty": 297,
       "skus": [
         {
@@ -5475,7 +5475,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 14,
       "total_qty": 5,
       "skus": [
         {
@@ -5502,7 +5502,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 12,
       "total_qty": 2,
       "skus": [
         {
@@ -5541,7 +5541,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 12,
       "total_qty": 188,
       "skus": [
         {
@@ -5610,13 +5610,13 @@
       "i_id": "DZTX251124-31",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260506/370FBA2245414C8C8EA6D9E6AABFCD50.png?name=72de639e-5864-44dd-88b5-2ffa21ca184e",
       "io_date": "2026-09-16",
       "created": "2026-05-12",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 12,
       "total_qty": 363,
       "skus": [
         {
@@ -5751,7 +5751,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 11,
       "total_qty": 2,
       "skus": [
         {
@@ -5790,7 +5790,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 11,
       "total_qty": 2,
       "skus": [
         {
@@ -5829,7 +5829,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 11,
       "total_qty": 2036,
       "skus": [
         {
@@ -5914,7 +5914,7 @@
       "io_date": "2026-09-17",
       "created": "2026-09-07",
       "warehouse": [],
-      "age_days": 0,
+      "age_days": 11,
       "total_qty": 1,
       "skus": [
         {
@@ -5939,7 +5939,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 9,
       "total_qty": 1,
       "skus": [
         {
@@ -5966,7 +5966,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 9,
       "total_qty": 1,
       "skus": [
         {
@@ -5993,7 +5993,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 9,
       "total_qty": 1,
       "skus": [
         {
@@ -6020,7 +6020,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 9,
       "total_qty": 2,
       "skus": [
         {
@@ -6059,7 +6059,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 9,
       "total_qty": 282,
       "skus": [
         {
@@ -6156,7 +6156,7 @@
       "io_date": "2026-09-19",
       "created": "2026-03-17",
       "warehouse": [],
-      "age_days": 0,
+      "age_days": 9,
       "total_qty": 1659,
       "skus": [
         {
@@ -6321,7 +6321,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 7,
       "total_qty": 1500,
       "skus": [
         {
@@ -6348,7 +6348,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 7,
       "total_qty": 198,
       "skus": [
         {
@@ -6375,7 +6375,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 7,
       "total_qty": 2,
       "skus": [
         {
@@ -6414,7 +6414,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 6,
       "total_qty": 75,
       "skus": [
         {
@@ -6489,7 +6489,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 6,
       "total_qty": 77,
       "skus": [
         {
@@ -6564,7 +6564,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 4,
       "total_qty": 211,
       "skus": [
         {
@@ -6627,7 +6627,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 4,
       "total_qty": 49,
       "skus": [
         {
@@ -6702,7 +6702,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 4,
       "total_qty": 36,
       "skus": [
         {
@@ -6765,7 +6765,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 4,
       "total_qty": 79,
       "skus": [
         {
@@ -6894,13 +6894,13 @@
       "i_id": "DZWY260731-94",
       "name": "定制",
       "labels": "品牌方商品,毕方品牌管理服务公司,15875129",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260729/A2B6D88041AE46AB9EFF561D1FE15B19.png?name=047e9ad6-05af-4b85-9443-190178613a75",
       "io_date": "2026-09-26",
       "created": "2026-08-22",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 2,
       "total_qty": 2078,
       "skus": [
         {
@@ -6969,13 +6969,13 @@
       "i_id": "DZCT260729-95",
       "name": "定制",
       "labels": "品牌方商品,毕方品牌管理服务公司,15875129",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260814/85796F7A218644A498CF509EA3200AEA.png?name=3692149c-7357-4e99-bae0-e4c59f719c5f",
       "io_date": "2026-09-26",
       "created": "2026-08-24",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 2,
       "total_qty": 74,
       "skus": [
         {
@@ -7086,7 +7086,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 143,
       "skus": [
         {
@@ -7149,7 +7149,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 376,
       "skus": [
         {
@@ -7224,7 +7224,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 618,
       "skus": [
         {
@@ -7263,7 +7263,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 99,
       "skus": [
         {
@@ -7350,7 +7350,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 100,
       "skus": [
         {
@@ -7437,7 +7437,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 200,
       "skus": [
         {
@@ -7668,7 +7668,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 100,
       "skus": [
         {
@@ -7827,7 +7827,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 680,
       "skus": [
         {

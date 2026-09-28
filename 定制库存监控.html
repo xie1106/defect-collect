@@ -22,7 +22,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .btn-sort.active { background:#eff6ff; border-color:#93c5fd; color:#1d4ed8; font-weight:600; }
 .updated { font-size:11px; color:#9ca3af; margin-top:6px; }
 /* TABLE */
-.th-row { display:grid; grid-template-columns:50px 2.5fr 80px 80px 80px 60px 100px 1.2fr; padding:8px 20px; background:#f9fafb; position:sticky; top:90px; z-index:15;
+.th-row { display:grid; grid-template-columns:50px 2fr 1fr 80px 80px 80px 60px 100px 1.2fr; padding:8px 20px; background:#f9fafb; position:sticky; z-index:15;
 /* PLACEHOLDER_TH */
   font-size:12px; color:#374151; font-weight:700; border-bottom:1px solid #e5e7eb; letter-spacing:0.5px; }
 .th-row .sortable { cursor:pointer; user-select:none; display:flex; align-items:center; gap:2px; justify-content:center; }
@@ -30,7 +30,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .th-row .sortable.active { color:#1d4ed8; font-weight:700; }
 .list { padding:0 0 80px; }
 .card { background:#fff; border-bottom:1px solid #f3f4f6; }
-.card-header { display:grid; grid-template-columns:50px 2.5fr 80px 80px 80px 60px 100px 1.2fr; padding:12px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
+.card-header { display:grid; grid-template-columns:50px 2fr 1fr 80px 80px 80px 60px 100px 1.2fr; padding:12px 20px; align-items:center; cursor:pointer; user-select:none; font-size:13px; }
 .card-header:hover { background:#fafbfc; }
 .iid-cell { display:flex; align-items:center; gap:6px; overflow:hidden; }
 .iid { font-weight:600; font-size:13px; color:#1f2937; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; }
@@ -82,6 +82,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 <div class="th-row">
     <div></div>
     <div>款号</div>
+    <div>标签</div>
     <div class="sortable" id="th-qty" onclick="setSort('qty')">库存 <span id="th-qty-arrow"></span></div>
     <div class="cell-c">占有</div>
     <div class="cell-c">在库天数</div><div class="cell-c">SKU</div>
@@ -208,12 +209,13 @@ function renderList() {
             : (whs.length ? whs.map(whLabel).join('') : '-');
         const dateStr = s.io_date || s.created || '';
         const picHtml = s.pic ? `<img class="thumb" src="${s.pic}" loading="lazy" onclick="previewImg(event,'${s.pic}')" onerror="this.style.display='none'">` : '';
-        const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag">${l.trim()}</span>`).join('') : '';
+        const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag">${l.trim()}</span>`).join('') : '<span style="color:#d1d5db">-</span>';
         const lockTotal = s.skus.reduce((a,k) => a + (k.order_lock||0), 0);
         html += `<div class="card">
             <div class="card-header" onclick="toggleSku('${s.i_id}')">
                 <div>${picHtml}</div>
-                <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span>${labelHtml}</div>
+                <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
+                <div>${labelHtml}</div>
                 <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
                 <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
                 <div class="cell-c"><span class="badge ${ac}">${s.age_days}天</span></div>
@@ -267,6 +269,14 @@ function exportCSV(mode) {
 }
 
 loadData();
+// 动态设置表头sticky top
+function fixThTop() {
+    const bar = document.querySelector('.top-bar');
+    const th = document.querySelector('.th-row');
+    if (bar && th) th.style.top = bar.offsetHeight + 'px';
+}
+fixThTop();
+window.addEventListener('resize', fixThTop);
 setInterval(loadData, 300000);
 </script>
 </body>
