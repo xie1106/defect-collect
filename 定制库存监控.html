@@ -119,6 +119,13 @@ async function loadData() {
 }
 
 function ageClass(d) { return d <= 30 ? 'age-green' : d <= 60 ? 'age-yellow' : 'age-red'; }
+function calcAgeDays(s) {
+    const d = s.io_date || s.created;
+    if (!d) return s.age_days || 0;
+    const ts = new Date(d.replace(/-/g,'/')).getTime();
+    if (isNaN(ts)) return s.age_days || 0;
+    return Math.floor((Date.now() - ts) / 86400000);
+}
 
 function whLabel(name) {
     if (!name) return '';
@@ -235,7 +242,8 @@ function renderList() {
 
     let html = '';
     for (const s of list) {
-        const ac = ageClass(s.age_days);
+        const ageDays = calcAgeDays(s);
+        const ac = ageClass(ageDays);
         const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
         // 汇总分仓库存
         const whAgg = {};
@@ -262,7 +270,7 @@ function renderList() {
                 <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb" title="点击筛选该销售员">'+s.salesperson+'</span>' : '<span style="color:#d1d5db">-</span>'}</div>
                 <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
                 <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
-                <div class="cell-c"><span class="badge ${ac}">${s.age_days}天</span></div>
+                <div class="cell-c"><span class="badge ${ac}">${ageDays}天</span></div>
                 <div class="cell-c">${s.skus.length}</div>
                 <div style="color:#6b7280;font-size:12px">${dateStr}</div>
                 <div class="wh-cell">${whHtml}</div>
@@ -293,7 +301,7 @@ function exportCSV(mode) {
         csv += '图片,款号,标签,仓库,实际库存,占有,在库天数,SKU数,最近入库\n';
         for (const s of DATA.styles) {
             const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean).join('+');
-            csv += `${s.pic||''},"${s.i_id}","${s.labels||''}","${whs}",${s.total_qty},${s.total_lock||0},${s.age_days},${s.skus.length},${s.io_date||s.created||''}\n`;
+            csv += `${s.pic||''},"${s.i_id}","${s.labels||''}","${whs}",${s.total_qty},${s.total_lock||0},${calcAgeDays(s)},${s.skus.length},${s.io_date||s.created||''}\n`;
         }
     } else {
         csv += '图片,SKU编码,款号,标签,颜色,尺码,实际库存,占有,仓库,入库时间\n';
