@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-09-29 11:27:29",
-  "total_styles": 95,
+  "total_styles": 93,
   "total_skus": 343,
   "total_qty": 10144,
-  "total_lock": 4196,
+  "total_lock": 2418,
   "warehouses": [
     {
       "wms_co_id": 10188262,
@@ -1689,20 +1689,6 @@
           }
         }
       ]
-    },
-    {
-      "i_id": "定制",
-      "name": "DZCT250822-74",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/FFD7BC1CC5464E06B87F180D9C3B96FD.jpeg?name=43cea8a2-c6e5-4bc0-955a-c60dd569b246",
-      "salesperson": "",
-      "io_date": "",
-      "created": "2025-12-29",
-      "warehouse": [],
-      "age_days": 274,
-      "total_qty": 0,
-      "total_lock": 198,
-      "skus": []
     },
     {
       "i_id": "DZCT251208-32",
@@ -4826,22 +4812,6 @@
           }
         }
       ]
-    },
-    {
-      "i_id": "DGSCT260311-93",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260317/24538E2A2EE1449C858A64A81251FE06.png?name=6bfb81d0-d754-432b-aacb-c88eb8f97511",
-      "salesperson": "莫紫珊",
-      "io_date": "2026-09-19",
-      "created": "2026-03-17",
-      "warehouse": [
-        "进货仓"
-      ],
-      "age_days": 9,
-      "total_qty": 0,
-      "total_lock": 1580,
-      "skus": []
     },
     {
       "i_id": "DZBB260824-74",
