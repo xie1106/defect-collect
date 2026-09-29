@@ -242,7 +242,7 @@ function renderList() {
                 <div>${picHtml}</div>
                 <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
                 <div>${labelHtml}</div>
-                <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb;text-decoration:underline dotted;text-underline-offset:2px" title="点击筛选该销售员">'+s.salesperson+'</span>' : '<span style="color:#d1d5db">-</span>'}</div>
+                <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb" title="点击筛选该销售员">'+s.salesperson+'</span>' : '<span style="color:#d1d5db">-</span>'}</div>
                 <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
                 <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
                 <div class="cell-c"><span class="badge ${ac}">${s.age_days}天</span></div>
