@@ -13,7 +13,7 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .top-row h1 { font-size:17px; font-weight:600; }
 .top-row .stats { font-size:13px; color:#6b7280; }
 .ctrl-row { display:flex; align-items:center; gap:8px; margin-top:10px; flex-wrap:wrap; }
-.search-wrap { position:relative; flex:1; min-width:160px; }
+.search-wrap { position:relative; flex:0 1 200px; min-width:120px; }
 .search-wrap input { width:100%; padding:7px 32px 7px 12px; border:1px solid #d1d5db; border-radius:6px; font-size:13px; outline:none; }
 .search-wrap input:focus { border-color:#3b82f6; }
 .search-clear { position:absolute; right:8px; top:50%; transform:translateY(-50%); width:18px; height:18px; border:none; background:#d1d5db; color:#fff; border-radius:50%; font-size:12px; line-height:18px; text-align:center; cursor:pointer; display:none; }
@@ -77,7 +77,16 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
         <div class="stats" id="stats">加载中...</div>
     </div>
     <div class="ctrl-row">
-        <div class="search-wrap"><input type="text" id="search" placeholder="搜索款号 / SKU / 标签 / 销售员..." oninput="onSearchInput()"><button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button></div>
+        <div class="search-wrap"><input type="text" id="search" placeholder="搜索款号/标签/销售员..." oninput="onSearchInput()"><button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button></div>
+        <select id="ageFilter" onchange="renderList()" style="padding:7px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:13px;outline:none;background:#fff;cursor:pointer">
+            <option value="">全部天数</option>
+            <option value="30">≤30天</option>
+            <option value="60">≤60天</option>
+            <option value="90">≤90天</option>
+            <option value="31-60">31-60天</option>
+            <option value="61-90">61-90天</option>
+            <option value="91">＞90天</option>
+        </select>
         <button class="btn" id="btn-toggle" onclick="toggleAllBtn()">展开全部</button>
         <button class="btn btn-blue" onclick="exportCSV('style')">📥 按款号</button>
         <button class="btn btn-blue" onclick="exportCSV('sku')">📥 按SKU</button>
@@ -228,6 +237,19 @@ function renderList() {
     if (!DATA) return;
     const q = (document.getElementById('search').value || '').trim().toLowerCase();
     let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q) || (s.labels||'').toLowerCase().includes(q) || (s.salesperson||'').toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q)));
+    const af = document.getElementById('ageFilter').value;
+    if (af) {
+        list = list.filter(s => {
+            const d = calcAgeDays(s);
+            if (af === '30') return d <= 30;
+            if (af === '60') return d <= 60;
+            if (af === '90') return d <= 90;
+            if (af === '31-60') return d > 30 && d <= 60;
+            if (af === '61-90') return d > 60 && d <= 90;
+            if (af === '91') return d > 90;
+            return true;
+        });
+    }
     if (sortField === 'qty') {
         list.sort((a, b) => sortDir === 'desc' ? b.total_qty - a.total_qty : a.total_qty - b.total_qty);
     } else if (sortField === 'date') {
