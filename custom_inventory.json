@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-09-29 16:03:28",
-  "total_styles": 101,
+  "total_styles": 100,
   "total_skus": 405,
   "total_qty": 11939,
-  "total_lock": 5577,
+  "total_lock": 5379,
   "warehouses": [
     {
       "wms_co_id": 10188262,
@@ -57,7 +57,7 @@
       "name": "",
       "labels": "",
       "pic": "",
-      "salesperson": "",
+      "salesperson": "冯佩珊",
       "io_date": "",
       "created": "",
       "warehouse": [
@@ -1681,20 +1681,6 @@
       ]
     },
     {
-      "i_id": "定制",
-      "name": "DZCT250822-74",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/FFD7BC1CC5464E06B87F180D9C3B96FD.jpeg?name=43cea8a2-c6e5-4bc0-955a-c60dd569b246",
-      "salesperson": "",
-      "io_date": "",
-      "created": "2025-12-29",
-      "warehouse": [],
-      "age_days": 274,
-      "total_qty": 0,
-      "total_lock": 198,
-      "skus": []
-    },
-    {
       "i_id": "DZCT251208-32",
       "name": "定制",
       "labels": "",
@@ -3004,7 +2990,7 @@
       "name": "定制",
       "labels": "半成品",
       "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260716/9EA6D910FC98452B8554058D2C5BBBA6.png?name=c226821a-fd55-4f8e-bad9-1b12cac270ca",
-      "salesperson": "",
+      "salesperson": "张玉珠",
       "io_date": "2026-07-25",
       "created": "2025-03-11",
       "warehouse": [
@@ -6146,7 +6132,7 @@
       "name": "定制",
       "labels": "",
       "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260910/E15560B9B4D74149A9EEC6B0F409E559.png?name=29c5f49a-d8cd-4ffd-aa67-fb4265c102e5",
-      "salesperson": "",
+      "salesperson": "罗伟仪",
       "io_date": "2026-09-29",
       "created": "2026-09-10",
       "warehouse": [
@@ -6173,7 +6159,7 @@
       "name": "定制",
       "labels": "",
       "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260115/1B69C9A96E064194ACABF4D426B85C28.png?name=0f44218a-606a-47bf-8baf-21fe60ff70bc",
-      "salesperson": "",
+      "salesperson": "周乐",
       "io_date": "2026-09-29",
       "created": "2026-01-15",
       "warehouse": [
@@ -6359,7 +6345,7 @@
       "name": "定制",
       "labels": "",
       "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260829/8B9BD8AB09A44233852DC70CB82968AE.png?name=c5885dd1-7e46-4341-9c89-ea968d33d24f",
-      "salesperson": "",
+      "salesperson": "刘胜楠",
       "io_date": "2026-09-29",
       "created": "2026-08-29",
       "warehouse": [
@@ -6461,7 +6447,7 @@
       "name": "定制",
       "labels": "",
       "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260804/12E94BC1FD6D40DA90250B43EA21CC52.png?name=5e063a35-2b25-4693-ab9f-c284eeb9951d",
-      "salesperson": "",
+      "salesperson": "刘胜楠",
       "io_date": "2026-09-29",
       "created": "2026-08-04",
       "warehouse": [
@@ -6575,7 +6561,7 @@
       "name": "定制",
       "labels": "",
       "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260929/91FE9A81531544E89A35B1739F5474E7.png?name=a2700a9a-69cc-4539-abea-f1e804845183",
-      "salesperson": "",
+      "salesperson": "莫紫珊",
       "io_date": "2026-09-29",
       "created": "2026-09-29",
       "warehouse": [
