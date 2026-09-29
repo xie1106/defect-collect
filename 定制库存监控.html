@@ -123,6 +123,17 @@ const MAIN_WH = '广州市捷展贸易有限公司';
 
 async function loadData() {
     try {
+        // 图片懒加载
+        if ('IntersectionObserver' in window) {
+            window._imgObs = new IntersectionObserver((entries) => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        e.target.src = e.target.dataset.src;
+                        window._imgObs.unobserve(e.target);
+                    }
+                });
+            }, { rootMargin: '200px' });
+        }
         const r = await fetch('custom_inventory.json?t=' + Date.now());
         DATA = await r.json();
         const totalLock = DATA.styles.reduce((a,s) => a + s.skus.reduce((b,k) => b + (k.order_lock||0), 0), 0);
@@ -191,7 +202,8 @@ function clearSearch() {
 function onSearchInput() {
     const v = document.getElementById('search').value;
     document.getElementById('searchClear').style.display = v ? 'block' : 'none';
-    renderList();
+    clearTimeout(window._searchTimer);
+    window._searchTimer = setTimeout(renderList, 150);
 }
 
 function filterByLabel(label, e) {
@@ -266,60 +278,80 @@ function renderList() {
         });
     }
 
-    if (!list.length) { document.getElementById('list').innerHTML = '<div class="empty">无匹配结果</div>'; return; }
+    const el = document.getElementById('list');
+    if (!list.length) { el.innerHTML = '<div class="empty">无匹配结果</div>'; return; }
 
-    let html = '';
-    for (const s of list) {
-        const ageDays = calcAgeDays(s);
-        const ac = ageClass(ageDays);
-        const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
-        // 汇总分仓库存
-        const whAgg = {};
-        for (const k of s.skus) {
-            if (k.wh_detail) {
-                for (const [wn, wq] of Object.entries(k.wh_detail)) {
-                    whAgg[wn] = (whAgg[wn]||0) + wq;
-                }
-            }
+    // 分批渲染
+    el.innerHTML = '';
+    if (window._renderTimer) cancelAnimationFrame(window._renderTimer);
+    const BATCH = 20;
+    let idx = 0;
+    function renderBatch() {
+        const frag = document.createDocumentFragment();
+        const end = Math.min(idx + BATCH, list.length);
+        for (; idx < end; idx++) {
+            frag.appendChild(buildCard(list[idx]));
         }
-        const whAggKeys = Object.keys(whAgg);
-        const whHtml = whAggKeys.length
-            ? whAggKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:1px">${whAgg[wn]}</span>`).join(' ')
-            : (whs.length ? whs.map(whLabel).join('') : '-');
-        const dateStr = s.io_date || s.created || '';
-        const picHtml = s.pic ? `<img class="thumb" src="${s.pic}" loading="lazy" referrerpolicy="no-referrer" onclick="previewImg(event,'${s.pic}')" onerror="this.style.display='none'">` : '';
-        const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag" onclick="filterByLabel('${l.trim()}',event)" style="cursor:pointer" title="点击筛选该标签">${l.trim()}</span>`).join('') : '<span style="color:#d1d5db">-</span>';
-        const lockTotal = s.skus.reduce((a,k) => a + (k.order_lock||0), 0);
-        html += `<div class="card">
-            <div class="card-header" onclick="toggleSku('${s.i_id}')">
-                <div>${picHtml}</div>
-                <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
-                <div>${labelHtml}</div>
-                <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb" title="点击筛选该销售员">'+s.salesperson+'</span>' : '<span style="color:#d1d5db">-</span>'}</div>
-                <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
-                <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
-                <div class="cell-c"><span class="badge ${ac}">${ageDays}天</span></div>
-                <div class="cell-c">${s.skus.length}</div>
-                <div style="color:#6b7280;font-size:12px">${dateStr}</div>
-                <div class="wh-cell">${whHtml}</div>
-            </div>
-            <div class="sku-panel" id="skus-${s.i_id}"><div class="sku-grid">
-                <div class="sku-th">SKU编码</div><div class="sku-th">颜色</div><div class="sku-th">尺码</div><div class="sku-th">库存</div><div class="sku-th">占有</div><div class="sku-th">入库时间</div><div class="sku-th">仓库</div>`;
-        for (const k of s.skus) {
-            const whd = k.wh_detail || {};
-            const whKeys = Object.keys(whd);
-            let whHtmlSku;
-            if (whKeys.length > 0) {
-                whHtmlSku = whKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:2px">${whd[wn]}</span>`).join(' ');
-            } else {
-                const kw = k.warehouse || (whs[0]||'');
-                whHtmlSku = kw ? whLabel(kw) : '-';
-            }
-            html += `<div class="sku-td copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</div><div class="sku-td">${k.color}</div><div class="sku-td">${k.size}</div><div class="sku-td"><b>${k.qty}</b></div><div class="sku-td" style="color:#92400e">${k.order_lock||'-'}</div><div class="sku-td" style="color:#9ca3af">${k.io_date||dateStr}</div><div class="sku-td">${whHtmlSku}</div>`;
-        }
-        html += '</div></div></div>';
+        el.appendChild(frag);
+        if (idx < list.length) window._renderTimer = requestAnimationFrame(renderBatch);
     }
-    document.getElementById('list').innerHTML = html;
+    renderBatch();
+}
+
+function buildCard(s) {
+    const ageDays = calcAgeDays(s);
+    const ac = ageClass(ageDays);
+    const whs = (Array.isArray(s.warehouse) ? s.warehouse : [s.warehouse]).filter(Boolean);
+    const whAgg = {};
+    for (const k of s.skus) {
+        if (k.wh_detail) {
+            for (const [wn, wq] of Object.entries(k.wh_detail)) {
+                whAgg[wn] = (whAgg[wn]||0) + wq;
+            }
+        }
+    }
+    const whAggKeys = Object.keys(whAgg);
+    const whHtml = whAggKeys.length
+        ? whAggKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:1px">${whAgg[wn]}</span>`).join(' ')
+        : (whs.length ? whs.map(whLabel).join('') : '-');
+    const dateStr = s.io_date || s.created || '';
+    const picHtml = s.pic ? `<img class="thumb" data-src="${s.pic}" referrerpolicy="no-referrer" onclick="previewImg(event,'${s.pic}')" onerror="this.style.display='none'">` : '';
+    const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag" onclick="filterByLabel('${l.trim()}',event)" style="cursor:pointer" title="点击筛选该标签">${l.trim()}</span>`).join('') : '<span style="color:#d1d5db">-</span>';
+    const lockTotal = s.skus.reduce((a,k) => a + (k.order_lock||0), 0);
+    const div = document.createElement('div');
+    div.className = 'card';
+    let skuRows = '';
+    for (const k of s.skus) {
+        const whd = k.wh_detail || {};
+        const whKeys = Object.keys(whd);
+        const whHtmlSku = whKeys.length > 0
+            ? whKeys.map(wn => whLabel(wn) + `<span style="font-size:11px;color:#6b7280;margin-left:2px">${whd[wn]}</span>`).join(' ')
+            : ((k.warehouse || whs[0]||'') ? whLabel(k.warehouse || whs[0]||'') : '-');
+        skuRows += `<div class="sku-td copyable" onclick="copyText('${k.sku_id}',event)" title="点击复制">${k.sku_id}</div><div class="sku-td">${k.color}</div><div class="sku-td">${k.size}</div><div class="sku-td"><b>${k.qty}</b></div><div class="sku-td" style="color:#92400e">${k.order_lock||'-'}</div><div class="sku-td" style="color:#9ca3af">${k.io_date||dateStr}</div><div class="sku-td">${whHtmlSku}</div>`;
+    }
+    div.innerHTML = `<div class="card-header" onclick="toggleSku('${s.i_id}')">
+        <div>${picHtml}</div>
+        <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
+        <div>${labelHtml}</div>
+        <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb">'+s.salesperson+'</span>' : '<span style="color:#d1d5db">-</span>'}</div>
+        <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
+        <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
+        <div class="cell-c"><span class="badge ${ac}">${ageDays}天</span></div>
+        <div class="cell-c">${s.skus.length}</div>
+        <div style="color:#6b7280;font-size:12px">${dateStr}</div>
+        <div class="wh-cell">${whHtml}</div>
+    </div>
+    <div class="sku-panel" id="skus-${s.i_id}"><div class="sku-grid">
+        <div class="sku-th">SKU编码</div><div class="sku-th">颜色</div><div class="sku-th">尺码</div><div class="sku-th">库存</div><div class="sku-th">占有</div><div class="sku-th">入库时间</div><div class="sku-th">仓库</div>
+        ${skuRows}
+    </div></div>`;
+    // 懒加载图片
+    const img = div.querySelector('img[data-src]');
+    if (img) {
+        if (window._imgObs) window._imgObs.observe(img);
+        else img.src = img.dataset.src;
+    }
+    return div;
 }
 
 function exportCSV(mode) {
