@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-09-29 11:27:29",
-  "total_styles": 96,
-  "total_skus": 344,
-  "total_qty": 10145,
-  "total_lock": 4197,
+  "total_styles": 95,
+  "total_skus": 343,
+  "total_qty": 10144,
+  "total_lock": 4196,
   "warehouses": [
     {
       "wms_co_id": 10188262,
@@ -5427,36 +5427,6 @@
           "io_date": "2026-09-27",
           "wh_detail": {
             "广州市捷展贸易有限公司": 99
-          }
-        }
-      ]
-    },
-    {
-      "i_id": "PODTX20250702XH-29",
-      "name": "定制",
-      "labels": "压膜二开",
-      "pic": "https://cdn.shopify.com/s/files/1/0800/5612/3704/files/1200-1500_-2_c44c09c4-c8ab-448a-9188-651005a7253e.webp?v=1779876208",
-      "salesperson": "林晓虹",
-      "io_date": "2026-09-28",
-      "created": "2026-09-07",
-      "warehouse": [
-        "广州市捷展贸易有限公司",
-        "主仓"
-      ],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 1,
-      "skus": [
-        {
-          "sku_id": "PODTX20250702XH-29107M",
-          "color": "麻灰",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 1,
-          "io_date": "2026-09-28",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 1
           }
         }
       ]
