@@ -279,6 +279,17 @@ function renderList() {
     }
 
     const el = document.getElementById('list');
+    const statsEl = document.getElementById('stats');
+    const isFiltered = q || af;
+    const filteredQty = list.reduce((a, s) => a + s.total_qty, 0);
+    const filteredLock = list.reduce((a, s) => a + s.skus.reduce((b, k) => b + (k.order_lock||0), 0), 0);
+    const filteredSkus = list.reduce((a, s) => a + s.skus.length, 0);
+    if (isFiltered) {
+        statsEl.innerHTML = `<span style="color:#2563eb;font-weight:600">筛选: ${list.length} 款 · ${filteredSkus} SKU · 库存 ${filteredQty} · 占有 ${filteredLock}</span> <span style="color:#9ca3af">/ 全部 ${DATA.total_styles} 款 · ${DATA.total_qty}</span>`;
+    } else {
+        const totalLock = DATA.styles.reduce((a,s) => a + s.skus.reduce((b,k) => b + (k.order_lock||0), 0), 0);
+        statsEl.textContent = `${DATA.total_styles} 个款号 · ${DATA.total_skus} 个SKU · 总库存 ${DATA.total_qty} · 占有 ${totalLock}`;
+    }
     if (!list.length) { el.innerHTML = '<div class="empty">无匹配结果</div>'; return; }
 
     // 分批渲染
