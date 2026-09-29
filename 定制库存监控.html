@@ -157,6 +157,17 @@ function copyText(text, e) {
     setTimeout(() => t.style.opacity = '0', 1200);
 }
 
+function filterByLabel(label, e) {
+    e && e.stopPropagation();
+    const input = document.getElementById('search');
+    if (input.value === label) {
+        input.value = '';
+    } else {
+        input.value = label;
+    }
+    renderList();
+}
+
 function filterBySalesperson(name, e) {
     e && e.stopPropagation();
     const input = document.getElementById('search');
@@ -224,7 +235,7 @@ function renderList() {
             : (whs.length ? whs.map(whLabel).join('') : '-');
         const dateStr = s.io_date || s.created || '';
         const picHtml = s.pic ? `<img class="thumb" src="${s.pic}" loading="lazy" referrerpolicy="no-referrer" onclick="previewImg(event,'${s.pic}')" onerror="this.style.display='none'">` : '';
-        const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag">${l.trim()}</span>`).join('') : '<span style="color:#d1d5db">-</span>';
+        const labelHtml = s.labels ? s.labels.split(',').map(l => `<span class="label-tag" onclick="filterByLabel('${l.trim()}',event)" style="cursor:pointer" title="点击筛选该标签">${l.trim()}</span>`).join('') : '<span style="color:#d1d5db">-</span>';
         const lockTotal = s.skus.reduce((a,k) => a + (k.order_lock||0), 0);
         html += `<div class="card">
             <div class="card-header" onclick="toggleSku('${s.i_id}')">
