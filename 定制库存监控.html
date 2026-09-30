@@ -148,9 +148,9 @@ async function loadData() {
 function ageClass(d) { return d <= 30 ? 'age-green' : d <= 60 ? 'age-yellow' : 'age-red'; }
 function calcAgeDays(s) {
     const d = s.io_date || s.created;
-    if (!d) return s.age_days || 0;
+    if (!d) return -1;
     const ts = new Date(d.replace(/-/g,'/')).getTime();
-    if (isNaN(ts)) return s.age_days || 0;
+    if (isNaN(ts)) return -1;
     return Math.floor((Date.now() - ts) / 86400000);
 }
 
@@ -255,11 +255,12 @@ function toggleSku(iid) {
 function renderList() {
     if (!DATA) return;
     const q = (document.getElementById('search').value || '').trim().toLowerCase();
-    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q) || (s.labels||'').toLowerCase().includes(q) || (s.salesperson||'').toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q)));
+    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q) || (s.labels||'').toLowerCase().includes(q) || (s.salesperson||'-').toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q)));
     const af = document.getElementById('ageFilter').value;
     if (af) {
         list = list.filter(s => {
             const d = calcAgeDays(s);
+            if (d < 0) return false;
             if (af === '30') return d <= 30;
             if (af === '60') return d <= 60;
             if (af === '90') return d <= 90;
@@ -346,10 +347,10 @@ function buildCard(s) {
         <div>${picHtml}</div>
         <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
         <div>${labelHtml}</div>
-        <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb">'+s.salesperson+'</span>' : '<span style="color:#d1d5db">-</span>'}</div>
+        <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb">'+s.salesperson+'</span>' : '<span class="sp-link" onclick="filterBySalesperson(\'-\',event)" style="cursor:pointer;color:#9ca3af">-</span>'}</div>
         <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
         <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
-        <div class="cell-c"><span class="badge ${ac}">${ageDays}天</span></div>
+        <div class="cell-c">${ageDays >= 0 ? '<span class="badge '+ac+'">'+ageDays+'天</span>' : '<span style="color:#d1d5db">-</span>'}</div>
         <div class="cell-c">${s.skus.length}</div>
         <div style="color:#6b7280;font-size:12px">${dateStr}</div>
         <div class="wh-cell">${whHtml}</div>
