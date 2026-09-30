@@ -1,8 +1,8 @@
 {
   "updated_at": "2026-09-30 11:00:07",
-  "total_styles": 102,
-  "total_skus": 395,
-  "total_qty": 9319,
+  "total_styles": 107,
+  "total_skus": 400,
+  "total_qty": 9324,
   "total_lock": 3178,
   "warehouses": [
     {
@@ -6584,6 +6584,131 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 60
           }
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260526-71",
+      "name": "定制",
+      "labels": null,
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260618/2C4E7D14252D4653BC0BDC5B37892216.png?name=ab33d529-dd06-4576-880a-3de6b77422ba",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2026-06-18",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260526-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260807-41",
+      "name": "定制",
+      "labels": null,
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260814/5B155952B89E4B68847806AC81204F87.png?name=5332a243-714e-4506-918f-85b57ea278a6",
+      "salesperson": "",
+      "io_date": "",
+      "created": "2026-08-14",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260807-4102XS",
+          "color": "黑色",
+          "size": "XS",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250415-71",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250415-71-待补充",
+          "color": "",
+          "size": "",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250418-390",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250418-390-待补充",
+          "color": "",
+          "size": "",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODWT260527-ZY",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "PODWT260527-ZY-待补充",
+          "color": "",
+          "size": "",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
         }
       ]
     }
