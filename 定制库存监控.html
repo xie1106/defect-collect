@@ -255,7 +255,11 @@ function toggleSku(iid) {
 function renderList() {
     if (!DATA) return;
     const q = (document.getElementById('search').value || '').trim().toLowerCase();
-    let list = DATA.styles.filter(s => !q || s.i_id.toLowerCase().includes(q) || (s.labels||'').toLowerCase().includes(q) || (s.salesperson||'-').toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q)));
+    let list = DATA.styles.filter(s => {
+        if (!q) return true;
+        if (q === '无销售员') return !s.salesperson;
+        return s.i_id.toLowerCase().includes(q) || (s.labels||'').toLowerCase().includes(q) || (s.salesperson||'').toLowerCase().includes(q) || s.skus.some(k => k.sku_id.toLowerCase().includes(q));
+    });
     const af = document.getElementById('ageFilter').value;
     if (af) {
         list = list.filter(s => {
@@ -347,7 +351,7 @@ function buildCard(s) {
         <div>${picHtml}</div>
         <div class="iid-cell"><span class="arrow" id="arrow-${s.i_id}">▶</span><span class="iid" onclick="copyText('${s.i_id}',event)" title="点击复制">${s.i_id}</span></div>
         <div>${labelHtml}</div>
-        <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb">'+s.salesperson+'</span>' : '<span class="sp-link" onclick="filterBySalesperson(\'-\',event)" style="cursor:pointer;color:#9ca3af">-</span>'}</div>
+        <div style="font-size:12px;color:#374151">${s.salesperson ? '<span class="sp-link" onclick="filterBySalesperson(\''+s.salesperson+'\',event)" style="cursor:pointer;color:#2563eb">'+s.salesperson+'</span>' : '<span class="sp-link" onclick="filterBySalesperson(\'无销售员\',event)" style="cursor:pointer;color:#9ca3af">-</span>'}</div>
         <div class="cell-c"><span class="badge badge-qty">${s.total_qty}</span></div>
         <div class="cell-c">${lockTotal ? '<span class="badge badge-lock">'+lockTotal+'</span>' : '-'}</div>
         <div class="cell-c">${ageDays >= 0 ? '<span class="badge '+ac+'">'+ageDays+'天</span>' : '<span style="color:#d1d5db">-</span>'}</div>
