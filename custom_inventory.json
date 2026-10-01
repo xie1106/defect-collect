@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-09-30 11:00:07",
-  "total_styles": 107,
-  "total_skus": 400,
-  "total_qty": 9324,
-  "total_lock": 3178,
+  "updated_at": "2026-10-01 11:08:08",
+  "total_styles": 106,
+  "total_skus": 423,
+  "total_qty": 9629,
+  "total_lock": 3966,
   "warehouses": [
     {
       "wms_co_id": 10188262,
@@ -92,7 +92,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 1175,
+      "age_days": 1176,
       "total_qty": 127,
       "total_lock": 0,
       "skus": [
@@ -114,14 +114,14 @@
       "i_id": "DZ13273W23",
       "name": "OCTTFLAB",
       "labels": "停产产品",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/208ACF8BF4A54A36BBC073271F30E993.jpeg?name=7fa1cff0-5088-4772-afd7-0a3e8c9e78be",
       "salesperson": "邓正瑶",
       "io_date": "",
       "created": "2024-03-01",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 942,
+      "age_days": 943,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -143,14 +143,14 @@
       "i_id": "DZ12406S24",
       "name": "定制",
       "labels": "",
-      "pic": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/0C55F8A1680B40A79D8E9DBE26E3466C.jpeg?name=0c45e13d-1b84-406e-847b-05192a5a42e3",
       "salesperson": "周乐",
       "io_date": "",
       "created": "2024-03-22",
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 921,
+      "age_days": 922,
       "total_qty": 45,
       "total_lock": 0,
       "skus": [
@@ -179,7 +179,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 909,
+      "age_days": 910,
       "total_qty": 11,
       "total_lock": 0,
       "skus": [
@@ -208,22 +208,10 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 756,
-      "total_qty": 182,
+      "age_days": 757,
+      "total_qty": 184,
       "total_lock": 0,
       "skus": [
-        {
-          "sku_id": "DZTX240901-72193S",
-          "color": "活性黑",
-          "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 6
-          }
-        },
         {
           "sku_id": "DZTX240901-72193XL",
           "color": "活性黑",
@@ -309,15 +297,15 @@
           }
         },
         {
-          "sku_id": "DZTX240901-7297L",
+          "sku_id": "DZTX240901-7297M",
           "color": "碳灰",
-          "size": "L",
-          "qty": 7,
-          "avail_qty": 7,
+          "size": "M",
+          "qty": 22,
+          "avail_qty": 22,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 7
+            "广州市捷展贸易有限公司": 22
           }
         },
         {
@@ -330,18 +318,6 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 8
-          }
-        },
-        {
-          "sku_id": "DZTX240901-7297XL",
-          "color": "碳灰",
-          "size": "XL",
-          "qty": 11,
-          "avail_qty": 11,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 11
           }
         },
         {
@@ -366,6 +342,18 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 11
+          }
+        },
+        {
+          "sku_id": "DZTX240901-72287M",
+          "color": "象牙白",
+          "size": "M",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 4
           }
         },
         {
@@ -417,8 +405,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 736,
-      "total_qty": 166,
+      "age_days": 737,
+      "total_qty": 215,
       "total_lock": 0,
       "skus": [
         {
@@ -431,18 +419,6 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 8
-          }
-        },
-        {
-          "sku_id": "DZTX240914-7039M",
-          "color": "卡其",
-          "size": "M",
-          "qty": 14,
-          "avail_qty": 14,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 14
           }
         },
         {
@@ -479,6 +455,18 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 8
+          }
+        },
+        {
+          "sku_id": "DZTX240914-70618M",
+          "color": "咖啡",
+          "size": "M",
+          "qty": 28,
+          "avail_qty": 28,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 28
           }
         },
         {
@@ -527,6 +515,30 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 17
+          }
+        },
+        {
+          "sku_id": "DZTX240914-70170L",
+          "color": "米杏",
+          "size": "L",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 17
+          }
+        },
+        {
+          "sku_id": "DZTX240914-70170M",
+          "color": "米杏",
+          "size": "M",
+          "qty": 18,
+          "avail_qty": 18,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 18
           }
         },
         {
@@ -602,8 +614,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 731,
-      "total_qty": 270,
+      "age_days": 732,
+      "total_qty": 255,
       "total_lock": 0,
       "skus": [
         {
@@ -643,15 +655,15 @@
           }
         },
         {
-          "sku_id": "DZWY240913-73239XL",
-          "color": "杏色",
-          "size": "XL",
-          "qty": 8,
-          "avail_qty": 8,
+          "sku_id": "DZWY240913-73193L",
+          "color": "活性黑",
+          "size": "L",
+          "qty": 2,
+          "avail_qty": 2,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 8
+            "广州市捷展贸易有限公司": 2
           }
         },
         {
@@ -751,18 +763,6 @@
           }
         },
         {
-          "sku_id": "DZWY240913-7386M",
-          "color": "深咖啡",
-          "size": "M",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 9
-          }
-        },
-        {
           "sku_id": "DZWY240913-7386S",
           "color": "深咖啡",
           "size": "S",
@@ -808,6 +808,30 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 3
+          }
+        },
+        {
+          "sku_id": "DZWY240913-7344S",
+          "color": "深灰",
+          "size": "S",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 4
+          }
+        },
+        {
+          "sku_id": "DZWY240913-7344XL",
+          "color": "深灰",
+          "size": "XL",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 10
           }
         },
         {
@@ -862,18 +886,6 @@
           "sku_id": "DZWY240913-73637L",
           "color": "灰湖蓝",
           "size": "L",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 8
-          }
-        },
-        {
-          "sku_id": "DZWY240913-73637XL",
-          "color": "灰湖蓝",
-          "size": "XL",
           "qty": 8,
           "avail_qty": 8,
           "order_lock": 0,
@@ -979,18 +991,6 @@
           }
         },
         {
-          "sku_id": "DZWY240913-7304L",
-          "color": "酒红",
-          "size": "L",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 6
-          }
-        },
-        {
           "sku_id": "DZWY240913-7304M",
           "color": "酒红",
           "size": "M",
@@ -1039,8 +1039,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 731,
-      "total_qty": 143,
+      "age_days": 732,
+      "total_qty": 153,
       "total_lock": 0,
       "skus": [
         {
@@ -1053,6 +1053,18 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 3
+          }
+        },
+        {
+          "sku_id": "DZWY240913-74239M",
+          "color": "杏色",
+          "size": "M",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 5
           }
         },
         {
@@ -1104,6 +1116,18 @@
           }
         },
         {
+          "sku_id": "DZWY240913-74184L",
+          "color": "深紫色",
+          "size": "L",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 10
+          }
+        },
+        {
           "sku_id": "DZWY240913-74184M",
           "color": "深紫色",
           "size": "M",
@@ -1128,6 +1152,18 @@
           }
         },
         {
+          "sku_id": "DZWY240913-74184XL",
+          "color": "深紫色",
+          "size": "XL",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 9
+          }
+        },
+        {
           "sku_id": "DZWY240913-74347L",
           "color": "灰绿色",
           "size": "L",
@@ -1137,18 +1173,6 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 15
-          }
-        },
-        {
-          "sku_id": "DZWY240913-74347M",
-          "color": "灰绿色",
-          "size": "M",
-          "qty": 20,
-          "avail_qty": 20,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 20
           }
         },
         {
@@ -1224,6 +1248,18 @@
           }
         },
         {
+          "sku_id": "DZWY240913-7422M",
+          "color": "蓝色",
+          "size": "M",
+          "qty": 12,
+          "avail_qty": 12,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 12
+          }
+        },
+        {
           "sku_id": "DZWY240913-7422S",
           "color": "蓝色",
           "size": "S",
@@ -1282,18 +1318,6 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 8
           }
-        },
-        {
-          "sku_id": "DZWY240913-7404XL",
-          "color": "酒红",
-          "size": "XL",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 6
-          }
         }
       ]
     },
@@ -1308,8 +1332,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 554,
-      "total_qty": 6,
+      "age_days": 555,
+      "total_qty": 7,
       "total_lock": 0,
       "skus": [
         {
@@ -1371,6 +1395,18 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 1
           }
+        },
+        {
+          "sku_id": "DZTX250317-74170XL",
+          "color": "米杏",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 1
+          }
         }
       ]
     },
@@ -1385,7 +1421,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 524,
+      "age_days": 525,
       "total_qty": 6,
       "total_lock": 0,
       "skus": [
@@ -1414,22 +1450,10 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 503,
-      "total_qty": 13,
+      "age_days": 504,
+      "total_qty": 11,
       "total_lock": 0,
       "skus": [
-        {
-          "sku_id": "DZTX250418-39642L",
-          "color": "椰奶白",
-          "size": "L",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 2
-          }
-        },
         {
           "sku_id": "DZTX250418-39642M",
           "color": "椰奶白",
@@ -1467,8 +1491,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 503,
-      "total_qty": 25,
+      "age_days": 504,
+      "total_qty": 41,
       "total_lock": 0,
       "skus": [
         {
@@ -1484,6 +1508,18 @@
           }
         },
         {
+          "sku_id": "DZTX250415-72641M",
+          "color": "元宇宙紫",
+          "size": "M",
+          "qty": 12,
+          "avail_qty": 12,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 12
+          }
+        },
+        {
           "sku_id": "DZTX250415-72641S",
           "color": "元宇宙紫",
           "size": "S",
@@ -1496,8 +1532,102 @@
           }
         },
         {
+          "sku_id": "DZTX250415-72407M",
+          "color": "水波灰",
+          "size": "M",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 4
+          }
+        },
+        {
           "sku_id": "DZTX250415-72407S",
           "color": "水波灰",
+          "size": "S",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 3
+          }
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250415-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/CAF6E99CBD3C4FCEBBFE4195A857C616.jpeg?name=04886f71-ffbe-4aff-b90d-3c8a59353cec",
+      "salesperson": "邓正瑶",
+      "io_date": "2025-05-23",
+      "created": "2025-05-21",
+      "warehouse": [
+        "广州市捷展贸易有限公司"
+      ],
+      "age_days": 497,
+      "total_qty": 17,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250415-71678L",
+          "color": "巧克力黑",
+          "size": "L",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 17
+          }
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250418-390",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/D16426BB72CF4405AABCEBA2A97E7550.jpeg?name=126cb9ec-08ee-457a-85e7-56ee26976f34",
+      "salesperson": "邓正瑶",
+      "io_date": "2025-06-04",
+      "created": "2025-05-30",
+      "warehouse": [
+        "广州市捷展贸易有限公司"
+      ],
+      "age_days": 488,
+      "total_qty": 13,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250418-390642L",
+          "color": "椰奶白",
+          "size": "L",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 4
+          }
+        },
+        {
+          "sku_id": "DZTX250418-390642M",
+          "color": "椰奶白",
+          "size": "M",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 6
+          }
+        },
+        {
+          "sku_id": "DZTX250418-390642S",
+          "color": "椰奶白",
           "size": "S",
           "qty": 3,
           "avail_qty": 3,
@@ -1520,22 +1650,10 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 376,
-      "total_qty": 13,
+      "age_days": 377,
+      "total_qty": 9,
       "total_lock": 0,
       "skus": [
-        {
-          "sku_id": "DZ5488W25756L",
-          "color": "墨黑色",
-          "size": "L",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 4
-          }
-        },
         {
           "sku_id": "DZ5488W25756M",
           "color": "墨黑色",
@@ -1597,8 +1715,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 343,
-      "total_qty": 1,
+      "age_days": 344,
+      "total_qty": 2,
       "total_lock": 0,
       "skus": [
         {
@@ -1612,28 +1730,11 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 1
           }
-        }
-      ]
-    },
-    {
-      "i_id": "DZWT251208-38",
-      "name": "定制外套",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251210/81744C3E9859425E9AABAE8023E291B9.jpeg?name=08ef9490-29dd-40cc-a5d7-6adf2d21fa2a",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2025-12-10",
-      "warehouse": [
-        "广州市捷展贸易有限公司"
-      ],
-      "age_days": 293,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
+        },
         {
-          "sku_id": "DZWT251208-3810M",
-          "color": "浅卡其",
-          "size": "M",
+          "sku_id": "DZWY250928-76162L",
+          "color": "绿色",
+          "size": "L",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
@@ -1655,7 +1756,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 293,
+      "age_days": 294,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -1684,26 +1785,14 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 281,
-      "total_qty": 40,
+      "age_days": 282,
+      "total_qty": 30,
       "total_lock": 0,
       "skus": [
         {
           "sku_id": "DZ12795S2505L",
           "color": "灰色",
           "size": "L",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 10
-          }
-        },
-        {
-          "sku_id": "DZ12795S2505M",
-          "color": "灰色",
-          "size": "M",
           "qty": 10,
           "avail_qty": 10,
           "order_lock": 0,
@@ -1749,8 +1838,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 267,
-      "total_qty": 31,
+      "age_days": 268,
+      "total_qty": 22,
       "total_lock": 0,
       "skus": [
         {
@@ -1790,18 +1879,6 @@
           }
         },
         {
-          "sku_id": "DZCT251208-32709XS",
-          "color": "轩蓝",
-          "size": "XS",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 9
-          }
-        },
-        {
           "sku_id": "DZCT251208-32709XXL",
           "color": "轩蓝",
           "size": "XXL",
@@ -1838,7 +1915,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 262,
+      "age_days": 263,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -1867,7 +1944,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 262,
+      "age_days": 263,
       "total_qty": 3,
       "total_lock": 0,
       "skus": [
@@ -1875,6 +1952,35 @@
           "sku_id": "DZFF20251108-47756S",
           "color": "墨黑色",
           "size": "S",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 3
+          }
+        }
+      ]
+    },
+    {
+      "i_id": "DZFF20251108-46",
+      "name": "定制卫衣",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260110/35B474DBF01D42A08B34B05489A569FF.jpeg?name=3e064eab-5660-4c6e-b62e-a409106a4e7f",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2026-01-10",
+      "warehouse": [
+        "广州市捷展贸易有限公司"
+      ],
+      "age_days": 263,
+      "total_qty": 3,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZFF20251108-46756L",
+          "color": "墨黑色",
+          "size": "L",
           "qty": 3,
           "avail_qty": 3,
           "order_lock": 0,
@@ -1896,7 +2002,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 242,
+      "age_days": 243,
       "total_qty": 6,
       "total_lock": 0,
       "skus": [
@@ -1949,7 +2055,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 239,
+      "age_days": 240,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -1978,22 +2084,10 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 237,
-      "total_qty": 11,
+      "age_days": 238,
+      "total_qty": 6,
       "total_lock": 0,
       "skus": [
-        {
-          "sku_id": "DZTX260108-30859XL",
-          "color": "檀棕褐",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 1
-          }
-        },
         {
           "sku_id": "DZTX260108-30247L",
           "color": "炭黑",
@@ -2004,18 +2098,6 @@
           "io_date": "",
           "wh_detail": {
             "广州市捷展贸易有限公司": 3
-          }
-        },
-        {
-          "sku_id": "DZTX260108-30247M",
-          "color": "炭黑",
-          "size": "M",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 4
           }
         },
         {
@@ -2067,7 +2149,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 237,
+      "age_days": 238,
       "total_qty": 12,
       "total_lock": 0,
       "skus": [
@@ -2144,7 +2226,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 214,
+      "age_days": 215,
       "total_qty": 30,
       "total_lock": 0,
       "skus": [
@@ -2185,7 +2267,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 200,
+      "age_days": 201,
       "total_qty": 30,
       "total_lock": 0,
       "skus": [
@@ -2214,7 +2296,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 169,
+      "age_days": 170,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -2243,7 +2325,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 169,
+      "age_days": 170,
       "total_qty": 3,
       "total_lock": 0,
       "skus": [
@@ -2296,7 +2378,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 169,
+      "age_days": 170,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -2325,7 +2407,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 167,
+      "age_days": 168,
       "total_qty": 5,
       "total_lock": 0,
       "skus": [
@@ -2354,7 +2436,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 165,
+      "age_days": 166,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -2395,10 +2477,22 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 140,
-      "total_qty": 9,
+      "age_days": 141,
+      "total_qty": 11,
       "total_lock": 0,
       "skus": [
+        {
+          "sku_id": "DZTX260511-710126M",
+          "color": "粉色",
+          "size": "M",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 3
+          }
+        },
         {
           "sku_id": "DZTX260511-710126S",
           "color": "粉色",
@@ -2434,18 +2528,6 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 1
           }
-        },
-        {
-          "sku_id": "DZTX260511-71002XL",
-          "color": "黑色",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 1
-          }
         }
       ]
     },
@@ -2460,7 +2542,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 139,
+      "age_days": 140,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -2489,7 +2571,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 139,
+      "age_days": 140,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -2530,7 +2612,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 134,
+      "age_days": 135,
       "total_qty": 7,
       "total_lock": 0,
       "skus": [
@@ -2571,8 +2653,8 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 133,
-      "total_qty": 82,
+      "age_days": 134,
+      "total_qty": 64,
       "total_lock": 0,
       "skus": [
         {
@@ -2636,15 +2718,15 @@
           }
         },
         {
-          "sku_id": "DSB241210-7102M",
+          "sku_id": "DSB241210-7102S",
           "color": "黑色",
-          "size": "M",
-          "qty": 16,
-          "avail_qty": 16,
+          "size": "S",
+          "qty": 6,
+          "avail_qty": 6,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 16
+            "广州市捷展贸易有限公司": 6
           }
         },
         {
@@ -2670,47 +2752,6 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 8
           }
-        },
-        {
-          "sku_id": "DSB241210-7102XXL",
-          "color": "黑色",
-          "size": "XXL",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 8
-          }
-        }
-      ]
-    },
-    {
-      "i_id": "DZCT260429-40",
-      "name": "定制",
-      "labels": "水果棉面料",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260522/25E4402090AB48BB986B4D35158A4C2E.png?name=6e6f1bed-0dea-43ae-8407-1468647fd1c6",
-      "salesperson": "莫紫珊",
-      "io_date": "",
-      "created": "2026-05-22",
-      "warehouse": [
-        "广州市捷展贸易有限公司"
-      ],
-      "age_days": 130,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCT260429-40484XXS",
-          "color": "环保黑",
-          "size": "XXS",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 1
-          }
         }
       ]
     },
@@ -2725,7 +2766,7 @@
       "warehouse": [
         "广州市捷展贸易有限公司"
       ],
-      "age_days": 109,
+      "age_days": 110,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -2752,11 +2793,11 @@
       "io_date": "2026-07-13",
       "created": "2026-05-26",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 78,
-      "total_qty": 125,
+      "age_days": 79,
+      "total_qty": 98,
       "total_lock": 0,
       "skus": [
         {
@@ -2782,18 +2823,6 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 41
           }
-        },
-        {
-          "sku_id": "DSB250618-7151XXL",
-          "color": "图片色",
-          "size": "XXL",
-          "qty": 27,
-          "avail_qty": 27,
-          "order_lock": 0,
-          "io_date": "2026-07-13",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 27
-          }
         }
       ]
     },
@@ -2806,11 +2835,11 @@
       "io_date": "2026-07-13",
       "created": "2026-02-27",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 78,
-      "total_qty": 134,
+      "age_days": 79,
+      "total_qty": 124,
       "total_lock": 0,
       "skus": [
         {
@@ -2838,15 +2867,15 @@
           }
         },
         {
-          "sku_id": "DZTX260226-1753S",
+          "sku_id": "DZTX260226-1753M",
           "color": "牙白",
-          "size": "S",
-          "qty": 21,
-          "avail_qty": 21,
+          "size": "M",
+          "qty": 11,
+          "avail_qty": 11,
           "order_lock": 0,
           "io_date": "2026-07-13",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 21
+            "广州市捷展贸易有限公司": 11
           }
         },
         {
@@ -2876,6 +2905,36 @@
       ]
     },
     {
+      "i_id": "DZTX260526-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260618/2C4E7D14252D4653BC0BDC5B37892216.png?name=ab33d529-dd06-4576-880a-3de6b77422ba",
+      "salesperson": "冯佩珊",
+      "io_date": "2026-07-19",
+      "created": "2026-06-18",
+      "warehouse": [
+        "进货仓",
+        "广州市捷展贸易有限公司"
+      ],
+      "age_days": 73,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260526-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-07-19",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 1
+          }
+        }
+      ]
+    },
+    {
       "i_id": "DZTX260520-95",
       "name": "定制",
       "labels": "",
@@ -2884,10 +2943,10 @@
       "io_date": "2026-07-19",
       "created": "2026-06-18",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 72,
+      "age_days": 73,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -2914,10 +2973,10 @@
       "io_date": "2026-07-19",
       "created": "2026-06-18",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 72,
+      "age_days": 73,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -2944,13 +3003,25 @@
       "io_date": "2026-07-21",
       "created": "2026-05-26",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 70,
-      "total_qty": 136,
+      "age_days": 71,
+      "total_qty": 226,
       "total_lock": 0,
       "skus": [
+        {
+          "sku_id": "DSB241016-7751L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 90,
+          "avail_qty": 90,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 90
+          }
+        },
         {
           "sku_id": "DSB241016-7751M",
           "color": "图片色",
@@ -2990,6 +3061,20 @@
       ]
     },
     {
+      "i_id": "DZCT260702-35",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260724/617A717068A5487F87750D051FA66ED9.png?name=75247330-7afb-4d3d-a2ea-482d2854753f",
+      "salesperson": "",
+      "io_date": "",
+      "created": "2026-07-24",
+      "warehouse": [],
+      "age_days": 68,
+      "total_qty": 0,
+      "total_lock": 240,
+      "skus": []
+    },
+    {
       "i_id": "DZTX260710-90",
       "name": "定制",
       "labels": "",
@@ -2998,10 +3083,10 @@
       "io_date": "2026-07-25",
       "created": "2026-07-10",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 66,
+      "age_days": 67,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -3028,10 +3113,10 @@
       "io_date": "2026-07-25",
       "created": "2025-03-11",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 66,
+      "age_days": 67,
       "total_qty": 7,
       "total_lock": 0,
       "skus": [
@@ -3070,10 +3155,10 @@
       "io_date": "2026-07-28",
       "created": "2026-03-12",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 63,
+      "age_days": 64,
       "total_qty": 5,
       "total_lock": 0,
       "skus": [
@@ -3124,10 +3209,10 @@
       "io_date": "2026-07-28",
       "created": "2026-03-12",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 63,
+      "age_days": 64,
       "total_qty": 4,
       "total_lock": 0,
       "skus": [
@@ -3190,10 +3275,10 @@
       "io_date": "2026-07-28",
       "created": "2026-01-08",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 63,
+      "age_days": 64,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -3232,11 +3317,11 @@
       "io_date": "2026-08-01",
       "created": "2026-06-08",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 59,
-      "total_qty": 215,
+      "age_days": 60,
+      "total_qty": 154,
       "total_lock": 0,
       "skus": [
         {
@@ -3264,18 +3349,6 @@
           }
         },
         {
-          "sku_id": "PODTX26061336",
-          "color": "深卡其",
-          "size": "S",
-          "qty": 32,
-          "avail_qty": 32,
-          "order_lock": 0,
-          "io_date": "2026-08-01",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 32
-          }
-        },
-        {
           "sku_id": "PODTX26061339",
           "color": "深卡其",
           "size": "XL",
@@ -3285,18 +3358,6 @@
           "io_date": "2026-08-01",
           "wh_detail": {
             "广州市捷展贸易有限公司": 21
-          }
-        },
-        {
-          "sku_id": "DZWY251125-31118XS",
-          "color": "深卡其",
-          "size": "XS",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-08-01",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 9
           }
         },
         {
@@ -3312,27 +3373,15 @@
           }
         },
         {
-          "sku_id": "PODTX26061342",
+          "sku_id": "PODTX26061341",
           "color": "灰色",
-          "size": "M",
-          "qty": 29,
-          "avail_qty": 29,
+          "size": "S",
+          "qty": 23,
+          "avail_qty": 23,
           "order_lock": 0,
           "io_date": "2026-08-01",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 29
-          }
-        },
-        {
-          "sku_id": "PODTX26061344",
-          "color": "灰色",
-          "size": "XL",
-          "qty": 14,
-          "avail_qty": 14,
-          "order_lock": 0,
-          "io_date": "2026-08-01",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 14
+            "广州市捷展贸易有限公司": 23
           }
         },
         {
@@ -3358,11 +3407,11 @@
       "io_date": "2026-08-05",
       "created": "2026-06-08",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 55,
-      "total_qty": 116,
+      "age_days": 56,
+      "total_qty": 115,
       "total_lock": 0,
       "skus": [
         {
@@ -3402,15 +3451,15 @@
           }
         },
         {
-          "sku_id": "DZWY251203-3105XL",
+          "sku_id": "DZWY251203-3105XS",
           "color": "灰色",
-          "size": "XL",
-          "qty": 14,
-          "avail_qty": 14,
+          "size": "XS",
+          "qty": 13,
+          "avail_qty": 13,
           "order_lock": 0,
           "io_date": "2026-08-05",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 14
+            "广州市捷展贸易有限公司": 13
           }
         }
       ]
@@ -3424,10 +3473,10 @@
       "io_date": "2026-08-12",
       "created": "2023-09-16",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 48,
+      "age_days": 49,
       "total_qty": 7,
       "total_lock": 0,
       "skus": [
@@ -3454,10 +3503,10 @@
       "io_date": "2026-08-12",
       "created": "2026-05-20",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 48,
+      "age_days": 49,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -3476,36 +3525,6 @@
       ]
     },
     {
-      "i_id": "DZTX260509-72",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260723/ED9DAB50D1684C20A485212098AD59C1.png?name=05fde40e-044a-4a1f-9ba0-1d53f2375ad5",
-      "salesperson": "刘胜楠",
-      "io_date": "2026-08-15",
-      "created": "2026-07-23",
-      "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
-      ],
-      "age_days": 45,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260509-7222M",
-          "color": "蓝色",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-08-15",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 1
-          }
-        }
-      ]
-    },
-    {
       "i_id": "DSDK260518-10",
       "name": "定制",
       "labels": "",
@@ -3514,10 +3533,10 @@
       "io_date": "2026-08-17",
       "created": "2026-07-30",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 43,
+      "age_days": 44,
       "total_qty": 119,
       "total_lock": 0,
       "skus": [
@@ -3544,10 +3563,10 @@
       "io_date": "2026-08-20",
       "created": "2026-07-28",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 40,
+      "age_days": 41,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -3574,11 +3593,11 @@
       "io_date": "2026-08-20",
       "created": "2026-07-08",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 40,
-      "total_qty": 131,
+      "age_days": 41,
+      "total_qty": 214,
       "total_lock": 0,
       "skus": [
         {
@@ -3591,6 +3610,18 @@
           "io_date": "2026-08-20",
           "wh_detail": {
             "广州市捷展贸易有限公司": 66
+          }
+        },
+        {
+          "sku_id": "DZTX260702-7102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 83,
+          "avail_qty": 83,
+          "order_lock": 0,
+          "io_date": "2026-08-20",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 83
           }
         },
         {
@@ -3628,10 +3659,10 @@
       "io_date": "2026-08-21",
       "created": "2026-08-07",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 40,
+      "age_days": 41,
       "total_qty": 4,
       "total_lock": 0,
       "skus": [
@@ -3658,11 +3689,11 @@
       "io_date": "2026-08-21",
       "created": "2026-06-08",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 39,
-      "total_qty": 200,
+      "age_days": 40,
+      "total_qty": 209,
       "total_lock": 0,
       "skus": [
         {
@@ -3772,6 +3803,18 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 24
           }
+        },
+        {
+          "sku_id": "DZWY251126-3505XS",
+          "color": "灰色",
+          "size": "XS",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "2026-08-18",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 9
+          }
         }
       ]
     },
@@ -3784,10 +3827,10 @@
       "io_date": "2026-08-27",
       "created": "2026-08-07",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 33,
+      "age_days": 34,
       "total_qty": 20,
       "total_lock": 0,
       "skus": [
@@ -3818,36 +3861,6 @@
       ]
     },
     {
-      "i_id": "DZCT260815-34",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/ItemSku/10188262/20260818/CADF3BA791BF4814BFA813D1BD23C94B.jpg",
-      "salesperson": "林梓仪",
-      "io_date": "2026-09-01",
-      "created": "2026-08-15",
-      "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
-      ],
-      "age_days": 28,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCT260815-34142M",
-          "color": "米白",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-01",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 1
-          }
-        }
-      ]
-    },
-    {
       "i_id": "DZWT260527-10",
       "name": "定制",
       "labels": "",
@@ -3856,23 +3869,23 @@
       "io_date": "2026-09-01",
       "created": "2026-07-02",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 28,
-      "total_qty": 121,
+      "age_days": 29,
+      "total_qty": 105,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZWT260527-1061M",
+          "sku_id": "DZWT260527-1061L",
           "color": "咖色",
-          "size": "M",
-          "qty": 59,
-          "avail_qty": 59,
+          "size": "L",
+          "qty": 43,
+          "avail_qty": 43,
           "order_lock": 0,
           "io_date": "2026-09-01",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 59
+            "广州市捷展贸易有限公司": 43
           }
         },
         {
@@ -3910,11 +3923,11 @@
       "io_date": "2026-09-03",
       "created": "2026-08-04",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 26,
-      "total_qty": 331,
+      "age_days": 27,
+      "total_qty": 362,
       "total_lock": 0,
       "skus": [
         {
@@ -3942,6 +3955,18 @@
           }
         },
         {
+          "sku_id": "DZTX260514-7001S",
+          "color": "白色",
+          "size": "S",
+          "qty": 31,
+          "avail_qty": 31,
+          "order_lock": 0,
+          "io_date": "2026-08-31",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 31
+          }
+        },
+        {
           "sku_id": "DZTX260514-7001XL",
           "color": "白色",
           "size": "XL",
@@ -3966,9 +3991,9 @@
           }
         },
         {
-          "sku_id": "DZTX260514-7002L",
+          "sku_id": "DZTX260514-7002M",
           "color": "黑色",
-          "size": "L",
+          "size": "M",
           "qty": 60,
           "avail_qty": 60,
           "order_lock": 0,
@@ -4024,10 +4049,10 @@
       "io_date": "2026-09-08",
       "created": "2026-06-27",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 21,
+      "age_days": 22,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -4066,10 +4091,10 @@
       "io_date": "2026-09-09",
       "created": "",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 20,
+      "age_days": 21,
       "total_qty": 172,
       "total_lock": 0,
       "skus": [
@@ -4136,6 +4161,20 @@
       ]
     },
     {
+      "i_id": "DZTX260127-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260910/B5644DB3EFEE40DA91972C7BC3725CD1.png?name=601a19aa-37a9-4b56-9a3a-81d73d3b87bb",
+      "salesperson": "",
+      "io_date": "",
+      "created": "2026-09-10",
+      "warehouse": [],
+      "age_days": 20,
+      "total_qty": 0,
+      "total_lock": 160,
+      "skus": []
+    },
+    {
       "i_id": "DS250220-70",
       "name": "定制",
       "labels": "",
@@ -4144,25 +4183,13 @@
       "io_date": "2026-09-11",
       "created": "2026-07-28",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 18,
-      "total_qty": 43,
+      "age_days": 19,
+      "total_qty": 34,
       "total_lock": 0,
       "skus": [
-        {
-          "sku_id": "DS250220-7002l",
-          "color": "黑色",
-          "size": "l",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 9
-          }
-        },
         {
           "sku_id": "DS250220-7002m",
           "color": "黑色",
@@ -4222,11 +4249,11 @@
       "io_date": "2026-09-11",
       "created": "2026-07-28",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 18,
-      "total_qty": 13,
+      "age_days": 19,
+      "total_qty": 18,
       "total_lock": 0,
       "skus": [
         {
@@ -4239,6 +4266,18 @@
           "io_date": "2026-09-11",
           "wh_detail": {
             "广州市捷展贸易有限公司": 3
+          }
+        },
+        {
+          "sku_id": "DS250106-7102m",
+          "color": "黑色",
+          "size": "m",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 5
           }
         },
         {
@@ -4288,11 +4327,11 @@
       "io_date": "2026-09-11",
       "created": "2026-05-26",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 18,
-      "total_qty": 183,
+      "age_days": 19,
+      "total_qty": 150,
       "total_lock": 0,
       "skus": [
         {
@@ -4330,18 +4369,6 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 41
           }
-        },
-        {
-          "sku_id": "DSB250618-7251XXL",
-          "color": "图片色",
-          "size": "XXL",
-          "qty": 33,
-          "avail_qty": 33,
-          "order_lock": 0,
-          "io_date": "2026-07-13",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 33
-          }
         }
       ]
     },
@@ -4354,10 +4381,10 @@
       "io_date": "2026-09-11",
       "created": "2026-05-26",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 18,
+      "age_days": 19,
       "total_qty": 239,
       "total_lock": 0,
       "skus": [
@@ -4420,11 +4447,11 @@
       "io_date": "2026-09-11",
       "created": "2026-05-19",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 18,
-      "total_qty": 197,
+      "age_days": 19,
+      "total_qty": 141,
       "total_lock": 0,
       "skus": [
         {
@@ -4464,18 +4491,6 @@
           }
         },
         {
-          "sku_id": "DS250515-7301XXL",
-          "color": "白色",
-          "size": "XXL",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 9
-          }
-        },
-        {
           "sku_id": "DS250515-7302L",
           "color": "黑色",
           "size": "L",
@@ -4485,18 +4500,6 @@
           "io_date": "2026-09-11",
           "wh_detail": {
             "广州市捷展贸易有限公司": 33
-          }
-        },
-        {
-          "sku_id": "DS250515-7302M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 47,
-          "avail_qty": 47,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 47
           }
         },
         {
@@ -4546,13 +4549,25 @@
       "io_date": "2026-09-11",
       "created": "2026-05-19",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 18,
-      "total_qty": 258,
+      "age_days": 19,
+      "total_qty": 231,
       "total_lock": 0,
       "skus": [
+        {
+          "sku_id": "DS250515-7401L",
+          "color": "白色",
+          "size": "L",
+          "qty": 39,
+          "avail_qty": 39,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 39
+          }
+        },
         {
           "sku_id": "DS250515-7401M",
           "color": "白色",
@@ -4602,18 +4617,6 @@
           }
         },
         {
-          "sku_id": "DS250515-7402L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 37,
-          "avail_qty": 37,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 37
-          }
-        },
-        {
           "sku_id": "DS250515-7402M",
           "color": "黑色",
           "size": "M",
@@ -4623,18 +4626,6 @@
           "io_date": "2026-09-11",
           "wh_detail": {
             "广州市捷展贸易有限公司": 47
-          }
-        },
-        {
-          "sku_id": "DS250515-7402S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 29,
-          "avail_qty": 29,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 29
           }
         },
         {
@@ -4672,10 +4663,10 @@
       "io_date": "2026-09-14",
       "created": "2026-08-11",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 15,
+      "age_days": 16,
       "total_qty": 5,
       "total_lock": 0,
       "skus": [
@@ -4702,10 +4693,10 @@
       "io_date": "2026-09-16",
       "created": "2026-08-18",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 13,
+      "age_days": 15,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -4744,11 +4735,11 @@
       "io_date": "2026-09-16",
       "created": "2026-06-24",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 13,
-      "total_qty": 163,
+      "age_days": 14,
+      "total_qty": 147,
       "total_lock": 0,
       "skus": [
         {
@@ -4776,15 +4767,15 @@
           }
         },
         {
-          "sku_id": "DZWT251201-3042S",
+          "sku_id": "DZWT251201-3042XL",
           "color": "迷彩",
-          "size": "S",
-          "qty": 41,
-          "avail_qty": 41,
+          "size": "XL",
+          "qty": 25,
+          "avail_qty": 25,
           "order_lock": 0,
           "io_date": "2026-09-16",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 41
+            "广州市捷展贸易有限公司": 25
           }
         },
         {
@@ -4810,11 +4801,11 @@
       "io_date": "2026-09-16",
       "created": "2026-05-12",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 13,
-      "total_qty": 321,
+      "age_days": 14,
+      "total_qty": 243,
       "total_lock": 0,
       "skus": [
         {
@@ -4830,18 +4821,6 @@
           }
         },
         {
-          "sku_id": "DZTX251124-31193M",
-          "color": "活性黑",
-          "size": "M",
-          "qty": 62,
-          "avail_qty": 62,
-          "order_lock": 0,
-          "io_date": "2026-09-16",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 62
-          }
-        },
-        {
           "sku_id": "DZTX251124-31193S",
           "color": "活性黑",
           "size": "S",
@@ -4854,15 +4833,15 @@
           }
         },
         {
-          "sku_id": "DZTX251124-31159L",
-          "color": "粉蓝",
-          "size": "L",
-          "qty": 32,
-          "avail_qty": 32,
+          "sku_id": "DZTX251124-31193XS",
+          "color": "活性黑",
+          "size": "XS",
+          "qty": 16,
+          "avail_qty": 16,
           "order_lock": 0,
           "io_date": "2026-09-16",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 32
+            "广州市捷展贸易有限公司": 16
           }
         },
         {
@@ -4924,10 +4903,10 @@
       "io_date": "2026-09-16",
       "created": "2026-02-26",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 13,
+      "age_days": 14,
       "total_qty": 4,
       "total_lock": 0,
       "skus": [
@@ -4954,16 +4933,28 @@
       "io_date": "2026-09-17",
       "created": "2026-08-18",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 12,
-      "total_qty": 1,
+      "age_days": 13,
+      "total_qty": 2,
       "total_lock": 0,
       "skus": [
         {
           "sku_id": "DSCT260730-7715L",
           "color": "紫色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 1
+          }
+        },
+        {
+          "sku_id": "DSCT260730-77164L",
+          "color": "藏青色",
           "size": "L",
           "qty": 1,
           "avail_qty": 1,
@@ -4984,10 +4975,10 @@
       "io_date": "2026-09-17",
       "created": "2026-08-20",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 12,
+      "age_days": 13,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -5026,11 +5017,11 @@
       "io_date": "2026-09-17",
       "created": "2026-08-18",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 12,
-      "total_qty": 1314,
+      "age_days": 13,
+      "total_qty": 1676,
       "total_lock": 0,
       "skus": [
         {
@@ -5055,6 +5046,18 @@
           "io_date": "2026-09-17",
           "wh_detail": {
             "广州市捷展贸易有限公司": 253
+          }
+        },
+        {
+          "sku_id": "DSCT260727-7102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 362,
+          "avail_qty": 362,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 362
           }
         },
         {
@@ -5092,10 +5095,10 @@
       "io_date": "2026-09-18",
       "created": "2026-06-01",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 11,
+      "age_days": 12,
       "total_qty": 3,
       "total_lock": 0,
       "skus": [
@@ -5122,10 +5125,10 @@
       "io_date": "2026-09-19",
       "created": "2026-09-01",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 10,
+      "age_days": 11,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -5152,10 +5155,10 @@
       "io_date": "2026-09-19",
       "created": "2026-09-01",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 10,
+      "age_days": 11,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -5182,10 +5185,10 @@
       "io_date": "2026-09-19",
       "created": "2026-09-01",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 10,
+      "age_days": 11,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
@@ -5212,17 +5215,29 @@
       "io_date": "2026-09-19",
       "created": "2026-09-01",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 10,
-      "total_qty": 1,
+      "age_days": 11,
+      "total_qty": 2,
       "total_lock": 0,
       "skus": [
         {
           "sku_id": "PODKZ260828-91122L",
           "color": "浅蓝",
           "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-19",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 1
+          }
+        },
+        {
+          "sku_id": "PODKZ260828-91122M",
+          "color": "浅蓝",
+          "size": "M",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
@@ -5244,40 +5259,10 @@
       "warehouse": [
         "进货仓"
       ],
-      "age_days": 10,
+      "age_days": 11,
       "total_qty": 0,
-      "total_lock": 1016,
+      "total_lock": 1637,
       "skus": []
-    },
-    {
-      "i_id": "DZTX260718-93",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/D8DE156EEAE54433B41BA4330B688C94.png?name=cb5c7a89-866f-4041-a109-0eb6b200564f",
-      "salesperson": "刘江滔",
-      "io_date": "2026-09-21",
-      "created": "2026-09-01",
-      "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
-      ],
-      "age_days": 8,
-      "total_qty": 198,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260718-93021码(L)",
-          "color": "黑色",
-          "size": "1码(L)",
-          "qty": 198,
-          "avail_qty": 198,
-          "order_lock": 0,
-          "io_date": "2026-09-21",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 198
-          }
-        }
-      ]
     },
     {
       "i_id": "DSCT260731-31",
@@ -5288,10 +5273,10 @@
       "io_date": "2026-09-21",
       "created": "2026-08-20",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 8,
+      "age_days": 9,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
@@ -5330,11 +5315,11 @@
       "io_date": "2026-09-23",
       "created": "2026-09-02",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 7,
-      "total_qty": 22,
+      "age_days": 8,
+      "total_qty": 29,
       "total_lock": 0,
       "skus": [
         {
@@ -5372,6 +5357,18 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 5
           }
+        },
+        {
+          "sku_id": "DZ8466S26338XL",
+          "color": "烟灰紫",
+          "size": "XL",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "2026-09-23",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 7
+          }
         }
       ]
     },
@@ -5384,12 +5381,12 @@
       "io_date": "2026-09-24",
       "created": "2026-09-14",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 5,
-      "total_qty": 58,
-      "total_lock": 58,
+      "age_days": 6,
+      "total_qty": 79,
+      "total_lock": 79,
       "skus": [
         {
           "sku_id": "PODKZ260903-R1756L",
@@ -5440,6 +5437,18 @@
           }
         },
         {
+          "sku_id": "PODKZ260903-R1656M",
+          "color": "机械灰",
+          "size": "M",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 5,
+          "io_date": "2026-09-24",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 5
+          }
+        },
+        {
           "sku_id": "PODKZ260903-R1656S",
           "color": "机械灰",
           "size": "S",
@@ -5449,6 +5458,18 @@
           "io_date": "2026-09-24",
           "wh_detail": {
             "广州市捷展贸易有限公司": 3
+          }
+        },
+        {
+          "sku_id": "PODKZ260903-R1755L",
+          "color": "沙砾卡其",
+          "size": "L",
+          "qty": 16,
+          "avail_qty": 16,
+          "order_lock": 16,
+          "io_date": "2026-09-24",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 16
           }
         },
         {
@@ -5498,10 +5519,10 @@
       "io_date": "2026-09-24",
       "created": "2026-06-27",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 5,
+      "age_days": 6,
       "total_qty": 49,
       "total_lock": 49,
       "skus": [
@@ -5576,25 +5597,13 @@
       "io_date": "2026-09-24",
       "created": "2026-08-07",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 5,
-      "total_qty": 211,
-      "total_lock": 211,
+      "age_days": 6,
+      "total_qty": 147,
+      "total_lock": 147,
       "skus": [
-        {
-          "sku_id": "DZTX260714-31193XL",
-          "color": "活性黑",
-          "size": "XL",
-          "qty": 64,
-          "avail_qty": 64,
-          "order_lock": 64,
-          "io_date": "2026-09-24",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 64
-          }
-        },
         {
           "sku_id": "DZTX260714-31193XXL",
           "color": "活性黑",
@@ -5642,12 +5651,12 @@
       "io_date": "2026-09-24",
       "created": "2026-06-26",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 5,
-      "total_qty": 36,
-      "total_lock": 36,
+      "age_days": 6,
+      "total_qty": 26,
+      "total_lock": 26,
       "skus": [
         {
           "sku_id": "PODWT260501-R2756L",
@@ -5665,18 +5674,6 @@
           "sku_id": "PODWT260501-R2756M",
           "color": "墨黑色",
           "size": "M",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 10,
-          "io_date": "2026-09-24",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 10
-          }
-        },
-        {
-          "sku_id": "PODWT260501-R2755L",
-          "color": "沙砾卡其",
-          "size": "L",
           "qty": 10,
           "avail_qty": 10,
           "order_lock": 10,
@@ -5708,13 +5705,25 @@
       "io_date": "2026-09-27",
       "created": "2026-08-18",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 2,
-      "total_qty": 38,
+      "age_days": 3,
+      "total_qty": 62,
       "total_lock": 0,
       "skus": [
+        {
+          "sku_id": "DSCT260731-3239L",
+          "color": "卡其",
+          "size": "L",
+          "qty": 24,
+          "avail_qty": 24,
+          "order_lock": 0,
+          "io_date": "2026-09-27",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 24
+          }
+        },
         {
           "sku_id": "DSCT260731-3239XL",
           "color": "卡其",
@@ -5750,10 +5759,10 @@
       "io_date": "2026-09-28",
       "created": "2026-09-14",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 1,
+      "age_days": 2,
       "total_qty": 200,
       "total_lock": 0,
       "skus": [
@@ -5770,9 +5779,9 @@
           }
         },
         {
-          "sku_id": "DZXH10232W2502XL",
+          "sku_id": "DZXH10232W2502M",
           "color": "黑色",
-          "size": "XL",
+          "size": "M",
           "qty": 100,
           "avail_qty": 100,
           "order_lock": 0,
@@ -5792,71 +5801,47 @@
       "io_date": "2026-09-28",
       "created": "2026-09-05",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 1,
-      "total_qty": 367,
+      "age_days": 2,
+      "total_qty": 52,
       "total_lock": 0,
       "skus": [
-        {
-          "sku_id": "DZTX260824-32022XL",
-          "color": "黑色",
-          "size": "2XL",
-          "qty": 20,
-          "avail_qty": 20,
-          "order_lock": 0,
-          "io_date": "2026-09-28",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 20
-          }
-        },
         {
           "sku_id": "DZTX260824-32024XL",
           "color": "黑色",
           "size": "4XL",
-          "qty": 37,
-          "avail_qty": 37,
+          "qty": 27,
+          "avail_qty": 27,
           "order_lock": 0,
           "io_date": "2026-09-28",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 37
-          }
-        },
-        {
-          "sku_id": "DZTX260824-3202L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 129,
-          "avail_qty": 129,
-          "order_lock": 0,
-          "io_date": "2026-09-28",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 129
-          }
-        },
-        {
-          "sku_id": "DZTX260824-3202M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 100,
-          "avail_qty": 100,
-          "order_lock": 0,
-          "io_date": "2026-09-28",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 100
+            "广州市捷展贸易有限公司": 27
           }
         },
         {
           "sku_id": "DZTX260824-3202XL",
           "color": "黑色",
           "size": "XL",
-          "qty": 81,
-          "avail_qty": 81,
+          "qty": 11,
+          "avail_qty": 11,
           "order_lock": 0,
           "io_date": "2026-09-28",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 81
+            "广州市捷展贸易有限公司": 11
+          }
+        },
+        {
+          "sku_id": "DZTX260824-3202XS",
+          "color": "黑色",
+          "size": "XS",
+          "qty": 14,
+          "avail_qty": 14,
+          "order_lock": 0,
+          "io_date": "2026-09-27",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 14
           }
         }
       ]
@@ -5870,12 +5855,12 @@
       "io_date": "2026-09-28",
       "created": "2026-08-07",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 1,
-      "total_qty": 1808,
-      "total_lock": 1808,
+      "age_days": 2,
+      "total_qty": 1628,
+      "total_lock": 1628,
       "skus": [
         {
           "sku_id": "DZTX260714-32193L",
@@ -5911,6 +5896,18 @@
           "io_date": "2026-09-28",
           "wh_detail": {
             "广州市捷展贸易有限公司": 136
+          }
+        },
+        {
+          "sku_id": "DZTX260714-32193XL",
+          "color": "活性黑",
+          "size": "XL",
+          "qty": 52,
+          "avail_qty": 52,
+          "order_lock": 52,
+          "io_date": "2026-09-28",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 52
           }
         },
         {
@@ -5962,18 +5959,6 @@
           }
         },
         {
-          "sku_id": "DZTX260714-3238XL",
-          "color": "灰蓝",
-          "size": "XL",
-          "qty": 52,
-          "avail_qty": 52,
-          "order_lock": 52,
-          "io_date": "2026-09-28",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 52
-          }
-        },
-        {
           "sku_id": "DZTX260714-3238XXL",
           "color": "灰蓝",
           "size": "XXL",
@@ -6022,27 +6007,27 @@
           }
         },
         {
-          "sku_id": "DZTX260714-32142M",
+          "sku_id": "DZTX260714-32142XL",
           "color": "米白",
-          "size": "M",
-          "qty": 132,
-          "avail_qty": 132,
-          "order_lock": 132,
+          "size": "XL",
+          "qty": 51,
+          "avail_qty": 51,
+          "order_lock": 51,
           "io_date": "2026-09-28",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 132
+            "广州市捷展贸易有限公司": 51
           }
         },
         {
-          "sku_id": "DZTX260714-32142S",
+          "sku_id": "DZTX260714-32142XXL",
           "color": "米白",
-          "size": "S",
-          "qty": 132,
-          "avail_qty": 132,
-          "order_lock": 132,
+          "size": "XXL",
+          "qty": 34,
+          "avail_qty": 34,
+          "order_lock": 34,
           "io_date": "2026-09-28",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 132
+            "广州市捷展贸易有限公司": 34
           }
         },
         {
@@ -6055,18 +6040,6 @@
           "io_date": "2026-09-28",
           "wh_detail": {
             "广州市捷展贸易有限公司": 42
-          }
-        },
-        {
-          "sku_id": "DZTX260714-3213M",
-          "color": "米色",
-          "size": "M",
-          "qty": 111,
-          "avail_qty": 111,
-          "order_lock": 111,
-          "io_date": "2026-09-28",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 111
           }
         },
         {
@@ -6118,6 +6091,18 @@
           }
         },
         {
+          "sku_id": "DZTX260714-3240M",
+          "color": "藕粉",
+          "size": "M",
+          "qty": 110,
+          "avail_qty": 110,
+          "order_lock": 110,
+          "io_date": "2026-09-28",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 110
+          }
+        },
+        {
           "sku_id": "DZTX260714-3240S",
           "color": "藕粉",
           "size": "S",
@@ -6164,11 +6149,11 @@
       "io_date": "2026-09-29",
       "created": "2026-09-17",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
-      "total_qty": 31,
+      "age_days": 1,
+      "total_qty": 50,
       "total_lock": 0,
       "skus": [
         {
@@ -6184,6 +6169,18 @@
           }
         },
         {
+          "sku_id": "PODWY260914-Y1616M",
+          "color": "橄榄绿",
+          "size": "M",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 4
+          }
+        },
+        {
           "sku_id": "PODWY260914-Y1616XL",
           "color": "橄榄绿",
           "size": "XL",
@@ -6193,6 +6190,18 @@
           "io_date": "2026-09-29",
           "wh_detail": {
             "广州市捷展贸易有限公司": 6
+          }
+        },
+        {
+          "sku_id": "PODWY260914-Y144L",
+          "color": "深灰",
+          "size": "L",
+          "qty": 15,
+          "avail_qty": 15,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 15
           }
         },
         {
@@ -6230,13 +6239,25 @@
       "io_date": "2026-09-29",
       "created": "2026-09-17",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
-      "total_qty": 74,
+      "age_days": 1,
+      "total_qty": 83,
       "total_lock": 0,
       "skus": [
+        {
+          "sku_id": "PODTX260820-Y122L",
+          "color": "蓝色",
+          "size": "L",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 7
+          }
+        },
         {
           "sku_id": "PODTX260820-Y122M",
           "color": "蓝色",
@@ -6259,18 +6280,6 @@
           "io_date": "2026-09-29",
           "wh_detail": {
             "广州市捷展贸易有限公司": 14
-          }
-        },
-        {
-          "sku_id": "PODTX260820-Y122XS",
-          "color": "蓝色",
-          "size": "XS",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 8
           }
         },
         {
@@ -6310,6 +6319,18 @@
           }
         },
         {
+          "sku_id": "PODTX260820-Y102XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 10
+          }
+        },
+        {
           "sku_id": "PODTX260820-Y102XS",
           "color": "黑色",
           "size": "XS",
@@ -6332,11 +6353,11 @@
       "io_date": "2026-09-29",
       "created": "2026-09-19",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
-      "total_qty": 50,
+      "age_days": 1,
+      "total_qty": 32,
       "total_lock": 0,
       "skus": [
         {
@@ -6349,18 +6370,6 @@
           "io_date": "2026-09-29",
           "wh_detail": {
             "广州市捷展贸易有限公司": 16
-          }
-        },
-        {
-          "sku_id": "PODTX260803-Y0102M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 18,
-          "avail_qty": 18,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 18
           }
         },
         {
@@ -6386,25 +6395,13 @@
       "io_date": "2026-09-29",
       "created": "2026-08-29",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
-      "total_qty": 71,
+      "age_days": 1,
+      "total_qty": 52,
       "total_lock": 0,
       "skus": [
-        {
-          "sku_id": "DZTX260623-92-01012XL",
-          "color": "白色",
-          "size": "2XL",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 6
-          }
-        },
         {
           "sku_id": "DZTX260623-92-01013XL",
           "color": "白色",
@@ -6427,30 +6424,6 @@
           "io_date": "2026-09-29",
           "wh_detail": {
             "广州市捷展贸易有限公司": 7
-          }
-        },
-        {
-          "sku_id": "DZTX260623-92-01015XL",
-          "color": "白色",
-          "size": "5XL",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 4
-          }
-        },
-        {
-          "sku_id": "DZTX260623-92-0101L",
-          "color": "白色",
-          "size": "L",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {
-            "广州市捷展贸易有限公司": 9
           }
         },
         {
@@ -6500,10 +6473,10 @@
       "io_date": "2026-09-29",
       "created": "2026-08-21",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
+      "age_days": 1,
       "total_qty": 8,
       "total_lock": 0,
       "skus": [
@@ -6534,6 +6507,300 @@
       ]
     },
     {
+      "i_id": "DZTX260731-90",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260904/5C3E9D49B7844817B10462A61396C39B.png?name=1170bbee-bbf4-4c14-8068-d3d5fe489ff3",
+      "salesperson": "",
+      "io_date": "2026-09-30",
+      "created": "2026-09-04",
+      "warehouse": [
+        "进货仓",
+        "广州市捷展贸易有限公司"
+      ],
+      "age_days": 0,
+      "total_qty": 411,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260731-901632XL",
+          "color": "棕色",
+          "size": "2XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 1
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90163L",
+          "color": "棕色",
+          "size": "L",
+          "qty": 27,
+          "avail_qty": 27,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 27
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90163M",
+          "color": "棕色",
+          "size": "M",
+          "qty": 21,
+          "avail_qty": 21,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 21
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90163S",
+          "color": "棕色",
+          "size": "S",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 7
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90163XS",
+          "color": "棕色",
+          "size": "XS",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 7
+          }
+        },
+        {
+          "sku_id": "DZTX260731-906172XL",
+          "color": "浅卡其",
+          "size": "2XL",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 5
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90617L",
+          "color": "浅卡其",
+          "size": "L",
+          "qty": 32,
+          "avail_qty": 32,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 32
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90617M",
+          "color": "浅卡其",
+          "size": "M",
+          "qty": 32,
+          "avail_qty": 32,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 32
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90617S",
+          "color": "浅卡其",
+          "size": "S",
+          "qty": 16,
+          "avail_qty": 16,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 16
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90617XL",
+          "color": "浅卡其",
+          "size": "XL",
+          "qty": 32,
+          "avail_qty": 32,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 32
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90617XS",
+          "color": "浅卡其",
+          "size": "XS",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 11
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90052XL",
+          "color": "灰色",
+          "size": "2XL",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 6
+          }
+        },
+        {
+          "sku_id": "DZTX260731-9005L",
+          "color": "灰色",
+          "size": "L",
+          "qty": 32,
+          "avail_qty": 32,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 32
+          }
+        },
+        {
+          "sku_id": "DZTX260731-9005M",
+          "color": "灰色",
+          "size": "M",
+          "qty": 19,
+          "avail_qty": 19,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 19
+          }
+        },
+        {
+          "sku_id": "DZTX260731-9005S",
+          "color": "灰色",
+          "size": "S",
+          "qty": 16,
+          "avail_qty": 16,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 16
+          }
+        },
+        {
+          "sku_id": "DZTX260731-9005XL",
+          "color": "灰色",
+          "size": "XL",
+          "qty": 21,
+          "avail_qty": 21,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 21
+          }
+        },
+        {
+          "sku_id": "DZTX260731-9005XS",
+          "color": "灰色",
+          "size": "XS",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 10
+          }
+        },
+        {
+          "sku_id": "DZTX260731-901282XL",
+          "color": "藏蓝色",
+          "size": "2XL",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 6
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90128L",
+          "color": "藏蓝色",
+          "size": "L",
+          "qty": 27,
+          "avail_qty": 27,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 27
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90128M",
+          "color": "藏蓝色",
+          "size": "M",
+          "qty": 29,
+          "avail_qty": 29,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 29
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90128S",
+          "color": "藏蓝色",
+          "size": "S",
+          "qty": 15,
+          "avail_qty": 15,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 15
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90128XL",
+          "color": "藏蓝色",
+          "size": "XL",
+          "qty": 28,
+          "avail_qty": 28,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 28
+          }
+        },
+        {
+          "sku_id": "DZTX260731-90128XS",
+          "color": "藏蓝色",
+          "size": "XS",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 11
+          }
+        }
+      ]
+    },
+    {
       "i_id": "DZTX260831-K10",
       "name": "定制",
       "labels": "",
@@ -6542,23 +6809,23 @@
       "io_date": "2026-09-30",
       "created": "2026-09-22",
       "warehouse": [
-        "广州市捷展贸易有限公司",
-        "进货仓"
+        "进货仓",
+        "广州市捷展贸易有限公司"
       ],
-      "age_days": 0,
-      "total_qty": 148,
+      "age_days": 1,
+      "total_qty": 97,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260831-K1002L",
+          "sku_id": "DZTX260831-K10022XL",
           "color": "黑色",
-          "size": "L",
-          "qty": 60,
-          "avail_qty": 60,
+          "size": "2XL",
+          "qty": 9,
+          "avail_qty": 9,
           "order_lock": 0,
           "io_date": "2026-09-30",
           "wh_detail": {
-            "广州市捷展贸易有限公司": 60
+            "广州市捷展贸易有限公司": 9
           }
         },
         {
@@ -6588,127 +6855,134 @@
       ]
     },
     {
-      "i_id": "DZTX260526-71",
+      "i_id": "POD-TX260722YZ103",
       "name": "定制",
-      "labels": null,
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260618/2C4E7D14252D4653BC0BDC5B37892216.png?name=ab33d529-dd06-4576-880a-3de6b77422ba",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2026-06-18",
-      "warehouse": [],
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260729/53AFCDA0A6EA4A1EBABDEEF4D666AFDA.png?name=c23323ba-2f5a-49b0-8b92-837179558db0",
+      "salesperson": "",
+      "io_date": "2026-09-30",
+      "created": "2026-07-29",
+      "warehouse": [
+        "进货仓",
+        "广州市捷展贸易有限公司"
+      ],
       "age_days": 0,
-      "total_qty": 1,
+      "total_qty": 112,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260526-7151XL",
-          "color": "图片色",
-          "size": "XL",
+          "sku_id": "POD-TX260722YZ103673M",
+          "color": "冰淇淋白",
+          "size": "M",
+          "qty": 15,
+          "avail_qty": 15,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 15
+          }
+        },
+        {
+          "sku_id": "POD-TX260722YZ103677L",
+          "color": "糖果粉",
+          "size": "L",
+          "qty": 28,
+          "avail_qty": 28,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 28
+          }
+        },
+        {
+          "sku_id": "POD-TX260722YZ103677M",
+          "color": "糖果粉",
+          "size": "M",
+          "qty": 30,
+          "avail_qty": 30,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 30
+          }
+        },
+        {
+          "sku_id": "POD-TX260722YZ103677S",
+          "color": "糖果粉",
+          "size": "S",
+          "qty": 37,
+          "avail_qty": 37,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 37
+          }
+        },
+        {
+          "sku_id": "POD-TX260722YZ10376L",
+          "color": "花灰色",
+          "size": "L",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 1
+          }
+        },
+        {
+          "sku_id": "POD-TX260722YZ10376S",
+          "color": "花灰色",
+          "size": "S",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 1
+          }
         }
       ]
     },
     {
-      "i_id": "DZTX260807-41",
+      "i_id": "DSKZ260815-45",
       "name": "定制",
-      "labels": null,
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260814/5B155952B89E4B68847806AC81204F87.png?name=5332a243-714e-4506-918f-85b57ea278a6",
-      "salesperson": "周乐",
-      "io_date": "2026-09-29",
-      "created": "2026-08-14",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260807-4102XS",
-          "color": "黑色",
-          "size": "XS",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX250415-71",
-      "name": "",
       "labels": "",
-      "pic": "",
-      "salesperson": "邓正瑶",
-      "io_date": "2025-05-23",
-      "created": "",
-      "warehouse": [],
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260904/F6656E375FEB41B1BFE21D09F8743A1A.png?name=9e8b55da-5ac1-4848-b80f-b14b94b9e23f",
+      "salesperson": "",
+      "io_date": "2026-09-30",
+      "created": "2026-09-04",
+      "warehouse": [
+        "进货仓",
+        "广州市捷展贸易有限公司"
+      ],
       "age_days": 0,
-      "total_qty": 1,
+      "total_qty": 266,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX250415-71-待补充",
-          "color": "",
-          "size": "",
-          "qty": 1,
-          "avail_qty": 1,
+          "sku_id": "DSKZ260815-4522M",
+          "color": "蓝色",
+          "size": "M",
+          "qty": 132,
+          "avail_qty": 132,
           "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX250418-390",
-      "name": "",
-      "labels": "",
-      "pic": "",
-      "salesperson": "邓正瑶",
-      "io_date": "2025-06-04",
-      "created": "",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 132
+          }
+        },
         {
-          "sku_id": "DZTX250418-390-待补充",
-          "color": "",
-          "size": "",
-          "qty": 1,
-          "avail_qty": 1,
+          "sku_id": "DSKZ260815-4522S",
+          "color": "蓝色",
+          "size": "S",
+          "qty": 134,
+          "avail_qty": 134,
           "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "PODWT260527-ZY",
-      "name": "",
-      "labels": "",
-      "pic": "",
-      "salesperson": "林梓仪",
-      "io_date": "2026-06-29",
-      "created": "",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "PODWT260527-ZY-待补充",
-          "color": "",
-          "size": "",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
+          "io_date": "2026-09-30",
+          "wh_detail": {
+            "广州市捷展贸易有限公司": 134
+          }
         }
       ]
     }
