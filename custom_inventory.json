@@ -1,8 +1,8 @@
 {
   "updated_at": "2026-10-02 01:10:08",
-  "total_styles": 107,
-  "total_skus": 470,
-  "total_qty": 11488,
+  "total_styles": 112,
+  "total_skus": 497,
+  "total_qty": 12143,
   "total_lock": 4413,
   "warehouses": [
     {
@@ -7466,6 +7466,351 @@
           "wh_detail": {
             "广州市捷展贸易有限公司": 22
           }
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260507-80",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "罗伟仪",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 3,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260507-8002S",
+          "color": "",
+          "size": "",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260520-94",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260520-94106XL",
+          "color": "",
+          "size": "",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260731-90",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 321,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260731-90052XL",
+          "color": "",
+          "size": "",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-9005L",
+          "color": "",
+          "size": "",
+          "qty": 32,
+          "avail_qty": 32,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-9005M",
+          "color": "",
+          "size": "",
+          "qty": 19,
+          "avail_qty": 19,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-9005S",
+          "color": "",
+          "size": "",
+          "qty": 16,
+          "avail_qty": 16,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-9005XL",
+          "color": "",
+          "size": "",
+          "qty": 21,
+          "avail_qty": 21,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-9005XS",
+          "color": "",
+          "size": "",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90163XL",
+          "color": "",
+          "size": "",
+          "qty": 19,
+          "avail_qty": 19,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-901282XL",
+          "color": "",
+          "size": "",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90128L",
+          "color": "",
+          "size": "",
+          "qty": 27,
+          "avail_qty": 27,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90128M",
+          "color": "",
+          "size": "",
+          "qty": 29,
+          "avail_qty": 29,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90128S",
+          "color": "",
+          "size": "",
+          "qty": 15,
+          "avail_qty": 15,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90128XL",
+          "color": "",
+          "size": "",
+          "qty": 28,
+          "avail_qty": 28,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90128XS",
+          "color": "",
+          "size": "",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-901632XL",
+          "color": "",
+          "size": "",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90163L",
+          "color": "",
+          "size": "",
+          "qty": 27,
+          "avail_qty": 27,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90163M",
+          "color": "",
+          "size": "",
+          "qty": 21,
+          "avail_qty": 21,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90163S",
+          "color": "",
+          "size": "",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90163XL",
+          "color": "",
+          "size": "",
+          "qty": 19,
+          "avail_qty": 19,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-90163XS",
+          "color": "",
+          "size": "",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZXH10232W25",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "邓正瑶",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 300,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZXH10232W2502L",
+          "color": "",
+          "size": "",
+          "qty": 100,
+          "avail_qty": 100,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZXH10232W2502M",
+          "color": "",
+          "size": "",
+          "qty": 100,
+          "avail_qty": 100,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZXH10232W2502XL",
+          "color": "",
+          "size": "",
+          "qty": 100,
+          "avail_qty": 100,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODTX260501-R4",
+      "name": "",
+      "labels": "",
+      "pic": "",
+      "salesperson": "朱雪榕",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 30,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "PODTX260501-R4877L",
+          "color": "",
+          "size": "",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 10,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "PODTX260501-R4878L",
+          "color": "",
+          "size": "",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 10,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "PODTX260501-R4878M",
+          "color": "",
+          "size": "",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 10,
+          "io_date": "",
+          "wh_detail": {}
         }
       ]
     }
