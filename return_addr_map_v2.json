@@ -149,13 +149,13 @@
     "address": ""
   },
   "档口-GLFS": {
-    "contacts": "小春",
+    "contacts": "朱先生",
     "mobile": "13825015119",
-    "address": "广东省广州市荔湾区光复南64号a01",
+    "address": "广东省广州市荔湾区中南街道南丫一巷1号万家福超市旁边巷子中间进来有间服装仓库（务必放进来仓库不然投诉",
     "province": "广东省",
     "city": "广州市",
     "district": "荔湾区",
-    "detail": "光复南64号a01"
+    "detail": "中南街道南丫一巷1号万家福超市旁边巷子中间进来有间服装仓库（务必放进来仓库不然投诉"
   },
   "档口-MEIM": {
     "contacts": "MEIM",
@@ -901,8 +901,8 @@
   "档口-SkatePark": {
     "contacts": "Estrella",
     "mobile": "15218813788",
-    "address": "广州市荔湾区光复南路143-2号skatepark",
-    "province": "",
+    "address": "广东省广州市荔湾区光复南路143-2号skatepark",
+    "province": "广东省",
     "city": "广州市",
     "district": "荔湾区",
     "detail": "光复南路143-2号skatepark"
