@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-10-06 11:14:20",
-  "total_styles": 121,
+  "total_styles": 120,
   "total_skus": 562,
   "total_qty": 16898,
-  "total_lock": 1937,
+  "total_lock": 278,
   "styles": [
     {
       "i_id": "DZTX260824-32",
@@ -2049,20 +2049,6 @@
           "wh_detail": {}
         }
       ]
-    },
-    {
-      "i_id": "DGSCT260311-93",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260317/24538E2A2EE1449C858A64A81251FE06.png?name=6bfb81d0-d754-432b-aacb-c88eb8f97511",
-      "salesperson": "莫紫珊",
-      "io_date": "2026-09-19",
-      "created": "2026-03-17",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 0,
-      "total_lock": 1659,
-      "skus": []
     },
     {
       "i_id": "DZFF20251108-46",
