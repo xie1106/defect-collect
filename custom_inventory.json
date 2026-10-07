@@ -1,8 +1,8 @@
 {
   "updated_at": "2026-10-07 10:40:09",
-  "total_styles": 112,
-  "total_skus": 524,
-  "total_qty": 16919,
+  "total_styles": 114,
+  "total_skus": 526,
+  "total_qty": 16922,
   "total_lock": 933,
   "styles": [
     {
@@ -6919,6 +6919,56 @@
           "size": "L",
           "qty": 5,
           "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260520-95",
+      "name": "定制",
+      "labels": "",
+      "pic": "",
+      "salesperson": "",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 2,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260520-95142F",
+          "color": "米白",
+          "size": "F",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260526-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "",
+      "salesperson": "",
+      "io_date": "",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260526-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
