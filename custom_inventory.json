@@ -1,26 +1,331 @@
 {
-  "updated_at": "2026-10-17 00:05:24",
-  "total_styles": 94,
-  "total_skus": 397,
-  "total_qty": 9864,
-  "total_lock": 1647,
+  "updated_at": "2026-10-18 00:05:22",
+  "total_styles": 92,
+  "total_skus": 380,
+  "total_qty": 9609,
+  "total_lock": 1497,
   "styles": [
     {
-      "i_id": "DZWY250928-76",
+      "i_id": "DZTX240401-34",
+      "name": "定制",
+      "labels": "半成品",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/44C0356654DD47AEAAECF1C6FBF2395F.jpg?name=24f4c2f2dbb66512810c25b8c93dabcd_20d3fc_DZTX240401-34.jpg",
+      "salesperson": "骆铭卓",
+      "io_date": "",
+      "created": "2024-04-03",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 11,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX240401-3440L",
+          "color": "藕粉",
+          "size": "L",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250310-72",
+      "name": "定制",
+      "labels": "半成品",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260716/9EA6D910FC98452B8554058D2C5BBBA6.png?name=c226821a-fd55-4f8e-bad9-1b12cac270ca",
+      "salesperson": "张玉珠",
+      "io_date": "2026-07-25",
+      "created": "2025-03-11",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 7,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250310-72193XS",
+          "color": "活性黑",
+          "size": "XS",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX250310-72142XS",
+          "color": "米白",
+          "size": "XS",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSB241016-77",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251022/018D5893D7E84789BA4FD8BBFCE629B4.jpeg?name=5b61e2be-37bf-4cd4-a638-049f7431662d",
-      "salesperson": "潘嘉瑜",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/C0369C08272E4AF2B1BE9BD21F0A4AE0.png?name=1b02a573-676b-45c8-af9a-71e6cd325bb8",
+      "salesperson": "罗伟仪",
+      "io_date": "2026-07-21",
+      "created": "2026-05-26",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 226,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSB241016-7751L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 90,
+          "avail_qty": 90,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241016-7751M",
+          "color": "图片色",
+          "size": "M",
+          "qty": 79,
+          "avail_qty": 79,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241016-7751XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 19,
+          "avail_qty": 19,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241016-7751XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 38,
+          "avail_qty": 38,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZCT251208-32",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260105/2530FCDB11CD4E98BF8C658390639C3D.jpeg?name=b148f23c-4203-4ea8-afc4-64f377793e71",
+      "salesperson": "莫紫珊",
       "io_date": "",
-      "created": "2025-10-22",
+      "created": "2026-01-05",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 31,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZCT251208-32709M",
+          "color": "轩蓝",
+          "size": "M",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZCT251208-32709S",
+          "color": "轩蓝",
+          "size": "S",
+          "qty": 13,
+          "avail_qty": 13,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZCT251208-32709XL",
+          "color": "轩蓝",
+          "size": "XL",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZCT251208-32709XS",
+          "color": "轩蓝",
+          "size": "XS",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZCT251208-32709XXL",
+          "color": "轩蓝",
+          "size": "XXL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZCT251208-32709XXXL",
+          "color": "轩蓝",
+          "size": "XXXL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODWT260527-ZY",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260616/BEA1EB8181E84F068ACAE5D54A3220C8.png?name=013c1298-5145-4a72-92c6-4ed499c0eb29",
+      "salesperson": "林梓仪",
+      "io_date": "",
+      "created": "2026-06-16",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 5,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "PODWT260527-ZY640XL",
+          "color": "无花果色",
+          "size": "XL",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSCT260727-72",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260820/03DC0C2180434B28ACEA7C75BFDA1005.png?name=4951f6ab-b440-4d06-8796-5576a99549d8",
+      "salesperson": "邓正瑶",
+      "io_date": "2026-09-17",
+      "created": "2026-08-20",
       "warehouse": [],
       "age_days": 0,
       "total_qty": 2,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZWY250928-7645XL",
-          "color": "浅灰",
+          "sku_id": "DSCT260727-7205M",
+          "color": "灰色",
+          "size": "M",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260727-7222L",
+          "color": "蓝色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZ12795S25",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251222/012EC0F1DA774AF3A3248ED324E9EAF5.png?name=672d8f97-b273-4386-af32-32b20d4f0b9d",
+      "salesperson": "周乐",
+      "io_date": "",
+      "created": "2025-12-22",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 40,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZ12795S2505L",
+          "color": "灰色",
+          "size": "L",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZ12795S2505M",
+          "color": "灰色",
+          "size": "M",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZ12795S2505XL",
+          "color": "灰色",
+          "size": "XL",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZ12795S2505XXL",
+          "color": "灰色",
+          "size": "XXL",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "F04",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260417/F6EF94B170814E6A83CD69CDA70B92BE.png?name=cd0135b2-f99b-4c50-8d98-58edd41b0df4",
+      "salesperson": "张玉珠",
+      "io_date": "",
+      "created": "2026-04-17",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 3,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "F04224XL",
+          "color": "奶黄",
           "size": "XL",
           "qty": 1,
           "avail_qty": 1,
@@ -29,9 +334,19 @@
           "wh_detail": {}
         },
         {
-          "sku_id": "DZWY250928-76162L",
-          "color": "绿色",
-          "size": "L",
+          "sku_id": "F04033XL",
+          "color": "宝蓝",
+          "size": "3XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "F043415XL",
+          "color": "雾霾蓝",
+          "size": "5XL",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
@@ -41,191 +356,421 @@
       ]
     },
     {
-      "i_id": "PODKZ260828-91",
+      "i_id": "PODTX260803-03",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/D85A973BF62F42329B9FFC4643929A7F.png?name=d1fbd17b-171a-497e-9120-e74e156970dd",
-      "salesperson": "邓正瑶",
-      "io_date": "2026-09-19",
-      "created": "2026-09-01",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260811/DF4F33902C084089BB97A391E3330467.png?name=3791ecfa-97b9-4a3c-a70c-8b713bc5f0eb",
+      "salesperson": "彭培强",
+      "io_date": "2026-09-14",
+      "created": "2026-08-11",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 1,
+      "total_qty": 5,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "PODKZ260828-91122L",
-          "color": "浅蓝",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
+          "sku_id": "PODTX260803-03278XXL",
+          "color": "石灰白",
+          "size": "XXL",
+          "qty": 5,
+          "avail_qty": 5,
           "order_lock": 0,
-          "io_date": "2026-09-19",
+          "io_date": "2026-09-14",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZTX260601-92",
+      "i_id": "DZKZ251226-34",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/0A98B33F165F4203BA1063AB7769B9D7.jpg?name=DZTX260601-92-03.jpg",
-      "salesperson": "莫紫珊",
-      "io_date": "2026-10-16",
-      "created": "2026-09-22",
+      "pic": "https://images-erp.sursung.com/prod/erp/ItemSku/10188262/20260403/912AB71CC3064C49A9238965A6CAA170.jpeg?name=5d58d638-15df-431c-8570-1c2c38cd365b",
+      "salesperson": "潘嘉瑜",
+      "io_date": "2026-07-28",
+      "created": "2026-03-12",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 609,
+      "total_qty": 4,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260601-92644L",
-          "color": "奶杏咖",
-          "size": "L",
-          "qty": 63,
-          "avail_qty": 63,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92644M",
-          "color": "奶杏咖",
-          "size": "M",
-          "qty": 64,
-          "avail_qty": 64,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92644S",
-          "color": "奶杏咖",
-          "size": "S",
-          "qty": 38,
-          "avail_qty": 38,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92644XL",
-          "color": "奶杏咖",
-          "size": "XL",
-          "qty": 32,
-          "avail_qty": 32,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92644XXL",
-          "color": "奶杏咖",
+          "sku_id": "DZKZ251226-34232XXL",
+          "color": "大地棕",
           "size": "XXL",
-          "qty": 13,
-          "avail_qty": 13,
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-10-14",
+          "io_date": "2026-07-28",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260601-92407L",
-          "color": "水波灰",
-          "size": "L",
-          "qty": 57,
-          "avail_qty": 57,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92407M",
-          "color": "水波灰",
-          "size": "M",
-          "qty": 62,
-          "avail_qty": 62,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92407S",
-          "color": "水波灰",
-          "size": "S",
-          "qty": 39,
-          "avail_qty": 39,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92407XL",
-          "color": "水波灰",
-          "size": "XL",
-          "qty": 32,
-          "avail_qty": 32,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-92407XXL",
-          "color": "水波灰",
-          "size": "XXL",
-          "qty": 15,
-          "avail_qty": 15,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260601-9202L",
+          "sku_id": "DZKZ251226-3402L",
           "color": "黑色",
           "size": "L",
-          "qty": 48,
-          "avail_qty": 48,
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-07-28",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260601-9202M",
+          "sku_id": "DZKZ251226-3402M",
           "color": "黑色",
           "size": "M",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-07-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZKZ251226-3402XXXL",
+          "color": "黑色",
+          "size": "XXXL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-07-28",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260702-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260708/62B26AC6D7EB4E00A6598BAB201EE974.png?name=f5560ff1-7c6d-4a1f-a526-df5a00743287",
+      "salesperson": "梁铭恩",
+      "io_date": "2026-08-20",
+      "created": "2026-07-08",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 214,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260702-7102L",
+          "color": "黑色",
+          "size": "L",
           "qty": 66,
           "avail_qty": 66,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-08-20",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260601-9202S",
+          "sku_id": "DZTX260702-7102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 83,
+          "avail_qty": 83,
+          "order_lock": 0,
+          "io_date": "2026-08-20",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260702-7102S",
           "color": "黑色",
           "size": "S",
-          "qty": 36,
-          "avail_qty": 36,
+          "qty": 33,
+          "avail_qty": 33,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-08-20",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260601-9202XL",
+          "sku_id": "DZTX260702-7102XL",
           "color": "黑色",
           "size": "XL",
           "qty": 32,
           "avail_qty": 32,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-08-20",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260511-710",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260512/B6104733DAC246BF87F641A8BBBDCC75.png?name=b68f3c0c-e6fd-4386-92d7-6d5e7e4b8fb0",
+      "salesperson": "敬健浩",
+      "io_date": "",
+      "created": "2026-05-12",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 12,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260511-710126M",
+          "color": "粉色",
+          "size": "M",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260601-9202XXL",
-          "color": "黑色",
-          "size": "XXL",
-          "qty": 12,
-          "avail_qty": 12,
+          "sku_id": "DZTX260511-710126S",
+          "color": "粉色",
+          "size": "S",
+          "qty": 5,
+          "avail_qty": 5,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260511-710126XS",
+          "color": "粉色",
+          "size": "XS",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260511-71002L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260511-71002XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX240914-70",
+      "name": "定制",
+      "labels": "半成品",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/494FA59C48F448C2825DDB23568B9770.jpg?name=249464b70715317a29f3fa80347ee705_a2667e_DZTX240914-70%E6%9B%B4%E6%96%B0.jpg",
+      "salesperson": "骆铭卓",
+      "io_date": "",
+      "created": "2024-09-23",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 229,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX240914-7039L",
+          "color": "卡其",
+          "size": "L",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-7039M",
+          "color": "卡其",
+          "size": "M",
+          "qty": 14,
+          "avail_qty": 14,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-7039S",
+          "color": "卡其",
+          "size": "S",
+          "qty": 14,
+          "avail_qty": 14,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-7039XL",
+          "color": "卡其",
+          "size": "XL",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70618L",
+          "color": "咖啡",
+          "size": "L",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70618M",
+          "color": "咖啡",
+          "size": "M",
+          "qty": 28,
+          "avail_qty": 28,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70618S",
+          "color": "咖啡",
+          "size": "S",
+          "qty": 27,
+          "avail_qty": 27,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70618XL",
+          "color": "咖啡",
+          "size": "XL",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70193M",
+          "color": "活性黑",
+          "size": "M",
+          "qty": 18,
+          "avail_qty": 18,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70193S",
+          "color": "活性黑",
+          "size": "S",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70170L",
+          "color": "米杏",
+          "size": "L",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70170M",
+          "color": "米杏",
+          "size": "M",
+          "qty": 18,
+          "avail_qty": 18,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70170S",
+          "color": "米杏",
+          "size": "S",
+          "qty": 16,
+          "avail_qty": 16,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70170XL",
+          "color": "米杏",
+          "size": "XL",
+          "qty": 18,
+          "avail_qty": 18,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70142L",
+          "color": "米白",
+          "size": "L",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70142M",
+          "color": "米白",
+          "size": "M",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240914-70142S",
+          "color": "米白",
+          "size": "S",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZFF20251101-42",
+      "name": "定制外套",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260110/77C554CD73584B3FAC39CE4BE908EEC8.jpeg?name=04809b4c-8bd0-4835-95d9-e922251399d4",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2026-01-10",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 4,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZFF20251101-42756L",
+          "color": "墨黑色",
+          "size": "L",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZFF20251101-42756M",
+          "color": "墨黑色",
+          "size": "M",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
           "wh_detail": {}
         }
       ]
@@ -636,107 +1181,157 @@
       ]
     },
     {
-      "i_id": "PODCX260413-43FF",
+      "i_id": "DZTX251226-37",
       "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260413/AFEECBEE163A4D599491F12B4DE1E577.png?name=035617e2-f366-4fc7-a7cd-46a7541b0ff6",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2026-04-13",
+      "labels": "水果棉面料",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260312/15D9F066B0804C6B87BAE8D9985F6265.png?name=230dbd2d-5ae1-4681-a192-3ffb018fe605",
+      "salesperson": "潘嘉瑜",
+      "io_date": "2026-07-28",
+      "created": "2026-03-12",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 3,
+      "total_qty": 5,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "PODCX260413-43FF484L",
-          "color": "环保黑",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODCX260413-43FF484M",
-          "color": "环保黑",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODCX260413-43FF484XL",
-          "color": "环保黑",
+          "sku_id": "DZTX251226-37856XL",
+          "color": "山竹白",
           "size": "XL",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-07-28",
           "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260807-70",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260807/9682EB9C90D04B41A760358BAFB1231A.png?name=6ca7ad61-9c04-4631-b3b3-cbd239f18918",
-      "salesperson": "刘江滔",
-      "io_date": "2026-08-21",
-      "created": "2026-08-07",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 4,
-      "total_lock": 0,
-      "skus": [
+        },
         {
-          "sku_id": "DZTX260807-70516XS",
-          "color": "阳光黄",
-          "size": "XS",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "2026-08-21",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZFF20251108-47",
-      "name": "定制长裤",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260110/4AC824242F234719BCDE9C5002004339.jpeg?name=23a58a5e-7fd7-4733-b678-eb0e8a3ea0bd",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2026-01-10",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 3,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZFF20251108-47756S",
-          "color": "墨黑色",
-          "size": "S",
+          "sku_id": "DZTX251226-37856XXL",
+          "color": "山竹白",
+          "size": "XXL",
           "qty": 3,
           "avail_qty": 3,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-07-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX251226-37856XXXL",
+          "color": "山竹白",
+          "size": "XXXL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-07-28",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DSCT260731-70",
+      "i_id": "DSCT260731-31",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/DFCFF9FCDF054973B083B78D7FB68F14.png?name=cd08c25e-db4b-4621-9739-2940000ceb0f",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260820/61CBD8A68E4E4BC19B358E6D48FCF230.png?name=c8854f90-0802-4b7d-a8db-7414cbde12d0",
       "salesperson": "邓正瑶",
-      "io_date": "2026-09-16",
+      "io_date": "2026-09-21",
+      "created": "2026-08-20",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 2,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSCT260731-3105L",
+          "color": "灰色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-21",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260731-3101L",
+          "color": "白色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-21",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260722-32",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260811/92189B78D0FE4C22B81F362FDE8A5336.png?name=20c9dddb-aa41-44f5-86c0-522e0a68695c",
+      "salesperson": "张玉珠",
+      "io_date": "2026-10-03",
+      "created": "2026-08-11",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 186,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260722-3201L",
+          "color": "白色",
+          "size": "L",
+          "qty": 28,
+          "avail_qty": 28,
+          "order_lock": 0,
+          "io_date": "2026-10-03",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260722-3201M",
+          "color": "白色",
+          "size": "M",
+          "qty": 51,
+          "avail_qty": 51,
+          "order_lock": 0,
+          "io_date": "2026-10-03",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260722-3202L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 41,
+          "avail_qty": 41,
+          "order_lock": 0,
+          "io_date": "2026-10-03",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260722-3202M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 60,
+          "avail_qty": 60,
+          "order_lock": 0,
+          "io_date": "2026-10-03",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260722-3202S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "2026-10-03",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSCT260730-77",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/B4E629347FE94715BABC4FAE622304C6.png?name=c8c1c2dd-36ae-411b-89f9-1aab746769f2",
+      "salesperson": "邓正瑶",
+      "io_date": "2026-09-17",
       "created": "2026-08-18",
       "warehouse": [],
       "age_days": 0,
@@ -744,496 +1339,91 @@
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DSCT260731-70162L",
-          "color": "绿色",
+          "sku_id": "DSCT260730-7715L",
+          "color": "紫色",
           "size": "L",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-09-16",
+          "io_date": "2026-09-17",
           "wh_detail": {}
         },
         {
-          "sku_id": "DSCT260731-7002L",
-          "color": "黑色",
+          "sku_id": "DSCT260730-77164L",
+          "color": "藏青色",
           "size": "L",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-09-16",
+          "io_date": "2026-09-17",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZTX260108-30",
+      "i_id": "DZCT260701-FPA263963",
       "name": "定制",
-      "labels": "鲁道夫汗跑面料",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260204/4A76DCE02BAE44FAB32CCC0A50AF730A.jpeg?name=ff1c20cd-bbd6-4223-a9aa-0261c5d123ba",
-      "salesperson": "潘嘉瑜",
-      "io_date": "",
-      "created": "2026-02-04",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260914/FC6249B09CFF4F4DBF0E764EC07B442C.png?name=071bbf9e-86b6-49df-aebc-961da8b3ffa2",
+      "salesperson": "彭培强",
+      "io_date": "2026-10-11",
+      "created": "2026-09-14",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 11,
+      "total_qty": 10,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260108-30859XL",
-          "color": "檀棕褐",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-30247L",
-          "color": "炭黑",
-          "size": "L",
-          "qty": 3,
-          "avail_qty": 3,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-30247M",
-          "color": "炭黑",
-          "size": "M",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-30247S",
-          "color": "炭黑",
+          "sku_id": "DZCT260701-FPA26396339S",
+          "color": "卡其",
           "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-30247XL",
-          "color": "炭黑",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-30247XXL",
-          "color": "炭黑",
-          "size": "XXL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "PODWT260527-ZY",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260616/BEA1EB8181E84F068ACAE5D54A3220C8.png?name=013c1298-5145-4a72-92c6-4ed499c0eb29",
-      "salesperson": "林梓仪",
-      "io_date": "",
-      "created": "2026-06-16",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 5,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "PODWT260527-ZY640XL",
-          "color": "无花果色",
-          "size": "XL",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "F04",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260417/F6EF94B170814E6A83CD69CDA70B92BE.png?name=cd0135b2-f99b-4c50-8d98-58edd41b0df4",
-      "salesperson": "张玉珠",
-      "io_date": "",
-      "created": "2026-04-17",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 3,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "F04224XL",
-          "color": "奶黄",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "F04033XL",
-          "color": "宝蓝",
-          "size": "3XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "F043415XL",
-          "color": "雾霾蓝",
-          "size": "5XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZBX260518-16",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260518/B3E3B095530944D2A2ED6F3EA9E64835.png?name=41973a9b-382a-4fa8-a89a-85d2a83849c0",
-      "salesperson": "刘胜楠",
-      "io_date": "",
-      "created": "2026-05-18",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 7,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZBX260518-16856L",
-          "color": "山竹白",
-          "size": "L",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZBX260518-16857M",
-          "color": "黑加仑",
-          "size": "M",
-          "qty": 3,
-          "avail_qty": 3,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZCK260430-82",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260522/D00465F4BAC94434838E6CED7EB07007.png?name=cd966f50-bc1a-4823-98c1-38b0d9e26d6e",
-      "salesperson": "",
-      "io_date": "2026-10-15",
-      "created": "2026-05-22",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCK260430-8202S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-10-15",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX240401-34",
-      "name": "定制",
-      "labels": "半成品",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/44C0356654DD47AEAAECF1C6FBF2395F.jpg?name=24f4c2f2dbb66512810c25b8c93dabcd_20d3fc_DZTX240401-34.jpg",
-      "salesperson": "骆铭卓",
-      "io_date": "",
-      "created": "2024-04-03",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 11,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX240401-3440L",
-          "color": "藕粉",
-          "size": "L",
-          "qty": 11,
-          "avail_qty": 11,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZCS251208-30",
-      "name": "定制长袖衬衣",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251210/789FED0E8DA54E5B8362D2BA25293B26.jpeg?name=95fe2259-9687-464b-884b-05d446930955",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2025-12-10",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCS251208-3001L",
-          "color": "白色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX240901-72",
-      "name": "定制",
-      "labels": "半成品",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260302/FF9A8A65B13E4C888CF6AD0F68A6D2D1.png?name=8f014858-bf7d-4ca2-a34a-b4e570095942",
-      "salesperson": "骆铭卓",
-      "io_date": "",
-      "created": "2024-09-03",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 208,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX240901-72193S",
-          "color": "活性黑",
-          "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-72193XL",
-          "color": "活性黑",
-          "size": "XL",
-          "qty": 13,
-          "avail_qty": 13,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-72193XXL",
-          "color": "活性黑",
-          "size": "XXL",
           "qty": 2,
           "avail_qty": 2,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-11",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX240901-7245L",
-          "color": "浅灰",
-          "size": "L",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7245M",
-          "color": "浅灰",
-          "size": "M",
-          "qty": 26,
-          "avail_qty": 26,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7245S",
-          "color": "浅灰",
-          "size": "S",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7245XL",
-          "color": "浅灰",
-          "size": "XL",
-          "qty": 15,
-          "avail_qty": 15,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7245XXL",
-          "color": "浅灰",
-          "size": "XXL",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7297L",
-          "color": "碳灰",
-          "size": "L",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7297M",
-          "color": "碳灰",
-          "size": "M",
-          "qty": 22,
-          "avail_qty": 22,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7297S",
-          "color": "碳灰",
+          "sku_id": "DZCT260701-FPA263963116S",
+          "color": "橘色",
           "size": "S",
           "qty": 8,
           "avail_qty": 8,
           "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7297XL",
-          "color": "碳灰",
-          "size": "XL",
-          "qty": 11,
-          "avail_qty": 11,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-7297XXL",
-          "color": "碳灰",
-          "size": "XXL",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-72287L",
-          "color": "象牙白",
-          "size": "L",
-          "qty": 11,
-          "avail_qty": 11,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-72287M",
-          "color": "象牙白",
-          "size": "M",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-72287S",
-          "color": "象牙白",
-          "size": "S",
-          "qty": 35,
-          "avail_qty": 35,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-72287XL",
-          "color": "象牙白",
-          "size": "XL",
-          "qty": 11,
-          "avail_qty": 11,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240901-72287XXL",
-          "color": "象牙白",
-          "size": "XXL",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-11",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "A18",
+      "i_id": "DS260429-21",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260313/928B8ED7DDB8469DAB2AF27A58A05709.png?name=d399584b-eda6-4be7-9e35-a97681a3f98a",
-      "salesperson": "朱家豪",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260508/C8B44B8F4A1C464FA6D45C95E49120FA.png?name=2f1be51a-b58b-4db0-986b-8e5931931834",
+      "salesperson": "邓正瑶",
       "io_date": "",
-      "created": "2026-03-13",
+      "created": "2026-05-13",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 30,
+      "total_qty": 2,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "A189043XL",
-          "color": "中国红",
-          "size": "3XL",
-          "qty": 30,
-          "avail_qty": 30,
+          "sku_id": "DS260429-2102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS260429-2102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
@@ -1516,44 +1706,49 @@
       ]
     },
     {
-      "i_id": "DZTX250418-39",
-      "name": "定制",
+      "i_id": "DZTX260520-94",
+      "name": "",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/DB7B11BD102A4E15847977BA36D4256D.jpeg?name=2c4c04e5-c149-46c5-a37c-cd7a4d3864f5",
-      "salesperson": "邓正瑶",
-      "io_date": "",
-      "created": "2025-05-14",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260618/488AEA9C650A4A4EAC46C5D540CA67E1.png?x-oss-process=image/resize,m_lfit,w_800,h_800",
+      "salesperson": "冯佩珊",
+      "io_date": "2026-07-19",
+      "created": "",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 13,
+      "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX250418-39642L",
-          "color": "椰奶白",
-          "size": "L",
-          "qty": 2,
-          "avail_qty": 2,
+          "sku_id": "DZTX260520-94106XL",
+          "color": "",
+          "size": "",
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-07-19",
           "wh_detail": {}
-        },
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT230831-78",
+      "name": "2301SS防晒衣外套",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260318/DCA6FA624A4042029CA4ED68839F559F.png?name=32acddff-dd1a-405a-a012-d37d769309f4",
+      "salesperson": "刘江滔",
+      "io_date": "2026-08-12",
+      "created": "2023-09-16",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 7,
+      "total_lock": 0,
+      "skus": [
         {
-          "sku_id": "DZTX250418-39642M",
-          "color": "椰奶白",
-          "size": "M",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX250418-39642S",
-          "color": "椰奶白",
-          "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
+          "sku_id": "DZWT230831-78230XL",
+          "color": "日光橙",
+          "size": "XL",
+          "qty": 7,
+          "avail_qty": 7,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
@@ -1561,131 +1756,226 @@
       ]
     },
     {
-      "i_id": "DSB250618-71",
-      "name": "定制",
+      "i_id": "DZCS251208-30",
+      "name": "定制长袖衬衣",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/3053ED9ACE434E3F810418C454B3AA4B.png?name=490c298e-1dae-4dd8-8e65-26919f9d43f6",
-      "salesperson": "罗伟仪",
-      "io_date": "2026-07-13",
-      "created": "2026-05-26",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251210/789FED0E8DA54E5B8362D2BA25293B26.jpeg?name=95fe2259-9687-464b-884b-05d446930955",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2025-12-10",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 173,
+      "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DSB250618-7151L",
-          "color": "图片色",
+          "sku_id": "DZCS251208-3001L",
+          "color": "白色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZWY250928-76",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251022/018D5893D7E84789BA4FD8BBFCE629B4.jpeg?name=5b61e2be-37bf-4cd4-a638-049f7431662d",
+      "salesperson": "潘嘉瑜",
+      "io_date": "",
+      "created": "2025-10-22",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 2,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZWY250928-7645XL",
+          "color": "浅灰",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZWY250928-76162L",
+          "color": "绿色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260601-92",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/0A98B33F165F4203BA1063AB7769B9D7.jpg?name=DZTX260601-92-03.jpg",
+      "salesperson": "莫紫珊",
+      "io_date": "2026-10-16",
+      "created": "2026-09-22",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 609,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260601-92644L",
+          "color": "奶杏咖",
+          "size": "L",
+          "qty": 63,
+          "avail_qty": 63,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-92644M",
+          "color": "奶杏咖",
+          "size": "M",
+          "qty": 64,
+          "avail_qty": 64,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-92644S",
+          "color": "奶杏咖",
+          "size": "S",
+          "qty": 38,
+          "avail_qty": 38,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-92644XL",
+          "color": "奶杏咖",
+          "size": "XL",
+          "qty": 32,
+          "avail_qty": 32,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-92644XXL",
+          "color": "奶杏咖",
+          "size": "XXL",
+          "qty": 13,
+          "avail_qty": 13,
+          "order_lock": 0,
+          "io_date": "2026-10-14",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-92407L",
+          "color": "水波灰",
           "size": "L",
           "qty": 57,
           "avail_qty": 57,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "DSB250618-7151M",
-          "color": "图片色",
+          "sku_id": "DZTX260601-92407M",
+          "color": "水波灰",
           "size": "M",
-          "qty": 49,
-          "avail_qty": 49,
+          "qty": 62,
+          "avail_qty": 62,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "DSB250618-7151XL",
-          "color": "图片色",
-          "size": "XL",
-          "qty": 41,
-          "avail_qty": 41,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB250618-7151XXL",
-          "color": "图片色",
-          "size": "XXL",
-          "qty": 26,
-          "avail_qty": 26,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZCT251208-32",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260105/2530FCDB11CD4E98BF8C658390639C3D.jpeg?name=b148f23c-4203-4ea8-afc4-64f377793e71",
-      "salesperson": "莫紫珊",
-      "io_date": "",
-      "created": "2026-01-05",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 31,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCT251208-32709M",
-          "color": "轩蓝",
-          "size": "M",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZCT251208-32709S",
-          "color": "轩蓝",
+          "sku_id": "DZTX260601-92407S",
+          "color": "水波灰",
           "size": "S",
-          "qty": 13,
-          "avail_qty": 13,
+          "qty": 39,
+          "avail_qty": 39,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZCT251208-32709XL",
-          "color": "轩蓝",
+          "sku_id": "DZTX260601-92407XL",
+          "color": "水波灰",
           "size": "XL",
-          "qty": 2,
-          "avail_qty": 2,
+          "qty": 32,
+          "avail_qty": 32,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZCT251208-32709XS",
-          "color": "轩蓝",
-          "size": "XS",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZCT251208-32709XXL",
-          "color": "轩蓝",
+          "sku_id": "DZTX260601-92407XXL",
+          "color": "水波灰",
           "size": "XXL",
-          "qty": 1,
-          "avail_qty": 1,
+          "qty": 15,
+          "avail_qty": 15,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZCT251208-32709XXXL",
-          "color": "轩蓝",
-          "size": "XXXL",
-          "qty": 1,
-          "avail_qty": 1,
+          "sku_id": "DZTX260601-9202L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 48,
+          "avail_qty": 48,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-9202M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 66,
+          "avail_qty": 66,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-9202S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 36,
+          "avail_qty": 36,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-9202XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 32,
+          "avail_qty": 32,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260601-9202XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 12,
+          "avail_qty": 12,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
           "wh_detail": {}
         }
       ]
@@ -1806,1057 +2096,42 @@
       ]
     },
     {
-      "i_id": "PODTX260528-41FF",
+      "i_id": "PODCX260413-43FF",
       "name": "定制",
-      "labels": "水果棉",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260605/B23AC6986F544596BB5F54553F516877.png?name=1bb49932-c4b9-4e96-8553-bef91d27f37c",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260413/AFEECBEE163A4D599491F12B4DE1E577.png?name=035617e2-f366-4fc7-a7cd-46a7541b0ff6",
       "salesperson": "冯佩珊",
-      "io_date": "2026-06-17",
-      "created": "2026-06-05",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 45,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "PODTX260528-41FF856L",
-          "color": "山竹白",
-          "size": "L",
-          "qty": 45,
-          "avail_qty": 45,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX251226-37",
-      "name": "定制",
-      "labels": "水果棉面料",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260312/15D9F066B0804C6B87BAE8D9985F6265.png?name=230dbd2d-5ae1-4681-a192-3ffb018fe605",
-      "salesperson": "潘嘉瑜",
-      "io_date": "2026-07-28",
-      "created": "2026-03-12",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 5,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX251226-37856XL",
-          "color": "山竹白",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-28",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX251226-37856XXL",
-          "color": "山竹白",
-          "size": "XXL",
-          "qty": 3,
-          "avail_qty": 3,
-          "order_lock": 0,
-          "io_date": "2026-07-28",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX251226-37856XXXL",
-          "color": "山竹白",
-          "size": "XXXL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-28",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX250521-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20261001/4F40550A066541AEB98005167CDF8779.jpeg?name=a2d7e6cc-5bdb-40c7-a195-79df2e9a7a36",
-      "salesperson": "邓正瑶",
-      "io_date": "",
-      "created": "2025-05-30",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 10,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX250521-71407L",
-          "color": "水波灰",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX250521-7115L",
-          "color": "紫色",
-          "size": "L",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX250521-7115M",
-          "color": "紫色",
-          "size": "M",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX250521-7115S",
-          "color": "紫色",
-          "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260914-73",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/C2786B37CB204B9194BA4C703530D194.png?name=31983a38-d284-4bda-9912-6bf85e2d9027",
-      "salesperson": "",
-      "io_date": "2026-10-12",
-      "created": "2026-09-22",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1497,
-      "total_lock": 1497,
-      "skus": [
-        {
-          "sku_id": "DZTX260914-7392M",
-          "color": "橄榄绿",
-          "size": "M",
-          "qty": 1497,
-          "avail_qty": 1497,
-          "order_lock": 1497,
-          "io_date": "2026-10-12",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260731-13",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260807/2783BF5CB8F049A18F6B3437BE2475A3.png?name=6bb3b8cf-5301-4b0c-977c-71c7b9dc057b",
-      "salesperson": "刘晓霞",
-      "io_date": "2026-08-27",
-      "created": "2026-08-07",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 20,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260731-1302L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "2026-08-27",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260731-1302XL",
-          "color": "黑色",
-          "size": "XL",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "2026-08-27",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260722-32",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260811/92189B78D0FE4C22B81F362FDE8A5336.png?name=20c9dddb-aa41-44f5-86c0-522e0a68695c",
-      "salesperson": "张玉珠",
-      "io_date": "2026-10-03",
-      "created": "2026-08-11",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 186,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260722-3201L",
-          "color": "白色",
-          "size": "L",
-          "qty": 28,
-          "avail_qty": 28,
-          "order_lock": 0,
-          "io_date": "2026-10-03",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260722-3201M",
-          "color": "白色",
-          "size": "M",
-          "qty": 51,
-          "avail_qty": 51,
-          "order_lock": 0,
-          "io_date": "2026-10-03",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260722-3202L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 41,
-          "avail_qty": 41,
-          "order_lock": 0,
-          "io_date": "2026-10-03",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260722-3202M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 60,
-          "avail_qty": 60,
-          "order_lock": 0,
-          "io_date": "2026-10-03",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260722-3202S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "2026-10-03",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260702-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260708/62B26AC6D7EB4E00A6598BAB201EE974.png?name=f5560ff1-7c6d-4a1f-a526-df5a00743287",
-      "salesperson": "梁铭恩",
-      "io_date": "2026-08-20",
-      "created": "2026-07-08",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 214,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260702-7102L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 66,
-          "avail_qty": 66,
-          "order_lock": 0,
-          "io_date": "2026-08-20",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260702-7102M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 83,
-          "avail_qty": 83,
-          "order_lock": 0,
-          "io_date": "2026-08-20",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260702-7102S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 33,
-          "avail_qty": 33,
-          "order_lock": 0,
-          "io_date": "2026-08-20",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260702-7102XL",
-          "color": "黑色",
-          "size": "XL",
-          "qty": 32,
-          "avail_qty": 32,
-          "order_lock": 0,
-          "io_date": "2026-08-20",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260202-2",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260203/11587AC71DBC4E3D8A6C1EB9633B4EE4.png?name=bfde9aef-6f3b-4d00-a547-2963943e7245",
-      "salesperson": "刘胜楠",
-      "io_date": "",
-      "created": "2026-02-03",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260202-2164M",
-          "color": "藏青色",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "PODTX260909-70",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20261009/9C4C375813354514843D7023E2E1DBCA.png?name=41683940-b61e-48e0-aca9-fed1c5d9167d",
-      "salesperson": "",
-      "io_date": "2026-10-16",
-      "created": "2026-10-09",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 60,
-      "total_lock": 150,
-      "skus": [
-        {
-          "sku_id": "PODTX260909-70642L",
-          "color": "椰奶白",
-          "size": "L",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 10,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70642M",
-          "color": "椰奶白",
-          "size": "M",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 14,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70642S",
-          "color": "椰奶白",
-          "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 3,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70642XL",
-          "color": "椰奶白",
-          "size": "XL",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 10,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70642XXL",
-          "color": "椰奶白",
-          "size": "XXL",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 3,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70407L",
-          "color": "水波灰",
-          "size": "L",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 14,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70407M",
-          "color": "水波灰",
-          "size": "M",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 10,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70407S",
-          "color": "水波灰",
-          "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 3,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70407XL",
-          "color": "水波灰",
-          "size": "XL",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 10,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-70407XXL",
-          "color": "水波灰",
-          "size": "XXL",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 3,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-7002L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 24,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-7002M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 15,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-7002S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 8,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-7002XL",
-          "color": "黑色",
-          "size": "XL",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 15,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260909-7002XXL",
-          "color": "黑色",
-          "size": "XXL",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 8,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX240914-70",
-      "name": "定制",
-      "labels": "半成品",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/494FA59C48F448C2825DDB23568B9770.jpg?name=249464b70715317a29f3fa80347ee705_a2667e_DZTX240914-70%E6%9B%B4%E6%96%B0.jpg",
-      "salesperson": "骆铭卓",
-      "io_date": "",
-      "created": "2024-09-23",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 229,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX240914-7039L",
-          "color": "卡其",
-          "size": "L",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-7039M",
-          "color": "卡其",
-          "size": "M",
-          "qty": 14,
-          "avail_qty": 14,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-7039S",
-          "color": "卡其",
-          "size": "S",
-          "qty": 14,
-          "avail_qty": 14,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-7039XL",
-          "color": "卡其",
-          "size": "XL",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70618L",
-          "color": "咖啡",
-          "size": "L",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70618M",
-          "color": "咖啡",
-          "size": "M",
-          "qty": 28,
-          "avail_qty": 28,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70618S",
-          "color": "咖啡",
-          "size": "S",
-          "qty": 27,
-          "avail_qty": 27,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70618XL",
-          "color": "咖啡",
-          "size": "XL",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70193M",
-          "color": "活性黑",
-          "size": "M",
-          "qty": 18,
-          "avail_qty": 18,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70193S",
-          "color": "活性黑",
-          "size": "S",
-          "qty": 17,
-          "avail_qty": 17,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70170L",
-          "color": "米杏",
-          "size": "L",
-          "qty": 17,
-          "avail_qty": 17,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70170M",
-          "color": "米杏",
-          "size": "M",
-          "qty": 18,
-          "avail_qty": 18,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70170S",
-          "color": "米杏",
-          "size": "S",
-          "qty": 16,
-          "avail_qty": 16,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70170XL",
-          "color": "米杏",
-          "size": "XL",
-          "qty": 18,
-          "avail_qty": 18,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70142L",
-          "color": "米白",
-          "size": "L",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70142M",
-          "color": "米白",
-          "size": "M",
-          "qty": 3,
-          "avail_qty": 3,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX240914-70142S",
-          "color": "米白",
-          "size": "S",
-          "qty": 3,
-          "avail_qty": 3,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260623-92-01",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260829/8B9BD8AB09A44233852DC70CB82968AE.png?name=c5885dd1-7e46-4341-9c89-ea968d33d24f",
-      "salesperson": "刘胜楠",
-      "io_date": "2026-09-29",
-      "created": "2026-08-29",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 71,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260623-92-01012XL",
-          "color": "白色",
-          "size": "2XL",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260623-92-01013XL",
-          "color": "白色",
-          "size": "3XL",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260623-92-01014XL",
-          "color": "白色",
-          "size": "4XL",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260623-92-01015XL",
-          "color": "白色",
-          "size": "5XL",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260623-92-0101L",
-          "color": "白色",
-          "size": "L",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260623-92-0101M",
-          "color": "白色",
-          "size": "M",
-          "qty": 13,
-          "avail_qty": 13,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260623-92-0101S",
-          "color": "白色",
-          "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260623-92-0101XL",
-          "color": "白色",
-          "size": "XL",
-          "qty": 17,
-          "avail_qty": 17,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSCT260727-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/3D9A04250E0F44C991FB3EC61F626B3E.png?name=de9d0ee8-c3c4-4d6e-bb0f-365f7ceb65d6",
-      "salesperson": "邓正瑶",
-      "io_date": "2026-09-17",
-      "created": "2026-08-18",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 2036,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSCT260727-71142L",
-          "color": "米白",
-          "size": "L",
-          "qty": 360,
-          "avail_qty": 360,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260727-71142M",
-          "color": "米白",
-          "size": "M",
-          "qty": 453,
-          "avail_qty": 453,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260727-71142XL",
-          "color": "米白",
-          "size": "XL",
-          "qty": 253,
-          "avail_qty": 253,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260727-7102L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 362,
-          "avail_qty": 362,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260727-7102M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 408,
-          "avail_qty": 408,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260727-7102XL",
-          "color": "黑色",
-          "size": "XL",
-          "qty": 200,
-          "avail_qty": 200,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSCT260731-32",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/D50B1D0E21DD40FDB24E0469BAA93495.png?name=1525db08-d871-4d70-9a32-fcde9d56ab60",
-      "salesperson": "邓正瑶",
-      "io_date": "2026-09-27",
-      "created": "2026-08-18",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 143,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSCT260731-3239L",
-          "color": "卡其",
-          "size": "L",
-          "qty": 24,
-          "avail_qty": 24,
-          "order_lock": 0,
-          "io_date": "2026-09-27",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260731-3239M",
-          "color": "卡其",
-          "size": "M",
-          "qty": 81,
-          "avail_qty": 81,
-          "order_lock": 0,
-          "io_date": "2026-09-27",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260731-3239XL",
-          "color": "卡其",
-          "size": "XL",
-          "qty": 12,
-          "avail_qty": 12,
-          "order_lock": 0,
-          "io_date": "2026-09-27",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260731-32305XL",
-          "color": "苔藓绿",
-          "size": "XL",
-          "qty": 26,
-          "avail_qty": 26,
-          "order_lock": 0,
-          "io_date": "2026-09-27",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX250415-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/CAF6E99CBD3C4FCEBBFE4195A857C616.jpeg?name=04886f71-ffbe-4aff-b90d-3c8a59353cec",
-      "salesperson": "邓正瑶",
-      "io_date": "",
-      "created": "2025-05-21",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 17,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX250415-71678L",
-          "color": "巧克力黑",
-          "size": "L",
-          "qty": 17,
-          "avail_qty": 17,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZWY260131-83",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260413/2D61B45BD6624027B4FCAB14F44E8F2A.jpeg?name=b2e17836-ad0e-4b4f-bdfc-1dfd113ead96",
-      "salesperson": "莫紫珊",
       "io_date": "",
       "created": "2026-04-13",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZWY260131-83-3",
-          "color": "活性黑",
-          "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSCT260730-77",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/B4E629347FE94715BABC4FAE622304C6.png?name=c8c1c2dd-36ae-411b-89f9-1aab746769f2",
-      "salesperson": "邓正瑶",
-      "io_date": "2026-09-17",
-      "created": "2026-08-18",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 2,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSCT260730-7715L",
-          "color": "紫色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260730-77164L",
-          "color": "藏青色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260526-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "",
-      "salesperson": "冯佩珊",
-      "io_date": "2026-07-19",
-      "created": "",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260526-7151XL",
-          "color": "图片色",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-19",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZKZ251226-35",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260108/79B519ABFF0E48CA9637AAE937681B85.jpeg?name=07288eef-dc8c-43bf-8a6b-5ed87d5d4dca",
-      "salesperson": "潘嘉瑜",
-      "io_date": "2026-07-28",
-      "created": "2026-01-08",
       "warehouse": [],
       "age_days": 0,
       "total_qty": 3,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZKZ251226-3502L",
-          "color": "黑色",
+          "sku_id": "PODCX260413-43FF484L",
+          "color": "环保黑",
           "size": "L",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-07-28",
+          "io_date": "",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZKZ251226-3502M",
-          "color": "黑色",
+          "sku_id": "PODCX260413-43FF484M",
+          "color": "环保黑",
           "size": "M",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-07-28",
+          "io_date": "",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZKZ251226-3502XXL",
-          "color": "黑色",
-          "size": "XXL",
+          "sku_id": "PODCX260413-43FF484XL",
+          "color": "环保黑",
+          "size": "XL",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
@@ -2866,92 +2141,137 @@
       ]
     },
     {
-      "i_id": "DZTX260512-42",
+      "i_id": "DS250515-74",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260520/030074B9CAE0449584D24D4690AFE02D.png?name=d91d3e95-2e66-4bb0-8874-cc2eb88f8b7a",
-      "salesperson": "邓正瑶",
-      "io_date": "2026-08-12",
-      "created": "2026-05-20",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/FE9E224BCB994A719BE6963C98B7089F.png?name=d935aa53-cc61-41a1-9d1b-b5e67fec938b",
+      "salesperson": "罗伟仪",
+      "io_date": "2026-09-11",
+      "created": "2026-05-19",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 1,
+      "total_qty": 297,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260512-42193XXL",
-          "color": "活性黑",
-          "size": "XXL",
-          "qty": 1,
-          "avail_qty": 1,
+          "sku_id": "DS250515-7401L",
+          "color": "白色",
+          "size": "L",
+          "qty": 39,
+          "avail_qty": 39,
           "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSCT260727-72",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260820/03DC0C2180434B28ACEA7C75BFDA1005.png?name=4951f6ab-b440-4d06-8796-5576a99549d8",
-      "salesperson": "邓正瑶",
-      "io_date": "2026-09-17",
-      "created": "2026-08-20",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 2,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSCT260727-7205M",
-          "color": "灰色",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-17",
+          "io_date": "2026-09-11",
           "wh_detail": {}
         },
         {
-          "sku_id": "DSCT260727-7222L",
-          "color": "蓝色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
+          "sku_id": "DS250515-7401M",
+          "color": "白色",
+          "size": "M",
+          "qty": 45,
+          "avail_qty": 45,
           "order_lock": 0,
-          "io_date": "2026-09-17",
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7401S",
+          "color": "白色",
+          "size": "S",
+          "qty": 25,
+          "avail_qty": 25,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7401XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 35,
+          "avail_qty": 35,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7401XXL",
+          "color": "白色",
+          "size": "XXL",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7402L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 37,
+          "avail_qty": 37,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7402M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 47,
+          "avail_qty": 47,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7402S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 29,
+          "avail_qty": 29,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7402XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 19,
+          "avail_qty": 19,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250515-7402XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZTX260108-31",
+      "i_id": "DZTX240901-72",
       "name": "定制",
-      "labels": "鲁道夫汗跑面料",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260204/E5BED99A7A554FCAA2174D75E24DF808.jpeg?name=83feded8-d5b6-4958-ba7a-f4158e302b41",
-      "salesperson": "潘嘉瑜",
+      "labels": "半成品",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260302/FF9A8A65B13E4C888CF6AD0F68A6D2D1.png?name=8f014858-bf7d-4ca2-a34a-b4e570095942",
+      "salesperson": "骆铭卓",
       "io_date": "",
-      "created": "2026-02-04",
+      "created": "2024-09-03",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 12,
+      "total_qty": 208,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260108-31247L",
-          "color": "炭黑",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-31247M",
-          "color": "炭黑",
-          "size": "M",
+          "sku_id": "DZTX240901-72193S",
+          "color": "活性黑",
+          "size": "S",
           "qty": 6,
           "avail_qty": 6,
           "order_lock": 0,
@@ -2959,398 +2279,233 @@
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260108-31247S",
-          "color": "炭黑",
+          "sku_id": "DZTX240901-72193XL",
+          "color": "活性黑",
+          "size": "XL",
+          "qty": 13,
+          "avail_qty": 13,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-72193XXL",
+          "color": "活性黑",
+          "size": "XXL",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7245L",
+          "color": "浅灰",
+          "size": "L",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7245M",
+          "color": "浅灰",
+          "size": "M",
+          "qty": 26,
+          "avail_qty": 26,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7245S",
+          "color": "浅灰",
+          "size": "S",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7245XL",
+          "color": "浅灰",
+          "size": "XL",
+          "qty": 15,
+          "avail_qty": 15,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7245XXL",
+          "color": "浅灰",
+          "size": "XXL",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7297L",
+          "color": "碳灰",
+          "size": "L",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7297M",
+          "color": "碳灰",
+          "size": "M",
+          "qty": 22,
+          "avail_qty": 22,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7297S",
+          "color": "碳灰",
+          "size": "S",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7297XL",
+          "color": "碳灰",
+          "size": "XL",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-7297XXL",
+          "color": "碳灰",
+          "size": "XXL",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-72287L",
+          "color": "象牙白",
+          "size": "L",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-72287M",
+          "color": "象牙白",
+          "size": "M",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-72287S",
+          "color": "象牙白",
+          "size": "S",
+          "qty": 35,
+          "avail_qty": 35,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-72287XL",
+          "color": "象牙白",
+          "size": "XL",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX240901-72287XXL",
+          "color": "象牙白",
+          "size": "XXL",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZFF20251108-47",
+      "name": "定制长裤",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260110/4AC824242F234719BCDE9C5002004339.jpeg?name=23a58a5e-7fd7-4733-b678-eb0e8a3ea0bd",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2026-01-10",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 3,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZFF20251108-47756S",
+          "color": "墨黑色",
           "size": "S",
           "qty": 3,
           "avail_qty": 3,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-31247XL",
-          "color": "炭黑",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260108-31247XXL",
-          "color": "炭黑",
-          "size": "XXL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZKZ251226-34",
+      "i_id": "PODTX260922-001",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260312/1FB02BB8D838443DA69A835316823E1D.png?name=78208187-f68b-4cfb-aa72-25b6fc1a5828",
-      "salesperson": "潘嘉瑜",
-      "io_date": "2026-07-28",
-      "created": "2026-03-12",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/04B0A7B04A6C464A873A0B1732432E82.png?name=578ebba5-9363-4181-98d0-866e7443e45b",
+      "salesperson": "",
+      "io_date": "2026-10-15",
+      "created": "2026-09-22",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 4,
+      "total_qty": 6,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZKZ251226-34232XXL",
-          "color": "大地棕",
-          "size": "XXL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-28",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZKZ251226-3402L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-28",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZKZ251226-3402M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-28",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZKZ251226-3402XXXL",
-          "color": "黑色",
-          "size": "XXXL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-28",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DS250220-70",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260728/8ABB424E5B894240A035E8B0214DD83B.png?name=ade0396c-7ed8-4d10-910c-0f7c59a24b04",
-      "salesperson": "鹏哥",
-      "io_date": "2026-09-11",
-      "created": "2026-07-28",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 43,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DS250220-7002l",
-          "color": "黑色",
-          "size": "l",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250220-7002m",
-          "color": "黑色",
-          "size": "m",
-          "qty": 11,
-          "avail_qty": 11,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250220-7002s",
-          "color": "黑色",
-          "size": "s",
-          "qty": 9,
-          "avail_qty": 9,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250220-7002xl",
-          "color": "黑色",
-          "size": "xl",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250220-7002xxl",
-          "color": "黑色",
-          "size": "xxl",
-          "qty": 4,
-          "avail_qty": 4,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZ12795S25",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251222/012EC0F1DA774AF3A3248ED324E9EAF5.png?name=672d8f97-b273-4386-af32-32b20d4f0b9d",
-      "salesperson": "周乐",
-      "io_date": "",
-      "created": "2025-12-22",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 40,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZ12795S2505L",
-          "color": "灰色",
-          "size": "L",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZ12795S2505M",
-          "color": "灰色",
-          "size": "M",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZ12795S2505XL",
-          "color": "灰色",
-          "size": "XL",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZ12795S2505XXL",
-          "color": "灰色",
-          "size": "XXL",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSB241210-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/CB9CFCE4947A416896F4DD18CF469B0D.png?name=46857841-29a0-4c84-8ab5-240f04795020",
-      "salesperson": "罗伟仪",
-      "io_date": "",
-      "created": "2026-05-19",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 110,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSB241210-7101L",
-          "color": "白色",
-          "size": "L",
-          "qty": 17,
-          "avail_qty": 17,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7101M",
-          "color": "白色",
-          "size": "M",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7101S",
-          "color": "白色",
-          "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7101XL",
+          "sku_id": "PODTX260922-00101XL",
           "color": "白色",
           "size": "XL",
-          "qty": 5,
-          "avail_qty": 5,
+          "qty": 3,
+          "avail_qty": 3,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-10-15",
           "wh_detail": {}
         },
         {
-          "sku_id": "DSB241210-7101XS",
-          "color": "白色",
-          "size": "XS",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7101XXL",
-          "color": "白色",
-          "size": "XXL",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7102L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 17,
-          "avail_qty": 17,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7102M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 16,
-          "avail_qty": 16,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7102S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7102XL",
+          "sku_id": "PODTX260922-00102XL",
           "color": "黑色",
           "size": "XL",
-          "qty": 7,
-          "avail_qty": 7,
+          "qty": 3,
+          "avail_qty": 3,
           "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7102XS",
-          "color": "黑色",
-          "size": "XS",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241210-7102XXL",
-          "color": "黑色",
-          "size": "XXL",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSB241016-77",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/C0369C08272E4AF2B1BE9BD21F0A4AE0.png?name=1b02a573-676b-45c8-af9a-71e6cd325bb8",
-      "salesperson": "罗伟仪",
-      "io_date": "2026-07-21",
-      "created": "2026-05-26",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 226,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSB241016-7751L",
-          "color": "图片色",
-          "size": "L",
-          "qty": 90,
-          "avail_qty": 90,
-          "order_lock": 0,
-          "io_date": "2026-07-21",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241016-7751M",
-          "color": "图片色",
-          "size": "M",
-          "qty": 79,
-          "avail_qty": 79,
-          "order_lock": 0,
-          "io_date": "2026-07-21",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241016-7751XL",
-          "color": "图片色",
-          "size": "XL",
-          "qty": 19,
-          "avail_qty": 19,
-          "order_lock": 0,
-          "io_date": "2026-07-21",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241016-7751XXL",
-          "color": "图片色",
-          "size": "XXL",
-          "qty": 38,
-          "avail_qty": 38,
-          "order_lock": 0,
-          "io_date": "2026-07-21",
+          "io_date": "2026-10-15",
           "wh_detail": {}
         }
       ]
@@ -3521,64 +2676,54 @@
       ]
     },
     {
-      "i_id": "DZTX260511-710",
+      "i_id": "DSB250618-71",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260512/B6104733DAC246BF87F641A8BBBDCC75.png?name=b68f3c0c-e6fd-4386-92d7-6d5e7e4b8fb0",
-      "salesperson": "敬健浩",
-      "io_date": "",
-      "created": "2026-05-12",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/3053ED9ACE434E3F810418C454B3AA4B.png?name=490c298e-1dae-4dd8-8e65-26919f9d43f6",
+      "salesperson": "罗伟仪",
+      "io_date": "2026-07-13",
+      "created": "2026-05-26",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 12,
+      "total_qty": 173,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260511-710126M",
-          "color": "粉色",
+          "sku_id": "DSB250618-7151L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 57,
+          "avail_qty": 57,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB250618-7151M",
+          "color": "图片色",
           "size": "M",
-          "qty": 3,
-          "avail_qty": 3,
+          "qty": 49,
+          "avail_qty": 49,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260511-710126S",
-          "color": "粉色",
-          "size": "S",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260511-710126XS",
-          "color": "粉色",
-          "size": "XS",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260511-71002L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260511-71002XL",
-          "color": "黑色",
+          "sku_id": "DSB250618-7151XL",
+          "color": "图片色",
           "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
+          "qty": 41,
+          "avail_qty": 41,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB250618-7151XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 26,
+          "avail_qty": 26,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
@@ -3586,87 +2731,87 @@
       ]
     },
     {
-      "i_id": "DZTX260824-32",
+      "i_id": "DZCT260602-92",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260905/115B573651F747C38A45C82E4B5D6C95.png?name=cbfeb9ed-8602-42c5-ba41-2528ab93e43f",
-      "salesperson": "刘胜楠",
-      "io_date": "2026-09-28",
-      "created": "2026-09-05",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/3CA8FE4390BB46FBBEE5F0A752E976DF.png?name=5a0c8a2d-da04-47b2-9a69-84a1aacd824f",
+      "salesperson": "",
+      "io_date": "2026-10-16",
+      "created": "2026-09-01",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 101,
+      "total_qty": 206,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260824-32023XL",
-          "color": "黑色",
-          "size": "3XL",
-          "qty": 10,
-          "avail_qty": 10,
+          "sku_id": "DZCT260602-924912XL",
+          "color": "矿铁黑",
+          "size": "2XL",
+          "qty": 7,
+          "avail_qty": 7,
           "order_lock": 0,
-          "io_date": "2026-09-28",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260824-32024XL",
-          "color": "黑色",
-          "size": "4XL",
-          "qty": 27,
-          "avail_qty": 27,
-          "order_lock": 0,
-          "io_date": "2026-09-28",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260824-3202L",
-          "color": "黑色",
+          "sku_id": "DZCT260602-92491L",
+          "color": "矿铁黑",
           "size": "L",
-          "qty": 39,
-          "avail_qty": 39,
+          "qty": 67,
+          "avail_qty": 67,
           "order_lock": 0,
-          "io_date": "2026-09-28",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260824-3202XL",
-          "color": "黑色",
+          "sku_id": "DZCT260602-92491M",
+          "color": "矿铁黑",
+          "size": "M",
+          "qty": 68,
+          "avail_qty": 68,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZCT260602-92491S",
+          "color": "矿铁黑",
+          "size": "S",
+          "qty": 34,
+          "avail_qty": 34,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZCT260602-92491XL",
+          "color": "矿铁黑",
           "size": "XL",
-          "qty": 11,
-          "avail_qty": 11,
+          "qty": 30,
+          "avail_qty": 30,
           "order_lock": 0,
-          "io_date": "2026-09-28",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260824-3202XS",
-          "color": "黑色",
-          "size": "XS",
-          "qty": 14,
-          "avail_qty": 14,
-          "order_lock": 0,
-          "io_date": "2026-09-27",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZCT260429-40",
+      "i_id": "DZTX260202-2",
       "name": "定制",
-      "labels": "水果棉面料",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260522/25E4402090AB48BB986B4D35158A4C2E.png?name=6e6f1bed-0dea-43ae-8407-1468647fd1c6",
-      "salesperson": "莫紫珊",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260203/11587AC71DBC4E3D8A6C1EB9633B4EE4.png?name=bfde9aef-6f3b-4d00-a547-2963943e7245",
+      "salesperson": "刘胜楠",
       "io_date": "",
-      "created": "2026-05-22",
+      "created": "2026-02-03",
       "warehouse": [],
       "age_days": 0,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZCT260429-40484XXS",
-          "color": "环保黑",
-          "size": "XXS",
+          "sku_id": "DZTX260202-2164M",
+          "color": "藏青色",
+          "size": "M",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
@@ -3676,26 +2821,476 @@
       ]
     },
     {
-      "i_id": "PODTX260803-03",
+      "i_id": "DZTX250215-705-1",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260811/DF4F33902C084089BB97A391E3330467.png?name=3791ecfa-97b9-4a3c-a70c-8b713bc5f0eb",
-      "salesperson": "彭培强",
-      "io_date": "2026-09-14",
-      "created": "2026-08-11",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/E3D82845F83C45B094A83EFB618387C4.png?name=8b64e21a-8aeb-4284-b701-86da5b39b170",
+      "salesperson": "熊梓杏",
+      "io_date": "",
+      "created": "2025-04-23",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 5,
+      "total_qty": 6,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "PODTX260803-03278XXL",
-          "color": "石灰白",
-          "size": "XXL",
+          "sku_id": "DZTX250215-705-122F",
+          "color": "蓝色",
+          "size": "F",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260731-13",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260807/2783BF5CB8F049A18F6B3437BE2475A3.png?name=6bb3b8cf-5301-4b0c-977c-71c7b9dc057b",
+      "salesperson": "刘晓霞",
+      "io_date": "2026-08-27",
+      "created": "2026-08-07",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 20,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260731-1302L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "2026-08-27",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260731-1302XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "2026-08-27",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260627-13",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260627/D30A9D7AA19545D89A887918DB19C517.png?name=c4dc1563-2bf5-4c74-a4c7-d21f6e8c773e",
+      "salesperson": "刘晓霞",
+      "io_date": "2026-09-08",
+      "created": "2026-06-27",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 2,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260627-138573XL",
+          "color": "黑加仑",
+          "size": "3XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260627-13857XL",
+          "color": "黑加仑",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-08",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX20260611",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260612/5B81DCC23480476CBCC3831F57B7CA45.png?name=5bea97bf-a4d7-4444-907c-d92dedcc5603",
+      "salesperson": "张佳慧",
+      "io_date": "",
+      "created": "2026-06-12",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX20260611859XL",
+          "color": "檀棕褐",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZWY260131-83",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260413/2D61B45BD6624027B4FCAB14F44E8F2A.jpeg?name=b2e17836-ad0e-4b4f-bdfc-1dfd113ead96",
+      "salesperson": "莫紫珊",
+      "io_date": "",
+      "created": "2026-04-13",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZWY260131-83-3",
+          "color": "活性黑",
+          "size": "S",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260623-92-01",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260829/8B9BD8AB09A44233852DC70CB82968AE.png?name=c5885dd1-7e46-4341-9c89-ea968d33d24f",
+      "salesperson": "刘胜楠",
+      "io_date": "2026-09-29",
+      "created": "2026-08-29",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 71,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260623-92-01012XL",
+          "color": "白色",
+          "size": "2XL",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260623-92-01013XL",
+          "color": "白色",
+          "size": "3XL",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260623-92-01014XL",
+          "color": "白色",
+          "size": "4XL",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260623-92-01015XL",
+          "color": "白色",
+          "size": "5XL",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260623-92-0101L",
+          "color": "白色",
+          "size": "L",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260623-92-0101M",
+          "color": "白色",
+          "size": "M",
+          "qty": 13,
+          "avail_qty": 13,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260623-92-0101S",
+          "color": "白色",
+          "size": "S",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260623-92-0101XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODKZ260828-91",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/D85A973BF62F42329B9FFC4643929A7F.png?name=d1fbd17b-171a-497e-9120-e74e156970dd",
+      "salesperson": "邓正瑶",
+      "io_date": "2026-09-19",
+      "created": "2026-09-01",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "PODKZ260828-91122L",
+          "color": "浅蓝",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-19",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODTX260528-41FF",
+      "name": "定制",
+      "labels": "水果棉",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260605/B23AC6986F544596BB5F54553F516877.png?name=1bb49932-c4b9-4e96-8553-bef91d27f37c",
+      "salesperson": "冯佩珊",
+      "io_date": "2026-06-17",
+      "created": "2026-06-05",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 45,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "PODTX260528-41FF856L",
+          "color": "山竹白",
+          "size": "L",
+          "qty": 45,
+          "avail_qty": 45,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZKZ251210-31",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260226/0972D6CFEAAB4D8E8F4BAE6CD52B3A3F.jpeg?name=9c254529-5345-411a-bd6c-c76a00815fa7",
+      "salesperson": "敬健浩",
+      "io_date": "2026-09-16",
+      "created": "2026-02-26",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 4,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZKZ251210-3197XS",
+          "color": "碳灰",
+          "size": "XS",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSB241210-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/CB9CFCE4947A416896F4DD18CF469B0D.png?name=46857841-29a0-4c84-8ab5-240f04795020",
+      "salesperson": "罗伟仪",
+      "io_date": "",
+      "created": "2026-05-19",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 110,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSB241210-7101L",
+          "color": "白色",
+          "size": "L",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7101M",
+          "color": "白色",
+          "size": "M",
           "qty": 5,
           "avail_qty": 5,
           "order_lock": 0,
-          "io_date": "2026-09-14",
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7101S",
+          "color": "白色",
+          "size": "S",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7101XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7101XS",
+          "color": "白色",
+          "size": "XS",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7101XXL",
+          "color": "白色",
+          "size": "XXL",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 16,
+          "avail_qty": 16,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7102S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7102XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 7,
+          "avail_qty": 7,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7102XS",
+          "color": "黑色",
+          "size": "XS",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241210-7102XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 8,
+          "avail_qty": 8,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260509-72",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260723/ED9DAB50D1684C20A485212098AD59C1.png?name=05fde40e-044a-4a1f-9ba0-1d53f2375ad5",
+      "salesperson": "刘胜楠",
+      "io_date": "2026-08-15",
+      "created": "2026-07-23",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260509-7222M",
+          "color": "蓝色",
+          "size": "M",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-08-15",
           "wh_detail": {}
         }
       ]
@@ -3776,186 +3371,26 @@
       ]
     },
     {
-      "i_id": "DZKZ260109-FPA263377",
+      "i_id": "DZTX260710-90",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260109/2866C8B599BB469AA450308E43115903.jpeg?name=2d556e4a-8c16-4374-bf2b-cefe1140843a",
-      "salesperson": "彭培强",
-      "io_date": "2026-10-15",
-      "created": "2026-01-09",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 195,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZKZ260109-FPA263377929S",
-          "color": "耀石灰",
-          "size": "S",
-          "qty": 35,
-          "avail_qty": 35,
-          "order_lock": 0,
-          "io_date": "2026-10-15",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZKZ260109-FPA26337702S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 160,
-          "avail_qty": 160,
-          "order_lock": 0,
-          "io_date": "2026-10-15",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZCT260602-92",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/3CA8FE4390BB46FBBEE5F0A752E976DF.png?name=5a0c8a2d-da04-47b2-9a69-84a1aacd824f",
-      "salesperson": "",
-      "io_date": "2026-10-16",
-      "created": "2026-09-01",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 206,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCT260602-924912XL",
-          "color": "矿铁黑",
-          "size": "2XL",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZCT260602-92491L",
-          "color": "矿铁黑",
-          "size": "L",
-          "qty": 67,
-          "avail_qty": 67,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZCT260602-92491M",
-          "color": "矿铁黑",
-          "size": "M",
-          "qty": 68,
-          "avail_qty": 68,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZCT260602-92491S",
-          "color": "矿铁黑",
-          "size": "S",
-          "qty": 34,
-          "avail_qty": 34,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZCT260602-92491XL",
-          "color": "矿铁黑",
-          "size": "XL",
-          "qty": 30,
-          "avail_qty": 30,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "PODWT260827-002",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/F23D2603B04C4A10BBEEC973F7A82DF3.png?name=1d2933a9-8675-4196-8f82-0635fbb3f5b6",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260710/43E1E055616A45BB972772B8F524E1D4.png?name=2a2773c5-e247-4672-a47a-4ef0a88e5f86",
       "salesperson": "邓正瑶",
-      "io_date": "2026-09-19",
-      "created": "2026-09-01",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "PODWT260827-00244L",
-          "color": "深灰",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-19",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260520-94",
-      "name": "",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260618/488AEA9C650A4A4EAC46C5D540CA67E1.png?x-oss-process=image/resize,m_lfit,w_800,h_800",
-      "salesperson": "冯佩珊",
-      "io_date": "2026-07-19",
-      "created": "",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260520-94106XL",
-          "color": "",
-          "size": "",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-07-19",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX250310-72",
-      "name": "定制",
-      "labels": "半成品",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260716/9EA6D910FC98452B8554058D2C5BBBA6.png?name=c226821a-fd55-4f8e-bad9-1b12cac270ca",
-      "salesperson": "张玉珠",
       "io_date": "2026-07-25",
-      "created": "2025-03-11",
+      "created": "2026-07-10",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 7,
+      "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX250310-72193XS",
-          "color": "活性黑",
-          "size": "XS",
-          "qty": 2,
-          "avail_qty": 2,
+          "sku_id": "DZTX260710-90023XL",
+          "color": "黑色",
+          "size": "3XL",
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX250310-72142XS",
-          "color": "米白",
-          "size": "XS",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-07-25",
           "wh_detail": {}
         }
       ]
@@ -4026,26 +3461,536 @@
       ]
     },
     {
-      "i_id": "DZTX260509-72",
+      "i_id": "DZTX260807-70",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260723/ED9DAB50D1684C20A485212098AD59C1.png?name=05fde40e-044a-4a1f-9ba0-1d53f2375ad5",
-      "salesperson": "刘胜楠",
-      "io_date": "2026-08-15",
-      "created": "2026-07-23",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260807/9682EB9C90D04B41A760358BAFB1231A.png?name=6ca7ad61-9c04-4631-b3b3-cbd239f18918",
+      "salesperson": "刘江滔",
+      "io_date": "2026-08-21",
+      "created": "2026-08-07",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 4,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260807-70516XS",
+          "color": "阳光黄",
+          "size": "XS",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "2026-08-21",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260108-30",
+      "name": "定制",
+      "labels": "鲁道夫汗跑面料",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260204/4A76DCE02BAE44FAB32CCC0A50AF730A.jpeg?name=ff1c20cd-bbd6-4223-a9aa-0261c5d123ba",
+      "salesperson": "潘嘉瑜",
+      "io_date": "",
+      "created": "2026-02-04",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 11,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260108-30859XL",
+          "color": "檀棕褐",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260108-30247L",
+          "color": "炭黑",
+          "size": "L",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260108-30247M",
+          "color": "炭黑",
+          "size": "M",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260108-30247S",
+          "color": "炭黑",
+          "size": "S",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260108-30247XL",
+          "color": "炭黑",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260108-30247XXL",
+          "color": "炭黑",
+          "size": "XXL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260512-42",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260520/030074B9CAE0449584D24D4690AFE02D.png?name=d91d3e95-2e66-4bb0-8874-cc2eb88f8b7a",
+      "salesperson": "邓正瑶",
+      "io_date": "2026-08-12",
+      "created": "2026-05-20",
       "warehouse": [],
       "age_days": 0,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260509-7222M",
-          "color": "蓝色",
+          "sku_id": "DZTX260512-42193XXL",
+          "color": "活性黑",
+          "size": "XXL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODTX260922-002",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/61D1A983E47F4751BE7CCCC9CA3EF116.png?name=b93bb321-1fdd-47b3-bf35-2331a68b6db1",
+      "salesperson": "",
+      "io_date": "2026-10-15",
+      "created": "2026-09-22",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 4,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "PODTX260922-00201XL",
+          "color": "白色",
+          "size": "XL",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "2026-10-15",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "PODTX260922-00202XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "2026-10-15",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260526-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "",
+      "salesperson": "冯佩珊",
+      "io_date": "2026-07-19",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260526-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-07-19",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260718-93",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/D8DE156EEAE54433B41BA4330B688C94.png?name=cb5c7a89-866f-4041-a109-0eb6b200564f",
+      "salesperson": "刘江滔",
+      "io_date": "2026-09-21",
+      "created": "2026-09-01",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 198,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260718-93021码(L)",
+          "color": "黑色",
+          "size": "1码(L)",
+          "qty": 198,
+          "avail_qty": 198,
+          "order_lock": 0,
+          "io_date": "2026-09-21",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSCT260731-70",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/DFCFF9FCDF054973B083B78D7FB68F14.png?name=cd08c25e-db4b-4621-9739-2940000ceb0f",
+      "salesperson": "邓正瑶",
+      "io_date": "2026-09-16",
+      "created": "2026-08-18",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 2,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSCT260731-70162L",
+          "color": "绿色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260731-7002L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-09-16",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZCT260429-40",
+      "name": "定制",
+      "labels": "水果棉面料",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260522/25E4402090AB48BB986B4D35158A4C2E.png?name=6e6f1bed-0dea-43ae-8407-1468647fd1c6",
+      "salesperson": "莫紫珊",
+      "io_date": "",
+      "created": "2026-05-22",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZCT260429-40484XXS",
+          "color": "环保黑",
+          "size": "XXS",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250521-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20261001/4F40550A066541AEB98005167CDF8779.jpeg?name=a2d7e6cc-5bdb-40c7-a195-79df2e9a7a36",
+      "salesperson": "邓正瑶",
+      "io_date": "",
+      "created": "2025-05-30",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 10,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250521-71407L",
+          "color": "水波灰",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX250521-7115L",
+          "color": "紫色",
+          "size": "L",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX250521-7115M",
+          "color": "紫色",
+          "size": "M",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX250521-7115S",
+          "color": "紫色",
+          "size": "S",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250418-39",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/DB7B11BD102A4E15847977BA36D4256D.jpeg?name=2c4c04e5-c149-46c5-a37c-cd7a4d3864f5",
+      "salesperson": "邓正瑶",
+      "io_date": "",
+      "created": "2025-05-14",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 13,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250418-39642L",
+          "color": "椰奶白",
+          "size": "L",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX250418-39642M",
+          "color": "椰奶白",
+          "size": "M",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX250418-39642S",
+          "color": "椰奶白",
+          "size": "S",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT251208-38",
+      "name": "定制外套",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251210/81744C3E9859425E9AABAE8023E291B9.jpeg?name=08ef9490-29dd-40cc-a5d7-6adf2d21fa2a",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2025-12-10",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZWT251208-3810M",
+          "color": "浅卡其",
           "size": "M",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-08-15",
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZFF20251108-46",
+      "name": "定制卫衣",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260110/35B474DBF01D42A08B34B05489A569FF.jpeg?name=3e064eab-5660-4c6e-b62e-a409106a4e7f",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2026-01-10",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 3,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZFF20251108-46756L",
+          "color": "墨黑色",
+          "size": "L",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260520-95",
+      "name": "定制",
+      "labels": "",
+      "pic": "",
+      "salesperson": "冯佩珊",
+      "io_date": "2026-07-19",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 2,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260520-95142F",
+          "color": "米白",
+          "size": "F",
+          "qty": 2,
+          "avail_qty": 2,
+          "order_lock": 0,
+          "io_date": "2026-07-19",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZ13273W23",
+      "name": "OCTTFLAB",
+      "labels": "停产产品",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/208ACF8BF4A54A36BBC073271F30E993.jpeg?name=7fa1cff0-5088-4772-afd7-0a3e8c9e78be",
+      "salesperson": "邓正瑶",
+      "io_date": "",
+      "created": "2024-03-01",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZ13273W23414S",
+          "color": "铁锈色",
+          "size": "S",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260824-32",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260905/115B573651F747C38A45C82E4B5D6C95.png?name=cbfeb9ed-8602-42c5-ba41-2528ab93e43f",
+      "salesperson": "刘胜楠",
+      "io_date": "2026-09-28",
+      "created": "2026-09-05",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 101,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260824-32023XL",
+          "color": "黑色",
+          "size": "3XL",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "2026-09-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260824-32024XL",
+          "color": "黑色",
+          "size": "4XL",
+          "qty": 27,
+          "avail_qty": 27,
+          "order_lock": 0,
+          "io_date": "2026-09-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260824-3202L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 39,
+          "avail_qty": 39,
+          "order_lock": 0,
+          "io_date": "2026-09-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260824-3202XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "2026-09-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260824-3202XS",
+          "color": "黑色",
+          "size": "XS",
+          "qty": 14,
+          "avail_qty": 14,
+          "order_lock": 0,
+          "io_date": "2026-09-27",
           "wh_detail": {}
         }
       ]
@@ -4166,6 +4111,31 @@
       ]
     },
     {
+      "i_id": "DZTX260914-73",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/C2786B37CB204B9194BA4C703530D194.png?name=31983a38-d284-4bda-9912-6bf85e2d9027",
+      "salesperson": "",
+      "io_date": "2026-10-12",
+      "created": "2026-09-22",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1497,
+      "total_lock": 1497,
+      "skus": [
+        {
+          "sku_id": "DZTX260914-7392M",
+          "color": "橄榄绿",
+          "size": "M",
+          "qty": 1497,
+          "avail_qty": 1497,
+          "order_lock": 1497,
+          "io_date": "2026-10-12",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
       "i_id": "DZTX260114-61",
       "name": "定制",
       "labels": "",
@@ -4201,191 +4171,356 @@
       ]
     },
     {
-      "i_id": "DZTX260710-90",
+      "i_id": "DZCT260302-34",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260710/43E1E055616A45BB972772B8F524E1D4.png?name=2a2773c5-e247-4672-a47a-4ef0a88e5f86",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260415/11D8359ACBA748BDA0DBF9F79547BB57.png?name=d5518629-e003-47ca-bcc9-0165eb6cdb37",
+      "salesperson": "罗伟仪",
+      "io_date": "",
+      "created": "2026-04-15",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 5,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZCT260302-34142L",
+          "color": "米白",
+          "size": "L",
+          "qty": 5,
+          "avail_qty": 5,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODWT260827-002",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/F23D2603B04C4A10BBEEC973F7A82DF3.png?name=1d2933a9-8675-4196-8f82-0635fbb3f5b6",
       "salesperson": "邓正瑶",
-      "io_date": "2026-07-25",
-      "created": "2026-07-10",
+      "io_date": "2026-09-19",
+      "created": "2026-09-01",
       "warehouse": [],
       "age_days": 0,
       "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260710-90023XL",
-          "color": "黑色",
-          "size": "3XL",
+          "sku_id": "PODWT260827-00244L",
+          "color": "深灰",
+          "size": "L",
           "qty": 1,
           "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-07-25",
+          "io_date": "2026-09-19",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZWT251108-31",
+      "i_id": "DZTX250415-71",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260603/DCC8A02F4041481E847D9940638BCCC5.png?name=794c1b6a-cb6c-4f42-97a3-286c99c50618",
-      "salesperson": "敏健浩",
-      "io_date": "2026-09-09",
-      "created": "2026-06-03",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/CAF6E99CBD3C4FCEBBFE4195A857C616.jpeg?name=04886f71-ffbe-4aff-b90d-3c8a59353cec",
+      "salesperson": "邓正瑶",
+      "io_date": "",
+      "created": "2025-05-21",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 170,
+      "total_qty": 17,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZWT251108-31840L",
-          "color": "浅棕",
+          "sku_id": "DZTX250415-71678L",
+          "color": "巧克力黑",
           "size": "L",
-          "qty": 39,
-          "avail_qty": 39,
-          "order_lock": 0,
-          "io_date": "2026-08-22",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZWT251108-31840M",
-          "color": "浅棕",
-          "size": "M",
-          "qty": 53,
-          "avail_qty": 53,
-          "order_lock": 0,
-          "io_date": "2026-09-09",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZWT251108-31840S",
-          "color": "浅棕",
-          "size": "S",
-          "qty": 37,
-          "avail_qty": 37,
-          "order_lock": 0,
-          "io_date": "2026-09-09",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZWT251108-31840XL",
-          "color": "浅棕",
-          "size": "XL",
-          "qty": 24,
-          "avail_qty": 24,
-          "order_lock": 0,
-          "io_date": "2026-09-09",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZWT251108-31840XS",
-          "color": "浅棕",
-          "size": "XS",
           "qty": 17,
           "avail_qty": 17,
           "order_lock": 0,
-          "io_date": "2026-09-09",
+          "io_date": "",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZTX260714-91",
+      "i_id": "DSCT260731-32",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260915/A728E04737D24CF2974BBDC6AC041AAB.png?name=170f5ec9-b7d8-4468-88a3-9355ca40a50a",
-      "salesperson": "",
-      "io_date": "2026-10-16",
-      "created": "2026-09-15",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/D50B1D0E21DD40FDB24E0469BAA93495.png?name=1525db08-d871-4d70-9a32-fcde9d56ab60",
+      "salesperson": "邓正瑶",
+      "io_date": "2026-09-27",
+      "created": "2026-08-18",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 105,
+      "total_qty": 143,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260714-9102L",
-          "color": "黑色",
+          "sku_id": "DSCT260731-3239L",
+          "color": "卡其",
           "size": "L",
-          "qty": 21,
-          "avail_qty": 21,
+          "qty": 24,
+          "avail_qty": 24,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-09-27",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260714-9102M",
-          "color": "黑色",
+          "sku_id": "DSCT260731-3239M",
+          "color": "卡其",
           "size": "M",
-          "qty": 21,
-          "avail_qty": 21,
+          "qty": 81,
+          "avail_qty": 81,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-09-27",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260714-9102S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 21,
-          "avail_qty": 21,
-          "order_lock": 0,
-          "io_date": "2026-10-16",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260714-9102XL",
-          "color": "黑色",
+          "sku_id": "DSCT260731-3239XL",
+          "color": "卡其",
           "size": "XL",
-          "qty": 21,
-          "avail_qty": 21,
+          "qty": 12,
+          "avail_qty": 12,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-09-27",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX260714-9102XXL",
-          "color": "黑色",
-          "size": "XXL",
-          "qty": 21,
-          "avail_qty": 21,
+          "sku_id": "DSCT260731-32305XL",
+          "color": "苔藓绿",
+          "size": "XL",
+          "qty": 26,
+          "avail_qty": 26,
           "order_lock": 0,
-          "io_date": "2026-10-16",
+          "io_date": "2026-09-27",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZFF20251101-42",
-      "name": "定制外套",
+      "i_id": "DZKZ251226-35",
+      "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260110/77C554CD73584B3FAC39CE4BE908EEC8.jpeg?name=04809b4c-8bd0-4835-95d9-e922251399d4",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2026-01-10",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260108/79B519ABFF0E48CA9637AAE937681B85.jpeg?name=07288eef-dc8c-43bf-8a6b-5ed87d5d4dca",
+      "salesperson": "潘嘉瑜",
+      "io_date": "2026-07-28",
+      "created": "2026-01-08",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 4,
+      "total_qty": 3,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZFF20251101-42756L",
-          "color": "墨黑色",
+          "sku_id": "DZKZ251226-3502L",
+          "color": "黑色",
           "size": "L",
-          "qty": 2,
-          "avail_qty": 2,
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-07-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZKZ251226-3502M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "2026-07-28",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZKZ251226-3502XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSCT260727-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260818/3D9A04250E0F44C991FB3EC61F626B3E.png?name=de9d0ee8-c3c4-4d6e-bb0f-365f7ceb65d6",
+      "salesperson": "邓正瑶",
+      "io_date": "2026-09-17",
+      "created": "2026-08-18",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 2036,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSCT260727-71142L",
+          "color": "米白",
+          "size": "L",
+          "qty": 360,
+          "avail_qty": 360,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260727-71142M",
+          "color": "米白",
+          "size": "M",
+          "qty": 453,
+          "avail_qty": 453,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260727-71142XL",
+          "color": "米白",
+          "size": "XL",
+          "qty": 253,
+          "avail_qty": 253,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260727-7102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 362,
+          "avail_qty": 362,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260727-7102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 408,
+          "avail_qty": 408,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCT260727-7102XL",
+          "color": "黑色",
+          "size": "XL",
+          "qty": 200,
+          "avail_qty": 200,
+          "order_lock": 0,
+          "io_date": "2026-09-17",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX260507-80",
+      "name": "",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260601/1467EDBCBFAD433E84CD16E2270BFD40.png?x-oss-process=image/resize,m_lfit,w_800,h_800",
+      "salesperson": "罗伟仪",
+      "io_date": "2026-09-18",
+      "created": "",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 3,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX260507-8002S",
+          "color": "",
+          "size": "",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "2026-09-18",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX250418-390",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/D16426BB72CF4405AABCEBA2A97E7550.jpeg?name=126cb9ec-08ee-457a-85e7-56ee26976f34",
+      "salesperson": "邓正瑶",
+      "io_date": "2025-06-04",
+      "created": "2025-05-30",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 13,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX250418-390642L",
+          "color": "椰奶白",
+          "size": "L",
+          "qty": 4,
+          "avail_qty": 4,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZFF20251101-42756M",
-          "color": "墨黑色",
+          "sku_id": "DZTX250418-390642M",
+          "color": "椰奶白",
+          "size": "M",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX250418-390642S",
+          "color": "椰奶白",
+          "size": "S",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSCK260717-31",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260821/4E302A805C214D52941CE601EC55912F.png?name=62f0f84e-b6a7-476c-88ea-7e5a7c750638",
+      "salesperson": "刘胜楠",
+      "io_date": "2026-10-15",
+      "created": "2026-08-21",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 8,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSCK260717-3101M",
+          "color": "白色",
           "size": "M",
           "qty": 2,
           "avail_qty": 2,
           "order_lock": 0,
-          "io_date": "",
+          "io_date": "2026-09-29",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSCK260717-3101S",
+          "color": "白色",
+          "size": "S",
+          "qty": 6,
+          "avail_qty": 6,
+          "order_lock": 0,
+          "io_date": "2026-09-29",
           "wh_detail": {}
         }
       ]
@@ -4456,676 +4591,26 @@
       ]
     },
     {
-      "i_id": "DZTX230705-78",
-      "name": "定制",
-      "labels": "半成品",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/AF216B63F6174B769C525E1C0F139538.jpg?name=7ef571dc7951032009e4ce1ad4cbb497_tlxmg0bgkuzbd5b0kbsxmyj677jl.jpg",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2023-07-12",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 127,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX230705-7802XXL",
-          "color": "黑色",
-          "size": "XXL",
-          "qty": 127,
-          "avail_qty": 127,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260627-13",
+      "i_id": "DZCK260430-82",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260627/D30A9D7AA19545D89A887918DB19C517.png?name=c4dc1563-2bf5-4c74-a4c7-d21f6e8c773e",
-      "salesperson": "刘晓霞",
-      "io_date": "2026-09-08",
-      "created": "2026-06-27",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 2,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260627-138573XL",
-          "color": "黑加仑",
-          "size": "3XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZTX260627-13857XL",
-          "color": "黑加仑",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-08",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZFF20251108-46",
-      "name": "定制卫衣",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260110/35B474DBF01D42A08B34B05489A569FF.jpeg?name=3e064eab-5660-4c6e-b62e-a409106a4e7f",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2026-01-10",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 3,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZFF20251108-46756L",
-          "color": "墨黑色",
-          "size": "L",
-          "qty": 3,
-          "avail_qty": 3,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DATX260513-919",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260513/0387EF5954BA4E3584FBC840788062FE.png?name=d3976ea7-d18c-49dc-a5db-30acc57618bb",
-      "salesperson": "苏芷萱",
-      "io_date": "",
-      "created": "2026-05-13",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DATX260513-919193XL",
-          "color": "活性黑",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX20260611",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260612/5B81DCC23480476CBCC3831F57B7CA45.png?name=5bea97bf-a4d7-4444-907c-d92dedcc5603",
-      "salesperson": "张佳慧",
-      "io_date": "",
-      "created": "2026-06-12",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX20260611859XL",
-          "color": "檀棕褐",
-          "size": "XL",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZWT251208-38",
-      "name": "定制外套",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20251210/81744C3E9859425E9AABAE8023E291B9.jpeg?name=08ef9490-29dd-40cc-a5d7-6adf2d21fa2a",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2025-12-10",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZWT251208-3810M",
-          "color": "浅卡其",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX260507-80",
-      "name": "",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260601/1467EDBCBFAD433E84CD16E2270BFD40.png?x-oss-process=image/resize,m_lfit,w_800,h_800",
-      "salesperson": "罗伟仪",
-      "io_date": "2026-09-18",
-      "created": "",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 3,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260507-8002S",
-          "color": "",
-          "size": "",
-          "qty": 3,
-          "avail_qty": 3,
-          "order_lock": 0,
-          "io_date": "2026-09-18",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZCT260701-FPA263963",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260914/FC6249B09CFF4F4DBF0E764EC07B442C.png?name=071bbf9e-86b6-49df-aebc-961da8b3ffa2",
-      "salesperson": "彭培强",
-      "io_date": "2026-10-11",
-      "created": "2026-09-14",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 10,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCT260701-FPA26396339S",
-          "color": "卡其",
-          "size": "S",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 0,
-          "io_date": "2026-10-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DZCT260701-FPA263963116S",
-          "color": "橘色",
-          "size": "S",
-          "qty": 8,
-          "avail_qty": 8,
-          "order_lock": 0,
-          "io_date": "2026-10-11",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DS260429-21",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260508/C8B44B8F4A1C464FA6D45C95E49120FA.png?name=2f1be51a-b58b-4db0-986b-8e5931931834",
-      "salesperson": "邓正瑶",
-      "io_date": "",
-      "created": "2026-05-13",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 2,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DS260429-2102L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS260429-2102M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSB241017-71",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/17B97175ED3443C58DF333571F92D3E1.png?name=8b5f666a-b769-442e-8c0b-bec47a0a830c",
-      "salesperson": "罗伟仪",
-      "io_date": "2026-09-11",
-      "created": "2026-05-26",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 239,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSB241017-7151L",
-          "color": "图片色",
-          "size": "L",
-          "qty": 92,
-          "avail_qty": 92,
-          "order_lock": 0,
-          "io_date": "2026-07-21",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241017-7151M",
-          "color": "图片色",
-          "size": "M",
-          "qty": 86,
-          "avail_qty": 86,
-          "order_lock": 0,
-          "io_date": "2026-07-21",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241017-7151XL",
-          "color": "图片色",
-          "size": "XL",
-          "qty": 28,
-          "avail_qty": 28,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB241017-7151XXL",
-          "color": "图片色",
-          "size": "XXL",
-          "qty": 33,
-          "avail_qty": 33,
-          "order_lock": 0,
-          "io_date": "2026-07-21",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DS250515-74",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260519/FE9E224BCB994A719BE6963C98B7089F.png?name=d935aa53-cc61-41a1-9d1b-b5e67fec938b",
-      "salesperson": "罗伟仪",
-      "io_date": "2026-09-11",
-      "created": "2026-05-19",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 297,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DS250515-7401L",
-          "color": "白色",
-          "size": "L",
-          "qty": 39,
-          "avail_qty": 39,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7401M",
-          "color": "白色",
-          "size": "M",
-          "qty": 45,
-          "avail_qty": 45,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7401S",
-          "color": "白色",
-          "size": "S",
-          "qty": 25,
-          "avail_qty": 25,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7401XL",
-          "color": "白色",
-          "size": "XL",
-          "qty": 35,
-          "avail_qty": 35,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7401XXL",
-          "color": "白色",
-          "size": "XXL",
-          "qty": 10,
-          "avail_qty": 10,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7402L",
-          "color": "黑色",
-          "size": "L",
-          "qty": 37,
-          "avail_qty": 37,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7402M",
-          "color": "黑色",
-          "size": "M",
-          "qty": 47,
-          "avail_qty": 47,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7402S",
-          "color": "黑色",
-          "size": "S",
-          "qty": 29,
-          "avail_qty": 29,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7402XL",
-          "color": "黑色",
-          "size": "XL",
-          "qty": 19,
-          "avail_qty": 19,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DS250515-7402XXL",
-          "color": "黑色",
-          "size": "XXL",
-          "qty": 11,
-          "avail_qty": 11,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZCT260302-34",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260415/11D8359ACBA748BDA0DBF9F79547BB57.png?name=d5518629-e003-47ca-bcc9-0165eb6cdb37",
-      "salesperson": "罗伟仪",
-      "io_date": "",
-      "created": "2026-04-15",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 5,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZCT260302-34142L",
-          "color": "米白",
-          "size": "L",
-          "qty": 5,
-          "avail_qty": 5,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZWT230831-78",
-      "name": "2301SS防晒衣外套",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260318/DCA6FA624A4042029CA4ED68839F559F.png?name=32acddff-dd1a-405a-a012-d37d769309f4",
-      "salesperson": "刘江滔",
-      "io_date": "2026-08-12",
-      "created": "2023-09-16",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 7,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZWT230831-78230XL",
-          "color": "日光橙",
-          "size": "XL",
-          "qty": 7,
-          "avail_qty": 7,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSCT260731-31",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260820/61CBD8A68E4E4BC19B358E6D48FCF230.png?name=c8854f90-0802-4b7d-a8db-7414cbde12d0",
-      "salesperson": "邓正瑶",
-      "io_date": "2026-09-21",
-      "created": "2026-08-20",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 2,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSCT260731-3105L",
-          "color": "灰色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-21",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCT260731-3101L",
-          "color": "白色",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "2026-09-21",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSB250618-72",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/7545A2F3485E4B49936430A7D789A906.png?name=3ec38c76-e5a8-4371-ba50-f24d1241796d",
-      "salesperson": "罗伟仪",
-      "io_date": "2026-09-11",
-      "created": "2026-05-26",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 183,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DSB250618-7251L",
-          "color": "图片色",
-          "size": "L",
-          "qty": 63,
-          "avail_qty": 63,
-          "order_lock": 0,
-          "io_date": "2026-09-11",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB250618-7251M",
-          "color": "图片色",
-          "size": "M",
-          "qty": 46,
-          "avail_qty": 46,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB250618-7251XL",
-          "color": "图片色",
-          "size": "XL",
-          "qty": 41,
-          "avail_qty": 41,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSB250618-7251XXL",
-          "color": "图片色",
-          "size": "XXL",
-          "qty": 33,
-          "avail_qty": 33,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZ13273W23",
-      "name": "OCTTFLAB",
-      "labels": "停产产品",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/208ACF8BF4A54A36BBC073271F30E993.jpeg?name=7fa1cff0-5088-4772-afd7-0a3e8c9e78be",
-      "salesperson": "邓正瑶",
-      "io_date": "",
-      "created": "2024-03-01",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZ13273W23414S",
-          "color": "铁锈色",
-          "size": "S",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZTX250215-705-1",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/E3D82845F83C45B094A83EFB618387C4.png?name=8b64e21a-8aeb-4284-b701-86da5b39b170",
-      "salesperson": "熊梓杏",
-      "io_date": "",
-      "created": "2025-04-23",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 6,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX250215-705-122F",
-          "color": "蓝色",
-          "size": "F",
-          "qty": 6,
-          "avail_qty": 6,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "PODCX260413-44FF",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260413/578089BA80A440249259F128AA53D920.png?name=55828e72-5b1c-491a-aeb7-b9b4f7f29caa",
-      "salesperson": "冯佩珊",
-      "io_date": "",
-      "created": "2026-04-13",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 1,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "PODCX260413-44FF53L",
-          "color": "牙白",
-          "size": "L",
-          "qty": 1,
-          "avail_qty": 1,
-          "order_lock": 0,
-          "io_date": "",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DSCK260717-31",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260821/4E302A805C214D52941CE601EC55912F.png?name=62f0f84e-b6a7-476c-88ea-7e5a7c750638",
-      "salesperson": "刘胜楠",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260522/D00465F4BAC94434838E6CED7EB07007.png?name=cd966f50-bc1a-4823-98c1-38b0d9e26d6e",
+      "salesperson": "",
       "io_date": "2026-10-15",
-      "created": "2026-08-21",
+      "created": "2026-05-22",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 8,
+      "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DSCK260717-3101M",
-          "color": "白色",
-          "size": "M",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 0,
-          "io_date": "2026-09-29",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "DSCK260717-3101S",
-          "color": "白色",
+          "sku_id": "DZCK260430-8202S",
+          "color": "黑色",
           "size": "S",
-          "qty": 6,
-          "avail_qty": 6,
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-09-29",
+          "io_date": "2026-10-15",
           "wh_detail": {}
         }
       ]
@@ -5196,66 +4681,56 @@
       ]
     },
     {
-      "i_id": "PODTX260922-002",
+      "i_id": "DATX260513-919",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/61D1A983E47F4751BE7CCCC9CA3EF116.png?name=b93bb321-1fdd-47b3-bf35-2331a68b6db1",
-      "salesperson": "",
-      "io_date": "2026-10-15",
-      "created": "2026-09-22",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260513/0387EF5954BA4E3584FBC840788062FE.png?name=d3976ea7-d18c-49dc-a5db-30acc57618bb",
+      "salesperson": "苏芷萱",
+      "io_date": "",
+      "created": "2026-05-13",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 4,
+      "total_qty": 1,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "PODTX260922-00201XL",
-          "color": "白色",
+          "sku_id": "DATX260513-919193XL",
+          "color": "活性黑",
           "size": "XL",
-          "qty": 2,
-          "avail_qty": 2,
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
-          "io_date": "2026-10-15",
-          "wh_detail": {}
-        },
-        {
-          "sku_id": "PODTX260922-00202XL",
-          "color": "黑色",
-          "size": "XL",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 0,
-          "io_date": "2026-10-15",
+          "io_date": "",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZTX250418-390",
+      "i_id": "DZTX260108-31",
       "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260930/D16426BB72CF4405AABCEBA2A97E7550.jpeg?name=126cb9ec-08ee-457a-85e7-56ee26976f34",
-      "salesperson": "邓正瑶",
-      "io_date": "2025-06-04",
-      "created": "2025-05-30",
+      "labels": "鲁道夫汗跑面料",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260204/E5BED99A7A554FCAA2174D75E24DF808.jpeg?name=83feded8-d5b6-4958-ba7a-f4158e302b41",
+      "salesperson": "潘嘉瑜",
+      "io_date": "",
+      "created": "2026-02-04",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 13,
+      "total_qty": 12,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX250418-390642L",
-          "color": "椰奶白",
+          "sku_id": "DZTX260108-31247L",
+          "color": "炭黑",
           "size": "L",
-          "qty": 4,
-          "avail_qty": 4,
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX250418-390642M",
-          "color": "椰奶白",
+          "sku_id": "DZTX260108-31247M",
+          "color": "炭黑",
           "size": "M",
           "qty": 6,
           "avail_qty": 6,
@@ -5264,36 +4739,31 @@
           "wh_detail": {}
         },
         {
-          "sku_id": "DZTX250418-390642S",
-          "color": "椰奶白",
+          "sku_id": "DZTX260108-31247S",
+          "color": "炭黑",
           "size": "S",
           "qty": 3,
           "avail_qty": 3,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "DZKZ251210-31",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260226/0972D6CFEAAB4D8E8F4BAE6CD52B3A3F.jpeg?name=9c254529-5345-411a-bd6c-c76a00815fa7",
-      "salesperson": "敬健浩",
-      "io_date": "2026-09-16",
-      "created": "2026-02-26",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 4,
-      "total_lock": 0,
-      "skus": [
+        },
         {
-          "sku_id": "DZKZ251210-3197XS",
-          "color": "碳灰",
-          "size": "XS",
-          "qty": 4,
-          "avail_qty": 4,
+          "sku_id": "DZTX260108-31247XL",
+          "color": "炭黑",
+          "size": "XL",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260108-31247XXL",
+          "color": "炭黑",
+          "size": "XXL",
+          "qty": 1,
+          "avail_qty": 1,
           "order_lock": 0,
           "io_date": "",
           "wh_detail": {}
@@ -5301,86 +4771,416 @@
       ]
     },
     {
-      "i_id": "DZTX260520-95",
+      "i_id": "DZTX260714-91",
       "name": "定制",
       "labels": "",
-      "pic": "",
-      "salesperson": "冯佩珊",
-      "io_date": "2026-07-19",
-      "created": "",
-      "warehouse": [],
-      "age_days": 0,
-      "total_qty": 2,
-      "total_lock": 0,
-      "skus": [
-        {
-          "sku_id": "DZTX260520-95142F",
-          "color": "米白",
-          "size": "F",
-          "qty": 2,
-          "avail_qty": 2,
-          "order_lock": 0,
-          "io_date": "2026-07-19",
-          "wh_detail": {}
-        }
-      ]
-    },
-    {
-      "i_id": "PODTX260922-001",
-      "name": "定制",
-      "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260922/04B0A7B04A6C464A873A0B1732432E82.png?name=578ebba5-9363-4181-98d0-866e7443e45b",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260915/A728E04737D24CF2974BBDC6AC041AAB.png?name=170f5ec9-b7d8-4468-88a3-9355ca40a50a",
       "salesperson": "",
-      "io_date": "2026-10-15",
-      "created": "2026-09-22",
+      "io_date": "2026-10-16",
+      "created": "2026-09-15",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 6,
+      "total_qty": 105,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "PODTX260922-00101XL",
-          "color": "白色",
-          "size": "XL",
-          "qty": 3,
-          "avail_qty": 3,
+          "sku_id": "DZTX260714-9102L",
+          "color": "黑色",
+          "size": "L",
+          "qty": 21,
+          "avail_qty": 21,
           "order_lock": 0,
-          "io_date": "2026-10-15",
+          "io_date": "2026-10-16",
           "wh_detail": {}
         },
         {
-          "sku_id": "PODTX260922-00102XL",
+          "sku_id": "DZTX260714-9102M",
+          "color": "黑色",
+          "size": "M",
+          "qty": 21,
+          "avail_qty": 21,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260714-9102S",
+          "color": "黑色",
+          "size": "S",
+          "qty": 21,
+          "avail_qty": 21,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260714-9102XL",
           "color": "黑色",
           "size": "XL",
-          "qty": 3,
-          "avail_qty": 3,
+          "qty": 21,
+          "avail_qty": 21,
           "order_lock": 0,
-          "io_date": "2026-10-15",
+          "io_date": "2026-10-16",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZTX260714-9102XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 21,
+          "avail_qty": 21,
+          "order_lock": 0,
+          "io_date": "2026-10-16",
           "wh_detail": {}
         }
       ]
     },
     {
-      "i_id": "DZTX260718-93",
+      "i_id": "A18",
       "name": "定制",
       "labels": "",
-      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260901/D8DE156EEAE54433B41BA4330B688C94.png?name=cb5c7a89-866f-4041-a109-0eb6b200564f",
-      "salesperson": "刘江滔",
-      "io_date": "2026-09-21",
-      "created": "2026-09-01",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260313/928B8ED7DDB8469DAB2AF27A58A05709.png?name=d399584b-eda6-4be7-9e35-a97681a3f98a",
+      "salesperson": "朱家豪",
+      "io_date": "",
+      "created": "2026-03-13",
       "warehouse": [],
       "age_days": 0,
-      "total_qty": 198,
+      "total_qty": 30,
       "total_lock": 0,
       "skus": [
         {
-          "sku_id": "DZTX260718-93021码(L)",
-          "color": "黑色",
-          "size": "1码(L)",
-          "qty": 198,
-          "avail_qty": 198,
+          "sku_id": "A189043XL",
+          "color": "中国红",
+          "size": "3XL",
+          "qty": 30,
+          "avail_qty": 30,
           "order_lock": 0,
-          "io_date": "2026-09-21",
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSB241017-71",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/17B97175ED3443C58DF333571F92D3E1.png?name=8b5f666a-b769-442e-8c0b-bec47a0a830c",
+      "salesperson": "罗伟仪",
+      "io_date": "2026-09-11",
+      "created": "2026-05-26",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 239,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSB241017-7151L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 92,
+          "avail_qty": 92,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241017-7151M",
+          "color": "图片色",
+          "size": "M",
+          "qty": 86,
+          "avail_qty": 86,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241017-7151XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 28,
+          "avail_qty": 28,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB241017-7151XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 33,
+          "avail_qty": 33,
+          "order_lock": 0,
+          "io_date": "2026-07-21",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "PODCX260413-44FF",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260413/578089BA80A440249259F128AA53D920.png?name=55828e72-5b1c-491a-aeb7-b9b4f7f29caa",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2026-04-13",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 1,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "PODCX260413-44FF53L",
+          "color": "牙白",
+          "size": "L",
+          "qty": 1,
+          "avail_qty": 1,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZBX260518-16",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260518/B3E3B095530944D2A2ED6F3EA9E64835.png?name=41973a9b-382a-4fa8-a89a-85d2a83849c0",
+      "salesperson": "刘胜楠",
+      "io_date": "",
+      "created": "2026-05-18",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 7,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZBX260518-16856L",
+          "color": "山竹白",
+          "size": "L",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZBX260518-16857M",
+          "color": "黑加仑",
+          "size": "M",
+          "qty": 3,
+          "avail_qty": 3,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DSB250618-72",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260526/7545A2F3485E4B49936430A7D789A906.png?name=3ec38c76-e5a8-4371-ba50-f24d1241796d",
+      "salesperson": "罗伟仪",
+      "io_date": "2026-09-11",
+      "created": "2026-05-26",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 183,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DSB250618-7251L",
+          "color": "图片色",
+          "size": "L",
+          "qty": 63,
+          "avail_qty": 63,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB250618-7251M",
+          "color": "图片色",
+          "size": "M",
+          "qty": 46,
+          "avail_qty": 46,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB250618-7251XL",
+          "color": "图片色",
+          "size": "XL",
+          "qty": 41,
+          "avail_qty": 41,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DSB250618-7251XXL",
+          "color": "图片色",
+          "size": "XXL",
+          "qty": 33,
+          "avail_qty": 33,
+          "order_lock": 0,
+          "io_date": "",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DS250220-70",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260728/8ABB424E5B894240A035E8B0214DD83B.png?name=ade0396c-7ed8-4d10-910c-0f7c59a24b04",
+      "salesperson": "鹏哥",
+      "io_date": "2026-09-11",
+      "created": "2026-07-28",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 43,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DS250220-7002l",
+          "color": "黑色",
+          "size": "l",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250220-7002m",
+          "color": "黑色",
+          "size": "m",
+          "qty": 11,
+          "avail_qty": 11,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250220-7002s",
+          "color": "黑色",
+          "size": "s",
+          "qty": 9,
+          "avail_qty": 9,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250220-7002xl",
+          "color": "黑色",
+          "size": "xl",
+          "qty": 10,
+          "avail_qty": 10,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DS250220-7002xxl",
+          "color": "黑色",
+          "size": "xxl",
+          "qty": 4,
+          "avail_qty": 4,
+          "order_lock": 0,
+          "io_date": "2026-09-11",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZWT251108-31",
+      "name": "定制",
+      "labels": "",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260603/DCC8A02F4041481E847D9940638BCCC5.png?name=794c1b6a-cb6c-4f42-97a3-286c99c50618",
+      "salesperson": "敏健浩",
+      "io_date": "2026-09-09",
+      "created": "2026-06-03",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 170,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZWT251108-31840L",
+          "color": "浅棕",
+          "size": "L",
+          "qty": 39,
+          "avail_qty": 39,
+          "order_lock": 0,
+          "io_date": "2026-08-22",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZWT251108-31840M",
+          "color": "浅棕",
+          "size": "M",
+          "qty": 53,
+          "avail_qty": 53,
+          "order_lock": 0,
+          "io_date": "2026-09-09",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZWT251108-31840S",
+          "color": "浅棕",
+          "size": "S",
+          "qty": 37,
+          "avail_qty": 37,
+          "order_lock": 0,
+          "io_date": "2026-09-09",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZWT251108-31840XL",
+          "color": "浅棕",
+          "size": "XL",
+          "qty": 24,
+          "avail_qty": 24,
+          "order_lock": 0,
+          "io_date": "2026-09-09",
+          "wh_detail": {}
+        },
+        {
+          "sku_id": "DZWT251108-31840XS",
+          "color": "浅棕",
+          "size": "XS",
+          "qty": 17,
+          "avail_qty": 17,
+          "order_lock": 0,
+          "io_date": "2026-09-09",
+          "wh_detail": {}
+        }
+      ]
+    },
+    {
+      "i_id": "DZTX230705-78",
+      "name": "定制",
+      "labels": "半成品",
+      "pic": "https://images-erp.sursung.com/prod/erp/Item/10188262/20260928/AF216B63F6174B769C525E1C0F139538.jpg?name=7ef571dc7951032009e4ce1ad4cbb497_tlxmg0bgkuzbd5b0kbsxmyj677jl.jpg",
+      "salesperson": "冯佩珊",
+      "io_date": "",
+      "created": "2023-07-12",
+      "warehouse": [],
+      "age_days": 0,
+      "total_qty": 127,
+      "total_lock": 0,
+      "skus": [
+        {
+          "sku_id": "DZTX230705-7802XXL",
+          "color": "黑色",
+          "size": "XXL",
+          "qty": 127,
+          "avail_qty": 127,
+          "order_lock": 0,
+          "io_date": "",
           "wh_detail": {}
         }
       ]
