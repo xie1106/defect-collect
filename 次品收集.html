@@ -684,18 +684,72 @@ function proxyImg(url, width) {
 function thumbImg(url) { return proxyImg(url, 200); }
 function fullImg(url) { return proxyImg(url); }
 
-// ═══ 映射数据加载：优先从 Supabase(mapping_data) 读取（聚水潭自动同步），失败则用本地 JSON 兜底 ═══
-// 本地兜底（GitHub 上线后也能用）
-function _localMap(url, fb) {
+// ═══ 映射数据加载：localStorage缓存 + ETag增量更新，避免每次下载大文件 ═══
+const MAP_CACHE_VER = '20261017a';
+function _mapCacheKey(name) { return 'map_' + name; }
+function _mapEtagKey(name) { return 'map_etag_' + name; }
+
+async function _cachedMap(url, fb) {
+  const name = url.replace(/\.json$/, '');
+  // 1. 先从localStorage读缓存
+  try {
+    const cached = localStorage.getItem(_mapCacheKey(name));
+    const etag = localStorage.getItem(_mapEtagKey(name));
+    if (cached && etag) {
+      // 后台检查是否有更新（If-None-Match），不阻塞
+      const data = JSON.parse(cached);
+      // 异步更新
+      fetch(url, { headers: etag ? { 'If-None-Match': etag } : {} })
+        .then(r => {
+          if (r.status === 304) return null; // 没变化
+          if (!r.ok) return null;
+          const newEtag = r.headers.get('ETag') || '';
+          return r.json().then(d => ({ data: d, etag: newEtag }));
+        })
+        .then(result => {
+          if (result) {
+            try {
+              localStorage.setItem(_mapCacheKey(name), JSON.stringify(result.data));
+              if (result.etag) localStorage.setItem(_mapEtagKey(name), result.etag);
+            } catch(e) { /* quota exceeded, ok */ }
+            // 更新内存中的映射
+            if (name === 'sku_info_map') { skuInfoMap = result.data; if(window._records) loadHistory(); }
+            else if (name === 'return_addr_map_v2') { _returnAddrMap = result.data; }
+            else if (name === 'return_style_map') { _styleSupplierMap = result.data; }
+            console.log(`🔄 ${name} 已后台更新`);
+          }
+        }).catch(() => {});
+      return data;
+    }
+  } catch(e) {}
+  
+  // 2. 无缓存：正常下载
   const ctrl = new AbortController();
-  const tm = setTimeout(() => ctrl.abort(), 8000);
-  return fetch(url + '?v=' + Date.now(), { signal: ctrl.signal }).then(r => { clearTimeout(tm); return r.ok ? r.json() : fb; }).catch(() => { clearTimeout(tm); return fb; });
+  const tm = setTimeout(() => ctrl.abort(), 15000);
+  try {
+    const r = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(tm);
+    if (!r.ok) return fb;
+    const data = await r.json();
+    const etag = r.headers.get('ETag') || '';
+    try {
+      localStorage.setItem(_mapCacheKey(url.replace(/\.json$/, '')), JSON.stringify(data));
+      if (etag) localStorage.setItem(_mapEtagKey(url.replace(/\.json$/, '')), etag);
+    } catch(e) { /* quota exceeded */ }
+    return data;
+  } catch(e) { clearTimeout(tm); return fb; }
 }
+
 async function loadAllMaps() {
-  // 从本地JSON加载（GitHub Pages，免费无流量限制）
-  try { skuInfoMap = await _localMap('sku_info_map.json', {}); } catch(e) {}
-  try { _returnAddrMap = await _localMap('return_addr_map_v2.json', {}); } catch(e) {}
-  try { _styleSupplierMap = await _localMap('return_style_map.json', null); } catch(e) {}
+  // 并行加载，有缓存时秒回
+  const [sku, addr, style] = await Promise.all([
+    _cachedMap('sku_info_map.json', {}),
+    _cachedMap('return_addr_map_v2.json', {}),
+    _cachedMap('return_style_map.json', null)
+  ]);
+  skuInfoMap = sku;
+  _returnAddrMap = addr;
+  _styleSupplierMap = style;
 }
 let _styleSupplierMap = null;
 const skuInfoMapPromise = loadAllMaps().catch(()=>{});
@@ -706,17 +760,13 @@ let _purchaseStatusMap = {};
 let _poSupplierMap = {};
 async function loadPurchaseStatus() {
     try {
-        const r = await fetch('purchase_status.json?t=' + Date.now());
-        if (r.ok) {
-            const data = await r.json();
-            // 兼容两种格式：{records: {poId: {refund_status}}} 或 {poId: "状态"}
-            _purchaseStatusMap = data.records || data || {};
-            console.log('📦 1688采购单状态加载:', Object.keys(_purchaseStatusMap).length, '条');
-        }
+        const data = await _cachedMap('purchase_status.json', {});
+        _purchaseStatusMap = data.records || data || {};
+        console.log('📦 1688采购单状态加载:', Object.keys(_purchaseStatusMap).length, '条');
     } catch(e) {}
     try {
-        const r2 = await fetch('po_supplier_map.json?t=' + Date.now());
-        if (r2.ok) { _poSupplierMap = await r2.json(); console.log('📦 采购单供应商加载:', Object.keys(_poSupplierMap).length, '条'); }
+        _poSupplierMap = await _cachedMap('po_supplier_map.json', {});
+        console.log('📦 采购单供应商加载:', Object.keys(_poSupplierMap).length, '条');
     } catch(e) {}
 }
 function getPurchaseRefundStatus(poId, note) {
