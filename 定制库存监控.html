@@ -56,7 +56,9 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
 .label-tag { display:inline-block; padding:1px 6px; border-radius:3px; font-size:10px; margin-left:4px; background:#fef3c7; color:#92400e; white-space:nowrap; }
 .age-green { background:#d1fae5; color:#065f46; }
 .age-yellow { background:#fef3c7; color:#92400e; }
+.age-orange { background:#ffedd5; color:#9a3412; }
 .age-red { background:#fee2e2; color:#991b1b; }
+.age-darkred { background:#fca5a5; color:#7f1d1d; }
 .cell-c { text-align:center; }
 .sku-panel { display:none; padding:4px 20px 12px 20px; }
 .sku-panel.open { display:block; }
@@ -83,12 +85,11 @@ body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-seri
             <div class="search-wrap"><input type="text" id="search" placeholder="搜索款号/标签/销售员..." oninput="onSearchInput()"><button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button></div>
             <select id="ageFilter" onchange="renderList()" style="padding:6px 8px;border:1px solid #d1d5db;border-radius:6px;font-size:12px;outline:none;background:#fff;cursor:pointer">
                 <option value="">在库天数</option>
-                <option value="30">≤30天</option>
-                <option value="60">≤60天</option>
-                <option value="90">≤90天</option>
-                <option value="31-60">31-60天</option>
-                <option value="61-90">61-90天</option>
-                <option value="91">＞90天</option>
+                <option value="0-30">0-30天</option>
+                <option value="31-90">31-90天</option>
+                <option value="91-180">91-180天</option>
+                <option value="181-365">181-365天</option>
+                <option value="365">超过365天</option>
             </select>
             <button class="btn" id="btn-toggle" onclick="toggleAllBtn()">展开全部</button>
             <span id="filterInfo" style="display:none"></span>
@@ -145,7 +146,7 @@ async function loadData() {
     } catch(e) { document.getElementById('stats').textContent = '❌ 加载失败'; }
 }
 
-function ageClass(d) { return d <= 30 ? 'age-green' : d <= 60 ? 'age-yellow' : 'age-red'; }
+function ageClass(d) { return d <= 30 ? 'age-green' : d <= 90 ? 'age-yellow' : d <= 180 ? 'age-orange' : d <= 365 ? 'age-red' : 'age-darkred'; }
 function calcAgeDays(s) {
     const d = s.io_date || s.created;
     if (!d) return -1;
@@ -265,12 +266,11 @@ function renderList() {
         list = list.filter(s => {
             const d = calcAgeDays(s);
             if (d < 0) return false;
-            if (af === '30') return d <= 30;
-            if (af === '60') return d <= 60;
-            if (af === '90') return d <= 90;
-            if (af === '31-60') return d > 30 && d <= 60;
-            if (af === '61-90') return d > 60 && d <= 90;
-            if (af === '91') return d > 90;
+            if (af === '0-30') return d <= 30;
+            if (af === '31-90') return d > 30 && d <= 90;
+            if (af === '91-180') return d > 90 && d <= 180;
+            if (af === '181-365') return d > 180 && d <= 365;
+            if (af === '365') return d > 365;
             return true;
         });
     }
