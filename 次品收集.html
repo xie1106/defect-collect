@@ -1820,7 +1820,7 @@ async function reprintWaybill(poId, btn, items) {
     }
 }
 // 快递单号小按钮（放在 1688/非1688 标签后，点击重新打面单）
-function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||''); }
+function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||'') && !/\[面单:已打印:/.test(note||''); }
 function isAbnormalNote(note) {
     const rf = parseRefundTag(note);
     return (rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status)) || isWaybillAbnormal(note);
