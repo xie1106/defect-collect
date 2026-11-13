@@ -1978,6 +1978,8 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
             for (const r of items) { await fetch(`${SUPABASE_URL}/rest/v1/defect_reports?id=eq.${r.id}`, { method:'PATCH', headers:h2, body: JSON.stringify({status:'done'}) }); }
         }
         if (btn) { btn.textContent = '🖨️ ' + mailNo; btn.disabled = false; }
+        // 刷新列表显示最新状态（面单已打印徽章）
+        setTimeout(() => loadHistory(), 300);
         return w;
     } catch(e) {
         // 如果已经打印成功（note里有"已打印"），不写异常标签
@@ -1987,6 +1989,7 @@ async function generateWaybill(supplier, items, labelPoIds, btn) {
         }
         showToast('❌ 获取面单失败: ' + e.message, '#dc2626');
         if (btn) { btn.textContent = orig; btn.disabled = false; }
+        setTimeout(() => loadHistory(), 300);
         return null;
     }
 }
