@@ -1425,7 +1425,6 @@ function loadHistory() {
             const singleSupplier = getSupplierForGroup([r]);
             const singleWaybillNo = singleSupplier ? getReturnAddress(singleSupplier) : null;
             const singleSupplierHtml = singleSupplier ? `<div style="font-size:11px;color:#8b5cf6;font-weight:500;">🏪 ${singleSupplier}</div>` : '';
-            const _printedSingle = getPrintedMailNo(r.note);
             const singlePhotos = r.photos || [];
             const singlePhotosId = 'sphoto_' + gi;
             const singleBtnPhotos = singlePhotos.length ? `<button onclick="document.getElementById('${singlePhotosId}').style.display=document.getElementById('${singlePhotosId}').style.display==='none'?'grid':'none'" style="padding:2px 8px;background:#fff;border:1.5px solid #4A90D9;border-radius:10px;color:#4A90D9;font-size:11px;cursor:pointer;margin-left:6px;">图片(${singlePhotos.length})</button>` : '';
