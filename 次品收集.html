@@ -1823,7 +1823,10 @@ async function reprintWaybill(poId, btn, items) {
 function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||'') && !/\[面单:已打印:/.test(note||''); }
 function isAbnormalNote(note) {
     const rf = parseRefundTag(note);
-    return (rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status)) || isWaybillAbnormal(note);
+    // 有退款标签的1688记录：退款被拒/关闭才算异常，面单异常不算（退款流程优先）
+    if (rf) return ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status);
+    // 无退款标签：面单异常才算异常
+    return isWaybillAbnormal(note);
 }
 
 // 1688 退款状态：由每 2 小时自动同步（聚水潭采购单 labels）维护，不再需要手动下拉。
