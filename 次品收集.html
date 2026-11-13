@@ -1154,7 +1154,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20261113a'; // 改版本号强制清缓存
+const CACHE_VER = '20261113b'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1347,21 +1347,21 @@ function loadHistory() {
     // Apply tab filter (skip if searching)
     if (!search) {
     if (currentTab === 'all') {} // 显示全部
-    else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id, r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r]) && getMissingMatch([r]).length === 0);
-    else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); });
+    else if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id, r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r]) && !isUnmatched(r) && !isWaybillAbnormal(r.note));
+    else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => isUnmatched(r));
     else if (currentTab === 'return_failed') filtered = filtered.filter(r => { const rt = parseReturnTag(r.note); return rt && rt.status === '失败' && !(rt.orderId||'').includes('无法匹配'); });
-    else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); return ps === '等待卖家同意' || ps === '线上申请取消'; });
+    else if (currentTab === '1688_wait_agree') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); if (ps === '等待卖家同意' || ps === '线上申请取消') return true; const is1688 = (r.note||'').includes('[1688:'); const printed = getWaybillPrinted([r]); return is1688 && printed && !ps; });
     else if (currentTab === '1688_wait_send') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); return ps === '等待买家退货'; });
     else if (currentTab === '1688_wait_receive') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); return ps === '等待卖家收货'; });
     else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); if (ps === '退款成功') return true; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isNon1688Done; });
-    else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalOrUnmatched(r));
+    else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
     } // end if (!search)
 
-    const allPending = list.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id, r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r]) && getMissingMatch([r]).length === 0).length;
+    const allPending = list.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id, r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r]) && !isUnmatched(r) && !isWaybillAbnormal(r.note)).length;
     const allRefunding = list.filter(r => isRefunding(r.note)).length;
     const allDone = list.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); if (ps === '退款成功') return true; const isNon1688Done = !(r.note||'').includes('[1688:') && (r.status === 'done' || (r.note||'').includes('[退货:已下单') || getWaybillPrinted([r])); return isNon1688Done; }).length;
-    const allUnmatched = list.filter(r => { const rt = parseReturnTag(r.note); return (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) || (rt && (rt.orderId||'').includes('无法匹配')); }).length;
-    const allError = list.filter(r => isAbnormalOrUnmatched(r)).length;
+    const allUnmatched = list.filter(r => isUnmatched(r)).length;
+    const allError = list.filter(r => isAbnormalNote(r.note)).length;
     document.getElementById('pendingCount').textContent = `待处理:${allPending}`;
     document.getElementById('refundingCount').textContent = `退款中:${allRefunding}`;
     document.getElementById('doneCount').textContent = `已完成:${allDone}`;
@@ -1407,8 +1407,18 @@ function loadHistory() {
             const statusClass = r.status==='done'?'badge-done':'badge-error';
             const statusText = r.status==='done'?'完成':(is1688Single?'异常':'未映射');
             const psRefund = getPurchaseRefundStatus(r.po_id, r.note);
+            const _printedSingle = getPrintedMailNo(r.note);
             const psBadge = psRefund ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:${psRefund==='退款成功'?'#05966918;color:#059669;border:1px solid #05966940':psRefund==='退款关闭'?'#6b728018;color:#6b7280;border:1px solid #6b728040':'#e67e2218;color:#e67e22;border:1px solid #e67e2240'};">${psRefund}</span>` : '';
-            const badgeHtml = psBadge || (returnInfo ? getReturnBadge(returnInfo) : refundInfo ? getRefundBadge(refundInfo) : `<span class="badge ${statusClass}">${statusText}</span>`);
+            // 徽章优先级：退款状态 > 面单已打印(1688=等待同意/非1688=完成) > 面单异常 > 退货标签 > 退款标签 > 未匹配 > 待处理
+            let badgeHtml;
+            if (psBadge) { badgeHtml = psBadge; }
+            else if (_printedSingle && is1688Single) { badgeHtml = `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#e67e2218;color:#e67e22;border:1px solid #e67e2240;">等待同意</span>`; }
+            else if (_printedSingle && !is1688Single) { badgeHtml = `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#05966918;color:#059669;border:1px solid #05966940;">✅ 已打印 ${_printedSingle}</span>`; }
+            else if (isWaybillAbnormal(r.note)) { badgeHtml = `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#dc262618;color:#dc2626;border:1px solid #dc262640;">❌ 面单异常</span>`; }
+            else if (returnInfo) { badgeHtml = getReturnBadge(returnInfo); }
+            else if (refundInfo) { badgeHtml = getRefundBadge(refundInfo); }
+            else if (getMissingMatch([r]).length > 0) { const mm = getMissingMatch([r]); badgeHtml = `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#e67e2218;color:#e67e22;border:1px solid #e67e2240;">未匹配：${mm.join('/')}</span>`; }
+            else { badgeHtml = `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;background:#6b728018;color:#6b7280;border:1px solid #6b728040;">待处理</span>`; }
             const printedNo = getWaybillPrinted([r]);
 
             const noteDisplay = formatNoteDisplay(r.note);
@@ -1450,7 +1460,7 @@ function loadHistory() {
         const isNon1688 = items.some(r=>(r.note||'').includes('[非1688]')||(r.note||'').includes('[系统:非1688'));
         const tagHtml = is1688 ? '<span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;background:#1677ff;color:#fff;margin-left:6px;">1688</span>' : isNon1688 ? '<span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:700;background:#faad14;color:#fff;margin-left:6px;">非1688</span>' : '';
         const supplierName = getSupplierForGroup(items);
-        const supplierHtml = supplierName ? `<div style="font-size:11px;color:#8b5cf6;margin-top:2px;font-weight:500;">🏪 ${supplierName}</div>` : (is1688 ? '' : `<div style="font-size:11px;color:#dc2626;margin-top:2px;">⚠️ 未匹配供应商</div>`);
+        const supplierHtml = supplierName ? `<div style="font-size:11px;color:#8b5cf6;margin-top:2px;font-weight:500;">🏪 ${supplierName}</div>` : `<div style="font-size:11px;color:#dc2626;margin-top:2px;">⚠️ 未匹配供应商</div>`;
         const btnPhotos = `<button onclick="document.getElementById('${photosId}').style.display=document.getElementById('${photosId}').style.display==='none'?'grid':'none'" style="padding:2px 8px;background:#fff;border:1.5px solid #4A90D9;border-radius:10px;color:#4A90D9;font-size:11px;cursor:pointer;margin-left:6px;">图片(${allPhotos.length})</button>`;
         const btnDetail = count>1?`<button onclick="document.getElementById('${expandId}').style.display=document.getElementById('${expandId}').style.display==='none'?'block':'none'" style="padding:2px 8px;background:#fff;border:1.5px solid #999;border-radius:10px;color:#666;font-size:11px;cursor:pointer;margin-left:4px;">明细(${count})</button>`:'';
         const skuMap = {};
@@ -1823,15 +1833,14 @@ async function reprintWaybill(poId, btn, items) {
 function isWaybillAbnormal(note) { return /\[面单:异常/.test(note||'') && !/\[面单:已打印:/.test(note||''); }
 function isAbnormalNote(note) {
     const rf = parseRefundTag(note);
-    // 有退款标签的1688记录：退款被拒/关闭才算异常，面单异常不算（退款流程优先）
-    if (rf) return ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status);
-    // 无退款标签：面单异常才算异常
-    return isWaybillAbnormal(note);
+    // 退款被拒/关闭/失败 = 异常
+    if (rf && ['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status)) return true;
+    // 面单异常（但有正常退款状态的不算异常，退款流程优先）
+    if (isWaybillAbnormal(note) && !(rf && !['退款关闭','卖家拒绝','卖家拒绝申请','卖家拒绝退款','申请失败'].includes(rf.status))) return true;
+    return false;
 }
-// 未匹配也归入异常（缺供应商/缺退货地址/缺商品资料）
-function isAbnormalOrUnmatched(r) {
-    if (isAbnormalNote(r.note)) return true;
-    // 未匹配：pending + 无退款/退货标签 + 缺供应商或退货地址
+// 未匹配判定：缺供应商 或 缺退货地址
+function isUnmatched(r) {
     const rt = parseReturnTag(r.note);
     if (r.status === 'pending' && !parseRefundTag(r.note) && !rt && getMissingMatch([r]).length > 0) return true;
     if (rt && (rt.orderId||'').includes('无法匹配')) return true;
