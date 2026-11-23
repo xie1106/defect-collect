@@ -489,8 +489,8 @@ async function confirmBatch1688Return() {
         .tab-btn.active { background: #4A90D9; color: #fff; border-color: #4A90D9; }
         .filter-btn { padding: 4px 8px; border: 1px solid #e5e7eb; border-radius: 12px; background: #fff; font-size: 12px; font-weight: 600; cursor: pointer; }
         .filter-btn.active { background: #1f2937; color: #fff; border-color: #1f2937; }
-        .search-box { display: flex; gap: 8px; margin-bottom: 12px; }
-        .search-box input { flex: 1; padding: 8px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
+        .search-box { display: flex; gap: 6px; margin-bottom: 6px; }
+        .search-box input { flex: 1; padding: 6px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 12px; outline: none; }
         .record-actions { display: flex; gap: 8px; margin-top: 8px; }
         .record-actions button { padding: 4px 10px; border: 1px solid #ddd; border-radius: 4px; background: #fff; font-size: 11px; cursor: pointer; }
         /* 图片预览弹窗 */
@@ -2918,14 +2918,20 @@ function exportFiltered() {
         const supplier = getSupplierForGroup(items) || '';
         const waybill = getWaybillPrinted(items) || '';
         const is1688 = items.some(r => (r.note||'').includes('[1688:'));
-        // 商品明细：合并所有SKU
+        // 商品明细：合并所有SKU，格式化为 款号·颜色·码数×数量
         const skuParts = [];
         items.forEach(r => {
             const clean = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
             const skuStr = clean.split('|')[0].trim();
-            if (skuStr) skuParts.push(skuStr);
+            if (skuStr) {
+                skuStr.split(',').forEach(p => {
+                    const sm = p.trim().match(/(.+?)[×x](\d+)/);
+                    if (sm) skuParts.push(formatSkuDisplay(sm[1].trim(), parseInt(sm[2])));
+                    else if (p.trim()) skuParts.push(p.trim());
+                });
+            }
         });
-        const skuText = skuParts.join('; ');
+        const skuText = skuParts.join(', ');
         // 状态
         let statusText = '待处理';
         const ps = getPurchaseRefundStatus(poId, items[0].note);
