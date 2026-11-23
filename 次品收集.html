@@ -567,11 +567,21 @@ async function confirmBatch1688Return() {
             </div>
         </div>
         <div class="search-box">
-            <div style="flex:1;position:relative;">
+            <button id="selectAllBtn" onclick="toggleSelectAll()" style="padding:6px 10px;background:#fff;border:1.5px solid #4A90D9;border-radius:8px;font-size:12px;font-weight:600;color:#4A90D9;cursor:pointer;white-space:nowrap;">☐ 全选</button>
+            <div style="flex:1;position:relative;min-width:0;">
                 <input type="text" id="searchInput" placeholder="🔍 搜索采购单号/快递单号" inputmode="numeric" oninput="loadHistory()" style="width:100%;padding-right:30px;">
                 <button onclick="document.getElementById('searchInput').value='';loadHistory();" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:16px;color:#999;cursor:pointer;padding:2px;">✕</button>
             </div>
-            <button onclick="searchScan()" style="padding:8px 14px;background:#4A90D9;color:#fff;border:none;border-radius:8px;font-size:13px;">扫码</button>
+            <button onclick="searchScan()" style="padding:6px 10px;background:#4A90D9;color:#fff;border:none;border-radius:8px;font-size:12px;">扫码</button>
+        </div>
+        <!-- 时间筛选 + 导出 -->
+        <div style="display:flex;gap:6px;margin-bottom:8px;align-items:center;flex-wrap:wrap;">
+            <input type="date" id="dateFrom" onchange="loadHistory()" style="padding:5px 8px;border:1px solid #ddd;border-radius:6px;font-size:12px;color:#333;">
+            <span style="font-size:12px;color:#999;">至</span>
+            <input type="date" id="dateTo" onchange="loadHistory()" style="padding:5px 8px;border:1px solid #ddd;border-radius:6px;font-size:12px;color:#333;">
+            <button onclick="clearDateFilter()" style="padding:4px 8px;background:none;border:1px solid #ddd;border-radius:6px;font-size:11px;color:#999;cursor:pointer;">清除</button>
+            <div style="flex:1;"></div>
+            <button onclick="exportFiltered()" style="padding:5px 12px;background:#059669;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;">📥 导出</button>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:8px;background:#e8edf5;border-radius:10px;padding:6px;">
                 <div style="display:flex;gap:3px;padding:2px 2px;flex-wrap:nowrap;overflow-x:auto;">
@@ -1154,7 +1164,7 @@ async function syncToServer(record) {
 const CACHE_KEY = 'defect_records_cache';
 const CACHE_TS_KEY = 'defect_records_ts';
 const CACHE_VER_KEY = 'defect_cache_ver';
-const CACHE_VER = '20261118a'; // 改版本号强制清缓存
+const CACHE_VER = '20261123a'; // 改版本号强制清缓存
 function _getCachedRecords() {
     // 版本号不匹配则清缓存
     if (localStorage.getItem(CACHE_VER_KEY) !== CACHE_VER) {
@@ -1338,6 +1348,11 @@ function loadHistory() {
     const list = getRecords();
     const search = document.getElementById('searchInput').value.trim();
     let filtered = list;
+    // 时间筛选
+    const dateFrom = document.getElementById('dateFrom').value;
+    const dateTo = document.getElementById('dateTo').value;
+    if (dateFrom) { const d = new Date(dateFrom); filtered = filtered.filter(r => new Date(r.created_at) >= d); }
+    if (dateTo) { const d = new Date(dateTo); d.setDate(d.getDate()+1); filtered = filtered.filter(r => new Date(r.created_at) < d); }
     if (search) filtered = filtered.filter(r => { const s = String(r.po_id).includes(search); const n = (r.note||'').includes(search); const w = (getWaybillPrinted([r])||'').includes(search); return s || n || w; });
     // Apply source filter (skip if searching)
     if (!search) {
@@ -2851,6 +2866,90 @@ document.getElementById('historyList').addEventListener('scroll', function() {
         card.style.background = '#f0f7ff'; card.style.border = '1px solid #d0e3f7';
     }
 }, {passive: true});
+
+// ═══════════════ 全选 / 时间筛选 / 导出 ═══════════════
+let _selectAll = false;
+function toggleSelectAll() {
+    _selectAll = !_selectAll;
+    const btn = document.getElementById('selectAllBtn');
+    btn.textContent = _selectAll ? '☑ 全选' : '☐ 全选';
+    btn.style.background = _selectAll ? '#4A90D9' : '#fff';
+    btn.style.color = _selectAll ? '#fff' : '#4A90D9';
+    // 勾选/取消所有图片checkbox（如果有的话）
+    document.querySelectorAll('.record-select-cb').forEach(cb => cb.checked = _selectAll);
+}
+function clearDateFilter() {
+    document.getElementById('dateFrom').value = '';
+    document.getElementById('dateTo').value = '';
+    loadHistory();
+}
+function getFilteredForExport() {
+    const list = getRecords();
+    let filtered = list;
+    const dateFrom = document.getElementById('dateFrom').value;
+    const dateTo = document.getElementById('dateTo').value;
+    if (dateFrom) { const d = new Date(dateFrom); filtered = filtered.filter(r => new Date(r.created_at) >= d); }
+    if (dateTo) { const d = new Date(dateTo); d.setDate(d.getDate()+1); filtered = filtered.filter(r => new Date(r.created_at) < d); }
+    const search = document.getElementById('searchInput').value.trim();
+    if (search) filtered = filtered.filter(r => String(r.po_id).includes(search) || (r.note||'').includes(search) || (getWaybillPrinted([r])||'').includes(search));
+    if (currentFilter === '1688') filtered = filtered.filter(r => (r.note||'').includes('[1688:'));
+    else if (currentFilter === 'non1688') filtered = filtered.filter(r => !(r.note||'').includes('[1688:'));
+    if (currentTab !== 'all') {
+        if (currentTab === 'pending_all') filtered = filtered.filter(r => r.status === 'pending' && !getPurchaseRefundStatus(r.po_id, r.note) && !parseReturnTag(r.note) && !getWaybillPrinted([r]) && !isUnmatched(r) && !isWaybillAbnormal(r.note));
+        else if (currentTab === 'done_all') filtered = filtered.filter(r => { const ps = getPurchaseRefundStatus(r.po_id, r.note); if (ps === '退款成功') return true; return !(r.note||'').includes('[1688:') && (r.status === 'done' || getWaybillPrinted([r])); });
+        else if (currentTab === '1688_error') filtered = filtered.filter(r => isAbnormalNote(r.note));
+        else if (currentTab === 'unmatched_all') filtered = filtered.filter(r => isUnmatched(r));
+    }
+    return filtered;
+}
+function exportFiltered() {
+    const filtered = getFilteredForExport();
+    if (!filtered.length) { alert('没有可导出的记录'); return; }
+    // 按采购单号分组
+    const groups = {};
+    filtered.forEach(r => {
+        if (!groups[r.po_id]) groups[r.po_id] = [];
+        groups[r.po_id].push(r);
+    });
+    // CSV header
+    const rows = [['采购单号','供应商','快递单号','商品明细','来源','状态','提交时间']];
+    Object.keys(groups).forEach(poId => {
+        const items = groups[poId];
+        const supplier = getSupplierForGroup(items) || '';
+        const waybill = getWaybillPrinted(items) || '';
+        const is1688 = items.some(r => (r.note||'').includes('[1688:'));
+        // 商品明细：合并所有SKU
+        const skuParts = [];
+        items.forEach(r => {
+            const clean = (r.note||'').replace(/\s*\[[^\]]*\]/g,'').trim();
+            const skuStr = clean.split('|')[0].trim();
+            if (skuStr) skuParts.push(skuStr);
+        });
+        const skuText = skuParts.join('; ');
+        // 状态
+        let statusText = '待处理';
+        const ps = getPurchaseRefundStatus(poId, items[0].note);
+        if (ps) statusText = ps;
+        else if (waybill && is1688) statusText = '等待同意';
+        else if (waybill && !is1688) statusText = '已完成';
+        else if (items.some(r => isWaybillAbnormal(r.note))) statusText = '面单异常';
+        else if (items.some(r => isUnmatched(r))) statusText = '未匹配';
+        const time = new Date(items[0].created_at).toLocaleString();
+        rows.push([poId, supplier, waybill, skuText, is1688?'1688':'非1688', statusText, time]);
+    });
+    // Generate CSV with BOM for Excel
+    const csv = '\uFEFF' + rows.map(r => r.map(c => '"' + String(c).replace(/"/g,'""') + '"').join(',')).join('\n');
+    const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const now = new Date();
+    a.download = `次品记录_${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
 </script>
 <!-- 圆通面单预览弹窗 -->
 <div id="waybillModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:9999;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeWaybillModal()">
